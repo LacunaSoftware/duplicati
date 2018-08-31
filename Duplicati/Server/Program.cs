@@ -1,6 +1,8 @@
+using Duplicati.Library.ENotariado;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace Duplicati.Server
@@ -150,6 +152,30 @@ namespace Duplicati.Server
         {
             get { return DataConnection.ApplicationSettings.IsFirstRun; }
             set { DataConnection.ApplicationSettings.IsFirstRun = value; }
+        }
+
+        public static bool ENotariadoDataIsSent
+        {
+            get { return DataConnection.ApplicationSettings.ENotariadoDataIsSent; }
+            set { DataConnection.ApplicationSettings.ENotariadoDataIsSent = value; }
+        }
+
+        public static bool ENotariadoIsVerified
+        {
+            get { return DataConnection.ApplicationSettings.ENotariadoIsVerified; }
+            set { DataConnection.ApplicationSettings.ENotariadoIsVerified = value; }
+        }
+
+        public static string CertificateThumbprint
+        {
+            get { return DataConnection.ApplicationSettings.CertificateThumbprint; }
+            set { DataConnection.ApplicationSettings.CertificateThumbprint = value; }
+        }
+
+        public static Guid ENotariadoApplicationId
+        {
+            get { return DataConnection.ApplicationSettings.ENotariadoApplicationId; }
+            set { DataConnection.ApplicationSettings.ENotariadoApplicationId = value; }
         }
 
         public static string StartedBy
@@ -316,6 +342,7 @@ namespace Duplicati.Server
                 if (commandlineOptions.ContainsKey("webservice-allowed-hostnames"))
                     Program.DataConnection.ApplicationSettings.SetAllowedHostnames(commandlineOptions["webservice-allowed-hostnames"]);
 
+                InitializeENotariado();
 
                 ApplicationExitEvent = new System.Threading.ManualResetEvent(false);
 
@@ -694,6 +721,64 @@ namespace Duplicati.Server
             }
 
             StatusEventNotifyer.SignalNewEvent();
+        }
+
+        /// <summary>
+        /// Initializes settings regarding eNotariado
+        /// </summary>
+        private static async void InitializeENotariado()
+        {
+#if DEBUG
+            var keyStoreLocation = StoreLocation.CurrentUser;
+#else
+		    var keyStoreLocation = StoreLocation.LocalMachine;
+#endif
+
+            // Checks if certificate already exists and is in local storage,
+            // then retrieves or creates a new one
+            X509Certificate2 cert;
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(CertificateThumbprint))
+                    cert = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
+                else
+                    cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+            }
+            catch (CryptoUtils.CertificateNotFoundException)
+            {
+                cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+            }
+            CertificateThumbprint = cert.Thumbprint;
+            
+            // If the application haven't tried to enroll yet or we don't have an ID
+            // we should enroll
+            if (!ENotariadoDataIsSent || ENotariadoApplicationId == Guid.Empty)
+            {
+                try
+                {
+                    // check if is already enrolled with certificate
+                    ENotariadoApplicationId = await ENotariadoConnection.Enroll(cert);
+                    ENotariadoDataIsSent = true;
+                } catch (Exception)
+                {
+                    ENotariadoApplicationId = Guid.Empty;
+                    ENotariadoDataIsSent = false;
+                }
+            }
+            ENotariadoConnection.Init(ENotariadoApplicationId, cert);
+
+            // If we are not verified, tries to verify
+            // CheckVerifiedStatus will throw with an undefined ID
+            if (!ENotariadoIsVerified)
+            {
+                try
+                {
+                    ENotariadoIsVerified = await ENotariadoConnection.CheckVerifiedStatus();
+                } catch (Exception)
+                {
+                    ENotariadoIsVerified = false;
+                }
+            }
         }
                
         /// <summary>

@@ -15,6 +15,26 @@ namespace Duplicati.Library.ENotariado
         private const string SignatureAlgorithmOid = "1.2.840.113549.1.1.11"; // SHA-256 with RSA
         private const string SignatureAlgorithmName = "SHA256";
         private const int KeySize = 4096;
+        
+        /// <summary>
+        /// Exception thrown when a certificate find operation fails
+        /// </summary>
+        public class CertificateNotFoundException : Exception
+        {
+            public CertificateNotFoundException()
+            {
+            }
+
+            public CertificateNotFoundException(string message)
+                : base(message)
+            {
+            }
+
+            public CertificateNotFoundException(string message, Exception inner)
+                : base(message, inner)
+            {
+            }
+        }
 
         public static X509Certificate2 CreateSelfSignedCertificate(StoreLocation keyStoreLocation, string commonName = "localhost", bool allowExport = false)
         {
@@ -35,7 +55,7 @@ namespace Duplicati.Library.ENotariado
                 var certCollection = store.Certificates.Find(X509FindType.FindByThumbprint, certThumbprint, false);
                 if (certCollection.Count == 0)
                 {
-                    throw new Exception(string.Format("Certificate with thumbprint {0} not found.", certThumbprint));
+                    throw new CertificateNotFoundException(string.Format("Certificate with thumbprint {0} not found.", certThumbprint));
                 }
                 cert = certCollection[0];
             }

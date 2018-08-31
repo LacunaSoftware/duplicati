@@ -250,7 +250,10 @@ namespace Duplicati.Server.Database
         {
             get
             {
-                return new Guid(m_values[CONST.ENOTARIADO_APPLICATION_ID]);
+                var appId = m_values[CONST.ENOTARIADO_APPLICATION_ID];
+                if (string.IsNullOrWhiteSpace(appId))
+                    return Guid.Empty;
+                return new Guid(appId);
             }
             set
             {
