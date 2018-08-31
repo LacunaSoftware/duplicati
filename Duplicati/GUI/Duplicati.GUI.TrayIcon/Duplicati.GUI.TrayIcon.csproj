@@ -154,6 +154,10 @@
       <Project>{8E4CECFB-0413-4B00-AB93-78D1C3902BD5}</Project>
       <Name>Duplicati.Library.Backend.AzureBlob</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Library\Backend\ENotariado\Duplicati.Library.Backend.ENotariado.csproj">
+      <Project>{2382d89f-18f9-46b1-bdb9-fe065da5b1c6}</Project>
+      <Name>Duplicati.Library.Backend.ENotariado</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Library\Backend\File\Duplicati.Library.Backend.File.csproj">
       <Project>{FC9B7611-836F-4127-8B44-A7C31F506807}</Project>
       <Name>Duplicati.Library.Backend.File</Name>
