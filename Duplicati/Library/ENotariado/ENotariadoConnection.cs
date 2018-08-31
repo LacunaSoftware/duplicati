@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace Duplicati.Library.ENotariado
 {
-    public class ENotariadoConnection
+    public static class ENotariadoConnection
     {
         private static string SessionToken;
+        private static DateTime SessionTokenExpiration;
         private static X509Certificate2 Certificate;
         private static Guid ApplicationId;
         private static bool IsVerified;
@@ -97,7 +98,7 @@ namespace Duplicati.Library.ENotariado
             }
         }
 
-        public static async Task<string> GetApplicationAuthToken()
+        public static async Task GetApplicationAuthToken()
         {
             var start = new StartPublicKeyAuthenticationRequest
             {
@@ -147,7 +148,8 @@ namespace Duplicati.Library.ENotariado
                  Token received.
                  */
                 var completeContent = JsonConvert.DeserializeObject<CompletePublicKeyAuthenticationResponse>(completeContentString);
-                return completeContent.AppToken;
+                SessionToken = completeContent.AppToken;
+                SessionTokenExpiration = DateTime.Now.AddMinutes(5);
             }
         }
 

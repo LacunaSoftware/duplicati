@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Duplicati.Library.ENotariado
 {
-    public class CryptoUtils
+    public static class CryptoUtils
     {
         private const string ProviderName = "Microsoft Enhanced RSA and AES Cryptographic Provider";
         private const int ProviderType = 24; // PROV_RSA_AES
