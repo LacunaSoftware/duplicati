@@ -54,6 +54,10 @@ namespace Duplicati.Server.Database
 			public const string HAS_ASKED_FOR_PASSWORD_PROTECTION = "has-asked-for-password-protection";
             public const string DISABLE_TRAY_ICON_LOGIN = "disable-tray-icon-login";
             public const string SERVER_ALLOWED_HOSTNAMES = "allowed-hostnames";
+            public const string ENOTARIADO_DATA_IS_SENT = "enotariado-data-is-sent";
+            public const string ENOTARIADO_IS_VERIFIED = "enotariado-is-verified";
+            public const string ENOTARIADO_CERT_THUMBPRINT = "enotariado-cert-thumbprint";
+            public const string ENOTARIADO_APPLICATION_ID = "enotariado-application-id";
 		}
 
         private readonly Dictionary<string, string> m_values;
@@ -194,8 +198,64 @@ namespace Duplicati.Server.Database
             }
             set
             {
-                lock(m_connection.m_lock)
+                lock (m_connection.m_lock)
                     m_values[CONST.IS_FIRST_RUN] = value.ToString();
+                SaveSettings();
+            }
+        }
+
+        public bool ENotariadoDataIsSent
+        {
+            get
+            {
+                return Duplicati.Library.Utility.Utility.ParseBoolOption(m_values, CONST.ENOTARIADO_DATA_IS_SENT);
+            }
+            set
+            {
+                lock (m_connection.m_lock)
+                    m_values[CONST.ENOTARIADO_DATA_IS_SENT] = value.ToString();
+                SaveSettings();
+            }
+        }
+
+        public bool ENotariadoIsVerified
+        {
+            get
+            {
+                return Duplicati.Library.Utility.Utility.ParseBoolOption(m_values, CONST.ENOTARIADO_IS_VERIFIED);
+            }
+            set
+            {
+                lock (m_connection.m_lock)
+                    m_values[CONST.ENOTARIADO_IS_VERIFIED] = value.ToString();
+                SaveSettings();
+            }
+        }
+
+        public string CertificateThumbprint
+        {
+            get
+            {
+                return m_values[CONST.ENOTARIADO_CERT_THUMBPRINT];
+            }
+            set
+            {
+                lock (m_connection.m_lock)
+                    m_values[CONST.ENOTARIADO_CERT_THUMBPRINT] = value;
+                SaveSettings();
+            }
+        }
+
+        public Guid ENotariadoApplicationId
+        {
+            get
+            {
+                return new Guid(m_values[CONST.ENOTARIADO_APPLICATION_ID]);
+            }
+            set
+            {
+                lock (m_connection.m_lock)
+                    m_values[CONST.ENOTARIADO_APPLICATION_ID] = value.ToString();
                 SaveSettings();
             }
         }
