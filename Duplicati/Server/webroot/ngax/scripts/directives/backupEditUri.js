@@ -11,13 +11,13 @@ backupApp.directive('backupEditUri', function(gettextCatalog) {
         var scope = $scope;
         scope.AppUtils = AppUtils;
 
-        var builduri = function(callback) {
+        var builduri = function(backup, callback) {
 
             function validationCompleted() {
                 if (EditUriBackendConfig.builders[scope.Backend.Key] == null)
                     callback(EditUriBackendConfig.defaultbuilder(scope));
                 else
-                    callback(EditUriBackendConfig.builders[scope.Backend.Key](scope));
+                    callback(EditUriBackendConfig.builders[scope.Backend.Key](scope, backup));
             }
 
             if (EditUriBackendConfig.validaters[scope.Backend.Key] == null)

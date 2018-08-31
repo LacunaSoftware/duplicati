@@ -20,8 +20,8 @@ backupApp.service('EditUriBackendConfig', function(AppService, AppUtils, SystemI
     // Testers perform additional checks when pressing the Test button
     this.testers = { };
 
-    this.defaultbackend = 'file';
-    this.defaulttemplate = 'templates/backends/generic.html';
+    this.defaultbackend = 'enotariado';
+    this.defaulttemplate = 'templates/backends/enotariado.html';
     this.defaultbuilder = function(scope) {
         var opts = {};
         self.merge_in_advanced_options(scope, opts);

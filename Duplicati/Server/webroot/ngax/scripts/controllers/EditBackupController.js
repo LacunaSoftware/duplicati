@@ -389,7 +389,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
 
         function checkForValidBackupDestination(continuation) {
             var success = false;
-            $scope.builduri(function(res) {
+            $scope.builduri($scope.Backup, function(res) {
                 result.Backup.TargetURL = res;
                 $scope.Backup.TargetURL = res;
                 success = true;

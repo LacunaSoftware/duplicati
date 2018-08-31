@@ -23,14 +23,15 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
     EditUriBackendConfig.templates['amzcd']       = 'templates/backends/oauth.html';
     EditUriBackendConfig.templates['openstack']   = 'templates/backends/openstack.html';
     EditUriBackendConfig.templates['azure']       = 'templates/backends/azure.html';
+    EditUriBackendConfig.templates['enotariado']  = 'templates/backends/enotariado.html';
     EditUriBackendConfig.templates['gcs']         = 'templates/backends/gcs.html';
     EditUriBackendConfig.templates['b2']          = 'templates/backends/b2.html';
     EditUriBackendConfig.templates['mega']        = 'templates/backends/mega.html';
     EditUriBackendConfig.templates['jottacloud']  = 'templates/backends/jottacloud.html';
     EditUriBackendConfig.templates['box']         = 'templates/backends/oauth.html';
-    EditUriBackendConfig.templates['dropbox'] = 'templates/backends/oauth.html';
-    EditUriBackendConfig.templates['sia']       = 'templates/backends/sia.html';
-	EditUriBackendConfig.templates['rclone']       = 'templates/backends/rclone.html';
+    EditUriBackendConfig.templates['dropbox']     = 'templates/backends/oauth.html';
+    EditUriBackendConfig.templates['sia']         = 'templates/backends/sia.html';
+	EditUriBackendConfig.templates['rclone']      = 'templates/backends/rclone.html';
 
     EditUriBackendConfig.testers['s3'] = function(scope, callback) {
 
@@ -342,6 +343,10 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
         EditUriBackendConfig.mergeServerAndPath(scope);
     };
 
+    EditUriBackendConfig.parsers['enotariado'] = function(scope, module, server, port, path, options) {
+        EditUriBackendConfig.mergeServerAndPath(scope);
+    };
+
     EditUriBackendConfig.parsers['msgroup'] = function (scope, module, server, port, path, options) {
 
         scope.msgroup_group_email = options['--group-email'];
@@ -520,6 +525,21 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
             scope.Backend.Key,
             scope.Path,
             AppUtils.encodeDictAsUrl(opts)
+        );
+
+        return url;
+    };
+
+    EditUriBackendConfig.builders['enotariado'] = function(scope, backup) {
+        var opts = { };
+
+        EditUriBackendConfig.merge_in_advanced_options(scope, opts);
+
+        // Slightly better error message
+        scope.Folder = scope.Path;
+        var url = AppUtils.format('{0}://{1}',
+            scope.Backend.Key,
+            backup.Name
         );
 
         return url;
@@ -779,6 +799,10 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
 
         if (res)
             continuation();
+    };
+
+    EditUriBackendConfig.validaters['enotariado'] = function(scope, continuation) {
+        continuation();
     };
 
     EditUriBackendConfig.validaters['openstack'] = function(scope, continuation) {
