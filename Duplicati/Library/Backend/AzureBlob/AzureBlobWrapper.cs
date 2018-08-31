@@ -24,6 +24,7 @@ using System.Linq;
 using Duplicati.Library.Interface;
 using Duplicati.Library.Utility;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Duplicati.Library.Backend.AzureBlob
@@ -69,9 +70,24 @@ namespace Duplicati.Library.Backend.AzureBlob
             _container = blobClient.GetContainerReference(containerName);
         }
 
+        public AzureBlobWrapper(string sasToken, string containerName)
+        {
+            _containerName = containerName;
+            var accountSAS = new StorageCredentials(sasToken);
+            var storageAccount = new CloudStorageAccount(accountSAS, null, true);
+            var blobClient = storageAccount.CreateCloudBlobClient();
+            _container = blobClient.GetContainerReference(_containerName);
+            AddContainerIfNotExists();
+        }
+
         public void AddContainer()
         {
             _container.Create(BlobContainerPublicAccessType.Off);
+        }
+
+        public void AddContainerIfNotExists()
+        {
+            _container.CreateIfNotExists(BlobContainerPublicAccessType.Off);
         }
 
         public virtual void GetFileStream(string keyName, Stream target)
