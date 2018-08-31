@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using Duplicati.Library.Backend.AzureBlob;
 using Duplicati.Library.Interface;
-using Duplicati.Library.Utility;
+using Duplicati.Library.ENotariado;
 
 namespace Duplicati.Library.Backend.ENotariado
 {
     public class ENotariadoBackend : IStreamingBackend
     {
         private readonly AzureBlobWrapper _azureBlob;
-        private static Guid ApplicationId;
-        private static string CertificateThumbprint;
 
         public ENotariadoBackend()
         {
@@ -23,25 +21,10 @@ namespace Duplicati.Library.Backend.ENotariado
             uri.RequireHost();
             string containerName = uri.Host.ToLowerInvariant();
 
-            if (string.IsNullOrWhiteSpace(CertificateThumbprint))
-            {
-                throw new UserInformationException(Strings.ENotariadoBackend.NoCertificateThumbprint, "ENotariadoNoCertificate");
-            }
-            if (ApplicationId == Guid.Empty)
-            {
-                throw new UserInformationException(Strings.ENotariadoBackend.NoApplicationId, "ENotariadoNoApplicationId");
-            }
-
             string sasToken;
             // sasToken = getSASToken();
 
             // _azureBlob = new AzureBlobWrapper(sasToken, ontainerName);
-        }
-
-        public static void InitENotariadoData(Guid applicationId, string certThumbprint)
-        {
-            ApplicationId = applicationId;
-            CertificateThumbprint = certThumbprint;
         }
 
         public string DisplayName
