@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,10 @@ namespace Duplicati.Library.ENotariado
         private static Guid ApplicationId;
         private static bool IsVerified;
         private static readonly string LOGTAG = Library.Logging.Log.LogTagFromType<ENotariadoConnection>();
-        
+        private static readonly string PublicKeyAuthenticationSessionState = "X-Public-Key-Auth-Session-State";
+        private static readonly string SubscriptionHeader = "X-Subscription";
+        private static readonly string BaseURI = $"https://localhost:44392/api";
+
         /// <summary>
         /// Simple method to init data regarding the application
         /// To be used when making requests to eNotariado
@@ -38,12 +42,12 @@ namespace Duplicati.Library.ENotariado
                 Certificate = cert.RawData,
                 Description = Environment.MachineName
             };
-            
+
             Library.Logging.Log.WriteVerboseMessage(LOGTAG, "CertThumbprint", $"Thumbprint of certificate is {cert.Thumbprint}");
 
             using (var client = new HttpClient())
             {
-                var uri = $"https://localhost:44392/api/app-enrollments";
+                var uri = $"{BaseURI}/app-enrollments";
                 var jsonInString = JsonConvert.SerializeObject(enrollment);
 
                 var response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
@@ -74,7 +78,7 @@ namespace Duplicati.Library.ENotariado
 
             using (var client = new HttpClient())
             {
-                var uri = $"https://localhost:44392/api/app-enrollments";
+                var uri = $"{BaseURI}/app-enrollments";
                 var id = ApplicationId.ToString();
 
                 var response = await client.GetAsync($"{uri}/{id}/status");
@@ -90,6 +94,60 @@ namespace Duplicati.Library.ENotariado
                 {
                     throw new FailedEnrollmentException("Não foi possível verificar a resposta com o servidor");
                 }
+            }
+        }
+
+        public static async Task<string> GetApplicationAuthToken()
+        {
+            var start = new StartPublicKeyAuthenticationRequest
+            {
+                ApplicationId = ApplicationId,
+                CertificateThumbprint = Certificate.Thumbprint,
+            };
+
+            using (var client = new HttpClient())
+            {
+
+                /* Performing the firts token request, in order to receive a challenge. */
+                var uri = $"{BaseURI}/public-key-auth";
+                var jsonInString = JsonConvert.SerializeObject(start);
+
+                var startResponse = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
+                var contentString = await startResponse.Content.ReadAsStringAsync();
+
+                if (!startResponse.IsSuccessStatusCode)
+                {
+                    throw new FailedRequestException($"Error! Response code: '{startResponse.StatusCode}'. Content: '{contentString}'.");
+                }
+
+                /* Request successful, challenge received and session header stored. */
+                var startContent = JsonConvert.DeserializeObject<StartPublicKeyAuthenticationResponse>(contentString);
+                var session = startResponse.Headers.GetValues(PublicKeyAuthenticationSessionState).FirstOrDefault();
+
+                var signature = CryptoUtils.SignDataWithCertificate(startContent.ToSignData, Certificate);
+                var complete = new CompletePublicKeyAuthenticationRequest
+                {
+                    Signature = signature
+                };
+
+                var jsonCompleteString = JsonConvert.SerializeObject(complete);
+
+                var stringContent = new StringContent(jsonCompleteString, Encoding.UTF8, "application/json");
+                stringContent.Headers.Add(PublicKeyAuthenticationSessionState, session);
+
+                var completeResponse = await client.PostAsync($"{uri}/complete", stringContent);
+                var completeContentString = await completeResponse.Content.ReadAsStringAsync();
+
+                if (!completeResponse.IsSuccessStatusCode)
+                {
+                    throw new FailedRequestException($"Error! Response code: '{startResponse.StatusCode}'. Content: '{contentString}'.");
+                }
+
+                /*
+                 Token received.
+                 */
+                var completeContent = JsonConvert.DeserializeObject<CompletePublicKeyAuthenticationResponse>(completeContentString);
+                return completeContent.AppToken;
             }
         }
 
