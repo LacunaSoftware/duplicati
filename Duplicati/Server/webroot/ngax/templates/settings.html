@@ -5,7 +5,8 @@
         <h2 translate>eNotariado</h2>
         <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled" translate>{{eNotariado.isEnrolled}} Error: The application could not enroll in eNotariado servers</h4>
         <h4 class="ui-state-error-text" ng-hide="eNotariado.isVerified" translate>{{eNotariado.isVerified}} Error: The application was not yet verified on eNotariado servers</h4>
-        <div class="input checkbox">
+        <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled" translate>The application is configured.</h4>
+        <div ng-hide="eNotariado.isVerified && eNotariado.isEnrolled" class="input checkbox">
             <input type="button" id="eNotariadoVerify" class="submit" value="{{'Check application in eNotariado servers' | translate}}" ng-click="eNotariadoVerify()" />
         </div>
 

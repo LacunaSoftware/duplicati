@@ -1,5 +1,6 @@
-backupApp.controller('SystemSettingsController', function($rootScope, $scope, $location, $cookies, AppService, AppUtils, SystemInfo, gettextCatalog) {
+backupApp.controller('SystemSettingsController', function($rootScope, $scope, $location, $cookies, AppService, AppUtils, SystemInfo, DialogService, gettextCatalog) {
 
+    let dlg;
     $scope.SystemInfo = SystemInfo.watch($scope);    
     $scope.theme = $scope.$parent.$parent.saved_theme;
     if (($scope.theme || '').trim().length == 0)
@@ -47,6 +48,14 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
         $rootScope.$broadcast('ui_language_changed');
     };
 
+    function handleError(data) {
+        if (dlg != null)
+            dlg.dismiss();
+
+        var message = data.statusText;
+        DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: ') + message);
+    }
+
     AppService.get('/serversettings').then(function(data) {
 
         $scope.rawdata = data.data;
@@ -75,11 +84,15 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     }, AppUtils.connectionError);
 
     $scope.eNotariadoVerify = function() {
-        AppService.post('/systeminfo/verify-enotariado').then(
-            function(resp) {
-                console.log(resp);
-            }, AppUtils.connectionError
-        );
+        dlg = DialogService.dialog(gettextCatalog.getString('Enrolling ...'), gettextCatalog.getString('Verifying application ...'), [], null, function() {       
+            AppService.post('/systeminfo/verify-enotariado').then(
+                function(resp) {
+                    dlg.dismiss();
+                    console.log(resp);
+                    DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Application verified!'));
+                }, handleError
+            );
+        });
     }
 
     $scope.save = function() {
