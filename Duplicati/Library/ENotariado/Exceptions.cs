@@ -12,17 +12,8 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class ENotariadoNotInitializedException : Exception
     {
-        public ENotariadoNotInitializedException()
-        {
-        }
-
-        public ENotariadoNotInitializedException(string message)
-            : base(message)
-        {
-        }
-
-        public ENotariadoNotInitializedException(string message, Exception inner)
-            : base(message, inner)
+        public static readonly string ErrorMessage = "O registro da aplicação com o eNotariado não foi inicializado";
+        public ENotariadoNotInitializedException() : base(ErrorMessage)
         {
         }
     }
@@ -32,17 +23,8 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class FailedEnrollmentException : Exception
     {
-        public FailedEnrollmentException()
-        {
-        }
-
-        public FailedEnrollmentException(string message)
-            : base(message)
-        {
-        }
-
-        public FailedEnrollmentException(string message, Exception inner)
-            : base(message, inner)
+        public static readonly string ErrorMessage = "Houve um erro ao se registrar com o servidor do eNotariado";
+        public FailedEnrollmentException() : base(ErrorMessage)
         {
         }
     }
@@ -52,18 +34,15 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class FailedRequestException : Exception
     {
-        public FailedRequestException()
+        public static readonly string ErrorMessage = "Houve um erro na comunicação com o servidor do eNotariado";
+        public string Details;
+        public FailedRequestException() : base(ErrorMessage)
         {
         }
-
-        public FailedRequestException(string message)
-            : base(message)
+        
+        public FailedRequestException(string message) : base(ErrorMessage)
         {
-        }
-
-        public FailedRequestException(string message, Exception inner)
-            : base(message, inner)
-        {
+            Details = message;
         }
     }
 

@@ -68,7 +68,7 @@ namespace Duplicati.Library.ENotariado
                 }
                 else
                 {
-                    throw new FailedEnrollmentException($"Error!Response code: '{response.StatusCode}'.Content: '{contentString}'.");
+                    throw new FailedRequestException($"Error!Response code: '{response.StatusCode}'.Content: '{contentString}'.");
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace Duplicati.Library.ENotariado
         {
             if (Certificate == null || Guid.Empty == ApplicationId)
             {
-                throw new ENotariadoNotInitializedException("eNotariado não foi inicializado corretamente");
+                throw new ENotariadoNotInitializedException();
             }
 
             using (var client = new HttpClient())
@@ -99,7 +99,7 @@ namespace Duplicati.Library.ENotariado
                 }
                 else
                 {
-                    throw new FailedEnrollmentException("Não foi possível verificar a resposta com o servidor");
+                    throw new FailedRequestException($"Error!Response code: '{response.StatusCode}'.Content: '{contentString}'.");
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Duplicati.Library.ENotariado
                 }
                 else
                 {
-                    throw new FailedEnrollmentException("Não foi possível verificar a resposta com o servidor");
+                    throw new FailedRequestException("Não foi possível verificar a resposta com o servidor");
                 }
             }
 
@@ -140,7 +140,7 @@ namespace Duplicati.Library.ENotariado
 
             if (Certificate == null || Guid.Empty == ApplicationId)
             {
-                throw new ENotariadoNotInitializedException("eNotariado não foi inicializado corretamente");
+                throw new ENotariadoNotInitializedException();
             }
 
             if (!IsVerified)
