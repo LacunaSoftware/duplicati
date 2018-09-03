@@ -82,7 +82,7 @@
         </div>
         <!-- .step1 -->
 
-        <!-- <div class="step step2" ng-class="{active: CurrentStep == 1}">
+        <div class="step step-1" ng-class="{active: CurrentStep == -1}">
             <form class="styled">
                 <div class="headerthreedotmenu">
                     <h2 translate>Backup destination</h2>
@@ -106,11 +106,11 @@
                 <backup-edit-uri uri="Backup.TargetURL" set-builduri-fn="setBuilduriFn(builduriFn)"></backup-edit-uri>
 
                 <div class="buttons">
-                    <input class="submit next" type="button" id="nextStep2" ng-click="nextPage()" value="{{'Next' | translate}} &gt;" />
-                    <input class="submit prev" type="button" id="prevStep2" ng-click="prevPage()" value="&lt; {{'Previous' | translate}}" />
+                    <input class="submit next" type="button" id="nextStep-1" ng-click="nextPage()" value="{{'Next' | translate}} &gt;" />
+                    <input class="submit prev" type="button" id="prevStep-1" ng-click="prevPage()" value="&lt; {{'Previous' | translate}}" />
                 </div>
             </form>
-        </div> -->
+        </div>
         <!-- .step2 -->
         
         <div class="step step2" ng-class="{active: CurrentStep == 1}">
@@ -357,7 +357,7 @@
                     </div>
 
                 </div>
-
+<!-- 
                 <div ng-repeat="module in ServerModules">
                     <h2 title="{{module.Description}}">{{module.DisplayName}}</h2>
                     
@@ -398,7 +398,7 @@
                     <div class="input" ng-hide="ShowAdvancedTextArea">
                         <advanced-options-editor ng-option-list="ExtendedOptionList" ng-model="ExtendedOptions"></advanced-options-editor>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="buttons">
                     <input class="submit save" type="submit" id="save" ng-click="save()" value="{{'Save' | translate}}" />
