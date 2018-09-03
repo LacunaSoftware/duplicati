@@ -537,9 +537,9 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
 
         // Slightly better error message
         scope.Folder = scope.Path;
-        var url = AppUtils.format('{0}://{1}',
+        var url = AppUtils.format('{0}://backup-id-{1}',
             scope.Backend.Key,
-            backup.Name
+            backup.ID
         );
 
         return url;
