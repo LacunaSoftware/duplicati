@@ -54,6 +54,14 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     info.OutputOK();
                     return;
 
+                case "verify-enotariado":
+                    bool result = Program.InitializeENotariado().GetAwaiter().GetResult();
+                    if (result)
+                        info.OutputOK();
+                    else
+                        info.OutputError();
+                    return;
+
                 default:
                     info.ReportClientError("No such action", System.Net.HttpStatusCode.NotFound);
                     return;

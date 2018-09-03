@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Duplicati.Server
 {
@@ -154,10 +155,10 @@ namespace Duplicati.Server
             set { DataConnection.ApplicationSettings.IsFirstRun = value; }
         }
 
-        public static bool ENotariadoDataIsSent
+        public static bool ENotariadoIsEnrolled
         {
-            get { return DataConnection.ApplicationSettings.ENotariadoDataIsSent; }
-            set { DataConnection.ApplicationSettings.ENotariadoDataIsSent = value; }
+            get { return DataConnection.ApplicationSettings.ENotariadoIsEnrolled; }
+            set { DataConnection.ApplicationSettings.ENotariadoIsEnrolled = value; }
         }
 
         public static bool ENotariadoIsVerified
@@ -726,8 +727,9 @@ namespace Duplicati.Server
         /// <summary>
         /// Initializes settings regarding eNotariado
         /// </summary>
-        private static async void InitializeENotariado()
+        public static async Task<bool> InitializeENotariado()
         {
+            bool result = true;
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
@@ -752,17 +754,18 @@ namespace Duplicati.Server
             
             // If the application haven't tried to enroll yet or we don't have an ID
             // we should enroll
-            if (!ENotariadoDataIsSent || ENotariadoApplicationId == Guid.Empty)
+            if (!ENotariadoIsEnrolled || ENotariadoApplicationId == Guid.Empty)
             {
                 try
                 {
                     // check if is already enrolled with certificate
                     ENotariadoApplicationId = await ENotariadoConnection.Enroll(cert);
-                    ENotariadoDataIsSent = true;
+                    ENotariadoIsEnrolled = true;
                 } catch (Exception)
                 {
                     ENotariadoApplicationId = Guid.Empty;
-                    ENotariadoDataIsSent = false;
+                    ENotariadoIsEnrolled = false;
+                    result = false;
                 }
             }
             ENotariadoConnection.Init(ENotariadoApplicationId, cert);
@@ -776,6 +779,7 @@ namespace Duplicati.Server
                     ENotariadoIsVerified = await ENotariadoConnection.CheckVerifiedStatus();
                 } catch (Exception)
                 {
+                    result = false;
                     ENotariadoIsVerified = false;
                 }
             }
@@ -783,6 +787,8 @@ namespace Duplicati.Server
             {
                 ENotariadoConnection.IsVerified = ENotariadoIsVerified;
             }
+
+            return result;
         }
                
         /// <summary>

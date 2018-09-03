@@ -2,6 +2,13 @@
     <h1 translate>Settings</h1>
 
     <form class="styled">
+        <h2 translate>eNotariado</h2>
+        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled" translate>{{eNotariado.isEnrolled}} Error: The application could not enroll in eNotariado servers</h4>
+        <h4 class="ui-state-error-text" ng-hide="eNotariado.isVerified" translate>{{eNotariado.isVerified}} Error: The application was not yet verified on eNotariado servers</h4>
+        <div class="input checkbox">
+            <input type="button" id="eNotariadoVerify" class="submit" value="{{'Check application in eNotariado servers' | translate}}" ng-click="eNotariadoVerify()" />
+        </div>
+
         <h2 translate>Access to user interface</h2>
         <div class="input mixed multiple">
             <input type="checkbox" class="checkbox" id="hasPassword" name="hasPassword" ng-model="requireRemotePassword" />

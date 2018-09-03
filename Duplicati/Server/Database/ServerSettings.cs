@@ -54,7 +54,7 @@ namespace Duplicati.Server.Database
 			public const string HAS_ASKED_FOR_PASSWORD_PROTECTION = "has-asked-for-password-protection";
             public const string DISABLE_TRAY_ICON_LOGIN = "disable-tray-icon-login";
             public const string SERVER_ALLOWED_HOSTNAMES = "allowed-hostnames";
-            public const string ENOTARIADO_DATA_IS_SENT = "enotariado-data-is-sent";
+            public const string ENOTARIADO_IS_ENROLLED = "enotariado-is-enrolled";
             public const string ENOTARIADO_IS_VERIFIED = "enotariado-is-verified";
             public const string ENOTARIADO_CERT_THUMBPRINT = "enotariado-cert-thumbprint";
             public const string ENOTARIADO_APPLICATION_ID = "enotariado-application-id";
@@ -204,16 +204,16 @@ namespace Duplicati.Server.Database
             }
         }
 
-        public bool ENotariadoDataIsSent
+        public bool ENotariadoIsEnrolled
         {
             get
             {
-                return Duplicati.Library.Utility.Utility.ParseBoolOption(m_values, CONST.ENOTARIADO_DATA_IS_SENT);
+                return Duplicati.Library.Utility.Utility.ParseBool(m_values[CONST.ENOTARIADO_IS_ENROLLED], false);
             }
             set
             {
                 lock (m_connection.m_lock)
-                    m_values[CONST.ENOTARIADO_DATA_IS_SENT] = value.ToString();
+                    m_values[CONST.ENOTARIADO_IS_ENROLLED] = value.ToString();
                 SaveSettings();
             }
         }
@@ -222,7 +222,7 @@ namespace Duplicati.Server.Database
         {
             get
             {
-                return Duplicati.Library.Utility.Utility.ParseBoolOption(m_values, CONST.ENOTARIADO_IS_VERIFIED);
+                return Duplicati.Library.Utility.Utility.ParseBool(m_values[CONST.ENOTARIADO_IS_VERIFIED], false);
             }
             set
             {
