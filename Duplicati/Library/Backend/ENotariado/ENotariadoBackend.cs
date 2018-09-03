@@ -20,11 +20,9 @@ namespace Duplicati.Library.Backend.ENotariado
             var uri = new Utility.Uri(url);
             uri.RequireHost();
             string containerName = uri.Host.ToLowerInvariant();
+            string sasToken = ENotariadoConnection.GetSASToken().GetAwaiter().GetResult();
 
-            string sasToken;
-            // sasToken = getSASToken();
-
-            // _azureBlob = new AzureBlobWrapper(sasToken, ontainerName);
+            _azureBlob = new AzureBlobWrapper(sasToken, containerName);
         }
 
         public string DisplayName

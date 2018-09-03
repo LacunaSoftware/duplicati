@@ -10,18 +10,18 @@ namespace Duplicati.Library.ENotariado
     /// Exception thrown when the data (certificate thumbprint and
     /// application id) about eNotariado has not been initialized yet.
     /// </summary>
-    public class ENotariadoNotInitialized : Exception
+    public class ENotariadoNotInitializedException : Exception
     {
-        public ENotariadoNotInitialized()
+        public ENotariadoNotInitializedException()
         {
         }
 
-        public ENotariadoNotInitialized(string message)
+        public ENotariadoNotInitializedException(string message)
             : base(message)
         {
         }
 
-        public ENotariadoNotInitialized(string message, Exception inner)
+        public ENotariadoNotInitializedException(string message, Exception inner)
             : base(message, inner)
         {
         }
@@ -62,6 +62,26 @@ namespace Duplicati.Library.ENotariado
         }
 
         public FailedRequestException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Exception thrown when a certificate find operation fails
+    /// </summary>
+    public class ENotariadoNotVerifiedException : Exception
+    {
+        public ENotariadoNotVerifiedException()
+        {
+        }
+
+        public ENotariadoNotVerifiedException(string message)
+            : base(message)
+        {
+        }
+
+        public ENotariadoNotVerifiedException(string message, Exception inner)
             : base(message, inner)
         {
         }

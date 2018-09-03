@@ -17,7 +17,13 @@ namespace Duplicati.Library.ENotariado
         private static DateTime SessionTokenExpiration;
         private static X509Certificate2 Certificate;
         private static Guid ApplicationId;
-        private static bool IsVerified;
+        public static bool IsVerified;
+
+        private static bool HasValidAuthToken
+        {
+            get { return !string.IsNullOrWhiteSpace(SessionToken) && DateTime.Now > SessionTokenExpiration; }
+        }
+
         private static readonly string LOGTAG = "eNotariado Connection";
         private static readonly string PublicKeyAuthenticationSessionState = "X-Public-Key-Auth-Session-State";
         private static readonly string SubscriptionHeader = "X-Subscription";
@@ -74,7 +80,7 @@ namespace Duplicati.Library.ENotariado
         {
             if (Certificate == null || Guid.Empty == ApplicationId)
             {
-                throw new ENotariadoNotInitialized("ENotariado não foi inicializado corretamente");
+                throw new ENotariadoNotInitializedException("eNotariado não foi inicializado corretamente");
             }
 
             using (var client = new HttpClient())
@@ -98,8 +104,50 @@ namespace Duplicati.Library.ENotariado
             }
         }
 
-        public static async Task GetApplicationAuthToken()
+        public static async Task<string> GetSASToken()
         {
+            if (!HasValidAuthToken)
+            {
+                await GetApplicationAuthToken();
+            }
+
+
+            using (var client = new HttpClient())
+            {
+                var uri = $"{BaseURI}/azure";
+                var id = ApplicationId.ToString();
+
+                var response = await client.GetAsync($"{uri}/{id}/sas-token");
+                var contentString = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return contentString;
+                    // var content = JsonConvert.DeserializeObject<ApplicationEnrollmentStatusQueryResponse>(contentString);
+                    // return content.Approved;
+                }
+                else
+                {
+                    throw new FailedEnrollmentException("Não foi possível verificar a resposta com o servidor");
+                }
+            }
+
+
+        }
+
+        private static async Task GetApplicationAuthToken()
+        {
+
+            if (Certificate == null || Guid.Empty == ApplicationId)
+            {
+                throw new ENotariadoNotInitializedException("eNotariado não foi inicializado corretamente");
+            }
+
+            if (!IsVerified)
+            {
+                throw new ENotariadoNotVerifiedException("Essa aplicação ainda não foi verificada nos servidores do eNotariado");
+            }
+
             var start = new StartPublicKeyAuthenticationRequest
             {
                 ApplicationId = ApplicationId,
@@ -152,11 +200,6 @@ namespace Duplicati.Library.ENotariado
                 SessionTokenExpiration = DateTime.Now.AddMinutes(5);
             }
         }
-
-        /*
-        public static string GetSASToken(Guid applicationId, string certThumbprint)
-        {
-        }
-        */
+        
     }
 }

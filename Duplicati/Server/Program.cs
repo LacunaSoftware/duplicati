@@ -744,7 +744,7 @@ namespace Duplicati.Server
                 else
                     cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
-            catch (CryptoUtils.CertificateNotFoundException)
+            catch (CertificateNotFoundException)
             {
                 cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
@@ -778,6 +778,10 @@ namespace Duplicati.Server
                 {
                     ENotariadoIsVerified = false;
                 }
+            }
+            else
+            {
+                ENotariadoConnection.IsVerified = ENotariadoIsVerified;
             }
         }
                
