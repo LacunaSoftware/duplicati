@@ -15,27 +15,10 @@ namespace Duplicati.Library.ENotariado
         private const string SignatureAlgorithmOid = "1.2.840.113549.1.1.11"; // SHA-256 with RSA
         private const string SignatureAlgorithmName = "SHA256";
         private const int KeySize = 4096;
-        
+
         /// <summary>
-        /// Exception thrown when a certificate find operation fails
+        /// Creates a self-signed X509 certificate and stores it in the specified StoreLocation
         /// </summary>
-        public class CertificateNotFoundException : Exception
-        {
-            public CertificateNotFoundException()
-            {
-            }
-
-            public CertificateNotFoundException(string message)
-                : base(message)
-            {
-            }
-
-            public CertificateNotFoundException(string message, Exception inner)
-                : base(message, inner)
-            {
-            }
-        }
-
         public static X509Certificate2 CreateSelfSignedCertificate(StoreLocation keyStoreLocation, string commonName = "localhost", bool allowExport = false)
         {
             var keyName = Guid.NewGuid().ToString();
@@ -44,7 +27,10 @@ namespace Duplicati.Library.ENotariado
             var certWithKey = ImportCertificate(cert, key, keyStoreLocation);
             return certWithKey;
         }
-
+        
+        /// <summary>
+        /// Gets certificate with specified certThumbprint from the specified StoreLocation
+        /// </summary>
         public static X509Certificate2 GetCertificate(StoreLocation keyStoreLocation, string certThumbprint)
         {
             X509Certificate2 cert;
@@ -65,12 +51,15 @@ namespace Duplicati.Library.ENotariado
             }
             return cert;
         }
-   
+
+        /// <summary>
+        /// Signs byte array using the provided certificate's private key.
+        /// </summary>
         public static byte[] SignDataWithCertificate(byte[] data, X509Certificate2 cert)
         {
             return ((RSACryptoServiceProvider) cert.PrivateKey).SignData(data, SignatureAlgorithmName);
         }
-
+        
         private static RSACryptoServiceProvider CreateKey(StoreLocation keyStoreLocation, string keyName, bool allowExport)
         {
 

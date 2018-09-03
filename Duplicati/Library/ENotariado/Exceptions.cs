@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Duplicati.Library.ENotariado
 {
+    /// <summary>
+    /// Exception thrown when the data (certificate thumbprint and
+    /// application id) about eNotariado has not been initialized yet.
+    /// </summary>
     public class ENotariadoNotInitialized : Exception
     {
         public ENotariadoNotInitialized()
@@ -23,6 +27,9 @@ namespace Duplicati.Library.ENotariado
         }
     }
 
+    /// <summary>
+    /// Exception thrown when the enrollment to eNotariado servers fails
+    /// </summary>
     public class FailedEnrollmentException : Exception
     {
         public FailedEnrollmentException()
@@ -39,6 +46,10 @@ namespace Duplicati.Library.ENotariado
         {
         }
     }
+
+    /// <summary>
+    /// Exception thrown when a request to eNotariado servers fail
+    /// </summary>
     public class FailedRequestException : Exception
     {
         public FailedRequestException()
@@ -51,6 +62,26 @@ namespace Duplicati.Library.ENotariado
         }
 
         public FailedRequestException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
+
+    /// <summary>
+    /// Exception thrown when a certificate find operation fails
+    /// </summary>
+    public class CertificateNotFoundException : Exception
+    {
+        public CertificateNotFoundException()
+        {
+        }
+
+        public CertificateNotFoundException(string message)
+            : base(message)
+        {
+        }
+
+        public CertificateNotFoundException(string message, Exception inner)
             : base(message, inner)
         {
         }

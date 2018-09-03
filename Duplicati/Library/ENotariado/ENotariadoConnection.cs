@@ -18,7 +18,7 @@ namespace Duplicati.Library.ENotariado
         private static X509Certificate2 Certificate;
         private static Guid ApplicationId;
         private static bool IsVerified;
-        private static readonly string LOGTAG = Library.Logging.Log.LogTagFromType<ENotariadoConnection>();
+        private static readonly string LOGTAG = "eNotariado Connection";
         private static readonly string PublicKeyAuthenticationSessionState = "X-Public-Key-Auth-Session-State";
         private static readonly string SubscriptionHeader = "X-Subscription";
         private static readonly string BaseURI = $"https://localhost:44392/api";
