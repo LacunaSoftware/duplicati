@@ -60,7 +60,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
     };
 
     $scope.nextPage = function() {
-        $scope.CurrentStep = Math.min(4, $scope.CurrentStep + 1);
+        $scope.CurrentStep = Math.min(3, $scope.CurrentStep + 1);
     };
 
     $scope.prevPage = function() {
