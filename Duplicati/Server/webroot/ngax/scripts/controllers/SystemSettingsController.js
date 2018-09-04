@@ -88,8 +88,18 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             AppService.post('/systeminfo/verify-enotariado').then(
                 function(resp) {
                     dlg.dismiss();
-                    console.log(resp);
                     DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Application verified!'));
+                }, handleError
+            );
+        });
+    }
+
+    $scope.eNotariadoReset = function() {
+        dlg = DialogService.dialog(gettextCatalog.getString('Resetting ...'), gettextCatalog.getString('Resetting enrollment ...'), [], null, function() {       
+            AppService.post('/systeminfo/reset-enotariado').then(
+                function(resp) {
+                    dlg.dismiss();
+                    DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Enrollment reset!'));
                 }, handleError
             );
         });

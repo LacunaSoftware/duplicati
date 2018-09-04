@@ -54,6 +54,7 @@
     <Compile Include="ApplicationEnrollment\Models.cs" />
     <Compile Include="CryptoUtils.cs" />
     <Compile Include="ENotariadoConnection.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

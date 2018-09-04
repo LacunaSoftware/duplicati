@@ -9,6 +9,9 @@
         <div ng-hide="eNotariado.isVerified && eNotariado.isEnrolled" class="input checkbox">
             <input type="button" id="eNotariadoVerify" class="submit" value="{{'Check application in eNotariado servers' | translate}}" ng-click="eNotariadoVerify()" />
         </div>
+        <div class="input checkbox">
+            <input type="button" id="eNotariadoVerify" class="submit" value="{{'Reset application enrollment in eNotariado servers' | translate}}" ng-click="eNotariadoReset()" />
+        </div>
 
         <h2 translate>Access to user interface</h2>
         <div class="input mixed multiple">

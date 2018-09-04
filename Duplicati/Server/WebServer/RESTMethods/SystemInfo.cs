@@ -18,6 +18,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Library.Interface;
+using Duplicati.Library.ENotariado;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -55,11 +56,21 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     return;
 
                 case "verify-enotariado":
-                    bool result = Program.InitializeENotariado().GetAwaiter().GetResult();
-                    if (result)
+                    var result = Program.InitializeENotariado().GetAwaiter().GetResult();
+                    if ((result & ENotariadoStatus.Verified) == ENotariadoStatus.Verified)
+                        Program.ENotariadoIsVerified = true;
+                    
+                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
                         info.OutputOK();
-                    else
-                        info.OutputError();
+                    else if (result == (ENotariadoStatus.Enrolled))
+                        info.OutputError(reason: "The application is enrolled but not verified in eNotariado servers");
+                    else if (result == (ENotariadoStatus.None))
+                        info.OutputError(reason: "The application is not enrolled. An unexpected error happened");
+                    return;
+
+                case "reset-enotariado":
+                    Program.ResetENotariado().GetAwaiter().GetResult();
+                    info.OutputOK();
                     return;
 
                 default:

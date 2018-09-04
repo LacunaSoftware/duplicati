@@ -727,9 +727,9 @@ namespace Duplicati.Server
         /// <summary>
         /// Initializes settings regarding eNotariado
         /// </summary>
-        public static async Task<bool> InitializeENotariado()
+        public static async Task<ENotariadoStatus> InitializeENotariado()
         {
-            bool result = true;
+            ENotariadoStatus result = ENotariadoStatus.None;
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
@@ -751,7 +751,7 @@ namespace Duplicati.Server
                 cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
             CertificateThumbprint = cert.Thumbprint;
-            
+
             // If the application haven't tried to enroll yet or we don't have an ID
             // we should enroll
             if (!ENotariadoIsEnrolled || ENotariadoApplicationId == Guid.Empty)
@@ -761,36 +761,56 @@ namespace Duplicati.Server
                     // check if is already enrolled with certificate
                     ENotariadoApplicationId = await ENotariadoConnection.Enroll(cert);
                     ENotariadoIsEnrolled = true;
-                } catch (Exception)
+                }
+                catch (Exception ex)
                 {
+                    Library.Logging.Log.WriteErrorMessage("eNotariado", "ApplicationEnrollmentFailed", ex, "Application enrollment failed.");
                     ENotariadoApplicationId = Guid.Empty;
-                    ENotariadoIsEnrolled = false;
-                    result = false;
                 }
             }
-            ENotariadoConnection.Init(ENotariadoApplicationId, cert);
 
-            // If we are not verified, tries to verify
+            // Initializes ENotariadoConnection with appropriate data
+            if (ENotariadoIsEnrolled)
+                ENotariadoConnection.Init(ENotariadoApplicationId, cert);
+
+            // If we are not verified, tries to verify on startup
             // CheckVerifiedStatus will throw with an undefined ID
-            if (!ENotariadoIsVerified)
+            if (ENotariadoIsEnrolled && !ENotariadoIsVerified)
             {
                 try
                 {
                     ENotariadoIsVerified = await ENotariadoConnection.CheckVerifiedStatus();
-                } catch (Exception)
+                }
+                catch (Exception ex)
                 {
-                    result = false;
+                    Library.Logging.Log.WriteErrorMessage("eNotariado", "ApplicationVerification", ex, "Application verification failed.");
                     ENotariadoIsVerified = false;
                 }
             }
-            else
+            else if (ENotariadoIsEnrolled) // is enrolled and verified
             {
                 ENotariadoConnection.IsVerified = ENotariadoIsVerified;
             }
+            
+            if (ENotariadoIsEnrolled)
+                result |= ENotariadoStatus.Enrolled;
+            if (ENotariadoIsVerified)
+                result |= ENotariadoStatus.Verified;
 
             return result;
         }
-               
+        
+        /// <summary>
+        /// Resets settings regarding eNotariado
+        /// </summary>
+        public static async Task ResetENotariado()
+        {
+            ENotariadoApplicationId = Guid.Empty;
+            ENotariadoIsEnrolled = false;
+            ENotariadoIsVerified = false;
+            await InitializeENotariado();
+        }
+
         /// <summary>
         /// Simple method for tracking if the server has crashed
         /// </summary>

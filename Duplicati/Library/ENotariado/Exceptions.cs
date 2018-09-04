@@ -36,13 +36,9 @@ namespace Duplicati.Library.ENotariado
     {
         public static readonly string ErrorMessage = "Houve um erro na comunicação com o servidor do eNotariado";
         public string Details;
-        public FailedRequestException() : base(ErrorMessage)
-        {
-        }
         
-        public FailedRequestException(string message) : base(ErrorMessage)
+        public FailedRequestException(string message) : base(ErrorMessage + " - " + message)
         {
-            Details = message;
         }
     }
 
