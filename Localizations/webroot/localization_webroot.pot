@@ -17,19 +17,19 @@ msgstr ""
 msgid "API Key"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:828
+#: scripts/services/EditUriBuiltins.js:852
 #: templates/backends/s3.html:54
 #: templates/backends/s3.html:55
 msgid "AWS Access ID"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:829
+#: scripts/services/EditUriBuiltins.js:853
 #: templates/backends/s3.html:58
 #: templates/backends/s3.html:59
 msgid "AWS Access Key"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:138
+#: scripts/services/EditUriBuiltins.js:139
 msgid "AWS IAM Policy"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgstr ""
 msgid "About {{appname}}"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:777
+#: scripts/services/EditUriBuiltins.js:797
 #: templates/backends/azure.html:11
 msgid "Access Key"
 msgstr ""
@@ -51,11 +51,11 @@ msgstr ""
 msgid "Access denied"
 msgstr ""
 
-#: templates/settings.html:5
+#: templates/settings.html:13
 msgid "Access to user interface"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:776
+#: scripts/services/EditUriBuiltins.js:796
 #: templates/backends/azure.html:7
 msgid "Account name"
 msgstr ""
@@ -94,12 +94,12 @@ msgstr ""
 msgid "Add path"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:839
-#: scripts/services/EditUriBuiltins.js:856
+#: scripts/services/EditUriBuiltins.js:863
+#: scripts/services/EditUriBuiltins.js:880
 msgid "Adjust bucket name?"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:757
+#: scripts/services/EditUriBuiltins.js:777
 msgid "Adjust path name?"
 msgstr ""
 
@@ -108,7 +108,6 @@ msgstr ""
 msgid "Advanced Options"
 msgstr ""
 
-#: templates/addoredit.html:372
 #: templates/edituri.html:28
 msgid "Advanced options"
 msgstr ""
@@ -125,11 +124,11 @@ msgstr ""
 msgid "All Microsoft SQL Databases"
 msgstr ""
 
-#: templates/settings.html:129
+#: templates/settings.html:137
 msgid "All usage reports are sent anonymously and do not contain any personal information. They contain information about hardware and operating system, the type of backend, backup duration, overall size of source data and similar data. They do not contain paths, filenames, usernames, passwords or similar sensitive information."
 msgstr ""
 
-#: templates/settings.html:13
+#: templates/settings.html:21
 msgid "Allow remote access (requires restart)"
 msgstr ""
 
@@ -155,8 +154,12 @@ msgid ""
 " Do you wish to use the existing database?"
 msgstr ""
 
-#: templates/settings.html:117
+#: templates/settings.html:125
 msgid "Anonymous usage reports"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:92
+msgid "Application verified!"
 msgstr ""
 
 #: scripts/services/AppUtils.js:204
@@ -167,7 +170,7 @@ msgstr ""
 msgid "As Command-line"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:710
+#: scripts/services/EditUriBuiltins.js:730
 #: templates/backends/gcs.html:8
 #: templates/backends/gcs.html:9
 #: templates/backends/msgroup.html:13
@@ -198,19 +201,19 @@ msgid "Automatically run backups."
 msgstr ""
 
 #: templates/backends/b2.html:12
-msgid "B2 Account ID"
+msgid "B2 Account ID or Application ID"
 msgstr ""
 
 #: templates/backends/b2.html:16
 msgid "B2 Application Key"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:875
+#: scripts/services/EditUriBuiltins.js:899
 #: templates/backends/b2.html:13
 msgid "B2 Cloud Storage Account ID"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:876
+#: scripts/services/EditUriBuiltins.js:900
 #: templates/backends/b2.html:17
 msgid "B2 Cloud Storage Application Key"
 msgstr ""
@@ -246,7 +249,7 @@ msgstr ""
 msgid "Backup:"
 msgstr ""
 
-#: templates/settings.html:94
+#: templates/settings.html:102
 msgid "Beta"
 msgstr ""
 
@@ -259,14 +262,14 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:33
+#: scripts/controllers/SystemSettingsController.js:34
 msgid "Browser default"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:787
-#: scripts/services/EditUriBuiltins.js:827
-#: scripts/services/EditUriBuiltins.js:874
-#: scripts/services/EditUriBuiltins.js:884
+#: scripts/services/EditUriBuiltins.js:811
+#: scripts/services/EditUriBuiltins.js:851
+#: scripts/services/EditUriBuiltins.js:898
+#: scripts/services/EditUriBuiltins.js:908
 msgid "Bucket Name"
 msgstr ""
 
@@ -303,11 +306,11 @@ msgstr ""
 msgid "Busy ..."
 msgstr ""
 
-#: templates/settings.html:14
+#: templates/settings.html:22
 msgid "By allowing remote access, the server listens to requests from any machine on your network. If you enable this option, make sure you are always using the computer on a secure firewall protected network."
 msgstr ""
 
-#: templates/settings.html:25
+#: templates/settings.html:33
 msgid "By default, the tray icon will open the user interface with a token than unlocks the user interface. This ensures that you can access the user interface from the tray icon, while requiring others to enter a password. If you prefer having to type in the password, even when accessing the user interface from the tray icon, enable this option."
 msgstr ""
 
@@ -315,7 +318,7 @@ msgstr ""
 msgid "Cache Files"
 msgstr ""
 
-#: templates/settings.html:104
+#: templates/settings.html:112
 msgid "Canary"
 msgstr ""
 
@@ -335,13 +338,13 @@ msgstr ""
 #: scripts/controllers/StateController.js:112
 #: scripts/services/CaptchaService.js:22
 #: scripts/services/DialogService.js:50
-#: scripts/services/EditUriBuiltins.js:50
-#: scripts/services/EditUriBuiltins.js:757
-#: scripts/services/EditUriBuiltins.js:839
-#: scripts/services/EditUriBuiltins.js:856
+#: scripts/services/EditUriBuiltins.js:51
+#: scripts/services/EditUriBuiltins.js:777
+#: scripts/services/EditUriBuiltins.js:863
+#: scripts/services/EditUriBuiltins.js:880
 #: templates/delete.html:54
 #: templates/export.html:26
-#: templates/settings.html:159
+#: templates/settings.html:167
 #: templates/waitarea.html:19
 msgid "Cancel"
 msgstr ""
@@ -356,6 +359,10 @@ msgstr ""
 
 #: templates/updatechangelog.html:2
 msgid "Changelog for {{appname}} {{version}}"
+msgstr ""
+
+#: templates/settings.html:10
+msgid "Check application in eNotariado servers"
 msgstr ""
 
 #: scripts/controllers/UpdateChangelogController.js:24
@@ -470,7 +477,7 @@ msgstr ""
 msgid "Connection worked!"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:778
+#: scripts/services/EditUriBuiltins.js:798
 #: templates/backends/azure.html:2
 msgid "Container name"
 msgstr ""
@@ -512,7 +519,7 @@ msgstr ""
 msgid "Counting ({{files}} files found, {{size}})"
 msgstr ""
 
-#: templates/settings.html:124
+#: templates/settings.html:132
 msgid "Crashes only"
 msgstr ""
 
@@ -524,7 +531,7 @@ msgstr ""
 msgid "Create folder?"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:124
+#: scripts/services/EditUriBuiltins.js:125
 msgid "Created new limited user"
 msgstr ""
 
@@ -532,7 +539,7 @@ msgstr ""
 msgid "Creating bug report ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:115
+#: scripts/services/EditUriBuiltins.js:116
 msgid "Creating new user with limited access ..."
 msgstr ""
 
@@ -544,7 +551,7 @@ msgstr ""
 msgid "Creating temporary backup ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:115
+#: scripts/services/EditUriBuiltins.js:116
 msgid "Creating user..."
 msgstr ""
 
@@ -603,11 +610,11 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:34
+#: scripts/controllers/SystemSettingsController.js:35
 msgid "Default"
 msgstr ""
 
-#: templates/settings.html:81
+#: templates/settings.html:89
 msgid "Default ({{channelname}})"
 msgstr ""
 
@@ -615,7 +622,7 @@ msgstr ""
 msgid "Default excludes"
 msgstr ""
 
-#: templates/settings.html:144
+#: templates/settings.html:152
 msgid "Default options"
 msgstr ""
 
@@ -665,10 +672,6 @@ msgstr ""
 msgid "Desktop"
 msgstr ""
 
-#: templates/addoredit.html:25
-msgid "Destination"
-msgstr ""
-
 #: templates/backends/sharepoint.html:2
 msgid "Destination path"
 msgstr ""
@@ -694,7 +697,7 @@ msgstr ""
 msgid "Dismiss all"
 msgstr ""
 
-#: templates/settings.html:63
+#: templates/settings.html:71
 msgid "Display and color theme"
 msgstr ""
 
@@ -715,16 +718,16 @@ msgstr ""
 msgid "Donate"
 msgstr ""
 
-#: templates/settings.html:71
-#: templates/settings.html:73
+#: templates/settings.html:79
+#: templates/settings.html:81
 msgid "Donation messages"
 msgstr ""
 
-#: templates/settings.html:75
+#: templates/settings.html:83
 msgid "Donation messages are hidden, click to show"
 msgstr ""
 
-#: templates/settings.html:74
+#: templates/settings.html:82
 msgid "Donation messages are visible, click to hide"
 msgstr ""
 
@@ -762,8 +765,8 @@ msgstr ""
 
 #: templates/delete.html:15
 msgid ""
-"Each backup has a local database associated with it, which stores information about the remote backup on the local machine.\n"
-"            When deleting a backup, you can also delete the local database without affecting the ability to restore the remote files.\n"
+"Each backup has a local database associated with it, which stores information about the remote backup on the local machine.\r\n"
+"            When deleting a backup, you can also delete the local database without affecting the ability to restore the remote files.\r\n"
 "            If you are using the local database for backups from the commandline, you should keep the database."
 msgstr ""
 
@@ -776,16 +779,14 @@ msgid "Edit ..."
 msgstr ""
 
 #: templates/addoredit.html:170
-#: templates/addoredit.html:383
 #: templates/edituri.html:39
-#: templates/settings.html:148
+#: templates/settings.html:156
 msgid "Edit as list"
 msgstr ""
 
 #: templates/addoredit.html:173
-#: templates/addoredit.html:386
 #: templates/edituri.html:42
-#: templates/settings.html:154
+#: templates/settings.html:162
 msgid "Edit as text"
 msgstr ""
 
@@ -806,6 +807,10 @@ msgstr ""
 
 #: templates/about.html:69
 msgid "Encryption modules:"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:87
+msgid "Enrolling ..."
 msgstr ""
 
 #: scripts/controllers/EditBackupController.js:75
@@ -884,6 +889,7 @@ msgstr ""
 #: scripts/controllers/RestoreController.js:88
 #: scripts/controllers/RestoreDirectController.js:110
 #: scripts/controllers/RestoreDirectController.js:74
+#: scripts/controllers/SystemSettingsController.js:56
 #: scripts/directives/backupEditUri.js:143
 #: scripts/directives/backupEditUri.js:170
 #: scripts/directives/backupEditUri.js:205
@@ -900,7 +906,7 @@ msgstr ""
 msgid "Error!"
 msgstr ""
 
-#: templates/settings.html:123
+#: templates/settings.html:131
 msgid "Errors and crashes"
 msgstr ""
 
@@ -944,7 +950,7 @@ msgstr ""
 msgid "Existing file found"
 msgstr ""
 
-#: templates/settings.html:99
+#: templates/settings.html:107
 msgid "Experimental"
 msgstr ""
 
@@ -981,6 +987,7 @@ msgstr ""
 msgid "Failed to build temporary database: {{message}}"
 msgstr ""
 
+#: scripts/controllers/SystemSettingsController.js:56
 #: scripts/directives/backupEditUri.js:143
 #: scripts/directives/backupEditUri.js:205
 #: scripts/directives/backupEditUri.js:239
@@ -1021,7 +1028,7 @@ msgstr ""
 msgid "Failed to restore files: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:113
+#: scripts/controllers/SystemSettingsController.js:139
 msgid "Failed to save:"
 msgstr ""
 
@@ -1108,8 +1115,8 @@ msgstr ""
 msgid "Getting file versions ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:729
-#: scripts/services/EditUriBuiltins.js:740
+#: scripts/services/EditUriBuiltins.js:749
+#: scripts/services/EditUriBuiltins.js:760
 #: templates/backends/msgroup.html:2
 msgid "Group email"
 msgstr ""
@@ -1132,13 +1139,13 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: templates/settings.html:17
+#: templates/settings.html:25
 msgid "Hostnames"
 msgstr ""
 
 #: scripts/services/AppUtils.js:100
 #: scripts/services/AppUtils.js:90
-#: templates/settings.html:47
+#: templates/settings.html:55
 msgid "Hours"
 msgstr ""
 
@@ -1253,7 +1260,7 @@ msgstr ""
 msgid "Incorrect answer, try again"
 msgstr ""
 
-#: templates/settings.html:105
+#: templates/settings.html:113
 msgid "Individual builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -1270,7 +1277,7 @@ msgstr ""
 msgid "Install failed:"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:932
+#: scripts/services/EditUriBuiltins.js:956
 msgid "Invalid characters in path"
 msgstr ""
 
@@ -1280,7 +1287,7 @@ msgstr ""
 msgid "Invalid retention time"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:686
+#: scripts/services/EditUriBuiltins.js:706
 msgid ""
 "It is possible to connect to some FTP without a password.\n"
 "Are you sure your FTP server supports password-less logins?"
@@ -1306,7 +1313,7 @@ msgstr ""
 msgid "Keystone API version"
 msgstr ""
 
-#: templates/settings.html:53
+#: templates/settings.html:61
 msgid "Language in user interface"
 msgstr ""
 
@@ -1378,7 +1385,7 @@ msgstr ""
 msgid "Loading remote storage usage ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:945
+#: scripts/services/EditUriBuiltins.js:969
 msgid "Local Repository"
 msgstr ""
 
@@ -1465,13 +1472,13 @@ msgstr ""
 msgid "Minimum redundancy"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:936
+#: scripts/services/EditUriBuiltins.js:960
 msgid "Minimum redundancy is 1.0"
 msgstr ""
 
 #: scripts/services/AppUtils.js:89
 #: scripts/services/AppUtils.js:99
-#: templates/settings.html:46
+#: templates/settings.html:54
 msgid "Minutes"
 msgstr ""
 
@@ -1532,7 +1539,7 @@ msgstr ""
 msgid "New update found: {{message}}"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:124
+#: scripts/services/EditUriBuiltins.js:125
 msgid ""
 "New user name is {{user}}.\n"
 "Updated credentials to use the new limited user"
@@ -1576,10 +1583,10 @@ msgstr ""
 #: scripts/directives/backupEditUri.js:214
 #: scripts/directives/backupEditUri.js:87
 #: scripts/services/EditUriBackendConfig.js:66
-#: scripts/services/EditUriBuiltins.js:50
-#: scripts/services/EditUriBuiltins.js:757
-#: scripts/services/EditUriBuiltins.js:839
-#: scripts/services/EditUriBuiltins.js:856
+#: scripts/services/EditUriBuiltins.js:51
+#: scripts/services/EditUriBuiltins.js:777
+#: scripts/services/EditUriBuiltins.js:863
+#: scripts/services/EditUriBuiltins.js:880
 msgid "No"
 msgstr ""
 
@@ -1623,7 +1630,7 @@ msgstr ""
 msgid "Non-matching passphrase"
 msgstr ""
 
-#: templates/settings.html:125
+#: templates/settings.html:133
 msgid "None / disabled"
 msgstr ""
 
@@ -1641,9 +1648,9 @@ msgstr ""
 #: scripts/services/DialogService.js:28
 #: scripts/services/DialogService.js:50
 #: scripts/services/DialogService.js:58
-#: scripts/services/EditUriBuiltins.js:124
+#: scripts/services/EditUriBuiltins.js:125
 #: templates/restore.html:146
-#: templates/settings.html:160
+#: templates/settings.html:168
 msgid "OK"
 msgstr ""
 
@@ -1659,7 +1666,7 @@ msgstr ""
 msgid "OpenStack Object Storage / Swift"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:803
+#: scripts/services/EditUriBuiltins.js:827
 msgid "Openstack API Key are not supported in v3 keystone API."
 msgstr ""
 
@@ -1667,8 +1674,8 @@ msgstr ""
 msgid "Operating System"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:124
-#: scripts/controllers/SystemSettingsController.js:135
+#: scripts/controllers/SystemSettingsController.js:150
+#: scripts/controllers/SystemSettingsController.js:161
 msgid "Operation failed:"
 msgstr ""
 
@@ -1686,12 +1693,12 @@ msgstr ""
 
 #: templates/addoredit.html:28
 #: templates/edituri.html:51
-#: templates/settings.html:147
-#: templates/settings.html:153
+#: templates/settings.html:155
+#: templates/settings.html:161
 msgid "Options"
 msgstr ""
 
-#: templates/settings.html:145
+#: templates/settings.html:153
 msgid "Options added here are applied to all backups, but can be overridden in each individual backup"
 msgstr ""
 
@@ -1729,8 +1736,8 @@ msgstr ""
 msgid "Passphrases are not matching"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:910
-#: scripts/services/EditUriBuiltins.js:920
+#: scripts/services/EditUriBuiltins.js:934
+#: scripts/services/EditUriBuiltins.js:944
 #: templates/backends/file.html:33
 #: templates/backends/generic.html:22
 #: templates/backends/jottacloud.html:11
@@ -1738,7 +1745,7 @@ msgstr ""
 #: templates/backends/mega.html:11
 #: templates/backends/mega.html:12
 #: templates/backends/openstack.html:34
-#: templates/settings.html:8
+#: templates/settings.html:16
 msgid "Password"
 msgstr ""
 
@@ -1750,7 +1757,7 @@ msgstr ""
 msgid "Patching files with local blocks ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:895
+#: scripts/services/EditUriBuiltins.js:919
 msgid "Path"
 msgstr ""
 
@@ -1769,11 +1776,11 @@ msgstr ""
 msgid "Path or subfolder in the bucket"
 msgstr ""
 
-#: templates/settings.html:31
+#: templates/settings.html:39
 msgid "Pause"
 msgstr ""
 
-#: templates/settings.html:29
+#: templates/settings.html:37
 msgid "Pause after startup or hibernation"
 msgstr ""
 
@@ -1797,7 +1804,7 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: templates/settings.html:24
+#: templates/settings.html:32
 msgid "Prevent tray icon automatic log-in"
 msgstr ""
 
@@ -1857,11 +1864,11 @@ msgstr ""
 msgid "Remote"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:946
+#: scripts/services/EditUriBuiltins.js:970
 msgid "Remote Path"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:944
+#: scripts/services/EditUriBuiltins.js:968
 msgid "Remote Repository"
 msgstr ""
 
@@ -1988,7 +1995,7 @@ msgstr ""
 msgid "S3 Compatible"
 msgstr ""
 
-#: templates/settings.html:82
+#: templates/settings.html:90
 msgid "Same as the base install version: {{channelname}}"
 msgstr ""
 
@@ -2035,7 +2042,7 @@ msgid "Search for files"
 msgstr ""
 
 #: scripts/services/AppUtils.js:98
-#: templates/settings.html:45
+#: templates/settings.html:53
 msgid "Seconds"
 msgstr ""
 
@@ -2049,7 +2056,7 @@ msgstr ""
 msgid "Select files"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:928
+#: scripts/services/EditUriBuiltins.js:952
 #: templates/backends/s3.html:8
 #: templates/backends/sia.html:2
 msgid "Server"
@@ -2147,7 +2154,7 @@ msgstr ""
 msgid "Source:"
 msgstr ""
 
-#: templates/settings.html:100
+#: templates/settings.html:108
 msgid "Specific builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -2217,6 +2224,7 @@ msgstr ""
 msgid "Strong"
 msgstr ""
 
+#: scripts/controllers/SystemSettingsController.js:92
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2234,7 +2242,7 @@ msgstr ""
 msgid "System Files"
 msgstr ""
 
-#: templates/settings.html:120
+#: templates/settings.html:128
 msgid "System default ({{levelname}})"
 msgstr ""
 
@@ -2291,24 +2299,28 @@ msgstr ""
 msgid "Testing connection ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:45
+#: scripts/services/EditUriBuiltins.js:46
 msgid "Testing permissions ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:45
+#: scripts/services/EditUriBuiltins.js:46
 msgid "Testing permissions..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:884
-#: scripts/services/EditUriBuiltins.js:895
+#: scripts/services/EditUriBuiltins.js:908
+#: scripts/services/EditUriBuiltins.js:919
 msgid "The '{{fieldname}}' field contains an invalid character: {{character}} (value: {{value}}, index: {{pos}})"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:856
+#: templates/settings.html:8
+msgid "The application is configured."
+msgstr ""
+
+#: scripts/services/EditUriBuiltins.js:880
 msgid "The bucket name should be all lower-case, convert automatically?"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:839
+#: scripts/services/EditUriBuiltins.js:863
 msgid "The bucket name should start with your username, prepend automatically?"
 msgstr ""
 
@@ -2316,11 +2328,11 @@ msgstr ""
 msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 
-#: templates/settings.html:67
+#: templates/settings.html:75
 msgid "The dark theme (by Michal)"
 msgstr ""
 
-#: templates/settings.html:66
+#: templates/settings.html:74
 msgid "The default blue on white theme (by Alex)"
 msgstr ""
 
@@ -2352,7 +2364,7 @@ msgstr ""
 msgid "The path must be an absolute path, i.e. it must start with a forward slash '/'"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:757
+#: scripts/services/EditUriBuiltins.js:777
 msgid ""
 "The path should start with \"{{prefix1}}\" or \"{{prefix2}}\", otherwise you will not be able to see the files in the HubiC web interface.\n"
 "\n"
@@ -2381,7 +2393,7 @@ msgstr ""
 msgid "The target folder contains encrypted files, please supply the passphrase"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:50
+#: scripts/services/EditUriBuiltins.js:51
 msgid "The user has too many permissions. Do you want to create a new limited user, with only permissions to the selected path?"
 msgstr ""
 
@@ -2421,7 +2433,7 @@ msgstr ""
 msgid "To export without a passphrase, uncheck the \"Encrypt file\" box"
 msgstr ""
 
-#: templates/settings.html:19
+#: templates/settings.html:27
 msgid "To prevent various DNS based attacks, Duplicati limits the allowed hostnames to the ones listed here. Direct IP access and localhost is always allowed. Multiple hostnames can be supplied with a semicolon separator. If any of the allowed hostnames is an asterisk (*), all hostnames are allowed and this feature is disabled. If the field is empty, only IP address and localhost access is allowed."
 msgstr ""
 
@@ -2437,7 +2449,7 @@ msgstr ""
 msgid "Trust server certificate?"
 msgstr ""
 
-#: templates/settings.html:95
+#: templates/settings.html:103
 msgid "Try out the new features that we are working on. Currently the most stable version available. Test Restore data before using this in production environments."
 msgstr ""
 
@@ -2457,7 +2469,7 @@ msgstr ""
 msgid "Until resumed"
 msgstr ""
 
-#: templates/settings.html:78
+#: templates/settings.html:86
 msgid "Update channel"
 msgstr ""
 
@@ -2473,15 +2485,15 @@ msgstr ""
 msgid "Uploading verification file ..."
 msgstr ""
 
-#: templates/settings.html:127
+#: templates/settings.html:135
 msgid "Usage reports help us improve the user experience and evaluate impact of new features. We use them to generate <external-link link=\"link\">public usage statistics</external-link>"
 msgstr ""
 
-#: templates/settings.html:115
+#: templates/settings.html:123
 msgid "Usage statistics"
 msgstr ""
 
-#: templates/settings.html:121
+#: templates/settings.html:129
 msgid "Usage statistics, warnings, errors, and crashes"
 msgstr ""
 
@@ -2510,18 +2522,18 @@ msgstr ""
 msgid "User domain name"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:50
+#: scripts/services/EditUriBuiltins.js:51
 msgid "User has too many permissions"
 msgstr ""
 
-#: templates/settings.html:51
+#: templates/settings.html:59
 msgid "User interface settings"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:681
-#: scripts/services/EditUriBuiltins.js:786
-#: scripts/services/EditUriBuiltins.js:909
-#: scripts/services/EditUriBuiltins.js:919
+#: scripts/services/EditUriBuiltins.js:701
+#: scripts/services/EditUriBuiltins.js:810
+#: scripts/services/EditUriBuiltins.js:933
+#: scripts/services/EditUriBuiltins.js:943
 #: templates/backends/file.html:29
 #: templates/backends/generic.html:18
 #: templates/backends/jottacloud.html:7
@@ -2547,6 +2559,10 @@ msgstr ""
 
 #: scripts/services/CaptchaService.js:32
 msgid "Verifying answer"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:87
+msgid "Verifying application ..."
 msgstr ""
 
 #: scripts/services/ServerStatus.js:34
@@ -2596,10 +2612,10 @@ msgid "Waiting for task to start ...."
 msgstr ""
 
 #: scripts/services/ServerStatus.js:39
-msgid "Waiting for upload ..."
+msgid "Waiting for upload to finish ..."
 msgstr ""
 
-#: templates/settings.html:122
+#: templates/settings.html:130
 msgid "Warnings, errors and crashes"
 msgstr ""
 
@@ -2654,10 +2670,10 @@ msgstr ""
 #: scripts/directives/backupEditUri.js:214
 #: scripts/directives/backupEditUri.js:87
 #: scripts/services/EditUriBackendConfig.js:66
-#: scripts/services/EditUriBuiltins.js:50
-#: scripts/services/EditUriBuiltins.js:757
-#: scripts/services/EditUriBuiltins.js:839
-#: scripts/services/EditUriBuiltins.js:856
+#: scripts/services/EditUriBuiltins.js:51
+#: scripts/services/EditUriBuiltins.js:777
+#: scripts/services/EditUriBuiltins.js:863
+#: scripts/services/EditUriBuiltins.js:880
 msgid "Yes"
 msgstr ""
 
@@ -2725,7 +2741,7 @@ msgstr ""
 msgid "You must choose at least one source folder"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:797
+#: scripts/services/EditUriBuiltins.js:821
 msgid "You must enter a domain name to use v3 API"
 msgstr ""
 
@@ -2737,7 +2753,7 @@ msgstr ""
 msgid "You must enter a passphrase or disable encryption"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:794
+#: scripts/services/EditUriBuiltins.js:818
 msgid "You must enter a password to use v3 API"
 msgstr ""
 
@@ -2745,11 +2761,11 @@ msgstr ""
 msgid "You must enter a positive number of backups to keep"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:800
+#: scripts/services/EditUriBuiltins.js:824
 msgid "You must enter a tenant (aka project) name to use v3 API"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:814
+#: scripts/services/EditUriBuiltins.js:838
 msgid "You must enter a tenant name if you do not provide an API Key"
 msgstr ""
 
@@ -2761,11 +2777,11 @@ msgstr ""
 msgid "You must enter a valid rentention policy string"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:811
+#: scripts/services/EditUriBuiltins.js:835
 msgid "You must enter either a password or an API Key"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:818
+#: scripts/services/EditUriBuiltins.js:842
 msgid "You must enter either a password or an API Key, not both"
 msgstr ""
 
@@ -2786,11 +2802,11 @@ msgstr ""
 msgid "You must fill in {{field}}"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:790
+#: scripts/services/EditUriBuiltins.js:814
 msgid "You must select or fill in the AuthURI"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:832
+#: scripts/services/EditUriBuiltins.js:856
 msgid "You must select or fill in the server"
 msgstr ""
 
@@ -2830,19 +2846,31 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
+#: templates/settings.html:5
+msgid "eNotariado"
+msgstr ""
+
 #: templates/commandline.html:49
 #: templates/restoredirect.html:95
 #: templates/waitarea.html:15
 msgid "resume now"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:729
-#: scripts/services/EditUriBuiltins.js:740
+#: scripts/services/EditUriBuiltins.js:749
+#: scripts/services/EditUriBuiltins.js:760
 msgid "unless you are explicitly specifying --group-id"
 msgstr ""
 
 #: templates/about.html:12
 msgid "{{appname}} was primarily developed by <a href=\"{{mail1}}\">{{dev1}}</a> and <a href=\"{{mail2}}\">{{dev2}}</a>. {{appname}} can be downloaded from <a href=\"{{websitelink}}\">{{websitename}}</a>. {{appname}} is licensed under the <a href=\"{{licenselink}}\">{{licensename}}</a>."
+msgstr ""
+
+#: templates/settings.html:6
+msgid "{{eNotariado.isEnrolled}} Error: The application could not enroll in eNotariado servers"
+msgstr ""
+
+#: templates/settings.html:7
+msgid "{{eNotariado.isVerified}} Error: The application was not yet verified on eNotariado servers"
 msgstr ""
 
 #: scripts/controllers/StateController.js:50
