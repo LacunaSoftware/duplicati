@@ -11,7 +11,7 @@ IF NOT EXIST "%1" (
 
 call "%VS140COMNTOOLS%vsvars32.bat"
 
-7z x -oDuplicati %1
+"C:\Program Files\7-Zip\7z.exe" x -oDuplicati %1
 
 IF EXIST "..\oem" (
 	echo Installing OEM files
