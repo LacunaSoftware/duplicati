@@ -116,11 +116,11 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
       }
 
     $scope.eNotariadoReset = function() {
-        dlg = DialogService.dialog(gettextCatalog.getString('Resetting ...'), gettextCatalog.getString('Resetting enrollment ...'), [], null, function() {       
+        dlg = DialogService.dialog(gettextCatalog.getString('Re-enrolling ...'), gettextCatalog.getString('Contacting e-Notariado ...'), [], null, function() {       
             AppService.post('/systeminfo/reset-enotariado').then(
                 function(resp) {
                     dlg.dismiss();
-                    DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Enrollment reset!'));
+                    DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('The application was re-enrolled successfully!'));
                 }, handleError
             );
         });

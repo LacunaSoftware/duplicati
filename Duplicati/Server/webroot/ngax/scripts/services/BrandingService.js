@@ -1,7 +1,7 @@
 backupApp.service('BrandingService', function() {
 
     var state = { 
-        'appName': 'Backup', 
+        'appName': 'e-notariado Backup', 
         'appSubtitle': null,
         'appLogoPath': '../img/logo.png'
     };

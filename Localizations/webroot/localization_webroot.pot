@@ -33,8 +33,8 @@ msgstr ""
 msgid "AWS IAM Policy"
 msgstr ""
 
-#: index.html:225
-#: index.html:241
+#: index.html:219
+#: index.html:235
 msgid "About"
 msgstr ""
 
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Access denied"
 msgstr ""
 
-#: templates/settings.html:13
+#: templates/settings.html:27
 msgid "Access to user interface"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Add advanced option"
 msgstr ""
 
-#: index.html:213
+#: index.html:207
 msgid "Add backup"
 msgstr ""
 
@@ -124,11 +124,11 @@ msgstr ""
 msgid "All Microsoft SQL Databases"
 msgstr ""
 
-#: templates/settings.html:137
+#: templates/settings.html:151
 msgid "All usage reports are sent anonymously and do not contain any personal information. They contain information about hardware and operating system, the type of backend, backup duration, overall size of source data and similar data. They do not contain paths, filenames, usernames, passwords or similar sensitive information."
 msgstr ""
 
-#: templates/settings.html:21
+#: templates/settings.html:35
 msgid "Allow remote access (requires restart)"
 msgstr ""
 
@@ -154,8 +154,12 @@ msgid ""
 " Do you wish to use the existing database?"
 msgstr ""
 
-#: templates/settings.html:125
+#: templates/settings.html:139
 msgid "Anonymous usage reports"
+msgstr ""
+
+#: templates/settings.html:12
+msgid "Application Code"
 msgstr ""
 
 #: scripts/controllers/SystemSettingsController.js:92
@@ -249,7 +253,7 @@ msgstr ""
 msgid "Backup:"
 msgstr ""
 
-#: templates/settings.html:102
+#: templates/settings.html:116
 msgid "Beta"
 msgstr ""
 
@@ -306,11 +310,11 @@ msgstr ""
 msgid "Busy ..."
 msgstr ""
 
-#: templates/settings.html:22
+#: templates/settings.html:36
 msgid "By allowing remote access, the server listens to requests from any machine on your network. If you enable this option, make sure you are always using the computer on a secure firewall protected network."
 msgstr ""
 
-#: templates/settings.html:33
+#: templates/settings.html:47
 msgid "By default, the tray icon will open the user interface with a token than unlocks the user interface. This ensures that you can access the user interface from the tray icon, while requiring others to enter a password. If you prefer having to type in the password, even when accessing the user interface from the tray icon, enable this option."
 msgstr ""
 
@@ -318,7 +322,7 @@ msgstr ""
 msgid "Cache Files"
 msgstr ""
 
-#: templates/settings.html:112
+#: templates/settings.html:126
 msgid "Canary"
 msgstr ""
 
@@ -344,7 +348,7 @@ msgstr ""
 #: scripts/services/EditUriBuiltins.js:880
 #: templates/delete.html:54
 #: templates/export.html:26
-#: templates/settings.html:167
+#: templates/settings.html:181
 #: templates/waitarea.html:19
 msgid "Cancel"
 msgstr ""
@@ -361,8 +365,8 @@ msgstr ""
 msgid "Changelog for {{appname}} {{version}}"
 msgstr ""
 
-#: templates/settings.html:10
-msgid "Check application in eNotariado servers"
+#: templates/settings.html:21
+msgid "Check application status"
 msgstr ""
 
 #: scripts/controllers/UpdateChangelogController.js:24
@@ -392,8 +396,8 @@ msgstr ""
 msgid "Click the AuthID link to create an AuthID"
 msgstr ""
 
-#: index.html:150
-#: index.html:201
+#: index.html:144
+#: index.html:195
 msgid "Click to set throttle options"
 msgstr ""
 
@@ -452,11 +456,11 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: index.html:313
+#: index.html:295
 msgid "Connect now"
 msgstr ""
 
-#: index.html:309
+#: index.html:291
 msgid "Connecting to server ..."
 msgstr ""
 
@@ -464,17 +468,21 @@ msgstr ""
 msgid "Connecting to task ...."
 msgstr ""
 
-#: index.html:314
+#: index.html:296
 msgid "Connecting..."
 msgstr ""
 
-#: index.html:305
+#: index.html:287
 msgid "Connection lost"
 msgstr ""
 
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Connection worked!"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:119
+msgid "Contacting e-Notariado ..."
 msgstr ""
 
 #: scripts/services/EditUriBuiltins.js:798
@@ -494,6 +502,10 @@ msgstr ""
 msgid "Continue without encryption"
 msgstr ""
 
+#: scripts/controllers/SystemSettingsController.js:108
+msgid "Copied  to clipboard"
+msgstr ""
+
 #: scripts/controllers/DialogController.js:16
 msgid "Copied!"
 msgstr ""
@@ -511,15 +523,23 @@ msgstr ""
 msgid "Copy failed. Please manually copy the URL"
 msgstr ""
 
+#: templates/settings.html:14
+msgid "Copy to clipboard"
+msgstr ""
+
 #: scripts/services/AppUtils.js:639
 msgid "Core options"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:113
+msgid "Could not copy  to clipboard"
 msgstr ""
 
 #: scripts/controllers/StateController.js:34
 msgid "Counting ({{files}} files found, {{size}})"
 msgstr ""
 
-#: templates/settings.html:132
+#: templates/settings.html:146
 msgid "Crashes only"
 msgstr ""
 
@@ -614,7 +634,7 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: templates/settings.html:89
+#: templates/settings.html:103
 msgid "Default ({{channelname}})"
 msgstr ""
 
@@ -622,7 +642,7 @@ msgstr ""
 msgid "Default excludes"
 msgstr ""
 
-#: templates/settings.html:152
+#: templates/settings.html:166
 msgid "Default options"
 msgstr ""
 
@@ -697,7 +717,7 @@ msgstr ""
 msgid "Dismiss all"
 msgstr ""
 
-#: templates/settings.html:71
+#: templates/settings.html:85
 msgid "Display and color theme"
 msgstr ""
 
@@ -713,22 +733,9 @@ msgstr ""
 msgid "Domain Name"
 msgstr ""
 
-#: index.html:142
-#: index.html:249
+#: index.html:136
+#: index.html:243
 msgid "Donate"
-msgstr ""
-
-#: templates/settings.html:79
-#: templates/settings.html:81
-msgid "Donation messages"
-msgstr ""
-
-#: templates/settings.html:83
-msgid "Donation messages are hidden, click to show"
-msgstr ""
-
-#: templates/settings.html:82
-msgid "Donation messages are visible, click to hide"
 msgstr ""
 
 #: templates/export.html:45
@@ -755,11 +762,7 @@ msgstr ""
 msgid "Duplicate option {{opt}}"
 msgstr ""
 
-#: index.html:269
-msgid "Duplicati Website"
-msgstr ""
-
-#: index.html:257
+#: index.html:251
 msgid "Duplicati forum"
 msgstr ""
 
@@ -780,13 +783,13 @@ msgstr ""
 
 #: templates/addoredit.html:170
 #: templates/edituri.html:39
-#: templates/settings.html:156
+#: templates/settings.html:170
 msgid "Edit as list"
 msgstr ""
 
 #: templates/addoredit.html:173
 #: templates/edituri.html:42
-#: templates/settings.html:162
+#: templates/settings.html:176
 msgid "Edit as text"
 msgstr ""
 
@@ -809,7 +812,7 @@ msgstr ""
 msgid "Encryption modules:"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:87
+#: scripts/controllers/SystemSettingsController.js:88
 msgid "Enrolling ..."
 msgstr ""
 
@@ -906,7 +909,11 @@ msgstr ""
 msgid "Error!"
 msgstr ""
 
-#: templates/settings.html:131
+#: templates/settings.html:6
+msgid "Error: The application is not enrolled in e-Notariado"
+msgstr ""
+
+#: templates/settings.html:145
 msgid "Errors and crashes"
 msgstr ""
 
@@ -950,7 +957,7 @@ msgstr ""
 msgid "Existing file found"
 msgstr ""
 
-#: templates/settings.html:107
+#: templates/settings.html:121
 msgid "Experimental"
 msgstr ""
 
@@ -981,6 +988,10 @@ msgstr ""
 
 #: scripts/services/SystemInfo.js:52
 msgid "FTP (Alternative)"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:113
+msgid "Fail"
 msgstr ""
 
 #: scripts/controllers/RestoreController.js:378
@@ -1028,7 +1039,7 @@ msgstr ""
 msgid "Failed to restore files: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:139
+#: scripts/controllers/SystemSettingsController.js:170
 msgid "Failed to save:"
 msgstr ""
 
@@ -1134,18 +1145,18 @@ msgstr ""
 msgid "Hide hidden folders"
 msgstr ""
 
-#: index.html:210
+#: index.html:204
 #: scripts/services/AppUtils.js:62
 msgid "Home"
 msgstr ""
 
-#: templates/settings.html:25
+#: templates/settings.html:39
 msgid "Hostnames"
 msgstr ""
 
 #: scripts/services/AppUtils.js:100
 #: scripts/services/AppUtils.js:90
-#: templates/settings.html:55
+#: templates/settings.html:69
 msgid "Hours"
 msgstr ""
 
@@ -1244,6 +1255,10 @@ msgstr ""
 msgid "Importing ..."
 msgstr ""
 
+#: templates/settings.html:10
+msgid "In order to verify the application, copy the digits below into the verification page of the e-Notariado website."
+msgstr ""
+
 #: scripts/controllers/EditBackupController.js:143
 msgid "Include a file?"
 msgstr ""
@@ -1260,7 +1275,7 @@ msgstr ""
 msgid "Incorrect answer, try again"
 msgstr ""
 
-#: templates/settings.html:113
+#: templates/settings.html:127
 msgid "Individual builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -1313,7 +1328,7 @@ msgstr ""
 msgid "Keystone API version"
 msgstr ""
 
-#: templates/settings.html:61
+#: templates/settings.html:75
 msgid "Language in user interface"
 msgstr ""
 
@@ -1421,7 +1436,7 @@ msgstr ""
 msgid "Log data from the server"
 msgstr ""
 
-#: index.html:228
+#: index.html:222
 msgid "Log out"
 msgstr ""
 
@@ -1450,7 +1465,7 @@ msgstr ""
 msgid "Max upload speed"
 msgstr ""
 
-#: index.html:146
+#: index.html:140
 #: templates/addoredit.html:123
 #: templates/addoredit.html:165
 #: templates/addoredit.html:378
@@ -1478,7 +1493,7 @@ msgstr ""
 
 #: scripts/services/AppUtils.js:89
 #: scripts/services/AppUtils.js:99
-#: templates/settings.html:54
+#: templates/settings.html:68
 msgid "Minutes"
 msgstr ""
 
@@ -1559,11 +1574,11 @@ msgstr ""
 msgid "Next scheduled run:"
 msgstr ""
 
-#: index.html:185
+#: index.html:179
 msgid "Next scheduled task:"
 msgstr ""
 
-#: index.html:182
+#: index.html:176
 msgid "Next task:"
 msgstr ""
 
@@ -1618,7 +1633,7 @@ msgstr ""
 msgid "No passphrase entered"
 msgstr ""
 
-#: index.html:187
+#: index.html:181
 msgid "No scheduled tasks"
 msgstr ""
 
@@ -1630,7 +1645,7 @@ msgstr ""
 msgid "Non-matching passphrase"
 msgstr ""
 
-#: templates/settings.html:133
+#: templates/settings.html:147
 msgid "None / disabled"
 msgstr ""
 
@@ -1650,7 +1665,7 @@ msgstr ""
 #: scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125
 #: templates/restore.html:146
-#: templates/settings.html:168
+#: templates/settings.html:182
 msgid "OK"
 msgstr ""
 
@@ -1674,8 +1689,8 @@ msgstr ""
 msgid "Operating System"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:150
-#: scripts/controllers/SystemSettingsController.js:161
+#: scripts/controllers/SystemSettingsController.js:181
+#: scripts/controllers/SystemSettingsController.js:192
 msgid "Operation failed:"
 msgstr ""
 
@@ -1693,12 +1708,12 @@ msgstr ""
 
 #: templates/addoredit.html:28
 #: templates/edituri.html:51
-#: templates/settings.html:155
-#: templates/settings.html:161
+#: templates/settings.html:169
+#: templates/settings.html:175
 msgid "Options"
 msgstr ""
 
-#: templates/settings.html:153
+#: templates/settings.html:167
 msgid "Options added here are applied to all backups, but can be overridden in each individual backup"
 msgstr ""
 
@@ -1745,7 +1760,7 @@ msgstr ""
 #: templates/backends/mega.html:11
 #: templates/backends/mega.html:12
 #: templates/backends/openstack.html:34
-#: templates/settings.html:16
+#: templates/settings.html:30
 msgid "Password"
 msgstr ""
 
@@ -1776,11 +1791,11 @@ msgstr ""
 msgid "Path or subfolder in the bucket"
 msgstr ""
 
-#: templates/settings.html:39
+#: templates/settings.html:53
 msgid "Pause"
 msgstr ""
 
-#: templates/settings.html:37
+#: templates/settings.html:51
 msgid "Pause after startup or hibernation"
 msgstr ""
 
@@ -1804,7 +1819,7 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: templates/settings.html:32
+#: templates/settings.html:46
 msgid "Prevent tray icon automatic log-in"
 msgstr ""
 
@@ -1834,6 +1849,14 @@ msgstr ""
 
 #: scripts/services/ServerStatus.js:65
 msgid "Purging files Complete!"
+msgstr ""
+
+#: templates/settings.html:24
+msgid "Re-enroll application"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:119
+msgid "Re-enrolling ..."
 msgstr ""
 
 #: scripts/services/ServerStatus.js:46
@@ -1913,7 +1936,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: index.html:216
+#: index.html:210
 #: templates/restore.html:131
 msgid "Restore"
 msgstr ""
@@ -1962,7 +1985,7 @@ msgstr ""
 msgid "Restoring files ..."
 msgstr ""
 
-#: index.html:219
+#: index.html:213
 msgid "Resume"
 msgstr ""
 
@@ -1987,7 +2010,7 @@ msgstr ""
 msgid "Running commandline entry"
 msgstr ""
 
-#: index.html:174
+#: index.html:168
 msgid "Running task:"
 msgstr ""
 
@@ -1995,7 +2018,7 @@ msgstr ""
 msgid "S3 Compatible"
 msgstr ""
 
-#: templates/settings.html:90
+#: templates/settings.html:104
 msgid "Same as the base install version: {{channelname}}"
 msgstr ""
 
@@ -2042,7 +2065,7 @@ msgid "Search for files"
 msgstr ""
 
 #: scripts/services/AppUtils.js:98
-#: templates/settings.html:53
+#: templates/settings.html:67
 msgid "Seconds"
 msgstr ""
 
@@ -2092,7 +2115,7 @@ msgstr ""
 msgid "Server state properties"
 msgstr ""
 
-#: index.html:222
+#: index.html:216
 #: templates/settings.html:2
 msgid "Settings"
 msgstr ""
@@ -2154,7 +2177,7 @@ msgstr ""
 msgid "Source:"
 msgstr ""
 
-#: templates/settings.html:108
+#: templates/settings.html:122
 msgid "Specific builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -2196,11 +2219,11 @@ msgstr ""
 msgid "Stop running task"
 msgstr ""
 
-#: index.html:170
+#: index.html:164
 msgid "Stopping after upload:"
 msgstr ""
 
-#: index.html:175
+#: index.html:169
 msgid "Stopping task:"
 msgstr ""
 
@@ -2224,6 +2247,8 @@ msgstr ""
 msgid "Strong"
 msgstr ""
 
+#: scripts/controllers/SystemSettingsController.js:108
+#: scripts/controllers/SystemSettingsController.js:123
 #: scripts/controllers/SystemSettingsController.js:92
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
@@ -2242,7 +2267,7 @@ msgstr ""
 msgid "System Files"
 msgstr ""
 
-#: templates/settings.html:128
+#: templates/settings.html:142
 msgid "System default ({{levelname}})"
 msgstr ""
 
@@ -2312,8 +2337,16 @@ msgstr ""
 msgid "The '{{fieldname}}' field contains an invalid character: {{character}} (value: {{value}}, index: {{pos}})"
 msgstr ""
 
+#: templates/settings.html:19
+msgid "The application is correctly configured."
+msgstr ""
+
 #: templates/settings.html:8
-msgid "The application is configured."
+msgid "The application is not verified on e-Notariado"
+msgstr ""
+
+#: scripts/controllers/SystemSettingsController.js:123
+msgid "The application was re-enrolled successfully!"
 msgstr ""
 
 #: scripts/services/EditUriBuiltins.js:880
@@ -2324,15 +2357,15 @@ msgstr ""
 msgid "The bucket name should start with your username, prepend automatically?"
 msgstr ""
 
-#: index.html:306
+#: index.html:288
 msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 
-#: templates/settings.html:75
+#: templates/settings.html:89
 msgid "The dark theme (by Michal)"
 msgstr ""
 
-#: templates/settings.html:74
+#: templates/settings.html:88
 msgid "The default blue on white theme (by Alex)"
 msgstr ""
 
@@ -2433,7 +2466,7 @@ msgstr ""
 msgid "To export without a passphrase, uncheck the \"Encrypt file\" box"
 msgstr ""
 
-#: templates/settings.html:27
+#: templates/settings.html:41
 msgid "To prevent various DNS based attacks, Duplicati limits the allowed hostnames to the ones listed here. Direct IP access and localhost is always allowed. Multiple hostnames can be supplied with a semicolon separator. If any of the allowed hostnames is an asterisk (*), all hostnames are allowed and this feature is disabled. If the field is empty, only IP address and localhost access is allowed."
 msgstr ""
 
@@ -2449,7 +2482,7 @@ msgstr ""
 msgid "Trust server certificate?"
 msgstr ""
 
-#: templates/settings.html:103
+#: templates/settings.html:117
 msgid "Try out the new features that we are working on. Currently the most stable version available. Test Restore data before using this in production environments."
 msgstr ""
 
@@ -2465,11 +2498,11 @@ msgstr ""
 msgid "Unknown backup size and versions"
 msgstr ""
 
-#: templates/pause.html:31
+#: templates/pause.html:46
 msgid "Until resumed"
 msgstr ""
 
-#: templates/settings.html:86
+#: templates/settings.html:100
 msgid "Update channel"
 msgstr ""
 
@@ -2485,15 +2518,15 @@ msgstr ""
 msgid "Uploading verification file ..."
 msgstr ""
 
-#: templates/settings.html:135
+#: templates/settings.html:149
 msgid "Usage reports help us improve the user experience and evaluate impact of new features. We use them to generate <external-link link=\"link\">public usage statistics</external-link>"
 msgstr ""
 
-#: templates/settings.html:123
+#: templates/settings.html:137
 msgid "Usage statistics"
 msgstr ""
 
-#: templates/settings.html:129
+#: templates/settings.html:143
 msgid "Usage statistics, warnings, errors, and crashes"
 msgstr ""
 
@@ -2526,7 +2559,7 @@ msgstr ""
 msgid "User has too many permissions"
 msgstr ""
 
-#: templates/settings.html:59
+#: templates/settings.html:73
 msgid "User interface settings"
 msgstr ""
 
@@ -2561,7 +2594,7 @@ msgstr ""
 msgid "Verifying answer"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:87
+#: scripts/controllers/SystemSettingsController.js:88
 msgid "Verifying application ..."
 msgstr ""
 
@@ -2591,10 +2624,6 @@ msgstr ""
 msgid "Very weak"
 msgstr ""
 
-#: index.html:254
-msgid "Visit us on"
-msgstr ""
-
 #: templates/delete.html:21
 msgid "WARNING: The remote database is found to be in use by the commandline library"
 msgstr ""
@@ -2615,7 +2644,7 @@ msgstr ""
 msgid "Waiting for upload to finish ..."
 msgstr ""
 
-#: templates/settings.html:130
+#: templates/settings.html:144
 msgid "Warnings, errors and crashes"
 msgstr ""
 
@@ -2846,6 +2875,10 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
+#: index.html:248
+msgid "e-notariado"
+msgstr ""
+
 #: templates/settings.html:5
 msgid "eNotariado"
 msgstr ""
@@ -2865,14 +2898,6 @@ msgstr ""
 msgid "{{appname}} was primarily developed by <a href=\"{{mail1}}\">{{dev1}}</a> and <a href=\"{{mail2}}\">{{dev2}}</a>. {{appname}} can be downloaded from <a href=\"{{websitelink}}\">{{websitename}}</a>. {{appname}} is licensed under the <a href=\"{{licenselink}}\">{{licensename}}</a>."
 msgstr ""
 
-#: templates/settings.html:6
-msgid "{{eNotariado.isEnrolled}} Error: The application could not enroll in eNotariado servers"
-msgstr ""
-
-#: templates/settings.html:7
-msgid "{{eNotariado.isVerified}} Error: The application was not yet verified on eNotariado servers"
-msgstr ""
-
 #: scripts/controllers/StateController.js:50
 msgid "{{files}} files ({{size}}) to go {{speed_txt}}"
 msgstr ""
@@ -2886,6 +2911,12 @@ msgstr[1] ""
 
 #: templates/pause.html:26
 msgid "{{number}} Hour"
+msgstr ""
+
+#: templates/pause.html:31
+#: templates/pause.html:36
+#: templates/pause.html:41
+msgid "{{number}} Hours"
 msgstr ""
 
 #: templates/pause.html:11
