@@ -1,7 +1,7 @@
 backupApp.service('BrandingService', function() {
 
     var state = { 
-        'appName': 'Duplicati', 
+        'appName': 'Backup', 
         'appSubtitle': null,
         'appLogoPath': '../img/logo.png'
     };

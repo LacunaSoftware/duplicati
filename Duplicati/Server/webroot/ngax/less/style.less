@@ -34,7 +34,7 @@ body {
 
 h1,
 h2 {
-    font-weight: 300;
+    font-weight: bold;
     color: @hColor;
 }
 
@@ -108,7 +108,7 @@ a {
 }
 
 .button:hover {
-    background: darken(@lColor, 10%);
+    background: @lColor;
 }
 
 .step2 source-folder-picker, #folder_path_picker, #restore_file_picker {
@@ -389,6 +389,7 @@ ul.notification {
 .settings {
     div.sublabel {
         clear: both;
+        color: @subText;
         padding: 0 31px;
         font-style: italic;
     }
@@ -396,10 +397,10 @@ ul.notification {
 
 .logo {
     img.mainlogo {
-        height: 64px;
-        width: 64px;
+        height: 60px;
+        width: 99px;
         float: left;
-        padding-right: 8px;
+        padding-right: 15px;
         padding-top: 2px;
     }
 
@@ -456,6 +457,7 @@ div.captcha {
 
 body {
     color: @tColor;
+    background: @eNotariadoWhite;
 
     .container {
         min-height: 100%;
@@ -473,7 +475,7 @@ body {
             z-index: 100;
 
             a {
-                color: @lColor;
+                color: @wColor;
             }
 
             a:hover,
@@ -619,7 +621,7 @@ body {
                 }
 
                 > .throttle.inactive {
-                    opacity: 0.5;
+                    opacity: 0.8;
                 }
             }
 
@@ -747,35 +749,35 @@ body {
                         }
 
                         > a.home.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/home.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/home.png') no-repeat 8px 7px;
                         }
 
                         > a.add.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/add.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/add.png') no-repeat 8px 7px;
                         }
 
                         > a.restore.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/restore.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/restore.png') no-repeat 8px 7px;
                         }
 
                         > a.pause.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/pause.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/pause.png') no-repeat 8px 7px;
                         }
 
                         > a.resume.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/resume.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/resume.png') no-repeat 8px 7px;
                         }
 
                         > a.settings.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/settings.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/settings.png') no-repeat 8px 7px;
                         }
 
                         > a.log.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/log.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/log.png') no-repeat 8px 7px;
                         }
 
                         > a.about.active {
-                            background: lighten(@lColor, 15%) url('../img/mainmenu/over/about.png') no-repeat 8px 7px;
+                            background: @lColor url('../img/mainmenu/over/about.png') no-repeat 8px 7px;
                         }
 
                         > a.pause.open.active {
@@ -785,15 +787,15 @@ body {
                         }
 
                         > a.add:hover {
-                            background: @lColor url('../img/mainmenu/over/add.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/add.png') no-repeat 8px 7px;
                         }
 
                         > a.restore:hover {
-                            background: @lColor url('../img/mainmenu/over/restore.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/restore.png') no-repeat 8px 7px;
                         }
 
                         > a.pause:hover {
-                            background: @lColor url('../img/mainmenu/over/pause.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/pause.png') no-repeat 8px 7px;
                         }
 
                         > a.pause:hover {
@@ -815,27 +817,27 @@ body {
                         }
 
                         > a.resume:hover {
-                            background: @lColor url('../img/mainmenu/over/resume.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/resume.png') no-repeat 8px 7px;
                         }
 
                         > a.settings:hover {
-                            background: @lColor url('../img/mainmenu/over/settings.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/settings.png') no-repeat 8px 7px;
                         }
 
                         > a.log:hover {
-                            background: @lColor url('../img/mainmenu/over/log.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/log.png') no-repeat 8px 7px;
                         }
 
                         > a.logout:hover {
-                            background: @lColor url('../img/mainmenu/over/logout.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/logout.png') no-repeat 8px 7px;
                         }
 
                         > a.home:hover {
-                            background: @lColor url('../img/mainmenu/over/home.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/home.png') no-repeat 8px 7px;
                         }
 
                         > a.about:hover {
-                            background: @lColor url('../img/mainmenu/over/about.png') no-repeat 8px 7px;
+                            background: darken(@lColor, 10%) url('../img/mainmenu/over/about.png') no-repeat 8px 7px;
                         }
                     }
 
@@ -923,7 +925,7 @@ body {
                         }
 
                         .progress-small-bg {
-                            border: 1px #65b1dd solid;
+                            border: 1px #009bb3 solid;
                             width: 200px;
                         }
 
@@ -1588,6 +1590,8 @@ body {
 
             .social {
                 float: right;
+                color: @hColor;
+                font-weight: bold;
 
                 ul {
                     overflow: hidden;
@@ -1723,12 +1727,12 @@ div.modal-dialog {
     }
 
     div.title {
-        border: 1px solid #65b1dd;
-        background-color: #65b1dd;
+        border: 1px solid #009bb3;
+        background-color: #009bb3;
         border-radius: 5px 5px 0 0;
         padding: 10px 20px;
         font-weight: bold;
-        color: lightgray;
+        color: white;
         text-align: center;
     }
 
@@ -1866,7 +1870,7 @@ div.modal-dialog {
             clear: both;
             margin-left: 30px;
             padding-top: 5px;
-            color: lightgray;
+            color: @subText;
 
         }
     }
@@ -1935,7 +1939,7 @@ div.modal-dialog {
         height: 100%;
         font-size: 12px;
         line-height: 20px;
-        color: #fff;
+        color: @eNotariadoWhite;
         text-align: center;
         background-color: #337ab7;
         -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
@@ -2231,7 +2235,7 @@ div.modal-dialog {
                     position: relative;
                     height: 40px;
                     line-height: 40px;
-                    color: #8f8f8f;
+                    color: #000;
                     float: right;
                     top: 10px;
                     padding-left: 20px;

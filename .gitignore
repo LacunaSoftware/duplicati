@@ -24,3 +24,4 @@ binfiles.wxs
 .idea/
 .vs/
 
+Duplicati/Server/webroot/ngax/compile-less.sh
