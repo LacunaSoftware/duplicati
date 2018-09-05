@@ -76,7 +76,8 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
             isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
             applicationId: data.data['enotariado-application-id'],
-            certThumbprint: data.data['enotariado-cert-thumbprint']
+            certThumbprint: data.data['enotariado-cert-thumbprint'],
+            slicedThumbprint: data.data['enotariado-cert-thumbprint'].slice(0, 8)
         };
 
         AppUtils.extractServerModuleOptions($scope.advancedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedGlobalCommands');
@@ -93,6 +94,26 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             );
         });
     }
+
+    $scope.copyToClipboard = function() {
+        const textArea = document.createElement("textarea");
+        const sliced = $scope.eNotariado.slicedThumbprint;
+        textArea.value = sliced;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        try {
+            const success = document.body.removeChild(textArea);
+            if (success) {
+                DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString(`Copied ${sliced} to clipboard`));
+            } else {
+                throw Exception;
+            }
+        } catch (err) {
+            DialogService.dialog(gettextCatalog.getString('Fail'), gettextCatalog.getString(`Could not copy ${sliced} to clipboard`));
+
+        }
+      }
 
     $scope.eNotariadoReset = function() {
         dlg = DialogService.dialog(gettextCatalog.getString('Resetting ...'), gettextCatalog.getString('Resetting enrollment ...'), [], null, function() {       

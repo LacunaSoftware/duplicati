@@ -3,21 +3,32 @@
 
     <form class="styled">
         <h2 translate>eNotariado</h2>
-        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled" translate>{{eNotariado.isEnrolled}} Error: The application could not enroll in eNotariado servers</h4>
-        <h4 class="ui-state-error-text" ng-hide="eNotariado.isVerified" translate>{{eNotariado.isVerified}} Error: The application was not yet verified on eNotariado servers</h4>
+        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled" translate>Error: The application could not enroll in eNotariado servers</h4>
+        <div ng-hide="!eNotariado.isEnrolled || eNotariado.isVerified">
+            <h4 class="ui-state-error-text"translate>The application is not verified on eNotariado servers</h4>
+            <p>
+                In order to verify the application, copy the digits below into the verification page of the eNotariado website.
+                <div class="input text">
+                    <label for="certThumbprint" translate>Application Code</label>
+                    <input style="font-weight: bold" type="text" id="certThumbprint" ng-model="eNotariado.slicedThumbprint"></input>
+                    <a id="copyToClip" href ng-click="copyToClipboard()" class="advanced-toggle" translate>Copy to clipboard</a>
+                </div>
+            </p>
+
+        </div>
         <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled" translate>The application is configured.</h4>
         <div ng-hide="eNotariado.isVerified && eNotariado.isEnrolled" class="input checkbox">
             <input type="button" id="eNotariadoVerify" class="submit" value="{{'Check application in eNotariado servers' | translate}}" ng-click="eNotariadoVerify()" />
         </div>
         <div class="input checkbox">
-            <input type="button" id="eNotariadoVerify" class="submit" value="{{'Reset application enrollment in eNotariado servers' | translate}}" ng-click="eNotariadoReset()" />
+            <input type="button" id="eNotariadoReset" class="submit" value="{{'Reset application enrollment in eNotariado servers' | translate}}" ng-click="eNotariadoReset()" />
         </div>
 
         <h2 translate>Access to user interface</h2>
         <div class="input mixed multiple">
             <input type="checkbox" class="checkbox" id="hasPassword" name="hasPassword" ng-model="requireRemotePassword" />
             <label for="password" translate>Password</label>
-            <input type="password" id="password" name="password" ng-model="remotePassword" />
+            <input type="password" id="password" name="password" ng-model="remotePassword" autocomplete="new-password" />
         </div>
         <div class="input checkbox">
             <input type="checkbox" class="checkbox" id="remote" name="remote" ng-model="allowRemoteAccess" />
@@ -79,12 +90,12 @@
             </select>
         </div>
 
-        <h2 translate>Donation messages</h2>
+        <!-- <h2 translate>Donation messages</h2>
         <div class="input checkbox">
             <label for="suppresDonationMessages" translate>Donation messages</label>
             <a href ng-click="suppressDonationMessages()" ng-show="!SystemInfo.SuppressDonationMessages" translate>Donation messages are visible, click to hide</a>
             <a href ng-click="displayDonationMessages()" ng-show="SystemInfo.SuppressDonationMessages" translate>Donation messages are hidden, click to show</a>
-        </div>
+        </div> -->
 
         <h2 translate>Update channel</h2>
         <div class="input checkbox">
