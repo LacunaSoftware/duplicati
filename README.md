@@ -10,3 +10,7 @@
 - Open the  [Developer Command Prompt for Visual Studio](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs)
 - Change directory to `<repository folder>/Installer/Windows`
 - Execute `build-msi.bat <zip file path>`
+
+### Preview
+
+![](Duplicati/Server/webroot/img/preview.png)
