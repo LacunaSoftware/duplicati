@@ -803,12 +803,12 @@ namespace Duplicati.Server
         /// <summary>
         /// Resets settings regarding eNotariado
         /// </summary>
-        public static async Task ResetENotariado()
+        public static async Task<ENotariadoStatus> ResetENotariado()
         {
             ENotariadoApplicationId = Guid.Empty;
             ENotariadoIsEnrolled = false;
             ENotariadoIsVerified = false;
-            await InitializeENotariado();
+            return await InitializeENotariado();
         }
 
         /// <summary>

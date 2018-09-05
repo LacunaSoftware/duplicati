@@ -69,8 +69,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     return;
 
                 case "reset-enotariado":
-                    Program.ResetENotariado().GetAwaiter().GetResult();
-                    info.OutputOK();
+                    result = Program.ResetENotariado().GetAwaiter().GetResult();
+                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
+                        info.OutputOK();
+                    else if (result == (ENotariadoStatus.Enrolled))
+                        info.OutputError(reason: "The application is enrolled but not verified in eNotariado servers");
+                    else if (result == (ENotariadoStatus.None))
+                        info.OutputError(reason: "The application is not enrolled. An unexpected error happened");
                     return;
 
                 default:
