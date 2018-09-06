@@ -69,7 +69,7 @@
                                     <a href ng-click="generatePassphrase()" translate>Generate</a>
                                 </li>
                                 <li ng-show="PassphraseScoreString">|</li>
-                                <li class="strength score-{{PassphraseScore}}" ng-show="PassphraseScoreString">{{PassphraseScore != 'x' ? 'Strength: ' : ''}} {{PassphraseScoreString}}</li>
+                                <li class="strength score-{{PassphraseScore}}" ng-show="PassphraseScoreString">{{PassphraseScore != 'x' ? 'Segurança: ' : ''}} {{PassphraseScoreString}}</li>
                             </ul>
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                                 ng-checked="ExcludeAttributes.indexOf(attr.value) > -1"
                                 ng-click="toggleExcludeAttributes(attr.value)"
                               />
-                              <label for="fileattr_{{attr.value}}">{{attr.name}}</label>
+                              <label for="fileattr_{{attr.value}}">{{attr.name | translate}}</label>
                             </div>
                         </div>
 

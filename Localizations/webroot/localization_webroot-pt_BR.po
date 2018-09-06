@@ -65,7 +65,7 @@ msgstr "Chave de acesso"
 msgid "Access denied"
 msgstr "Acesso negado"
 
-#: templates/settings.html:27
+#: templates/settings.html:29
 msgid "Access to user interface"
 msgstr "Acesso à interface do usuário"
 
@@ -135,7 +135,7 @@ msgstr "Todas as máquinas Hyper-V"
 msgid "All Microsoft SQL Databases"
 msgstr "Todas as bases Microsoft SQL"
 
-#: templates/settings.html:151
+#: templates/settings.html:153
 msgid ""
 "All usage reports are sent anonymously and do not contain any personal "
 "information. They contain information about hardware and operating system, "
@@ -149,7 +149,7 @@ msgstr ""
 "dados de origem e dados similares. Os relatórios não contêm caminhos, nomes "
 "de arquivos, usuários, senhas ou informações similares."
 
-#: templates/settings.html:35
+#: templates/settings.html:37
 msgid "Allow remote access (requires restart)"
 msgstr "Permitir acesso remoto (restart necessário)"
 
@@ -182,7 +182,7 @@ msgstr ""
 "instâncias trabalhem no mesmo armazenamento remoto.\n"
 "Gostaria de utilizar a base existente?"
 
-#: templates/settings.html:139
+#: templates/settings.html:141
 msgid "Anonymous usage reports"
 msgstr "Relatório anônimo de uso"
 
@@ -273,7 +273,7 @@ msgstr "Retenção de backup"
 msgid "Backup:"
 msgstr "Backup:"
 
-#: templates/settings.html:116
+#: templates/settings.html:118
 msgid "Beta"
 msgstr "Beta"
 
@@ -326,7 +326,7 @@ msgstr "Criando base temporária parcial ..."
 msgid "Busy ..."
 msgstr "Ocupado ..."
 
-#: templates/settings.html:36
+#: templates/settings.html:38
 msgid ""
 "By allowing remote access, the server listens to requests from any machine "
 "on your network. If you enable this option, make sure you are always using "
@@ -336,7 +336,7 @@ msgstr ""
 "máquina em sua rede. Se você habilitar essa opção, verifique se está sempre "
 "usando o computador em uma rede protegida por firewall seguro."
 
-#: templates/settings.html:47
+#: templates/settings.html:49
 msgid ""
 "By default, the tray icon will open the user interface with a token than "
 "unlocks the user interface. This ensures that you can access the user "
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Cache Files"
 msgstr "Arquivos de Cache"
 
-#: templates/settings.html:126
+#: templates/settings.html:128
 msgid "Canary"
 msgstr "Canary"
 
@@ -376,8 +376,8 @@ msgstr "Canary"
 #: scripts/services/EditUriBuiltins.js:51
 #: scripts/services/EditUriBuiltins.js:777
 #: scripts/services/EditUriBuiltins.js:863
-#: scripts/services/EditUriBuiltins.js:880 templates/delete.html:54
-#: templates/export.html:26 templates/settings.html:181
+#: scripts/services/EditUriBuiltins.js:880 templates/delete.html:52
+#: templates/export.html:26 templates/settings.html:183
 #: templates/waitarea.html:19
 msgid "Cancel"
 msgstr "Cancelar"
@@ -394,7 +394,7 @@ msgstr "Changelog"
 msgid "Changelog for {{appname}} {{version}}"
 msgstr "Changelog para {{appname}} {{version}}"
 
-#: templates/settings.html:21
+#: templates/settings.html:19
 msgid "Check application status"
 msgstr "Conferir status da aplicação"
 
@@ -527,8 +527,8 @@ msgid "Continue without encryption"
 msgstr "Continuar sem utilizar criptografia"
 
 #: scripts/controllers/SystemSettingsController.js:108
-msgid "Copied  to clipboard"
-msgstr "Cópia feita com sucesso"
+msgid "Copied {0} to clipboard"
+msgstr "{0} foi copiado"
 
 #: scripts/controllers/DialogController.js:16
 msgid "Copied!"
@@ -555,14 +555,14 @@ msgid "Core options"
 msgstr "Opções básicas"
 
 #: scripts/controllers/SystemSettingsController.js:113
-msgid "Could not copy  to clipboard"
-msgstr "Não foi possível copiar"
+msgid "Could not copy {0} to clipboard"
+msgstr "Não foi possível copier {0}"
 
 #: scripts/controllers/StateController.js:34
 msgid "Counting ({{files}} files found, {{size}})"
 msgstr "Contabilizando ({{files}} arquivos encontrados, {{size}})"
 
-#: templates/settings.html:146
+#: templates/settings.html:148
 msgid "Crashes only"
 msgstr "Somente falhas"
 
@@ -654,7 +654,7 @@ msgstr "Dias"
 msgid "Default"
 msgstr "Padrão"
 
-#: templates/settings.html:103
+#: templates/settings.html:105
 msgid "Default ({{channelname}})"
 msgstr "Padrão ({{channelname}})"
 
@@ -662,7 +662,7 @@ msgstr "Padrão ({{channelname}})"
 msgid "Default excludes"
 msgstr "Exclusões padrão"
 
-#: templates/settings.html:166
+#: templates/settings.html:168
 msgid "Default options"
 msgstr "Opções padrão"
 
@@ -674,7 +674,7 @@ msgstr "Remover"
 msgid "Delete ..."
 msgstr "Remover ..."
 
-#: templates/delete.html:5 templates/delete.html:53
+#: templates/delete.html:5 templates/delete.html:51
 msgid "Delete backup"
 msgstr "Remover backup"
 
@@ -686,15 +686,15 @@ msgstr "Excluir backups mais antigos que"
 msgid "Delete local database"
 msgstr "Remover base local"
 
-#: templates/delete.html:38 templates/delete.html:47
+#: templates/delete.html:36 templates/delete.html:45
 msgid "Delete remote files"
 msgstr "Remover arquivos remotos"
 
-#: templates/delete.html:26
+#: templates/delete.html:24
 msgid "Delete the local database"
 msgstr "Remover a base local"
 
-#: templates/delete.html:41
+#: templates/delete.html:39
 msgid "Delete {{filecount}} files ({{filesize}}) from the remote storage?"
 msgstr "Remover {{filecount}} arquivos ({{filesize}}) do armazenamento remoto?"
 
@@ -740,7 +740,7 @@ msgstr "Ok"
 msgid "Dismiss all"
 msgstr "Ignorar tudo"
 
-#: templates/settings.html:85
+#: templates/settings.html:87
 msgid "Display and color theme"
 msgstr "Tela e cores do tema"
 
@@ -788,52 +788,42 @@ msgstr "Duplicar opção {{opt}}"
 msgid "Duplicati forum"
 msgstr "Fórum do Duplicati"
 
-#: templates/delete.html:15
-#, fuzzy
-#| msgid ""
-#| "Each backup has a local database associated with it, which stores "
-#| "information about the remote backup on the local machine.\n"
-#| "            When deleting a backup, you can also delete the local "
-#| "database without affecting the ability to restore the remote files.\n"
-#| "            If you are using the local database for backups from the "
-#| "commandline, you should keep the database."
+#: templates/localdatabase.html:7
 msgid ""
 "Each backup has a local database associated with it, which stores "
-"information about the remote backup on the local machine.\r\n"
-"            When deleting a backup, you can also delete the local database "
-"without affecting the ability to restore the remote files.\r\n"
-"            If you are using the local database for backups from the "
-"commandline, you should keep the database."
-msgstr ""
-"Cada backup tem um banco de dados local associado a ele, que armazena "
-"informações sobre o backup remoto na máquina local.\n"
-"            Ao excluir um backup, você também pode excluir o banco de dados "
-"local sem afetar a capacidade de restaurar os arquivos remotos.\n"
-"            Se você estiver usando o banco de dados local para backups da "
-"linha de comando, é melhor manter o banco de dados."
-
-#: templates/localdatabase.html:8
-msgid ""
-"Each backup has a local database associated with it, which stores "
-"information about the remote backup on the local machine.\\nThis makes it "
+"information about the remote backup on the local machine. This makes it "
 "faster to perform many operations, and reduces the amount of data that needs "
 "to be downloaded for each operation."
 msgstr ""
 "Cada backup possui uma base associada pra armazenar informações sobre o "
-"destino.\\nEsta base torna algumas operações mais rápidas, além de reduzir a "
-"quantidade de dados que precisam ser baixados para cada operação."
+"destino. Isto acelera a realização de várias operações e reduz a quantidade "
+"de dados que precisam ser baixados a cada operação."
+
+#: templates/delete.html:15
+msgid ""
+"Each backup has a local database associated with it, which stores "
+"information about the remote backup on the local machine. When deleting a "
+"backup, you can also delete the local database without affecting the ability "
+"to restore the remote files. If you are using the local database for backups "
+"from the commandline, you should keep the database."
+msgstr ""
+"Cada backup tem um banco de dados local associado a ele, que armazena "
+"informações sobre o backup remoto na máquina local. Ao excluir um backup, "
+"você também pode excluir o banco de dados local sem afetar a capacidade de "
+"restaurar os arquivos remotos. Se você estiver usando o banco de dados local "
+"para backups da linha de comando, é melhor manter o banco de dados."
 
 #: templates/home.html:24
 msgid "Edit ..."
 msgstr "Editar ..."
 
 #: templates/addoredit.html:170 templates/edituri.html:39
-#: templates/settings.html:170
+#: templates/settings.html:172
 msgid "Edit as list"
 msgstr "Editar como lista"
 
 #: templates/addoredit.html:173 templates/edituri.html:42
-#: templates/settings.html:176
+#: templates/settings.html:178
 msgid "Edit as text"
 msgstr "Editar como texto"
 
@@ -961,7 +951,7 @@ msgstr "Erro!"
 msgid "Error: The application is not enrolled in e-Notariado"
 msgstr "Erro: A aplicação não está cadastrada no e-Notariado"
 
-#: templates/settings.html:145
+#: templates/settings.html:147
 msgid "Errors and crashes"
 msgstr "Erros e problemas"
 
@@ -1005,7 +995,7 @@ msgstr "Excluir utilizando expressão regular"
 msgid "Existing file found"
 msgstr "Excluir arquivo encontrado"
 
-#: templates/settings.html:121
+#: templates/settings.html:123
 msgid "Experimental"
 msgstr "Experimental"
 
@@ -1021,7 +1011,7 @@ msgstr "Exportar ..."
 msgid "Export backup configuration"
 msgstr "Exportar configuração do backup"
 
-#: templates/delete.html:31 templates/delete.html:34
+#: templates/delete.html:29 templates/delete.html:32
 msgid "Export configuration"
 msgstr "Exportar configuração"
 
@@ -1188,12 +1178,12 @@ msgstr "Ocultar diretórios ocultos"
 msgid "Home"
 msgstr "Home"
 
-#: templates/settings.html:39
+#: templates/settings.html:41
 msgid "Hostnames"
 msgstr "Hostnames"
 
 #: scripts/services/AppUtils.js:100 scripts/services/AppUtils.js:90
-#: templates/settings.html:69
+#: templates/settings.html:71
 msgid "Hours"
 msgstr "Horas"
 
@@ -1232,14 +1222,14 @@ msgstr ""
 "Se um novo backup for encontrado, todos os backups anteriores a esta data "
 "são excluídos."
 
-#: templates/localdatabase.html:13
+#: templates/localdatabase.html:12
 msgid ""
 "If the backup and the remote storage is out of sync, Duplicati will require "
-"that you perform a repair operation to synchronize the database.\\nIf the "
+"that you perform a repair operation to synchronize the database. If the "
 "repair is unsuccesful, you can delete the local database and re-generate."
 msgstr ""
 "Caso o backup e o armazenamento remoto estejam dessincronizados, o Duplicati "
-"precisará de uma operação de reparo para realizar o sincronismo. \\nCaso o "
+"precisará de uma operação de reparo para realizar o sincronismo.  Caso o "
 "reparo não seja possível, você pode remover a base local e regenerá-la."
 
 #: templates/export.html:41
@@ -1275,7 +1265,7 @@ msgstr ""
 msgid "If you do not enter an API Key, the tenant name is required"
 msgstr "Se você não inserir uma chave de API, o nome do projeto é necessário"
 
-#: templates/delete.html:32
+#: templates/delete.html:30
 msgid ""
 "If you want to use the backup later, you can export the configuration before "
 "deleting it"
@@ -1352,7 +1342,7 @@ msgstr "Incluir expressão regular"
 msgid "Incorrect answer, try again"
 msgstr "Resposta incorreta, tente novamente"
 
-#: templates/settings.html:127
+#: templates/settings.html:129
 msgid "Individual builds for developers only. Not for use with important data."
 msgstr ""
 "Versões apenas para desenvolvedores. Não para uso com dados importantes."
@@ -1407,7 +1397,7 @@ msgstr "Manter todos os backups"
 msgid "Keystone API version"
 msgstr "Versão da API Keystone"
 
-#: templates/settings.html:75
+#: templates/settings.html:77
 msgid "Language in user interface"
 msgstr "Idioma da interface do usuário"
 
@@ -1472,7 +1462,7 @@ msgstr "Abrir dados antigos"
 msgid "Loading ..."
 msgstr "Abrindo ..."
 
-#: templates/delete.html:40
+#: templates/delete.html:38
 msgid "Loading remote storage usage ..."
 msgstr "Carregando o uso de armazenamento remoto ..."
 
@@ -1563,7 +1553,7 @@ msgid "Minimum redundancy is 1.0"
 msgstr "Redundância mínima é 1.0"
 
 #: scripts/services/AppUtils.js:89 scripts/services/AppUtils.js:99
-#: templates/settings.html:68
+#: templates/settings.html:70
 msgid "Minutes"
 msgstr "Minutos"
 
@@ -1718,7 +1708,7 @@ msgstr "Não, minha máquina possui apenas uma conta"
 msgid "Non-matching passphrase"
 msgstr "Senha não correspondente"
 
-#: templates/settings.html:147
+#: templates/settings.html:149
 msgid "None / disabled"
 msgstr "Nenhum / desabilitado"
 
@@ -1735,7 +1725,7 @@ msgstr "Nada será excluído. O tamanho do backup crescerá com cada mudança."
 #: scripts/services/CaptchaService.js:22 scripts/services/DialogService.js:28
 #: scripts/services/DialogService.js:50 scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125 templates/restore.html:146
-#: templates/settings.html:182
+#: templates/settings.html:184
 msgid "OK"
 msgstr "OK"
 
@@ -1781,11 +1771,11 @@ msgid "Optional authentication username"
 msgstr "Usuário opcional de autenticação"
 
 #: templates/addoredit.html:28 templates/edituri.html:51
-#: templates/settings.html:169 templates/settings.html:175
+#: templates/settings.html:171 templates/settings.html:177
 msgid "Options"
 msgstr "Opções"
 
-#: templates/settings.html:167
+#: templates/settings.html:169
 msgid ""
 "Options added here are applied to all backups, but can be overridden in each "
 "individual backup"
@@ -1837,7 +1827,7 @@ msgstr "Senhas não correspondem"
 #: templates/backends/generic.html:22 templates/backends/jottacloud.html:11
 #: templates/backends/jottacloud.html:12 templates/backends/mega.html:11
 #: templates/backends/mega.html:12 templates/backends/openstack.html:34
-#: templates/settings.html:30
+#: templates/settings.html:32
 msgid "Password"
 msgstr "Senha"
 
@@ -1866,11 +1856,11 @@ msgstr "Caminho do servidor"
 msgid "Path or subfolder in the bucket"
 msgstr "Caminho ou subpasta no bucket"
 
-#: templates/settings.html:53
+#: templates/settings.html:55
 msgid "Pause"
 msgstr "Parar"
 
-#: templates/settings.html:51
+#: templates/settings.html:53
 msgid "Pause after startup or hibernation"
 msgstr "Pausa após a inicialização ou a hibernação"
 
@@ -1894,7 +1884,7 @@ msgstr "Aponte para os arquivos de backup e restaure de lá"
 msgid "Port"
 msgstr "Porta"
 
-#: templates/settings.html:46
+#: templates/settings.html:48
 msgid "Prevent tray icon automatic log-in"
 msgstr "Impedir login automático no ícone da bandeja"
 
@@ -1924,7 +1914,7 @@ msgstr "Limpando arquivos ..."
 msgid "Purging files Complete!"
 msgstr "Deleção de arquivos Completo!"
 
-#: templates/settings.html:24
+#: templates/settings.html:26
 msgid "Re-enroll application"
 msgstr "Recadastrar a aplicação"
 
@@ -2086,7 +2076,7 @@ msgstr "Executando tarefa:"
 msgid "S3 Compatible"
 msgstr "S3 Compatível"
 
-#: templates/settings.html:104
+#: templates/settings.html:106
 msgid "Same as the base install version: {{channelname}}"
 msgstr "Igual à versão de instalação base: {{channelname}}"
 
@@ -2130,7 +2120,7 @@ msgstr "Buscar"
 msgid "Search for files"
 msgstr "Procurar por arquivos"
 
-#: scripts/services/AppUtils.js:98 templates/settings.html:67
+#: scripts/services/AppUtils.js:98 templates/settings.html:69
 msgid "Seconds"
 msgstr "Segundos"
 
@@ -2239,7 +2229,7 @@ msgstr "Pasta de origem"
 msgid "Source:"
 msgstr "Origem:"
 
-#: templates/settings.html:122
+#: templates/settings.html:124
 msgid "Specific builds for developers only. Not for use with important data."
 msgstr ""
 "Versão apenas para desenvolvedores. Não para uso com dados importantes."
@@ -2330,7 +2320,7 @@ msgstr "Link simbólico"
 msgid "System Files"
 msgstr "Arquivos do sistema"
 
-#: templates/settings.html:142
+#: templates/settings.html:144
 msgid "System default ({{levelname}})"
 msgstr "Sistema padrão ({{levelname}})"
 
@@ -2403,7 +2393,7 @@ msgstr ""
 "O campo '{{fieldname}}' contém um caractere inválido: {{character}} (valor: "
 "{{value}}, índice: {{pos}})"
 
-#: templates/settings.html:19
+#: templates/settings.html:23
 msgid "The application is correctly configured."
 msgstr "A aplicação está configurada corretamente."
 
@@ -2431,11 +2421,11 @@ msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 "A conexão com o servidor foi perdida, tentando novamente em {{time}} ..."
 
-#: templates/settings.html:89
+#: templates/settings.html:91
 msgid "The dark theme (by Michal)"
 msgstr "O tema escuro (por Michal)"
 
-#: templates/settings.html:88
+#: templates/settings.html:90
 msgid "The default blue on white theme (by Alex)"
 msgstr "O tema padrão azul sobre branco (por Alex)"
 
@@ -2592,7 +2582,7 @@ msgid "To export without a passphrase, uncheck the \"Encrypt file\" box"
 msgstr ""
 "Para exportar sem uma senha, desmarque a caixa \"Criptografar arquivo\""
 
-#: templates/settings.html:41
+#: templates/settings.html:43
 msgid ""
 "To prevent various DNS based attacks, Duplicati limits the allowed hostnames "
 "to the ones listed here. Direct IP access and localhost is always allowed. "
@@ -2621,7 +2611,7 @@ msgstr "Confiar no certificado de host?"
 msgid "Trust server certificate?"
 msgstr "Confiar no certificado de servidor?"
 
-#: templates/settings.html:117
+#: templates/settings.html:119
 msgid ""
 "Try out the new features that we are working on. Currently the most stable "
 "version available. Test Restore data before using this in production "
@@ -2647,7 +2637,7 @@ msgstr "Tamanho do backup e versões desconhecidos"
 msgid "Until resumed"
 msgstr "Até retomar"
 
-#: templates/settings.html:100
+#: templates/settings.html:102
 msgid "Update channel"
 msgstr "Canal de atualização"
 
@@ -2663,7 +2653,7 @@ msgstr "Atualizando com o banco de dados existente"
 msgid "Uploading verification file ..."
 msgstr "Enviando arquivo de verificação ..."
 
-#: templates/settings.html:149
+#: templates/settings.html:151
 msgid ""
 "Usage reports help us improve the user experience and evaluate impact of new "
 "features. We use them to generate <external-link link=\"link\">public usage "
@@ -2673,11 +2663,11 @@ msgstr ""
 "avaliar o impacto de novos recursos. Nós usamos eles para gerar <external-"
 "link link=\"link\"> estatísticas de uso público </external-link>"
 
-#: templates/settings.html:137
+#: templates/settings.html:139
 msgid "Usage statistics"
 msgstr "Estatísticas de uso"
 
-#: templates/settings.html:143
+#: templates/settings.html:145
 msgid "Usage statistics, warnings, errors, and crashes"
 msgstr "Estatísticas de uso, avisos, erros e falhas"
 
@@ -2709,7 +2699,7 @@ msgstr "Nome de domínio do usuário"
 msgid "User has too many permissions"
 msgstr "O usuário tem muitas permissões"
 
-#: templates/settings.html:73
+#: templates/settings.html:75
 msgid "User interface settings"
 msgstr "Configurações da interface do usuário"
 
@@ -2767,14 +2757,14 @@ msgstr "Muito forte"
 msgid "Very weak"
 msgstr "Muito fraca"
 
-#: templates/delete.html:21
+#: templates/delete.html:19
 msgid ""
 "WARNING: The remote database is found to be in use by the commandline library"
 msgstr ""
 "AVISO: o banco de dados remoto está sendo usado pela biblioteca de linha de "
 "comando"
 
-#: templates/delete.html:44
+#: templates/delete.html:42
 msgid "WARNING: This will prevent you from restoring the data in the future."
 msgstr "AVISO: isso impedirá que você restaure os dados no futuro."
 
@@ -2790,7 +2780,7 @@ msgstr "Aguardando a tarefa começar ..."
 msgid "Waiting for upload to finish ..."
 msgstr "Aguardando pelo término do upload ..."
 
-#: templates/settings.html:144
+#: templates/settings.html:146
 msgid "Warnings, errors and crashes"
 msgstr "Avisos, erros e falhas"
 
@@ -3109,6 +3099,57 @@ msgstr "{{number}} Minutos"
 #: templates/home.html:47
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#, fuzzy
+#~| msgid ""
+#~| "Each backup has a local database associated with it, which stores "
+#~| "information about the remote backup on the local machine.\n"
+#~| "            When deleting a backup, you can also delete the local "
+#~| "database without affecting the ability to restore the remote files.\n"
+#~| "            If you are using the local database for backups from the "
+#~| "commandline, you should keep the database."
+#~ msgid ""
+#~ "Each backup has a local database associated with it, which stores "
+#~ "information about the remote backup on the local machine.\r\n"
+#~ "            When deleting a backup, you can also delete the local "
+#~ "database without affecting the ability to restore the remote files.\r\n"
+#~ "            If you are using the local database for backups from the "
+#~ "commandline, you should keep the database."
+#~ msgstr ""
+#~ "Cada backup tem um banco de dados local associado a ele, que armazena "
+#~ "informações sobre o backup remoto na máquina local.\n"
+#~ "            Ao excluir um backup, você também pode excluir o banco de "
+#~ "dados local sem afetar a capacidade de restaurar os arquivos remotos.\n"
+#~ "            Se você estiver usando o banco de dados local para backups da "
+#~ "linha de comando, é melhor manter o banco de dados."
+
+#~ msgid ""
+#~ "{{'Each backup has a local database associated with it, which stores "
+#~ "information about the remote backup on the local machine.\\nThis makes it "
+#~ "faster to perform many operations, and reduces the amount of data that "
+#~ "needs to be downloaded for each operation.'}}"
+#~ msgstr ""
+#~ "{{'Cada backup possui uma base associada pra armazenar informações sobre "
+#~ "o destino.\\nEsta base torna algumas operações mais rápidas, além de "
+#~ "reduzir a quantidade de dados que precisam ser baixados para cada "
+#~ "operação.'}}"
+
+#, fuzzy
+#~| msgid ""
+#~| "Each backup has a local database associated with it, which stores "
+#~| "information about the remote backup on the local machine.\\nThis makes "
+#~| "it faster to perform many operations, and reduces the amount of data "
+#~| "that needs to be downloaded for each operation."
+#~ msgid ""
+#~ "{{'Each backup has a local database associated with it, which stores "
+#~ "information about the remote backup on the local machine.\\nThis makes it "
+#~ "faster to perform many operations, and reduces the amount of data that "
+#~ "needs to be downloaded for each operation.' | translate}}"
+#~ msgstr ""
+#~ "Cada backup possui uma base associada pra armazenar informações sobre o "
+#~ "destino.\\nEsta base torna algumas operações mais rápidas, além de "
+#~ "reduzir a quantidade de dados que precisam ser baixados para cada "
+#~ "operação."
 
 #~ msgid "Enrollment reset!"
 #~ msgstr "Cadastro resetado!"

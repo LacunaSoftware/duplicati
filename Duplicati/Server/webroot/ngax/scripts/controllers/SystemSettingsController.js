@@ -105,12 +105,12 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
         try {
             const success = document.body.removeChild(textArea);
             if (success) {
-                DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString(`Copied ${sliced} to clipboard`));
+                DialogService.dialog(gettextCatalog.getString('Success'), AppUtils.format(gettextCatalog.getString('Copied {0} to clipboard'), sliced));
             } else {
                 throw Exception;
             }
         } catch (err) {
-            DialogService.dialog(gettextCatalog.getString('Fail'), gettextCatalog.getString(`Could not copy ${sliced} to clipboard`));
+            DialogService.dialog(gettextCatalog.getString('Fail'), AppUtils.format(gettextCatalog.getString('Could not copy {0} to clipboard'), sliced));
 
         }
       }
