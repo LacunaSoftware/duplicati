@@ -57,11 +57,11 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     }
 
     AppService.get('/serversettings').then(function(data) {
+        data.data['placeholder-password'] = AppUtils.parseBoolString(data.data['has-password-protection']) ? Math.random().toString(36) : '';
+        $scope.rawdata = data.data;        
 
-        $scope.rawdata = data.data;
-
-        $scope.requireRemotePassword = data.data['server-passphrase'] != null && data.data['server-passphrase'] != '';
-        $scope.remotePassword = data.data['server-passphrase'];
+        $scope.requireRemotePassword = AppUtils.parseBoolString(data.data['has-password-protection']);
+        $scope.remotePassword = data.data['placeholder-password'];
         $scope.allowRemoteAccess = data.data['server-listen-interface'] != 'loopback';
         $scope.startupDelayDurationValue = data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1) == "" ? "0" : data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1);
         $scope.startupDelayDurationMultiplier = data.data['startup-delay'].substr(-1) == "" ? "s" : data.data['startup-delay'].substr(-1);
@@ -132,7 +132,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             return AppUtils.notifyInputError('Cannot use empty password');
 
         var patchdata = {
-            'server-passphrase': $scope.requireRemotePassword ? $scope.remotePassword : '',
+            '#-server-passphrase': $scope.requireRemotePassword ? $scope.remotePassword : '',
             'allowed-hostnames': $scope.remoteHostnames,
             'server-listen-interface': $scope.allowRemoteAccess ? 'any' : 'loopback',
             'startup-delay': $scope.startupDelayDurationValue + '' + $scope.startupDelayDurationMultiplier,
@@ -142,13 +142,13 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
         };
 
         if ($scope.requireRemotePassword) {
-            if ($scope.rawdata['server-passphrase'] != $scope.remotePassword) {
-                patchdata['server-passphrase-salt'] =  CryptoJS.lib.WordArray.random(256/8).toString(CryptoJS.enc.Base64);
-                patchdata['server-passphrase'] = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Utf8.parse($scope.remotePassword) + CryptoJS.enc.Base64.parse(patchdata['server-passphrase-salt']))).toString(CryptoJS.enc.Base64);
+            if ($scope.remotePassword != $scope.rawdata['placeholder-password']) {
+                patchdata['#-server-passphrase-salt'] =  CryptoJS.lib.WordArray.random(256/8).toString(CryptoJS.enc.Base64);
+                patchdata['#-server-passphrase'] = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Utf8.parse($scope.remotePassword) + CryptoJS.enc.Base64.parse(patchdata['#-server-passphrase-salt']))).toString(CryptoJS.enc.Base64);
             }
         } else {
-            patchdata['server-passphrase-salt'] = null;
-            patchdata['server-passphrase'] = null;
+            patchdata['#-server-passphrase-salt'] = null;
+            patchdata['#-server-passphrase'] = null;
         }
 
         AppUtils.mergeAdvancedOptions($scope.advancedOptions, patchdata, $scope.rawdata);

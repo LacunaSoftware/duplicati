@@ -164,7 +164,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         $scope.throttle_active = (ut != null && ut.trim().length != 0) || (dt != null && dt.trim().length != 0);
 
         var firstpw = data.data['has-asked-for-password-protection'];
-        var haspw = data.data['server-passphrase'];
+        var haspw = data.data['#-server-passphrase'];
         if (!firstpw && haspw == '') {
             DialogService.dialog(
                 gettextCatalog.getString('First run setup'),

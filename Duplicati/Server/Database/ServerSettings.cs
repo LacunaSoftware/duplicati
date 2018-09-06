@@ -37,10 +37,10 @@ namespace Duplicati.Server.Database
             public const string LAST_WEBSERVER_PORT = "last-webserver-port";
             public const string IS_FIRST_RUN = "is-first-run";
             public const string SERVER_PORT_CHANGED = "server-port-changed";
-            public const string SERVER_PASSPHRASE = "server-passphrase";
-            public const string SERVER_PASSPHRASE_SALT = "server-passphrase-salt";
-            public const string SERVER_PASSPHRASETRAYICON = "server-passphrase-trayicon";
-            public const string SERVER_PASSPHRASETRAYICONHASH = "server-passphrase-trayicon-hash";
+            public const string SERVER_PASSPHRASE = "#-server-passphrase";
+            public const string SERVER_PASSPHRASE_SALT = "#-server-passphrase-salt";
+            public const string SERVER_PASSPHRASETRAYICON = "#-server-passphrase-trayicon";
+            public const string SERVER_PASSPHRASETRAYICONHASH = "#-server-passphrase-trayicon-hash";
             public const string UPDATE_CHECK_LAST = "last-update-check";
             public const string UPDATE_CHECK_INTERVAL = "update-check-interval";
             public const string UPDATE_CHECK_NEW_VERSION = "update-check-latest";

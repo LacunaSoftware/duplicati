@@ -28,9 +28,9 @@ namespace Duplicati.Server.WebServer.RESTMethods
         public void GET(string key, RequestInfo info)
         {
             // Join server settings and global settings
-            var adv_props = 
+            var adv_props =
                 Program.DataConnection.GetSettings(Database.Connection.SERVER_SETTINGS_ID)
-                       .Where(x => !string.IsNullOrWhiteSpace(x.Name))
+                       .Where(x => !string.IsNullOrWhiteSpace(x.Name) && !x.Name.StartsWith("#-", StringComparison.OrdinalIgnoreCase))
                        .Union(
                            Program.DataConnection.Settings
                            .Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name.StartsWith("--", StringComparison.Ordinal))
@@ -43,6 +43,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             string sslcert;
             dict.TryGetValue("server-ssl-certificate", out sslcert);
             dict["server-ssl-certificate"] = (!string.IsNullOrWhiteSpace(sslcert)).ToString();
+            dict["has-password-protection"] = (!string.IsNullOrWhiteSpace(Program.DataConnection.ApplicationSettings.WebserverPassword)).ToString();
 
             info.OutputOK(dict);
         }
