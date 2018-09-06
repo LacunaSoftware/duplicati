@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Asn1;
+﻿using Duplicati.Library.Localization.Short;
+using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.X509;
@@ -41,7 +42,7 @@ namespace Duplicati.Library.ENotariado
                 var certCollection = store.Certificates.Find(X509FindType.FindByThumbprint, certThumbprint, false);
                 if (certCollection.Count == 0)
                 {
-                    throw new CertificateNotFoundException(string.Format("Certificate with thumbprint {0} not found.", certThumbprint));
+                    throw new CertificateNotFoundException(string.Format(LC.L("Certificate with thumbprint {0} not found."), certThumbprint));
                 }
                 cert = certCollection[0];
             }

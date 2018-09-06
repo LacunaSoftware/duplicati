@@ -19,6 +19,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Library.Interface;
 using Duplicati.Library.ENotariado;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -63,9 +64,9 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
                         info.OutputOK();
                     else if (result == (ENotariadoStatus.Enrolled))
-                        info.OutputError(reason: "The application is enrolled but not verified in eNotariado servers");
+                        info.OutputError(reason: LC.L(@"The application is enrolled but not verified in e-Notariado servers"));
                     else if (result == (ENotariadoStatus.None))
-                        info.OutputError(reason: "The application is not enrolled. An unexpected error happened");
+                        info.OutputError(reason: LC.L(@"The application is not enrolled. An unexpected error happened"));
                     return;
 
                 case "reset-enotariado":
@@ -73,9 +74,9 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
                         info.OutputOK();
                     else if (result == (ENotariadoStatus.Enrolled))
-                        info.OutputError(reason: "The application is enrolled but not verified in eNotariado servers");
+                        info.OutputError(reason: LC.L(@"The application is enrolled but not verified in e-Notariado servers"));
                     else if (result == (ENotariadoStatus.None))
-                        info.OutputError(reason: "The application is not enrolled. An unexpected error happened");
+                        info.OutputError(reason: LC.L(@"The application is not enrolled. An unexpected error happened"));
                     return;
 
                 default:

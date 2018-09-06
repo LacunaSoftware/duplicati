@@ -65,6 +65,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Localization\Duplicati.Library.Localization.csproj">
+      <Project>{B68F2214-951F-4F78-8488-66E1ED3F50BF}</Project>
+      <Name>Duplicati.Library.Localization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logging\Duplicati.Library.Logging.csproj">
       <Project>{d10a5fc0-11b4-4e70-86aa-8aea52bd9798}</Project>
       <Name>Duplicati.Library.Logging</Name>

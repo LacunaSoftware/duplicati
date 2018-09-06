@@ -1,4 +1,5 @@
 ﻿using Duplicati.Library.ENotariado;
+using Duplicati.Library.Localization.Short;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace Duplicati.Library.ENotariado
                 }
                 else
                 {
-                    throw new FailedRequestException($"Error!Response code: '{response.StatusCode}'.Content: '{contentString}'.");
+                    throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), response.StatusCode, contentString));
                 }
             }
         }
@@ -99,7 +100,7 @@ namespace Duplicati.Library.ENotariado
                 }
                 else
                 {
-                    throw new FailedRequestException($"Error!Response code: '{response.StatusCode}'.Content: '{contentString}'.");
+                    throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), response.StatusCode, contentString));
                 }
             }
         }
@@ -128,7 +129,7 @@ namespace Duplicati.Library.ENotariado
                 }
                 else
                 {
-                    throw new FailedRequestException("Não foi possível verificar a resposta com o servidor");
+                    throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), response.StatusCode, contentString));
                 }
             }
 
@@ -145,7 +146,7 @@ namespace Duplicati.Library.ENotariado
 
             if (!IsVerified)
             {
-                throw new ENotariadoNotVerifiedException("Essa aplicação ainda não foi verificada nos servidores do eNotariado");
+                throw new ENotariadoNotVerifiedException();
             }
 
             var start = new StartPublicKeyAuthenticationRequest
@@ -166,7 +167,7 @@ namespace Duplicati.Library.ENotariado
 
                 if (!startResponse.IsSuccessStatusCode)
                 {
-                    throw new FailedRequestException($"Error! Response code: '{startResponse.StatusCode}'. Content: '{contentString}'.");
+                    throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), startResponse.StatusCode, contentString));
                 }
 
                 /* Request successful, challenge received and session header stored. */
@@ -189,7 +190,7 @@ namespace Duplicati.Library.ENotariado
 
                 if (!completeResponse.IsSuccessStatusCode)
                 {
-                    throw new FailedRequestException($"Error! Response code: '{startResponse.StatusCode}'. Content: '{contentString}'.");
+                    throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), completeResponse.StatusCode, contentString));
                 }
 
                 /*

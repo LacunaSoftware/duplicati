@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Duplicati.Library.Localization.Short;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class ENotariadoNotInitializedException : Exception
     {
-        public static readonly string ErrorMessage = "O registro da aplicação com o eNotariado não foi inicializado";
+        public static readonly string ErrorMessage = LC.L(@"The application is not enrolled in e-Notariado");
         public ENotariadoNotInitializedException() : base(ErrorMessage)
         {
         }
@@ -23,7 +24,7 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class FailedEnrollmentException : Exception
     {
-        public static readonly string ErrorMessage = "Houve um erro ao se registrar com o servidor do eNotariado";
+        public static readonly string ErrorMessage = LC.L(@"There was an error while enrolling in e-Notariado");
         public FailedEnrollmentException() : base(ErrorMessage)
         {
         }
@@ -34,7 +35,7 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class FailedRequestException : Exception
     {
-        public static readonly string ErrorMessage = "Houve um erro na comunicação com o servidor do eNotariado";
+        public static readonly string ErrorMessage = LC.L(@"There was an error in the connection with e-Notariado");
         public string Details;
         
         public FailedRequestException(string message) : base(ErrorMessage + " - " + message)
@@ -47,17 +48,8 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class ENotariadoNotVerifiedException : Exception
     {
-        public ENotariadoNotVerifiedException()
-        {
-        }
-
-        public ENotariadoNotVerifiedException(string message)
-            : base(message)
-        {
-        }
-
-        public ENotariadoNotVerifiedException(string message, Exception inner)
-            : base(message, inner)
+        public static readonly string ErrorMessage = LC.L(@"The application is not verified in e-Notariado");
+        public ENotariadoNotVerifiedException() : base(ErrorMessage)
         {
         }
     }
