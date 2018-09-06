@@ -4,7 +4,7 @@
     font-family: 'Clear Sans', sans-serif;
 }
 body {
-    background: #C0C0C0;
+    background: #f8f9fa;
     color: #000;
     font: 100%/1.5em;
     margin: 0;
@@ -23,13 +23,15 @@ input {
 
 #login {
     border: 0px solid black;
+    border-radius: 23px 23px 20px 20px;
+    box-shadow: 0 0 8px 5px #ddd;
     margin: 50px auto;
     width: 400px;
 }
 
 #login h2 {
-    background: #65b1dd;
-    color: #d3d3d3;
+    background: #009bb3;
+    color: #ffffff;
     font-size: 28px;
     border-radius: 20px 20px 0 0;
     padding: 18px 20px;
@@ -45,7 +47,7 @@ input {
 }
 
 #login fieldset p {
-    color: #777;
+    color: #6f6f6f;
     margin-bottom: 14px;
 }
 
@@ -58,14 +60,14 @@ input {
 }
 
 #login fieldset input[type="email"], #login fieldset input[type="password"] {
-    background: #eee;
-    color: #777;
+    background: #f8f9fa;
+    color: #6f6f6f;
     padding: 4px 10px;
     width: 328px;
 }
 
 #login fieldset input[type="submit"] {
-    background: #65b1dd;
+    background: #009bb3;
     color: #fff;
     width: 100px;
     display: block;
@@ -74,5 +76,5 @@ input {
 }
 
 #login fieldset input[type="submit"]:hover {
-    background: #65b1dd;
+    background: #009bb3;
 }
