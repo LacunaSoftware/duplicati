@@ -1,8 +1,8 @@
 <ul class="notification">
     <li ng-repeat="item in Notifications track by item.ID" ng-show="$index < 4" class="{{item.Type.toLowerCase()}}">
-        <div class="title">{{item.Title}}</div>
+        <div class="title">{{item.Title | translate}}</div>
         <div class="content">
-            <div ng-if="item.Action != 'update:new'" class="message">{{item.Message}}</div>
+            <div ng-if="item.Action != 'update:new'" class="message">{{item.Message | translate}}</div>
             <div ng-show="item.DownloadLink != null">
                 <div translate>If the backup file was not downloaded automatically, <a href="{{item.DownloadLink}}" target="_blank">right click and choose &quot;Save as ...&quot;</a></div>
             </div>

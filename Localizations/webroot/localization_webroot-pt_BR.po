@@ -738,7 +738,7 @@ msgstr "Ok"
 
 #: templates/notificationarea.html:41
 msgid "Dismiss all"
-msgstr "Ignorar tudo"
+msgstr "Dispensar todos"
 
 #: templates/settings.html:87
 msgid "Display and color theme"
