@@ -4,7 +4,7 @@
     <form class="styled">
         <h2 translate>eNotariado</h2>
         <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled" translate>Error: The application is not enrolled in e-Notariado</h4>
-        <div ng-show="!eNotariado.isEnrolled || eNotariado.isVerified">
+        <div ng-hide="!eNotariado.isEnrolled || eNotariado.isVerified">
             <h4 class="ui-state-error-text"translate>The application is not verified on e-Notariado</h4>
             <p>
                 <span translate>In order to verify the application, copy the digits below into the verification page of the e-Notariado website.</span>
@@ -83,14 +83,14 @@
             </select>
         </div>
 
-        <div class="input mixed multiple">
+        <!-- <div class="input mixed multiple">
             <label for="themedisplay" translate>Display and color theme</label>
 
             <select id="themedisplay" ng-model="theme">
                 <option value="default" translate>The default blue on white theme (by Alex)</option>
                 <option value="dark" translate>The dark theme (by Michal)</option>
             </select>
-        </div>
+        </div> -->
 
         <!-- <h2 translate>Donation messages</h2>
         <div class="input checkbox">

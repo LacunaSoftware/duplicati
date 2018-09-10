@@ -343,7 +343,7 @@ namespace Duplicati.Server
                 if (commandlineOptions.ContainsKey("webservice-allowed-hostnames"))
                     Program.DataConnection.ApplicationSettings.SetAllowedHostnames(commandlineOptions["webservice-allowed-hostnames"]);
 
-                InitializeENotariado();
+                var result = InitializeENotariado();
 
                 ApplicationExitEvent = new System.Threading.ManualResetEvent(false);
 
