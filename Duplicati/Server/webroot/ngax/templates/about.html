@@ -51,7 +51,7 @@
     </div>
 
     <div ng-show="Page == 'licenses'" class="licenses">
-        {{brandingService.appName}} is using the following third party libraries:
+        {{brandingService.appName}} <span translate>is using the following third party libraries:</span>
         <ul>
             <li ng-show="Licenses == null" translate>Loading ...</li>
             <li ng-repeat="item in Licenses" class="licenseentry">

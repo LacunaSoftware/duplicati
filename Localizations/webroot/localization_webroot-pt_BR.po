@@ -49,7 +49,7 @@ msgstr "Chave de acesso do AWS"
 msgid "AWS IAM Policy"
 msgstr "Política de IAM do AWS"
 
-#: index.html:219 index.html:235
+#: index.html:215 index.html:231
 msgid "About"
 msgstr "Sobre"
 
@@ -94,7 +94,7 @@ msgstr "Adicione um caminho diretamente"
 msgid "Add advanced option"
 msgstr "Adicionar opção avançada"
 
-#: index.html:207
+#: index.html:203
 msgid "Add backup"
 msgstr "Adicionar backup"
 
@@ -123,7 +123,7 @@ msgstr "Opções avançadas"
 msgid "Advanced options"
 msgstr "Opções avançadas"
 
-#: templates/home.html:30
+#: templates/home.html:34
 msgid "Advanced:"
 msgstr "Avançado:"
 
@@ -269,7 +269,7 @@ msgstr "Localização do backup"
 msgid "Backup retention"
 msgstr "Retenção de backup"
 
-#: templates/home.html:66
+#: templates/home.html:70
 msgid "Backup:"
 msgstr "Backup:"
 
@@ -423,15 +423,11 @@ msgstr "Para iniciar, escolha o tipo de armazenamento"
 msgid "Click the AuthID link to create an AuthID"
 msgstr "Clique no link AuthID para criar uma AuthID"
 
-#: index.html:144 index.html:195
+#: index.html:140 index.html:191
 msgid "Click to set throttle options"
 msgstr "Clique para definir opções de limite"
 
-#: templates/home.html:35
-msgid "Commandline ..."
-msgstr "Linha de comando"
-
-#: templates/home.html:34
+#: templates/home.html:38
 msgid "Compact now"
 msgstr "Compactar agora"
 
@@ -459,7 +455,7 @@ msgstr "Computador"
 msgid "Configuration file:"
 msgstr "Arquivo de configuração:"
 
-#: templates/home.html:22
+#: templates/home.html:26
 msgid "Configuration:"
 msgstr "Configuração:"
 
@@ -481,11 +477,11 @@ msgstr "Confirmação necessária"
 msgid "Connect"
 msgstr "Conectar"
 
-#: index.html:295
+#: index.html:291
 msgid "Connect now"
 msgstr "Conectar agora"
 
-#: index.html:291
+#: index.html:287
 msgid "Connecting to server ..."
 msgstr "Conectando ao servidor ..."
 
@@ -493,11 +489,11 @@ msgstr "Conectando ao servidor ..."
 msgid "Connecting to task ...."
 msgstr "Conectando-se à tarefa"
 
-#: index.html:296
+#: index.html:292
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: index.html:287
+#: index.html:283
 msgid "Connection lost"
 msgstr "Conexão perdida"
 
@@ -566,7 +562,7 @@ msgstr "Contabilizando ({{files}} arquivos encontrados, {{size}})"
 msgid "Crashes only"
 msgstr "Somente falhas"
 
-#: templates/home.html:41
+#: templates/home.html:45
 msgid "Create bug report ..."
 msgstr "Criar relatório de falhas"
 
@@ -598,11 +594,11 @@ msgstr "Criando backup temporario ..."
 msgid "Creating user..."
 msgstr "Criando usuário..."
 
-#: templates/home.html:71
+#: templates/home.html:75
 msgid "Current action:"
 msgstr "Ação atual:"
 
-#: templates/home.html:81
+#: templates/home.html:85
 msgid "Current file:"
 msgstr "Arquivo atual:"
 
@@ -642,7 +638,7 @@ msgstr "URL personalizada do servidor ({{server}})"
 msgid "Custom storage class ({{class}})"
 msgstr "Classe de armazenamento personalizada ({{class}})"
 
-#: templates/home.html:32
+#: templates/home.html:36
 msgid "Database ..."
 msgstr "Banco de dados"
 
@@ -670,7 +666,7 @@ msgstr "Opções padrão"
 msgid "Delete"
 msgstr "Remover"
 
-#: templates/home.html:26
+#: templates/home.html:30
 msgid "Delete ..."
 msgstr "Remover ..."
 
@@ -724,10 +720,6 @@ msgstr ""
 "do Duplicati com uma doação. Sugerimos {{smallamount}} para usuários "
 "domésticos e {{largeamount}} para uso comercial."
 
-#: templates/restorewizard.html:9
-msgid "Direct restore from backup files ..."
-msgstr "Restaure diretamente dos arquivos de backup..."
-
 #: templates/log.html:31
 msgid "Disabled"
 msgstr "Desabilitado"
@@ -739,10 +731,6 @@ msgstr "Ok"
 #: templates/notificationarea.html:41
 msgid "Dismiss all"
 msgstr "Dispensar todos"
-
-#: templates/settings.html:87
-msgid "Display and color theme"
-msgstr "Tela e cores do tema"
 
 #: scripts/controllers/DeleteController.js:77
 msgid "Do you really want to delete the backup: \"{{name}}\" ?"
@@ -756,7 +744,7 @@ msgstr "Deseja realmente remover a base local para: {{name}}"
 msgid "Domain Name"
 msgstr "Nome do domínio"
 
-#: index.html:136 index.html:243
+#: index.html:239
 msgid "Donate"
 msgstr "Doar"
 
@@ -784,7 +772,7 @@ msgstr "Baixando update..."
 msgid "Duplicate option {{opt}}"
 msgstr "Duplicar opção {{opt}}"
 
-#: index.html:251
+#: index.html:247
 msgid "Duplicati forum"
 msgstr "Fórum do Duplicati"
 
@@ -813,7 +801,7 @@ msgstr ""
 "restaurar os arquivos remotos. Se você estiver usando o banco de dados local "
 "para backups da linha de comando, é melhor manter o banco de dados."
 
-#: templates/home.html:24
+#: templates/home.html:28
 msgid "Edit ..."
 msgstr "Editar ..."
 
@@ -1003,7 +991,7 @@ msgstr "Experimental"
 msgid "Export"
 msgstr "Exportar"
 
-#: templates/home.html:25
+#: templates/home.html:29
 msgid "Export ..."
 msgstr "Exportar ..."
 
@@ -1174,7 +1162,7 @@ msgstr "Ocultar"
 msgid "Hide hidden folders"
 msgstr "Ocultar diretórios ocultos"
 
-#: index.html:204 scripts/services/AppUtils.js:62
+#: index.html:200 scripts/services/AppUtils.js:62
 msgid "Home"
 msgstr "Home"
 
@@ -1405,11 +1393,11 @@ msgstr "Idioma da interface do usuário"
 msgid "Last month"
 msgstr "Último mês"
 
-#: templates/home.html:46
+#: templates/home.html:50
 msgid "Last successful backup:"
 msgstr "Último backup bem-sucedido:"
 
-#: templates/restorewizard.html:27
+#: templates/restorewizard.html:32
 msgid "Last successful restore: {{time}} (took {{duration || '0 seconds'}})"
 msgstr ""
 "Última restauração bem-sucedida: {{time}} (duração de {{duration || '0 "
@@ -1443,12 +1431,6 @@ msgstr "Ao vivo"
 msgid "Load a configuration from an exported job or a storage provider"
 msgstr ""
 "Carregar uma configuração de um trabalho exportado ou de um provedor de "
-"armazenamento"
-
-#: templates/restorewizard.html:16
-msgid "Load destination from an exported job or a storage provider"
-msgstr ""
-"Carregar destino a partir de um trabalho exportado ou de um provedor de "
 "armazenamento"
 
 #: templates/log.html:23 templates/log.html:54 templates/log.html:68
@@ -1502,7 +1484,7 @@ msgstr "Grave log para <b> {{Backup.Backup.Name}} </b>"
 msgid "Log data from the server"
 msgstr "Registrar dados do servidor"
 
-#: index.html:222
+#: index.html:218
 msgid "Log out"
 msgstr "Sair"
 
@@ -1530,7 +1512,7 @@ msgstr "Velocidade de download máxima"
 msgid "Max upload speed"
 msgstr "Velocidade de upload máxima"
 
-#: index.html:140 templates/addoredit.html:123 templates/addoredit.html:165
+#: index.html:136 templates/addoredit.html:123 templates/addoredit.html:165
 #: templates/addoredit.html:378 templates/addoredit.html:91
 #: templates/edituri.html:34 templates/restoredirect.html:34
 msgid "Menu"
@@ -1605,7 +1587,7 @@ msgstr "Minhas Imagens"
 msgid "Name"
 msgstr "Nome"
 
-#: templates/home.html:53
+#: templates/home.html:57
 msgid "Never"
 msgstr "Nunca"
 
@@ -1624,19 +1606,19 @@ msgstr ""
 #: templates/addoredit.html:109 templates/addoredit.html:242
 #: templates/addoredit.html:292 templates/addoredit.html:78
 #: templates/addwizard.html:28 templates/restoredirect.html:52
-#: templates/restorewizard.html:36
+#: templates/restorewizard.html:41
 msgid "Next"
 msgstr "Próximo"
 
-#: templates/home.html:57
+#: templates/home.html:61
 msgid "Next scheduled run:"
 msgstr "Próxima execução agendada:"
 
-#: index.html:179
+#: index.html:175
 msgid "Next scheduled task:"
 msgstr "Próxima tarefa agendada:"
 
-#: index.html:176
+#: index.html:172
 msgid "Next task:"
 msgstr "Próxima tarefa:"
 
@@ -1696,7 +1678,7 @@ msgstr "Sem itens para restaurar. por favor selecione um ou mais itens"
 msgid "No passphrase entered"
 msgstr "Nenhuma senha inserida"
 
-#: index.html:181
+#: index.html:177
 msgid "No scheduled tasks"
 msgstr "Sem tarefas agendadas"
 
@@ -1758,7 +1740,7 @@ msgstr "Sistema operacional"
 msgid "Operation failed:"
 msgstr "Operação falhou:"
 
-#: templates/home.html:16
+#: templates/home.html:20
 msgid "Operations:"
 msgstr "Operações:"
 
@@ -1876,10 +1858,6 @@ msgstr "Permissões"
 msgid "Pick location"
 msgstr "Escolher localização"
 
-#: templates/restorewizard.html:10
-msgid "Point to your backup files and restore from there"
-msgstr "Aponte para os arquivos de backup e restaure de lá"
-
 #: templates/backends/generic.html:9
 msgid "Port"
 msgstr "Porta"
@@ -1894,7 +1872,7 @@ msgstr "Impedir login automático no ícone da bandeja"
 msgid "Previous"
 msgstr "Anterior"
 
-#: templates/home.html:73
+#: templates/home.html:77
 msgid "Progress:"
 msgstr "Progresso:"
 
@@ -1990,7 +1968,7 @@ msgstr "Reparando banco de dados ..."
 msgid "Repeat Passphrase"
 msgstr "Repetir frase de segurança"
 
-#: templates/home.html:38
+#: templates/home.html:42
 msgid "Reporting:"
 msgstr "Relatórios:"
 
@@ -1998,7 +1976,7 @@ msgstr "Relatórios:"
 msgid "Reset"
 msgstr "Redefinir"
 
-#: index.html:210 templates/restore.html:131
+#: index.html:206 templates/restore.html:131
 msgid "Restore"
 msgstr "Restaurar"
 
@@ -2010,7 +1988,7 @@ msgstr "Restauração Completa!"
 msgid "Restore files"
 msgstr "Restaurar arquivos"
 
-#: templates/home.html:19
+#: templates/home.html:23
 msgid "Restore files ..."
 msgstr "Restaurar arquivos ..."
 
@@ -2026,10 +2004,6 @@ msgstr "Restaurar de"
 msgid "Restore from backup configuration"
 msgstr "Restaurar a partir da configuração de backup"
 
-#: templates/restorewizard.html:15
-msgid "Restore from configuration ..."
-msgstr "Restaurar a partir da configuração ..."
-
 #: templates/restore.html:24 templates/restore.html:39
 #: templates/restore.html:76 templates/restoredirect.html:24
 msgid "Restore options"
@@ -2044,7 +2018,7 @@ msgstr "Restaurar permissões leitura/escrita"
 msgid "Restoring files ..."
 msgstr "Restaurando arquivos ..."
 
-#: index.html:213
+#: index.html:209
 msgid "Resume"
 msgstr "Continuar"
 
@@ -2052,7 +2026,7 @@ msgstr "Continuar"
 msgid "Run again every"
 msgstr "Executar novamente a cada"
 
-#: templates/home.html:18 templates/home.html:53
+#: templates/home.html:22 templates/home.html:57
 msgid "Run now"
 msgstr "Executar agora"
 
@@ -2068,7 +2042,7 @@ msgstr "Executando ..."
 msgid "Running commandline entry"
 msgstr "Executando entrada de linha de comando"
 
-#: index.html:168
+#: index.html:164
 msgid "Running task:"
 msgstr "Executando tarefa:"
 
@@ -2167,7 +2141,7 @@ msgstr "Servidor parado"
 msgid "Server state properties"
 msgstr "Propriedades do estado do servidor"
 
-#: index.html:216 templates/settings.html:2
+#: index.html:212 templates/settings.html:2
 msgid "Settings"
 msgstr "Configurações"
 
@@ -2189,7 +2163,7 @@ msgstr "Exibir pastas ocultas"
 msgid "Show log"
 msgstr "Exibir log"
 
-#: templates/home.html:40
+#: templates/home.html:44
 msgid "Show log ..."
 msgstr "Exibir log ..."
 
@@ -2225,7 +2199,7 @@ msgstr "Dados de origem"
 msgid "Source folders"
 msgstr "Pasta de origem"
 
-#: templates/home.html:62
+#: templates/home.html:66
 msgid "Source:"
 msgstr "Origem:"
 
@@ -2272,11 +2246,11 @@ msgstr "Parar de executar o backup"
 msgid "Stop running task"
 msgstr "Parar de executar a tarefa"
 
-#: index.html:164
+#: index.html:160
 msgid "Stopping after upload:"
 msgstr "Parando após o envio:"
 
-#: index.html:169
+#: index.html:165
 msgid "Stopping task:"
 msgstr "Tarefa de parada:"
 
@@ -2416,18 +2390,10 @@ msgstr ""
 "O nome do bucket deve começar com o seu nome de usuário, afixar "
 "automaticamente?"
 
-#: index.html:288
+#: index.html:284
 msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 "A conexão com o servidor foi perdida, tentando novamente em {{time}} ..."
-
-#: templates/settings.html:91
-msgid "The dark theme (by Michal)"
-msgstr "O tema escuro (por Michal)"
-
-#: templates/settings.html:90
-msgid "The default blue on white theme (by Alex)"
-msgstr "O tema padrão azul sobre branco (por Alex)"
 
 #: scripts/directives/backupEditUri.js:131
 msgid ""
@@ -2524,6 +2490,10 @@ msgid ""
 msgstr ""
 "O usuário tem muitas permissões. Deseja criar um novo usuário limitado, com "
 "apenas permissões para o caminho selecionado?"
+
+#: templates/home.html:4 templates/restorewizard.html:20
+msgid "There are no backups registered"
+msgstr "Não há backups"
 
 #: scripts/controllers/RestoreController.js:305
 msgid ""
@@ -2629,7 +2599,7 @@ msgstr "Ter"
 msgid "Type to highlight files"
 msgstr "Tipo para destacar arquivos"
 
-#: templates/restorewizard.html:25
+#: templates/restorewizard.html:30
 msgid "Unknown backup size and versions"
 msgstr "Tamanho do backup e versões desconhecidos"
 
@@ -2717,7 +2687,7 @@ msgstr "Nome de usuário"
 msgid "Validating ..."
 msgstr "Validando ..."
 
-#: templates/home.html:33
+#: templates/home.html:37
 msgid "Verify files"
 msgstr "Verificar arquivos"
 
@@ -3043,13 +3013,17 @@ msgstr "byte/s"
 msgid "custom"
 msgstr "personalizado"
 
-#: index.html:248
+#: index.html:244
 msgid "e-notariado"
 msgstr "e-Notariado"
 
 #: templates/settings.html:5
 msgid "eNotariado"
 msgstr "e-Notariado"
+
+#: templates/about.html:54
+msgid "is using the following third party libraries:"
+msgstr "está usando as seguintes bibliotecas de terceiros:"
 
 #: templates/commandline.html:49 templates/restoredirect.html:95
 #: templates/waitarea.html:15
@@ -3077,7 +3051,7 @@ msgstr ""
 msgid "{{files}} files ({{size}}) to go {{speed_txt}}"
 msgstr "{{files}} arquivos ({{size}}) restantes {{speed_txt}}"
 
-#: templates/home.html:67 templates/restorewizard.html:23
+#: templates/home.html:71 templates/restorewizard.html:28
 msgid "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Version"
 msgid_plural "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Versions"
 msgstr[0] "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Versão"
@@ -3096,9 +3070,35 @@ msgstr "{{number}} Horas"
 msgid "{{number}} Minutes"
 msgstr "{{number}} Minutos"
 
-#: templates/home.html:47
+#: templates/home.html:51
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#~ msgid "Commandline ..."
+#~ msgstr "Linha de comando"
+
+#~ msgid "Direct restore from backup files ..."
+#~ msgstr "Restaure diretamente dos arquivos de backup..."
+
+#~ msgid "Display and color theme"
+#~ msgstr "Tela e cores do tema"
+
+#~ msgid "Load destination from an exported job or a storage provider"
+#~ msgstr ""
+#~ "Carregar destino a partir de um trabalho exportado ou de um provedor de "
+#~ "armazenamento"
+
+#~ msgid "Point to your backup files and restore from there"
+#~ msgstr "Aponte para os arquivos de backup e restaure de lá"
+
+#~ msgid "Restore from configuration ..."
+#~ msgstr "Restaurar a partir da configuração ..."
+
+#~ msgid "The dark theme (by Michal)"
+#~ msgstr "O tema escuro (por Michal)"
+
+#~ msgid "The default blue on white theme (by Alex)"
+#~ msgstr "O tema padrão azul sobre branco (por Alex)"
 
 #, fuzzy
 #~| msgid ""
