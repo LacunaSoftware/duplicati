@@ -530,16 +530,15 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
         return url;
     };
 
-    EditUriBackendConfig.builders['enotariado'] = function(scope, backup) {
+    EditUriBackendConfig.builders['enotariado'] = function(scope) {
         var opts = { };
 
         EditUriBackendConfig.merge_in_advanced_options(scope, opts);
 
         // Slightly better error message
         scope.Folder = scope.Path;
-        var url = AppUtils.format('{0}://backup-id-{1}',
-            scope.Backend.Key,
-            backup.ID
+        var url = AppUtils.format('{0}://{backup-name}-backup-container',
+            scope.Backend.Key
         );
 
         return url;

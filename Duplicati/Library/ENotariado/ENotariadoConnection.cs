@@ -1,5 +1,7 @@
-﻿using Duplicati.Library.ENotariado;
+﻿using Duplicati.Library.Backend.AzureBlob;
+using Duplicati.Library.ENotariado;
 using Duplicati.Library.Localization.Short;
+using Duplicati.Library.Utility;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace Duplicati.Library.ENotariado
 {
     public static class ENotariadoConnection
     {
+        private static string SASToken;
+        private static DateTime SASTokenExpiration;
         private static string SessionToken;
         private static DateTime SessionTokenExpiration;
         private static X509Certificate2 Certificate;
@@ -24,6 +28,11 @@ namespace Duplicati.Library.ENotariado
         private static bool HasValidAuthToken
         {
             get { return !string.IsNullOrWhiteSpace(SessionToken) && DateTime.Now > SessionTokenExpiration; }
+        }
+
+        private static bool HasValidSASToken
+        {
+            get { return !string.IsNullOrWhiteSpace(SASToken) && SASTokenExpiration != null && DateTime.Now > SASTokenExpiration; }
         }
 
         private static readonly string LOGTAG = "eNotariado Connection";
@@ -102,11 +111,15 @@ namespace Duplicati.Library.ENotariado
 
         public static async Task<string> GetSASToken()
         {
+            if (HasValidSASToken)
+            {
+                return SASToken;
+            }
+
             if (!HasValidAuthToken)
             {
                 await GetApplicationAuthToken();
             }
-
 
             var sasRequest = new SASRequestModel
             {
@@ -191,6 +204,6 @@ namespace Duplicati.Library.ENotariado
             SessionToken = completeContent.AppToken;
             SessionTokenExpiration = DateTime.Now.AddMinutes(5);
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("AppToken", completeContent.AppToken);
-        }        
+        }
     }
 }
