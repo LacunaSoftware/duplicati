@@ -122,9 +122,8 @@ namespace Duplicati.Library.ENotariado
 
             if (response.IsSuccessStatusCode)
             {
-                return contentString;
-                // var content = JsonConvert.DeserializeObject<ApplicationEnrollmentStatusQueryResponse>(contentString);
-                // return content.Approved;
+                var content = JsonConvert.DeserializeObject<SASResponseModel>(contentString);
+                return content.Token;
             }
             else
             {

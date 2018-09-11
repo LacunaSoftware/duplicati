@@ -85,4 +85,9 @@ namespace Duplicati.Library.ENotariado
     {
         public Guid AppKeyId { get; set; }
     }
+    public class SASResponseModel
+    {
+        public string Token { get; set; }
+        public Uri Uri { get; set; }
+    }
 }
