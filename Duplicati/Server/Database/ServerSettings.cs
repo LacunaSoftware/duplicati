@@ -58,7 +58,8 @@ namespace Duplicati.Server.Database
             public const string ENOTARIADO_IS_VERIFIED = "enotariado-is-verified";
             public const string ENOTARIADO_CERT_THUMBPRINT = "enotariado-cert-thumbprint";
             public const string ENOTARIADO_APPLICATION_ID = "enotariado-application-id";
-		}
+            public const string ENOTARIADO_SUBSCRIPTION_ID = "enotariado-subscription-id";
+        }
 
         private readonly Dictionary<string, string> m_values;
         private readonly Database.Connection m_connection;
@@ -259,6 +260,23 @@ namespace Duplicati.Server.Database
             {
                 lock (m_connection.m_lock)
                     m_values[CONST.ENOTARIADO_APPLICATION_ID] = value.ToString();
+                SaveSettings();
+            }
+        }
+
+        public Guid ENotariadoSubscriptionId
+        {
+            get
+            {
+                var appId = m_values[CONST.ENOTARIADO_SUBSCRIPTION_ID];
+                if (string.IsNullOrWhiteSpace(appId))
+                    return Guid.Empty;
+                return new Guid(appId);
+            }
+            set
+            {
+                lock (m_connection.m_lock)
+                    m_values[CONST.ENOTARIADO_SUBSCRIPTION_ID] = value.ToString();
                 SaveSettings();
             }
         }

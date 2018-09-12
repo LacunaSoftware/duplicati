@@ -23,6 +23,14 @@ namespace Duplicati.Library.Backend.ENotariado
             var uri = new Utility.Uri(url);
             uri.RequireHost();
             var containerName = uri.Host.ToLowerInvariant();
+            string backupName = null;
+
+            if (options.ContainsKey("name"))
+                backupName = options["name"];
+            if (string.IsNullOrWhiteSpace(backupName))
+            {
+                throw new UserInformationException(Strings.ENotariadoBackend.NoBackupName, "NoBackupName");
+            }
 
             if (string.IsNullOrWhiteSpace(SASToken) || SASTokenExpiration == null || SASTokenExpiration < DateTime.Now)
             {
@@ -32,7 +40,9 @@ namespace Duplicati.Library.Backend.ENotariado
                 SASTokenExpiration = DateTime.Parse(sasExpiration);
             }
 
-            _azureBlob = new AzureBlobWrapper(SASToken, containerName);
+            var accountName = ENotariadoConnection.SubscriptionId.ToString().Replace("-", "").Substring(0, 24);
+
+            _azureBlob = new AzureBlobWrapper(accountName, SASToken, containerName, backupName);
         }
 
         public string DisplayName

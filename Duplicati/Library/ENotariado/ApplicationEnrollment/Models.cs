@@ -48,7 +48,7 @@ namespace Duplicati.Library.ENotariado
     }
     public class ApplicationEnrollmentStatusQueryResponse
     {
-
+        public Guid? SubscriptionId { get; set; }
         public bool Approved { get; set; }
     }
     public class StartPublicKeyAuthenticationRequest

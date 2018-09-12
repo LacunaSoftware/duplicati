@@ -18,9 +18,11 @@
 // 
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Duplicati.Library.Interface;
 using Duplicati.Library.Utility;
 using Microsoft.WindowsAzure.Storage;
@@ -29,6 +31,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Duplicati.Library.Backend.AzureBlob
 {
+
     /// <summary>
     /// Azure blob storage facade.
     /// </summary>
@@ -36,6 +39,7 @@ namespace Duplicati.Library.Backend.AzureBlob
     {
         private readonly string _containerName;
         private readonly CloudBlobContainer _container;
+        private readonly string CONTAINER_METADATA_BACKUP_NAME = "backupName";
 
         public string[] DnsNames
         {
@@ -70,14 +74,16 @@ namespace Duplicati.Library.Backend.AzureBlob
             _container = blobClient.GetContainerReference(containerName);
         }
 
-        public AzureBlobWrapper(string sasToken, string containerName)
+        public AzureBlobWrapper(string accountName, string sasToken, string containerName, string backupName)
         {
             _containerName = containerName;
             var accountSAS = new StorageCredentials(sasToken);
-            var storageAccount = new CloudStorageAccount(accountSAS, null, true);
+            var storageAccount = new CloudStorageAccount(accountSAS, accountName, null, true);
             var blobClient = storageAccount.CreateCloudBlobClient();
             _container = blobClient.GetContainerReference(_containerName);
             AddContainerIfNotExists();
+            _container.Metadata[CONTAINER_METADATA_BACKUP_NAME] = Convert.ToBase64String(Encoding.UTF8.GetBytes(backupName));
+            _container.SetMetadata();
         }
 
         public void AddContainer()
@@ -139,7 +145,7 @@ namespace Duplicati.Library.Backend.AzureBlob
                             var lastModified = new System.DateTime();
                             if (cb.Properties.LastModified != null)
                                 lastModified = new System.DateTime(cb.Properties.LastModified.Value.Ticks, System.DateTimeKind.Utc);
-                            return new FileEntry(Uri.UrlDecode(blobName.Replace("+", "%2B")), cb.Properties.Length, lastModified, lastModified);
+                            return new FileEntry(Utility.Uri.UrlDecode(blobName.Replace("+", "%2B")), cb.Properties.Length, lastModified, lastModified);
                         }
                     }
                     catch
@@ -147,7 +153,7 @@ namespace Duplicati.Library.Backend.AzureBlob
                         // If the metadata fails to parse, return the basic entry
                     }
 
-                    return new FileEntry(Uri.UrlDecode(blobName.Replace("+", "%2B")));
+                    return new FileEntry(Utility.Uri.UrlDecode(blobName.Replace("+", "%2B")));
                 })
                 .Cast<IFileEntry>()
                 .ToList();

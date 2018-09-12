@@ -532,17 +532,31 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
 
     EditUriBackendConfig.builders['enotariado'] = function(scope, backup) {
         var opts = { };
+        var uuid;
 
         EditUriBackendConfig.merge_in_advanced_options(scope, opts);
 
+
+        if (backup.TargetURL !== undefined) {
+            uuid = backup.TargetURL.replace('enotariado://', '');
+            uuid = uuid.substring(0, uuid.indexOf('?'));
+        } else {
+            var d = new Date().getTime();
+            if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+                d += performance.now(); //use high-precision timer if available
+            }
+            uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (d + Math.random() * 16) % 16 | 0;
+                d = Math.floor(d / 16);
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+        }
+
         // Slightly better error message
         scope.Folder = scope.Path;
-        var url = AppUtils.format('{0}://backup-id-{1}',
-            scope.Backend.Key,
-            backup.ID
-        );
+        
 
-        return url;
+        return `enotariado://${uuid}?name=${encodeURIComponent(backup.Name)}`;
     };
 
     EditUriBackendConfig.builders['msgroup'] = function (scope) {

@@ -11,7 +11,7 @@ backupApp.directive('backupEditUri', function(gettextCatalog) {
         var scope = $scope;
         scope.AppUtils = AppUtils;
 
-        var builduri = function(backup, callback) {
+        var builduri = function(callback, backup) {
 
             function validationCompleted() {
                 if (EditUriBackendConfig.builders[scope.Backend.Key] == null)

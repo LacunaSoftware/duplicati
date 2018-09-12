@@ -17,8 +17,9 @@ namespace Duplicati.Library.ENotariado
         private static string SessionToken;
         private static DateTime SessionTokenExpiration;
         private static X509Certificate2 Certificate;
-        private static Guid ApplicationId;
         private static HttpClient client = new HttpClient();
+        public static Guid ApplicationId;
+        public static Guid SubscriptionId;
         public static bool IsVerified;
 
         private static bool HasValidAuthToken
@@ -75,7 +76,7 @@ namespace Duplicati.Library.ENotariado
         /// <summary>
         /// Asks the eNotariado server if this application's enrollment has already been verified
         /// </summary>
-        public static async Task<bool> CheckVerifiedStatus()
+        public static async Task<Guid> CheckVerifiedStatus()
         {
             if (Certificate == null || Guid.Empty == ApplicationId)
             {
@@ -91,8 +92,13 @@ namespace Duplicati.Library.ENotariado
             if (response.IsSuccessStatusCode)
             {
                 var content = JsonConvert.DeserializeObject<ApplicationEnrollmentStatusQueryResponse>(contentString);
-                IsVerified = content.Approved;
-                return content.Approved;
+                IsVerified = content.Approved && content.SubscriptionId != null;
+                if (IsVerified)
+                {
+                    SubscriptionId = (Guid) content.SubscriptionId;
+                    return SubscriptionId;
+                }
+                return Guid.Empty;
             }
             else
             {

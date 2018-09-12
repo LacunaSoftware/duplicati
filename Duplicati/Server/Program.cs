@@ -179,6 +179,12 @@ namespace Duplicati.Server
             set { DataConnection.ApplicationSettings.ENotariadoApplicationId = value; }
         }
 
+        public static Guid ENotariadoSubscriptionId
+        {
+            get { return DataConnection.ApplicationSettings.ENotariadoSubscriptionId; }
+            set { DataConnection.ApplicationSettings.ENotariadoSubscriptionId = value; }
+        }
+
         public static string StartedBy
         {
             get { return Origin; }
@@ -775,11 +781,12 @@ namespace Duplicati.Server
 
             // If we are not verified, tries to verify on startup
             // CheckVerifiedStatus will throw with an undefined ID
-            if (ENotariadoIsEnrolled && !ENotariadoIsVerified)
+            if (ENotariadoIsEnrolled && (!ENotariadoIsVerified || ENotariadoSubscriptionId == Guid.Empty))
             {
                 try
                 {
-                    ENotariadoIsVerified = await ENotariadoConnection.CheckVerifiedStatus();
+                    ENotariadoSubscriptionId = await ENotariadoConnection.CheckVerifiedStatus();
+                    ENotariadoIsVerified = ENotariadoSubscriptionId != Guid.Empty;
                 }
                 catch (Exception ex)
                 {
