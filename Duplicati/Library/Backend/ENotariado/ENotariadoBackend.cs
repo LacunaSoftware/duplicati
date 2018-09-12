@@ -11,6 +11,8 @@ namespace Duplicati.Library.Backend.ENotariado
     public class ENotariadoBackend : IStreamingBackend
     {
         private readonly AzureBlobWrapper _azureBlob;
+        private static string SASToken;
+        private static DateTime SASTokenExpiration;
 
         public ENotariadoBackend()
         {
@@ -22,9 +24,15 @@ namespace Duplicati.Library.Backend.ENotariado
             uri.RequireHost();
             var containerName = uri.Host.ToLowerInvariant();
 
-            var sasToken = ENotariadoConnection.GetSASToken().GetAwaiter().GetResult();
-            _azureBlob = new AzureBlobWrapper(sasToken, containerName);
-            _azureBlob.AddContainerIfNotExists();
+            if (string.IsNullOrWhiteSpace(SASToken) || SASTokenExpiration == null || SASTokenExpiration < DateTime.Now)
+            {
+                SASToken = ENotariadoConnection.GetSASToken().GetAwaiter().GetResult();
+                var parsed = HttpUtility.ParseQueryString(SASToken);
+                var sasExpiration = parsed["se"];
+                SASTokenExpiration = DateTime.Parse(sasExpiration);
+            }
+
+            _azureBlob = new AzureBlobWrapper(SASToken, containerName);
         }
 
         public string DisplayName

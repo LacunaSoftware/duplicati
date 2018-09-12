@@ -545,23 +545,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
                             return;
                         }
 
-                        try
-                        {
-                            // if targetURL is changed and is using e-notariado backend and container already exists
-                            if (backup.TargetURL != data.Backup.TargetURL &&
-                                Library.ENotariado.Utils.IsENotariadoBackend(data.Backup.TargetURL) &&
-                                Library.ENotariado.Utils.ContainerAlreadyExists(data.Backup.TargetURL))
-                            {
-                                info.ReportClientError("There already exists a backup with the name \"" + data.Backup.Name + "\" in storage.", System.Net.HttpStatusCode.Conflict);
-                                return;
-                            }
-                        }
-                        catch (Exception)
-                        {
-                            info.ReportClientError("Failed to connect to e-Notariado to check for valid name", System.Net.HttpStatusCode.InternalServerError);
-                            return;
-                        }
-
                         var err = Program.DataConnection.ValidateBackup(data.Backup, data.Schedule);
                         if (!string.IsNullOrWhiteSpace(err))
                         {
@@ -571,11 +554,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
                         //TODO: Merge in real passwords where the placeholder is found
                         Program.DataConnection.AddOrUpdateBackupAndSchedule(data.Backup, data.Schedule);
-                        if (backup.TargetURL != data.Backup.TargetURL &&
-                            Library.ENotariado.Utils.IsENotariadoBackend(data.Backup.TargetURL))
-                        {
-                            Library.ENotariado.Utils.RenameAzureContainer(backup.TargetURL, data.Backup.TargetURL);
-                        }
+
                     }
 
                     info.OutputOK();

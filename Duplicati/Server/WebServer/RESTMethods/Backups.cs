@@ -19,8 +19,6 @@ using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
-using Duplicati.Library.Backend.AzureBlob;
-using Duplicati.Library.Utility;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -209,22 +207,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
                         if (Program.DataConnection.Backups.Where(x => x.Name.Equals(data.Backup.Name, StringComparison.OrdinalIgnoreCase)).Any())
                         {
                             info.ReportClientError("There already exists a backup with the name: " + data.Backup.Name, System.Net.HttpStatusCode.Conflict);
-                            return;
-                        }
-
-                        try
-                        {
-                            // if is using e-notariado backend and container already exists
-                            if (Library.ENotariado.Utils.IsENotariadoBackend(data.Backup.TargetURL) &&
-                                Library.ENotariado.Utils.ContainerAlreadyExists(data.Backup.TargetURL))
-                            {
-                                info.ReportClientError("There already exists a backup with the name \"" + data.Backup.Name + "\" in storage.", System.Net.HttpStatusCode.Conflict);
-                                return;
-                            }
-                        }
-                        catch (Exception)
-                        {
-                            info.ReportClientError("Failed to connect to e-Notariado to check for valid name", System.Net.HttpStatusCode.InternalServerError);
                             return;
                         }
 

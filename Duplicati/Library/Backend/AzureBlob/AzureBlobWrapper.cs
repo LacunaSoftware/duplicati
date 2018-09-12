@@ -74,19 +74,10 @@ namespace Duplicati.Library.Backend.AzureBlob
         {
             _containerName = containerName;
             var accountSAS = new StorageCredentials(sasToken);
-            var storageAccount = new CloudStorageAccount(accountSAS, "8db281f6b9964c8cb4e54389", null, true);
+            var storageAccount = new CloudStorageAccount(accountSAS, null, true);
             var blobClient = storageAccount.CreateCloudBlobClient();
             _container = blobClient.GetContainerReference(_containerName);
-        }
-
-        public static bool RenameContainer(string sasToken, string accountName, string oldContainerName, string newContainerName)
-        {
-            return true;
-        }
-
-        public bool HasContainer()
-        {
-            return _container.Exists();
+            AddContainerIfNotExists();
         }
 
         public void AddContainer()
