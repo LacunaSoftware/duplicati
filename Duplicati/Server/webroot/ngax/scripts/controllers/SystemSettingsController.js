@@ -76,8 +76,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
             isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
             applicationId: data.data['enotariado-application-id'],
-            certThumbprint: data.data['enotariado-cert-thumbprint'],
-            slicedThumbprint: data.data['enotariado-cert-thumbprint'].slice(0, 8)
+            certThumbprint: data.data['enotariado-cert-thumbprint']
         };
 
         AppUtils.extractServerModuleOptions($scope.advancedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedGlobalCommands');
@@ -97,7 +96,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
 
     $scope.copyToClipboard = function() {
         const textArea = document.createElement("textarea");
-        const sliced = $scope.eNotariado.slicedThumbprint;
+        const sliced = $scope.eNotariado.applicationId;
         textArea.value = sliced;
         document.body.appendChild(textArea);
         textArea.select();
