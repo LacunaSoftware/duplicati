@@ -39,7 +39,7 @@ namespace Duplicati.Library.Backend.AzureBlob
     {
         private readonly string _containerName;
         private readonly CloudBlobContainer _container;
-        private readonly string CONTAINER_METADATA_BACKUP_NAME = "backupName";
+        private readonly string BACKUP_NAME = "backupName";
 
         public string[] DnsNames
         {
@@ -82,8 +82,13 @@ namespace Duplicati.Library.Backend.AzureBlob
             var blobClient = storageAccount.CreateCloudBlobClient();
             _container = blobClient.GetContainerReference(_containerName);
             AddContainerIfNotExists();
-            _container.Metadata[CONTAINER_METADATA_BACKUP_NAME] = Convert.ToBase64String(Encoding.UTF8.GetBytes(backupName));
-            _container.SetMetadata();
+            var base64BackupName = Convert.ToBase64String(Encoding.UTF8.GetBytes(backupName));
+            
+            if (!_container.Metadata.ContainsKey(BACKUP_NAME) || _container.Metadata[BACKUP_NAME] != base64BackupName)
+            {
+                _container.Metadata[BACKUP_NAME] = base64BackupName;
+                _container.SetMetadata();
+            }
         }
 
         public void AddContainer()

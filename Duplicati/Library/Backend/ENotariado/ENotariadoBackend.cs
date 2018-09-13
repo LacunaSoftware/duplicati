@@ -104,6 +104,8 @@ namespace Duplicati.Library.Backend.ENotariado
             get
             {
                 return new List<ICommandLineArgument>(new ICommandLineArgument[] {
+                    new CommandLineArgument("name",
+                        CommandLineArgument.ArgumentType.String)
                 });
 
             }
