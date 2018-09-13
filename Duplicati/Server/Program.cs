@@ -797,6 +797,7 @@ namespace Duplicati.Server
             else if (ENotariadoIsEnrolled) // is enrolled and verified
             {
                 ENotariadoConnection.IsVerified = ENotariadoIsVerified;
+                ENotariadoConnection.SubscriptionId = ENotariadoSubscriptionId;
             }
             
             if (ENotariadoIsEnrolled)

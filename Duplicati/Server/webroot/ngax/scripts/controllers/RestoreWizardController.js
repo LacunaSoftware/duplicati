@@ -10,6 +10,8 @@ backupApp.controller('RestoreWizardController', function($scope, $location, Back
             $location.path('/restoredirect');
         else if ($scope.selection.backupid == 'import')
             $location.path('/restore-import');
+        else if ($scope.selection.backupid == 'enotariado')
+            $location.path('/restore-enotariado');
         else
             $location.path('/restore/' + $scope.selection.backupid);
     };

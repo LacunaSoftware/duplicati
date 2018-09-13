@@ -4,7 +4,7 @@
 
     <form class="styled">
     	<ul>
-    		<li class="input" ng-click="selection.backupid = 'direct'">
+    		<!-- <li class="input" ng-click="selection.backupid = 'direct'">
 	    		<input type="radio" name="direct" id="direct" ng-model="selection.backupid" value="direct">
     			<label for="direct" translate>Direct restore from backup files ...</label>
     			<div class="subtext" translate>Point to your backup files and restore from there</div>
@@ -14,6 +14,12 @@
                 <input type="radio" name="import" id="import" ng-model="selection.backupid" value="import">
                 <label for="import" translate>Restore from configuration ...</label>
                 <div class="subtext" translate>Load destination from an exported job or a storage provider</div>
+            </li> -->
+
+            <li class="input" ng-click="selection.backupid = 'enotariado'">
+                <input type="radio" name="enotariado" id="enotariado" ng-model="selection.backupid" value="enotariado">
+                <label for="enotariado" translate>Restore from e-Notariado ...</label>
+                <div class="subtext" translate>Load all backups stored in your e-Notariado account</div>
             </li>
 
             

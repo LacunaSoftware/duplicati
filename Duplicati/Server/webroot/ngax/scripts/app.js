@@ -71,6 +71,9 @@ backupApp.config(['$routeProvider',
             when('/restore-import', {
                 templateUrl: 'templates/import.html'
             }).
+            when('/restore-enotariado', {
+                templateUrl: 'templates/restore-enotariado.html'
+            }).
             when('/localdb/:backupid', {
                 templateUrl: 'templates/localdatabase.html'
             }).
