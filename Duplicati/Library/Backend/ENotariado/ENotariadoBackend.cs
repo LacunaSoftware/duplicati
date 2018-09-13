@@ -11,8 +11,6 @@ namespace Duplicati.Library.Backend.ENotariado
     public class ENotariadoBackend : IStreamingBackend
     {
         private readonly AzureBlobWrapper _azureBlob;
-        private static string SASToken;
-        private static DateTime SASTokenExpiration;
 
         public ENotariadoBackend()
         {
@@ -22,8 +20,11 @@ namespace Duplicati.Library.Backend.ENotariado
         {
             var uri = new Utility.Uri(url);
             uri.RequireHost();
-            var containerName = uri.Host.ToLowerInvariant();
             string backupName = null;
+
+            var accountName = ENotariadoConnection.SubscriptionId.ToString().Replace("-", "").Substring(0, 24);
+            var sasToken = ENotariadoConnection.GetSASToken().GetAwaiter().GetResult();
+            var containerName = uri.Host.ToLowerInvariant();
 
             if (options.ContainsKey("name"))
                 backupName = options["name"];
@@ -32,17 +33,7 @@ namespace Duplicati.Library.Backend.ENotariado
                 throw new UserInformationException(Strings.ENotariadoBackend.NoBackupName, "NoBackupName");
             }
 
-            if (string.IsNullOrWhiteSpace(SASToken) || SASTokenExpiration == null || SASTokenExpiration < DateTime.Now)
-            {
-                SASToken = ENotariadoConnection.GetSASToken().GetAwaiter().GetResult();
-                var parsed = HttpUtility.ParseQueryString(SASToken);
-                var sasExpiration = parsed["se"];
-                SASTokenExpiration = DateTime.Parse(sasExpiration);
-            }
-
-            var accountName = ENotariadoConnection.SubscriptionId.ToString().Replace("-", "").Substring(0, 24);
-
-            _azureBlob = new AzureBlobWrapper(accountName, SASToken, containerName, backupName);
+            _azureBlob = new AzureBlobWrapper(accountName, sasToken, containerName, backupName);
         }
 
         public string DisplayName

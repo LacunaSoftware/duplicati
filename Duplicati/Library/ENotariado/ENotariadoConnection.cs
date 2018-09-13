@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Duplicati.Library.ENotariado
 {
@@ -16,6 +17,8 @@ namespace Duplicati.Library.ENotariado
     {
         private static string SessionToken;
         private static DateTime SessionTokenExpiration;
+        private static string SASToken;
+        private static DateTime SASTokenExpiration;
         private static X509Certificate2 Certificate;
         private static HttpClient client = new HttpClient();
         public static Guid ApplicationId;
@@ -25,6 +28,11 @@ namespace Duplicati.Library.ENotariado
         private static bool HasValidAuthToken
         {
             get { return !string.IsNullOrWhiteSpace(SessionToken) && DateTime.Now > SessionTokenExpiration; }
+        }
+
+        private static bool HasValidSASToken
+        {
+            get { return !(string.IsNullOrWhiteSpace(SASToken) || SASTokenExpiration == null || SASTokenExpiration < DateTime.Now); }
         }
 
         private static readonly string LOGTAG = "eNotariado Connection";
@@ -106,13 +114,20 @@ namespace Duplicati.Library.ENotariado
             }
         }
 
+        /// <summary>
+        /// Asks the eNotariado server for a SAS token to access Azure
+        /// </summary>
         public static async Task<string> GetSASToken()
         {
+            if (HasValidSASToken)
+            {
+                return SASToken;
+            }
+
             if (!HasValidAuthToken)
             {
                 await GetApplicationAuthToken();
             }
-
 
             var sasRequest = new SASRequestModel
             {
@@ -129,7 +144,11 @@ namespace Duplicati.Library.ENotariado
             if (response.IsSuccessStatusCode)
             {
                 var content = JsonConvert.DeserializeObject<SASResponseModel>(contentString);
-                return content.Token;
+                SASToken = content.Token;
+                var parsed = HttpUtility.ParseQueryString(SASToken);
+                var sasExpiration = parsed["se"];
+                SASTokenExpiration = DateTime.Parse(sasExpiration);
+                return SASToken;
             }
             else
             {
@@ -137,6 +156,9 @@ namespace Duplicati.Library.ENotariado
             }
         }
 
+        /// <summary>
+        /// Authentication flow in eNotariado servers
+        /// </summary>
         private static async Task GetApplicationAuthToken()
         {
             if (Certificate == null || Guid.Empty == ApplicationId)
