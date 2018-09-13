@@ -66,6 +66,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Backend\AzureBlob\Duplicati.Library.Backend.AzureBlob.csproj">
+      <Project>{8e4cecfb-0413-4b00-ab93-78d1c3902bd5}</Project>
+      <Name>Duplicati.Library.Backend.AzureBlob</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Localization\Duplicati.Library.Localization.csproj">
       <Project>{B68F2214-951F-4F78-8488-66E1ED3F50BF}</Project>
       <Name>Duplicati.Library.Localization</Name>

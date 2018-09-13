@@ -165,7 +165,7 @@ namespace Duplicati.Library.ENotariado
             {
                 throw new ENotariadoNotInitializedException();
             }
-
+        
             if (!IsVerified)
             {
                 throw new ENotariadoNotVerifiedException();
@@ -220,5 +220,16 @@ namespace Duplicati.Library.ENotariado
             SessionTokenExpiration = DateTime.Now.AddMinutes(5);
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("AppToken", completeContent.AppToken);
         }        
+
+        public static List<Backend.AzureBlob.BackupData> GetStoredBackupNames()
+        {
+            if (!HasValidSASToken)
+            {
+                GetSASToken().GetAwaiter().GetResult();
+            }
+
+            var accountName = SubscriptionId.ToString().Replace("-", "").Substring(0, 24);
+            return Backend.AzureBlob.AzureBlobWrapper.GetStoredBackups(accountName, SASToken);
+        }
     }
 }

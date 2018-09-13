@@ -31,6 +31,11 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Duplicati.Library.Backend.AzureBlob
 {
+    public class BackupData
+    {
+        public string ContainerName;
+        public string BackupName;
+    }
 
     /// <summary>
     /// Azure blob storage facade.
@@ -39,7 +44,7 @@ namespace Duplicati.Library.Backend.AzureBlob
     {
         private readonly string _containerName;
         private readonly CloudBlobContainer _container;
-        private readonly string BACKUP_NAME = "backupName";
+        private static readonly string BACKUP_NAME = "backupName";
 
         public string[] DnsNames
         {
@@ -83,12 +88,35 @@ namespace Duplicati.Library.Backend.AzureBlob
             _container = blobClient.GetContainerReference(_containerName);
             AddContainerIfNotExists();
             var base64BackupName = Convert.ToBase64String(Encoding.UTF8.GetBytes(backupName));
+            _container.Metadata[BACKUP_NAME] = base64BackupName;
+            _container.SetMetadata();
+        }
+
+        public static List<BackupData> GetStoredBackups(string accountName, string sasToken)
+        {
+            var accountSAS = new StorageCredentials(sasToken);
+            var storageAccount = new CloudStorageAccount(accountSAS, accountName, null, true);
+            var blobClient = storageAccount.CreateCloudBlobClient();
+            var containers = blobClient.ListContainers();
+
+            var backups = new List<BackupData>();
             
-            if (!_container.Metadata.ContainsKey(BACKUP_NAME) || _container.Metadata[BACKUP_NAME] != base64BackupName)
+            foreach(var container in containers)
             {
-                _container.Metadata[BACKUP_NAME] = base64BackupName;
-                _container.SetMetadata();
+                container.FetchAttributes();
+                string backupName = null;
+                if (!container.Metadata.ContainsKey(BACKUP_NAME))
+                    continue;
+
+                backupName = container.Metadata[BACKUP_NAME];
+                backupName = Encoding.UTF8.GetString(Convert.FromBase64String(backupName));
+                backups.Add(new BackupData()
+                {
+                    ContainerName = container.Name,
+                    BackupName = backupName
+                });
             }
+            return backups;
         }
 
         public void AddContainer()
