@@ -53,42 +53,47 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             dlg.dismiss();
 
         var message = data.statusText;
-        DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: ') + message);
+        dlg = DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: ') + message);
+        dlg.ondismiss = getSettings
     }
 
-    AppService.get('/serversettings').then(function(data) {
-        data.data['placeholder-password'] = AppUtils.parseBoolString(data.data['has-password-protection']) ? Math.random().toString(36) : '';
-        $scope.rawdata = data.data;        
+    function getSettings() {
+        AppService.get('/serversettings').then(function(data) {
+            data.data['placeholder-password'] = AppUtils.parseBoolString(data.data['has-password-protection']) ? Math.random().toString(36) : '';
+            $scope.rawdata = data.data;        
 
-        $scope.requireRemotePassword = AppUtils.parseBoolString(data.data['has-password-protection']);
-        $scope.remotePassword = data.data['placeholder-password'];
-        $scope.allowRemoteAccess = data.data['server-listen-interface'] != 'loopback';
-        $scope.startupDelayDurationValue = data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1) == "" ? "0" : data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1);
-        $scope.startupDelayDurationMultiplier = data.data['startup-delay'].substr(-1) == "" ? "s" : data.data['startup-delay'].substr(-1);
-        $scope.updateChannel = data.data['update-channel'];
-        $scope.originalUpdateChannel = data.data['update-channel'];
-        $scope.usageReporterLevel = data.data['usage-reporter-level'];
-        $scope.disableTrayIconLogin =  AppUtils.parseBoolString(data.data['disable-tray-icon-login']);
-        $scope.remoteHostnames = data.data['allowed-hostnames'];
-        $scope.advancedOptions = AppUtils.serializeAdvancedOptionsToArray(data.data);
-        $scope.servermodulesettings = {};
-        $scope.eNotariado = {
-            isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
-            isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
-            applicationId: data.data['enotariado-application-id'],
-            certThumbprint: data.data['enotariado-cert-thumbprint']
-        };
+            $scope.requireRemotePassword = AppUtils.parseBoolString(data.data['has-password-protection']);
+            $scope.remotePassword = data.data['placeholder-password'];
+            $scope.allowRemoteAccess = data.data['server-listen-interface'] != 'loopback';
+            $scope.startupDelayDurationValue = data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1) == "" ? "0" : data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1);
+            $scope.startupDelayDurationMultiplier = data.data['startup-delay'].substr(-1) == "" ? "s" : data.data['startup-delay'].substr(-1);
+            $scope.updateChannel = data.data['update-channel'];
+            $scope.originalUpdateChannel = data.data['update-channel'];
+            $scope.usageReporterLevel = data.data['usage-reporter-level'];
+            $scope.disableTrayIconLogin =  AppUtils.parseBoolString(data.data['disable-tray-icon-login']);
+            $scope.remoteHostnames = data.data['allowed-hostnames'];
+            $scope.advancedOptions = AppUtils.serializeAdvancedOptionsToArray(data.data);
+            $scope.servermodulesettings = {};
+            $scope.eNotariado = {
+                isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
+                isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
+                applicationId: data.data['enotariado-application-id'],
+                certThumbprint: data.data['enotariado-cert-thumbprint']
+            };
 
-        AppUtils.extractServerModuleOptions($scope.advancedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedGlobalCommands');
-        
-    }, AppUtils.connectionError);
+            AppUtils.extractServerModuleOptions($scope.advancedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedGlobalCommands');
+            
+        }, AppUtils.connectionError);
+    }
+    getSettings();
 
     $scope.eNotariadoVerify = function() {
         dlg = DialogService.dialog(gettextCatalog.getString('Enrolling ...'), gettextCatalog.getString('Verifying application ...'), [], null, function() {       
             AppService.post('/systeminfo/verify-enotariado').then(
                 function(resp) {
                     dlg.dismiss();
-                    DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Application verified!'));
+                    dlg = DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Application verified!'));
+                    dlg.ondismiss = getSettings
                 }, handleError
             );
         });
@@ -119,7 +124,8 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             AppService.post('/systeminfo/reset-enotariado').then(
                 function(resp) {
                     dlg.dismiss();
-                    DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('The application was re-enrolled successfully!'));
+                    dlg = DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('The application was re-enrolled successfully!'));
+                    dlg.ondismiss = getSettings
                 }, handleError
             );
         });
