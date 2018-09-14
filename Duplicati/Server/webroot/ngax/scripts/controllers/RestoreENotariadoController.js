@@ -7,7 +7,7 @@ backupApp.controller('RestoreENotariadoController', function ($rootScope, $scope
     $scope.CurrentStep = 0;
     $scope.connecting = false;
     $scope.ConnectionProgress = [];
-    let backups = [];
+    $scope.backups = [];
 
     $scope.nextPage = function() {
         $scope.CurrentStep = Math.min(1, $scope.CurrentStep + 1);
@@ -24,7 +24,8 @@ backupApp.controller('RestoreENotariadoController', function ($rootScope, $scope
         AppService.get('/enotariado', {'headers': {'Content-Type': 'application/json'}}).then(
             function(resp) {
                 
-                backups = resp.data;
+                $scope.backups = resp.data;
+                console.log(resp.data);
                 $scope.ConnectionProgress.push(AppUtils.format(gettextCatalog.getString('Retrieved information about {0} backups ...'), resp.data.length));
             }, function(resp) {
                 var message = resp.statusText;
@@ -36,6 +37,46 @@ backupApp.controller('RestoreENotariadoController', function ($rootScope, $scope
             }
         );
     };
+
+    $scope.restore = function() {
+        var backupInfo = JSON.parse($scope.selectedBackup);
+        var targetURL = `enotariado://${backupInfo.ContainerName}?name=${backupInfo.BackupName}`;
+        var opts = {};
+        var obj = {'Backup': {'TargetURL': targetURL } };
+
+        if (($scope.EncryptionPassphrase || '') == '')
+            opts['--no-encryption'] = 'true';
+        else
+            opts['passphrase'] = $scope.EncryptionPassphrase;
+
+        if (!AppUtils.parse_extra_options($scope.ExtendedOptions, opts))
+            return false;
+
+        obj.Backup.Settings = [];
+        for(var k in opts) {
+            obj.Backup.Settings.push({
+                Name: k,
+                Value: opts[k]
+            });
+        }
+
+        AppService.post('/backups?temporary=true', obj, {'headers': {'Content-Type': 'application/json'}}).then(
+            function(resp) {
+
+                $scope.ConnectionProgress = gettextCatalog.getString('Listing backup dates ...');
+                $scope.BackupID = resp.data.ID;
+                $scope.fetchBackupTimes();
+            }, function(resp) {
+                var message = resp.statusText;
+                if (resp.data != null && resp.data.Message != null)
+                    message = resp.data.Message;
+
+                $scope.connecting = false;
+                $scope.ConnectionProgress = '';
+                DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+            }
+        );
+    }
 
     $scope.fetchBackupTimes = function() {
         AppService.get('/backup/' + $scope.BackupID + '/filesets').then(
@@ -53,7 +94,7 @@ backupApp.controller('RestoreENotariadoController', function ($rootScope, $scope
                     message = resp.data.Message;
 
                 if (message == 'encrypted-storage')
-                    message = gettextCatalog.getString('The target folder contains encrypted files, please supply the passphrase');
+                    message = gettextCatalog.getString('The target backup contains encrypted files, please supply the passphrase');
 
                 $scope.connecting = false;
                 $scope.ConnectionProgress = '';

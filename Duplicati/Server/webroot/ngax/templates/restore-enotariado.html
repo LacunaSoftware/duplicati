@@ -22,7 +22,7 @@
                     <h2 translate>Encryption</h2>
                     <div class="input password">
                         <label for="password" translate>Passphrase</label>
-                        <input type="password" id="password" name="password" ng-model="EncryptionPassphrase" placeholder="{{'Enter backup passphrase' | translate}}" />
+                        <input type="password" id="password" name="password" ng-model="EncryptionPassphrase" placeholder="{{ 'Enter backup passphrase' | translate}}" />
                     </div>
 
                     <div class="expandable">
@@ -51,6 +51,17 @@
                         <p ng-repeat="line in ConnectionProgress">{{line}}</p>
                         <div ng-show="serverstate.programState == 'Paused'">
                             {{'Server is currently paused,' | translate}} <a style="cursor: pointer" ng-click="ServerStatus.resume()" translate>resume now</a>
+                        </div>
+                    </div>
+                    <div ng-show="backups.length > 0" class="input mixed multiple">
+                        <label for="backups" translate>Select backup: </label>
+                        <select id="backups" name="backups" ng-model="selectedBackup">
+                            <option ng-repeat="backup in backups" value="{{backup}}">{{backup.BackupName}}</option>
+                        </select>
+                        
+                        <div class="buttons">
+                            <a href="#" id="cancel" class="submit" translate>Cancel</a>
+                            <input type="button" id="save" class="submit" value="{{'Restore' | translate}}" ng-show="selectedBackup" ng-click="restore()" />
                         </div>
                     </div>
                 </div>

@@ -34,6 +34,7 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         });
     };
 
+    // If this function is updated, make similar changes to RestoreENotariadoController
     $scope.doConnect = function() {
         function connect() {
             $scope.connecting = true;
@@ -87,6 +88,7 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         checkForValidBackupDestination(connect);
     };
 
+    // If this function is updated, make similar changes to RestoreENotariadoController
     $scope.fetchBackupTimes = function() {
         AppService.get('/backup/' + $scope.BackupID + '/filesets').then(
             function(resp) {
