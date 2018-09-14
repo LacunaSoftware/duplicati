@@ -74,12 +74,11 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             $scope.remoteHostnames = data.data['allowed-hostnames'];
             $scope.advancedOptions = AppUtils.serializeAdvancedOptionsToArray(data.data);
             $scope.servermodulesettings = {};
-            $scope.eNotariado = {
-                isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
-                isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
-                applicationId: data.data['enotariado-application-id'],
-                certThumbprint: data.data['enotariado-cert-thumbprint']
-            };
+            if (!$scope.eNotariado) $scope.eNotariado = {};
+            $scope.eNotariado.isEnrolled = (data.data['enotariado-is-enrolled'].toLowerCase() === 'true');
+            $scope.eNotariado.isVerified = (data.data['enotariado-is-verified'].toLowerCase() === 'true');
+            $scope.eNotariado.applicationId = data.data['enotariado-application-id'];
+            $scope.eNotariado.certThumbprint = data.data['enotariado-cert-thumbprint'];
 
             AppUtils.extractServerModuleOptions($scope.advancedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedGlobalCommands');
             

@@ -72,6 +72,25 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         );
     };
 
+    const eNotariadoCheck = function (eNotariado) {
+        if (!eNotariado) return;
+        if (!eNotariado.isEnrolled) {
+            DialogService.dialog(
+                gettextCatalog.getString('e-Notariado error'),
+                gettextCatalog.getString('The application is not enrolled in e-Notariado. Please re-enroll'),                
+                [gettextCatalog.getString('OK')],
+                () => $location.path('/settings')
+            );
+        } else if (!eNotariado.isVerified) {
+            DialogService.dialog(
+                gettextCatalog.getString('e-Notariado error'),
+                gettextCatalog.getString('The application is not verified in e-Notariado. Please verify the application and recheck the status'),                
+                [gettextCatalog.getString('OK')],
+                () => $location.path('/settings')
+            );
+        }
+    }
+
     function updateCurrentPage() {
 
         $scope.active_theme = $scope.saved_theme;
@@ -90,6 +109,8 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
             $scope.current_page = 'about';
         else
             $scope.current_page = '';
+
+        if ($scope.current_page !== 'settings') eNotariadoCheck($scope.eNotariado);
     };
 
     $scope.$on('serverstatechanged', function() {
@@ -159,6 +180,14 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
     });
 
     AppService.get('/serversettings').then(function(data) {
+        $scope.eNotariado = {
+            isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
+            isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
+            applicationId: data.data['enotariado-application-id'],
+            certThumbprint: data.data['enotariado-cert-thumbprint']
+        };
+        eNotariadoCheck($scope.eNotariado);
+
         var ut = data.data['max-upload-speed'];
         var dt = data.data['max-download-speed'];
         $scope.throttle_active = (ut != null && ut.trim().length != 0) || (dt != null && dt.trim().length != 0);
