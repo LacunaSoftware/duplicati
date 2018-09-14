@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-06 12:08-0300\n"
-"PO-Revision-Date: 2018-09-06 12:13-0300\n"
+"POT-Creation-Date: 2018-09-14 14:07-0300\n"
+"PO-Revision-Date: 2018-09-14 14:10-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -703,21 +703,21 @@ msgstr ""
 msgid "Dropbox"
 msgstr "Dropbox"
 
-#: Library/Backend/ENotariado/Strings.cs:4
+#: Library/Backend/ENotariado/Strings.cs:5
 msgid "e-Notariado"
 msgstr "e-Notariado"
 
-#: Library/Backend/ENotariado/Strings.cs:5
-#, fuzzy
-#| msgid ""
-#| "This backend can read and write data to Azure blob storage.  Allowed "
-#| "formats are: \"azure://bucketname\""
+#: Library/Backend/ENotariado/Strings.cs:6
+msgid "The name of the backup was not recognized by the backend"
+msgstr "O nome do backup não foi reconhecido pelo backend"
+
+#: Library/Backend/ENotariado/Strings.cs:7
 msgid ""
 "This backend can read and write data to Azure blob storage using the "
 "eNotariado system.  Allowed formats are: \"enotariado://containername\""
 msgstr ""
 "Este backend pode ler e gravar dados em blobs de armazenamento do Azure. Os "
-"formatos permitidos são: \"azure://bucketname\""
+"formatos permitidos são: \"enotariado://bucketname\""
 
 #: Library/Backend/File/Strings.cs:4
 #, csharp-format
@@ -2354,11 +2354,11 @@ msgstr "Falha ao invocar o GnuPG, o programa não terminará"
 msgid "Certificate with thumbprint {0} not found."
 msgstr "Certificado com digital {0} não encontrado."
 
-#: Library/ENotariado/ENotariadoConnection.cs:72
-#: Library/ENotariado/ENotariadoConnection.cs:103
-#: Library/ENotariado/ENotariadoConnection.cs:132
-#: Library/ENotariado/ENotariadoConnection.cs:170
-#: Library/ENotariado/ENotariadoConnection.cs:193
+#: Library/ENotariado/ENotariadoConnection.cs:80
+#: Library/ENotariado/ENotariadoConnection.cs:113
+#: Library/ENotariado/ENotariadoConnection.cs:155
+#: Library/ENotariado/ENotariadoConnection.cs:189
+#: Library/ENotariado/ENotariadoConnection.cs:212
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr "Código de resposta: '{0}'. Conteudo: '{1}'."

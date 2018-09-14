@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-06 12:08-0300\n"
+"POT-Creation-Date: 2018-09-14 14:07-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -604,11 +604,15 @@ msgstr ""
 msgid "Dropbox"
 msgstr ""
 
-#: Library/Backend/ENotariado/Strings.cs:4
+#: Library/Backend/ENotariado/Strings.cs:5
 msgid "e-Notariado"
 msgstr ""
 
-#: Library/Backend/ENotariado/Strings.cs:5
+#: Library/Backend/ENotariado/Strings.cs:6
+msgid "The name of the backup was not recognized by the backend"
+msgstr ""
+
+#: Library/Backend/ENotariado/Strings.cs:7
 msgid ""
 "This backend can read and write data to Azure blob storage using the "
 "eNotariado system.  Allowed formats are: \"enotariado://containername\""
@@ -1973,11 +1977,11 @@ msgstr ""
 msgid "Certificate with thumbprint {0} not found."
 msgstr ""
 
-#: Library/ENotariado/ENotariadoConnection.cs:72
-#: Library/ENotariado/ENotariadoConnection.cs:103
-#: Library/ENotariado/ENotariadoConnection.cs:132
-#: Library/ENotariado/ENotariadoConnection.cs:170
-#: Library/ENotariado/ENotariadoConnection.cs:193
+#: Library/ENotariado/ENotariadoConnection.cs:80
+#: Library/ENotariado/ENotariadoConnection.cs:113
+#: Library/ENotariado/ENotariadoConnection.cs:155
+#: Library/ENotariado/ENotariadoConnection.cs:189
+#: Library/ENotariado/ENotariadoConnection.cs:212
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr ""

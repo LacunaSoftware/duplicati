@@ -17,13 +17,13 @@ msgstr ""
 msgid "API Key"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:852
+#: scripts/services/EditUriBuiltins.js:866
 #: templates/backends/s3.html:54
 #: templates/backends/s3.html:55
 msgid "AWS Access ID"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:853
+#: scripts/services/EditUriBuiltins.js:867
 #: templates/backends/s3.html:58
 #: templates/backends/s3.html:59
 msgid "AWS Access Key"
@@ -33,8 +33,8 @@ msgstr ""
 msgid "AWS IAM Policy"
 msgstr ""
 
-#: index.html:215
-#: index.html:231
+#: index.html:216
+#: index.html:232
 msgid "About"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgstr ""
 msgid "About {{appname}}"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:797
+#: scripts/services/EditUriBuiltins.js:811
 #: templates/backends/azure.html:11
 msgid "Access Key"
 msgstr ""
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Access to user interface"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:796
+#: scripts/services/EditUriBuiltins.js:810
 #: templates/backends/azure.html:7
 msgid "Account name"
 msgstr ""
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Add advanced option"
 msgstr ""
 
-#: index.html:203
+#: index.html:204
 msgid "Add backup"
 msgstr ""
 
@@ -94,15 +94,17 @@ msgstr ""
 msgid "Add path"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:863
-#: scripts/services/EditUriBuiltins.js:880
+#: scripts/services/EditUriBuiltins.js:877
+#: scripts/services/EditUriBuiltins.js:894
 msgid "Adjust bucket name?"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:777
+#: scripts/services/EditUriBuiltins.js:791
 msgid "Adjust path name?"
 msgstr ""
 
+#: templates/restore-enotariado.html:30
+#: templates/restore-enotariado.html:38
 #: templates/restoredirect.html:66
 #: templates/restoredirect.html:74
 msgid "Advanced Options"
@@ -162,7 +164,7 @@ msgstr ""
 msgid "Application Code"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:92
+#: scripts/controllers/SystemSettingsController.js:91
 msgid "Application verified!"
 msgstr ""
 
@@ -174,7 +176,7 @@ msgstr ""
 msgid "As Command-line"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:730
+#: scripts/services/EditUriBuiltins.js:744
 #: templates/backends/gcs.html:8
 #: templates/backends/gcs.html:9
 #: templates/backends/msgroup.html:13
@@ -212,12 +214,12 @@ msgstr ""
 msgid "B2 Application Key"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:899
+#: scripts/services/EditUriBuiltins.js:913
 #: templates/backends/b2.html:13
 msgid "B2 Cloud Storage Account ID"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:900
+#: scripts/services/EditUriBuiltins.js:914
 #: templates/backends/b2.html:17
 msgid "B2 Cloud Storage Application Key"
 msgstr ""
@@ -270,10 +272,10 @@ msgstr ""
 msgid "Browser default"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:811
-#: scripts/services/EditUriBuiltins.js:851
-#: scripts/services/EditUriBuiltins.js:898
-#: scripts/services/EditUriBuiltins.js:908
+#: scripts/services/EditUriBuiltins.js:825
+#: scripts/services/EditUriBuiltins.js:865
+#: scripts/services/EditUriBuiltins.js:912
+#: scripts/services/EditUriBuiltins.js:922
 msgid "Bucket Name"
 msgstr ""
 
@@ -343,11 +345,12 @@ msgstr ""
 #: scripts/services/CaptchaService.js:22
 #: scripts/services/DialogService.js:50
 #: scripts/services/EditUriBuiltins.js:51
-#: scripts/services/EditUriBuiltins.js:777
-#: scripts/services/EditUriBuiltins.js:863
-#: scripts/services/EditUriBuiltins.js:880
+#: scripts/services/EditUriBuiltins.js:791
+#: scripts/services/EditUriBuiltins.js:877
+#: scripts/services/EditUriBuiltins.js:894
 #: templates/delete.html:52
 #: templates/export.html:26
+#: templates/restore-enotariado.html:63
 #: templates/settings.html:183
 #: templates/waitarea.html:19
 msgid "Cancel"
@@ -396,8 +399,8 @@ msgstr ""
 msgid "Click the AuthID link to create an AuthID"
 msgstr ""
 
-#: index.html:140
-#: index.html:191
+#: index.html:141
+#: index.html:192
 msgid "Click to set throttle options"
 msgstr ""
 
@@ -448,15 +451,16 @@ msgstr ""
 msgid "Confirmation required"
 msgstr ""
 
+#: templates/restore-enotariado.html:44
 #: templates/restoredirect.html:80
 msgid "Connect"
 msgstr ""
 
-#: index.html:291
+#: index.html:292
 msgid "Connect now"
 msgstr ""
 
-#: index.html:287
+#: index.html:288
 msgid "Connecting to server ..."
 msgstr ""
 
@@ -464,11 +468,11 @@ msgstr ""
 msgid "Connecting to task ...."
 msgstr ""
 
-#: index.html:292
+#: index.html:293
 msgid "Connecting..."
 msgstr ""
 
-#: index.html:283
+#: index.html:284
 msgid "Connection lost"
 msgstr ""
 
@@ -477,11 +481,11 @@ msgstr ""
 msgid "Connection worked!"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:119
+#: scripts/controllers/SystemSettingsController.js:118
 msgid "Contacting e-Notariado ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:798
+#: scripts/services/EditUriBuiltins.js:812
 #: templates/backends/azure.html:2
 msgid "Container name"
 msgstr ""
@@ -498,7 +502,7 @@ msgstr ""
 msgid "Continue without encryption"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:108
+#: scripts/controllers/SystemSettingsController.js:107
 msgid "Copied {0} to clipboard"
 msgstr ""
 
@@ -527,7 +531,7 @@ msgstr ""
 msgid "Core options"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:113
+#: scripts/controllers/SystemSettingsController.js:112
 msgid "Could not copy {0} to clipboard"
 msgstr ""
 
@@ -721,7 +725,7 @@ msgstr ""
 msgid "Domain Name"
 msgstr ""
 
-#: index.html:239
+#: index.html:240
 msgid "Donate"
 msgstr ""
 
@@ -749,7 +753,7 @@ msgstr ""
 msgid "Duplicate option {{opt}}"
 msgstr ""
 
-#: index.html:247
+#: index.html:248
 msgid "Duplicati forum"
 msgstr ""
 
@@ -782,6 +786,8 @@ msgid "Encrypt file"
 msgstr ""
 
 #: templates/addoredit.html:43
+#: templates/restore-enotariado.html:15
+#: templates/restore-enotariado.html:22
 #: templates/restore.html:22
 #: templates/restoredirect.html:22
 #: templates/restoredirect.html:58
@@ -796,7 +802,7 @@ msgstr ""
 msgid "Encryption modules:"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:88
+#: scripts/controllers/SystemSettingsController.js:87
 msgid "Enrolling ..."
 msgstr ""
 
@@ -815,6 +821,10 @@ msgstr ""
 
 #: templates/backends/azure.html:8
 msgid "Enter account name"
+msgstr ""
+
+#: templates/restore-enotariado.html:25
+msgid "Enter backup passphrase"
 msgstr ""
 
 #: templates/restoredirect.html:61
@@ -874,8 +884,10 @@ msgstr ""
 #: scripts/controllers/RestoreController.js:411
 #: scripts/controllers/RestoreController.js:421
 #: scripts/controllers/RestoreController.js:88
-#: scripts/controllers/RestoreDirectController.js:110
-#: scripts/controllers/RestoreDirectController.js:74
+#: scripts/controllers/RestoreDirectController.js:112
+#: scripts/controllers/RestoreDirectController.js:75
+#: scripts/controllers/RestoreENotariadoController.js:101
+#: scripts/controllers/RestoreENotariadoController.js:76
 #: scripts/controllers/SystemSettingsController.js:56
 #: scripts/directives/backupEditUri.js:143
 #: scripts/directives/backupEditUri.js:170
@@ -974,7 +986,7 @@ msgstr ""
 msgid "FTP (Alternative)"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:113
+#: scripts/controllers/SystemSettingsController.js:112
 msgid "Fail"
 msgstr ""
 
@@ -997,8 +1009,11 @@ msgstr ""
 #: scripts/controllers/RestoreController.js:331
 #: scripts/controllers/RestoreController.js:421
 #: scripts/controllers/RestoreController.js:88
-#: scripts/controllers/RestoreDirectController.js:110
-#: scripts/controllers/RestoreDirectController.js:74
+#: scripts/controllers/RestoreDirectController.js:112
+#: scripts/controllers/RestoreDirectController.js:75
+#: scripts/controllers/RestoreENotariadoController.js:101
+#: scripts/controllers/RestoreENotariadoController.js:36
+#: scripts/controllers/RestoreENotariadoController.js:76
 msgid "Failed to connect: {{message}}"
 msgstr ""
 
@@ -1023,7 +1038,7 @@ msgstr ""
 msgid "Failed to restore files: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:170
+#: scripts/controllers/SystemSettingsController.js:169
 msgid "Failed to save:"
 msgstr ""
 
@@ -1110,8 +1125,12 @@ msgstr ""
 msgid "Getting file versions ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:749
-#: scripts/services/EditUriBuiltins.js:760
+#: scripts/controllers/RestoreENotariadoController.js:22
+msgid "Getting list of backups stored remotely ..."
+msgstr ""
+
+#: scripts/services/EditUriBuiltins.js:763
+#: scripts/services/EditUriBuiltins.js:774
 #: templates/backends/msgroup.html:2
 msgid "Group email"
 msgstr ""
@@ -1129,7 +1148,7 @@ msgstr ""
 msgid "Hide hidden folders"
 msgstr ""
 
-#: index.html:200
+#: index.html:201
 #: scripts/services/AppUtils.js:62
 msgid "Home"
 msgstr ""
@@ -1276,7 +1295,7 @@ msgstr ""
 msgid "Install failed:"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:956
+#: scripts/services/EditUriBuiltins.js:970
 msgid "Invalid characters in path"
 msgstr ""
 
@@ -1286,7 +1305,7 @@ msgstr ""
 msgid "Invalid retention time"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:706
+#: scripts/services/EditUriBuiltins.js:720
 msgid ""
 "It is possible to connect to some FTP without a password.\n"
 "Are you sure your FTP server supports password-less logins?"
@@ -1324,7 +1343,7 @@ msgstr ""
 msgid "Last successful backup:"
 msgstr ""
 
-#: templates/restorewizard.html:32
+#: templates/restorewizard.html:38
 msgid "Last successful restore: {{time}} (took {{duration || '0 seconds'}})"
 msgstr ""
 
@@ -1336,7 +1355,8 @@ msgstr ""
 msgid "Libraries"
 msgstr ""
 
-#: scripts/controllers/RestoreDirectController.js:64
+#: scripts/controllers/RestoreDirectController.js:65
+#: scripts/controllers/RestoreENotariadoController.js:66
 msgid "Listing backup dates ..."
 msgstr ""
 
@@ -1362,6 +1382,10 @@ msgstr ""
 msgid "Load older data"
 msgstr ""
 
+#: templates/restorewizard.html:22
+msgid "Load one of the backups stored in your e-Notariado account"
+msgstr ""
+
 #: templates/about.html:45
 #: templates/about.html:50
 #: templates/about.html:56
@@ -1380,7 +1404,7 @@ msgstr ""
 msgid "Loading remote storage usage ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:969
+#: scripts/services/EditUriBuiltins.js:983
 msgid "Local Repository"
 msgstr ""
 
@@ -1416,7 +1440,7 @@ msgstr ""
 msgid "Log data from the server"
 msgstr ""
 
-#: index.html:218
+#: index.html:219
 msgid "Log out"
 msgstr ""
 
@@ -1445,7 +1469,7 @@ msgstr ""
 msgid "Max upload speed"
 msgstr ""
 
-#: index.html:136
+#: index.html:137
 #: templates/addoredit.html:123
 #: templates/addoredit.html:165
 #: templates/addoredit.html:378
@@ -1467,7 +1491,7 @@ msgstr ""
 msgid "Minimum redundancy"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:960
+#: scripts/services/EditUriBuiltins.js:974
 msgid "Minimum redundancy is 1.0"
 msgstr ""
 
@@ -1546,7 +1570,7 @@ msgstr ""
 #: templates/addoredit.html:78
 #: templates/addwizard.html:28
 #: templates/restoredirect.html:52
-#: templates/restorewizard.html:41
+#: templates/restorewizard.html:47
 msgid "Next"
 msgstr ""
 
@@ -1554,11 +1578,11 @@ msgstr ""
 msgid "Next scheduled run:"
 msgstr ""
 
-#: index.html:175
+#: index.html:176
 msgid "Next scheduled task:"
 msgstr ""
 
-#: index.html:172
+#: index.html:173
 msgid "Next task:"
 msgstr ""
 
@@ -1579,9 +1603,9 @@ msgstr ""
 #: scripts/directives/backupEditUri.js:87
 #: scripts/services/EditUriBackendConfig.js:66
 #: scripts/services/EditUriBuiltins.js:51
-#: scripts/services/EditUriBuiltins.js:777
-#: scripts/services/EditUriBuiltins.js:863
-#: scripts/services/EditUriBuiltins.js:880
+#: scripts/services/EditUriBuiltins.js:791
+#: scripts/services/EditUriBuiltins.js:877
+#: scripts/services/EditUriBuiltins.js:894
 msgid "No"
 msgstr ""
 
@@ -1613,7 +1637,7 @@ msgstr ""
 msgid "No passphrase entered"
 msgstr ""
 
-#: index.html:177
+#: index.html:178
 msgid "No scheduled tasks"
 msgstr ""
 
@@ -1661,7 +1685,7 @@ msgstr ""
 msgid "OpenStack Object Storage / Swift"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:827
+#: scripts/services/EditUriBuiltins.js:841
 msgid "Openstack API Key are not supported in v3 keystone API."
 msgstr ""
 
@@ -1669,8 +1693,8 @@ msgstr ""
 msgid "Operating System"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:181
-#: scripts/controllers/SystemSettingsController.js:192
+#: scripts/controllers/SystemSettingsController.js:180
+#: scripts/controllers/SystemSettingsController.js:191
 msgid "Operation failed:"
 msgstr ""
 
@@ -1715,6 +1739,7 @@ msgstr ""
 
 #: templates/addoredit.html:54
 #: templates/export.html:21
+#: templates/restore-enotariado.html:24
 #: templates/restoredirect.html:60
 msgid "Passphrase"
 msgstr ""
@@ -1731,8 +1756,8 @@ msgstr ""
 msgid "Passphrases are not matching"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:934
-#: scripts/services/EditUriBuiltins.js:944
+#: scripts/services/EditUriBuiltins.js:948
+#: scripts/services/EditUriBuiltins.js:958
 #: templates/backends/file.html:33
 #: templates/backends/generic.html:22
 #: templates/backends/jottacloud.html:11
@@ -1752,7 +1777,7 @@ msgstr ""
 msgid "Patching files with local blocks ..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:919
+#: scripts/services/EditUriBuiltins.js:933
 msgid "Path"
 msgstr ""
 
@@ -1807,6 +1832,11 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+#: templates/restore-enotariado.html:16
+#: templates/restore-enotariado.html:49
+msgid "Progress"
+msgstr ""
+
 #: templates/home.html:77
 msgid "Progress:"
 msgstr ""
@@ -1831,7 +1861,7 @@ msgstr ""
 msgid "Re-enroll application"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:119
+#: scripts/controllers/SystemSettingsController.js:118
 msgid "Re-enrolling ..."
 msgstr ""
 
@@ -1847,7 +1877,7 @@ msgstr ""
 msgid "Recreating database ..."
 msgstr ""
 
-#: scripts/controllers/RestoreDirectController.js:40
+#: scripts/controllers/RestoreDirectController.js:41
 msgid "Registering temporary backup ..."
 msgstr ""
 
@@ -1863,11 +1893,11 @@ msgstr ""
 msgid "Remote"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:970
+#: scripts/services/EditUriBuiltins.js:984
 msgid "Remote Path"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:968
+#: scripts/services/EditUriBuiltins.js:982
 msgid "Remote Repository"
 msgstr ""
 
@@ -1912,7 +1942,8 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: index.html:206
+#: index.html:207
+#: templates/restore-enotariado.html:64
 #: templates/restore.html:131
 msgid "Restore"
 msgstr ""
@@ -1941,6 +1972,10 @@ msgstr ""
 msgid "Restore from backup configuration"
 msgstr ""
 
+#: templates/restorewizard.html:21
+msgid "Restore from e-Notariado ..."
+msgstr ""
+
 #: templates/restore.html:24
 #: templates/restore.html:39
 #: templates/restore.html:76
@@ -1957,8 +1992,12 @@ msgstr ""
 msgid "Restoring files ..."
 msgstr ""
 
-#: index.html:209
+#: index.html:210
 msgid "Resume"
+msgstr ""
+
+#: scripts/controllers/RestoreENotariadoController.js:29
+msgid "Retrieved information about {0} backups ..."
 msgstr ""
 
 #: templates/addoredit.html:265
@@ -1982,7 +2021,7 @@ msgstr ""
 msgid "Running commandline entry"
 msgstr ""
 
-#: index.html:164
+#: index.html:165
 msgid "Running task:"
 msgstr ""
 
@@ -2045,13 +2084,17 @@ msgstr ""
 msgid "Select a log level and see messages as they happen:"
 msgstr ""
 
+#: templates/restore-enotariado.html:57
+msgid "Select backup:"
+msgstr ""
+
 #: templates/restore.html:23
 #: templates/restore.html:38
 #: templates/restoredirect.html:23
 msgid "Select files"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:952
+#: scripts/services/EditUriBuiltins.js:966
 #: templates/backends/s3.html:8
 #: templates/backends/sia.html:2
 msgid "Server"
@@ -2066,6 +2109,7 @@ msgid "Server hostname or IP"
 msgstr ""
 
 #: templates/commandline.html:49
+#: templates/restore-enotariado.html:53
 #: templates/restoredirect.html:95
 #: templates/waitarea.html:15
 msgid "Server is currently paused,"
@@ -2087,7 +2131,7 @@ msgstr ""
 msgid "Server state properties"
 msgstr ""
 
-#: index.html:212
+#: index.html:213
 #: templates/settings.html:2
 msgid "Settings"
 msgstr ""
@@ -2191,11 +2235,11 @@ msgstr ""
 msgid "Stop running task"
 msgstr ""
 
-#: index.html:160
+#: index.html:161
 msgid "Stopping after upload:"
 msgstr ""
 
-#: index.html:165
+#: index.html:166
 msgid "Stopping task:"
 msgstr ""
 
@@ -2219,9 +2263,9 @@ msgstr ""
 msgid "Strong"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:108
-#: scripts/controllers/SystemSettingsController.js:123
-#: scripts/controllers/SystemSettingsController.js:92
+#: scripts/controllers/SystemSettingsController.js:107
+#: scripts/controllers/SystemSettingsController.js:122
+#: scripts/controllers/SystemSettingsController.js:91
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2304,8 +2348,8 @@ msgstr ""
 msgid "Testing permissions..."
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:908
-#: scripts/services/EditUriBuiltins.js:919
+#: scripts/services/EditUriBuiltins.js:922
+#: scripts/services/EditUriBuiltins.js:933
 msgid "The '{{fieldname}}' field contains an invalid character: {{character}} (value: {{value}}, index: {{pos}})"
 msgstr ""
 
@@ -2317,19 +2361,19 @@ msgstr ""
 msgid "The application is not verified on e-Notariado"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:123
+#: scripts/controllers/SystemSettingsController.js:122
 msgid "The application was re-enrolled successfully!"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:880
+#: scripts/services/EditUriBuiltins.js:894
 msgid "The bucket name should be all lower-case, convert automatically?"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:863
+#: scripts/services/EditUriBuiltins.js:877
 msgid "The bucket name should start with your username, prepend automatically?"
 msgstr ""
 
-#: index.html:284
+#: index.html:285
 msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 
@@ -2361,7 +2405,7 @@ msgstr ""
 msgid "The path must be an absolute path, i.e. it must start with a forward slash '/'"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:777
+#: scripts/services/EditUriBuiltins.js:791
 msgid ""
 "The path should start with \"{{prefix1}}\" or \"{{prefix2}}\", otherwise you will not be able to see the files in the HubiC web interface.\n"
 "\n"
@@ -2386,7 +2430,11 @@ msgstr ""
 msgid "The storage class affects the availability and price for a stored file"
 msgstr ""
 
-#: scripts/controllers/RestoreDirectController.js:106
+#: scripts/controllers/RestoreENotariadoController.js:97
+msgid "The target backup contains encrypted files, please supply the passphrase"
+msgstr ""
+
+#: scripts/controllers/RestoreDirectController.js:108
 msgid "The target folder contains encrypted files, please supply the passphrase"
 msgstr ""
 
@@ -2395,7 +2443,7 @@ msgid "The user has too many permissions. Do you want to create a new limited us
 msgstr ""
 
 #: templates/home.html:4
-#: templates/restorewizard.html:20
+#: templates/restorewizard.html:26
 msgid "There are no backups registered"
 msgstr ""
 
@@ -2463,7 +2511,7 @@ msgstr ""
 msgid "Type to highlight files"
 msgstr ""
 
-#: templates/restorewizard.html:30
+#: templates/restorewizard.html:36
 msgid "Unknown backup size and versions"
 msgstr ""
 
@@ -2532,10 +2580,10 @@ msgstr ""
 msgid "User interface settings"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:701
-#: scripts/services/EditUriBuiltins.js:810
-#: scripts/services/EditUriBuiltins.js:933
-#: scripts/services/EditUriBuiltins.js:943
+#: scripts/services/EditUriBuiltins.js:715
+#: scripts/services/EditUriBuiltins.js:824
+#: scripts/services/EditUriBuiltins.js:947
+#: scripts/services/EditUriBuiltins.js:957
 #: templates/backends/file.html:29
 #: templates/backends/generic.html:18
 #: templates/backends/jottacloud.html:7
@@ -2563,7 +2611,7 @@ msgstr ""
 msgid "Verifying answer"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:88
+#: scripts/controllers/SystemSettingsController.js:87
 msgid "Verifying application ..."
 msgstr ""
 
@@ -2669,9 +2717,9 @@ msgstr ""
 #: scripts/directives/backupEditUri.js:87
 #: scripts/services/EditUriBackendConfig.js:66
 #: scripts/services/EditUriBuiltins.js:51
-#: scripts/services/EditUriBuiltins.js:777
-#: scripts/services/EditUriBuiltins.js:863
-#: scripts/services/EditUriBuiltins.js:880
+#: scripts/services/EditUriBuiltins.js:791
+#: scripts/services/EditUriBuiltins.js:877
+#: scripts/services/EditUriBuiltins.js:894
 msgid "Yes"
 msgstr ""
 
@@ -2739,7 +2787,7 @@ msgstr ""
 msgid "You must choose at least one source folder"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:821
+#: scripts/services/EditUriBuiltins.js:835
 msgid "You must enter a domain name to use v3 API"
 msgstr ""
 
@@ -2751,7 +2799,7 @@ msgstr ""
 msgid "You must enter a passphrase or disable encryption"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:818
+#: scripts/services/EditUriBuiltins.js:832
 msgid "You must enter a password to use v3 API"
 msgstr ""
 
@@ -2759,11 +2807,11 @@ msgstr ""
 msgid "You must enter a positive number of backups to keep"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:824
+#: scripts/services/EditUriBuiltins.js:838
 msgid "You must enter a tenant (aka project) name to use v3 API"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:838
+#: scripts/services/EditUriBuiltins.js:852
 msgid "You must enter a tenant name if you do not provide an API Key"
 msgstr ""
 
@@ -2775,11 +2823,11 @@ msgstr ""
 msgid "You must enter a valid rentention policy string"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:835
+#: scripts/services/EditUriBuiltins.js:849
 msgid "You must enter either a password or an API Key"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:842
+#: scripts/services/EditUriBuiltins.js:856
 msgid "You must enter either a password or an API Key, not both"
 msgstr ""
 
@@ -2800,11 +2848,11 @@ msgstr ""
 msgid "You must fill in {{field}}"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:814
+#: scripts/services/EditUriBuiltins.js:828
 msgid "You must select or fill in the AuthURI"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:856
+#: scripts/services/EditUriBuiltins.js:870
 msgid "You must select or fill in the server"
 msgstr ""
 
@@ -2844,7 +2892,7 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
-#: index.html:244
+#: index.html:245
 msgid "e-notariado"
 msgstr ""
 
@@ -2857,13 +2905,14 @@ msgid "is using the following third party libraries:"
 msgstr ""
 
 #: templates/commandline.html:49
+#: templates/restore-enotariado.html:53
 #: templates/restoredirect.html:95
 #: templates/waitarea.html:15
 msgid "resume now"
 msgstr ""
 
-#: scripts/services/EditUriBuiltins.js:749
-#: scripts/services/EditUriBuiltins.js:760
+#: scripts/services/EditUriBuiltins.js:763
+#: scripts/services/EditUriBuiltins.js:774
 msgid "unless you are explicitly specifying --group-id"
 msgstr ""
 
@@ -2876,7 +2925,7 @@ msgid "{{files}} files ({{size}}) to go {{speed_txt}}"
 msgstr ""
 
 #: templates/home.html:71
-#: templates/restorewizard.html:28
+#: templates/restorewizard.html:34
 msgid "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Version"
 msgid_plural "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Versions"
 msgstr[0] ""
