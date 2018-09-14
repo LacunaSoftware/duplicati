@@ -72,7 +72,7 @@ backupApp.config(['$routeProvider',
                 templateUrl: 'templates/import.html'
             }).
             when('/restore-enotariado', {
-                templateUrl: 'templates/restore-enotariado.html'
+                templateUrl: 'templates/restoredirect.html'
             }).
             when('/localdb/:backupid', {
                 templateUrl: 'templates/localdatabase.html'

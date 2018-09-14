@@ -1,6 +1,6 @@
 <div class="restore restore-direct" ng-controller="RestoreDirectController">
     <form id="restore" class="styled">
-        <div ng-show="!connecting">
+        <div>
             <div class="steps">
                 <div class="step step1" ng-class="{active: CurrentStep == 0}" ng-click="CurrentStep = 0">
                     <span>1</span>
@@ -18,47 +18,17 @@
             <!-- .steps -->
 
             <ol class="steps-legend">
-                <li ng-class="{active: CurrentStep == 0}" class="step1" ng-click="CurrentStep = 0" translate>Backup location</li>
-                <li ng-class="{active: CurrentStep == 1}" class="step2" ng-click="CurrentStep = 1" translate>Encryption</li>
-                <li class="step3 not-clickable" translate>Select files</li>
-                <li class="step4 not-clickable" translate>Restore options</li>
+                <li ng-class="{active: CurrentStep == 0}" class="step1" ng-click="CurrentStep = 0" translate>Encryption</li>
+                <li ng-class="{active: CurrentStep == 1}" class="step2" ng-click="CurrentStep = 1" translate>Progress</li>
             </ol>
             <!-- .steps-legend -->
 
             <div class="steps-boxes">
                 <div class="step step1" ng-class="{active: CurrentStep == 0}">
-                    <div class="headerthreedotmenu">
-                        <h2 translate>Backup location</h2>
-
-                        <div class="contextmenu_container">
-                            <a href title="{{'Menu' | translate}}"><img src="img/three_dots.png" id="threedotmenubutton_add_destination" class="threedotmenubutton"/></a>
-
-                            <div class="contextmenu" id="threedotmenu_add_destination">
-                                <ul>
-                                    <li>
-                                        <a href ng-click="importUrl()" translate>Import Destination URL</a>
-                                    </li>
-                                    <li>
-                                        <a href ng-click="copyUrlToClipboard()" translate>Copy Destination URL to Clipboard</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <backup-edit-uri uri="TargetURL" set-builduri-fn="setBuilduriFn(builduriFn)"></backup-edit-uri>
-
-                    <div class="buttons">
-                        <input class="submit next" type="button" id="nextStep1" ng-click="nextPage()" value="{{'Next' | translate}} &gt;" />
-                    </div>
-                </div>
-                <!-- .step1 -->
-
-                <div class="step step2" ng-class="{active: CurrentStep == 1}">
                     <h2 translate>Encryption</h2>
                     <div class="input password">
                         <label for="password" translate>Passphrase</label>
-                        <input type="password" id="password" name="password" ng-model="EncryptionPassphrase" placeholder="{{'Enter backup passphrase, if any' | translate}}" />
+                        <input type="password" id="password" name="password" ng-model="EncryptionPassphrase" placeholder="{{ 'Enter backup passphrase' | translate}}" />
                     </div>
 
                     <div class="expandable">
@@ -78,22 +48,32 @@
 
                     <div class="buttons" ng-hide="connecting">
                         <input class="submit" type="button" id="connect" ng-click="doConnect()" value="{{'Connect' | translate}}" />
-                        <input class="submit prev" type="button" id="prevStep2" ng-click="prevPage()" value="&lt; {{'Previous' | translate}}" />
                     </div>
-                    <div ng-show="connecting">
-                        {{ConnectionProgress}}
+                </div>
+                <!-- .step2 -->
+                <div class="step step2" ng-class="{active: CurrentStep == 1}">
+                    <h2 translate>Progress</h2>
+                    <div>
+                        <p ng-repeat="line in ConnectionProgress track by $index">{{line}}</p>
+                        <div ng-show="serverstate.programState == 'Paused'">
+                            {{'Server is currently paused,' | translate}} <a style="cursor: pointer" ng-click="ServerStatus.resume()" translate>resume now</a>
+                        </div>
+                    </div>
+                    <div ng-show="backups.length > 0" class="input mixed multiple">
+                        <label for="backups" translate>Select backup: </label>
+                        <select id="backups" name="backups" ng-model="selectedBackup">
+                            <option ng-repeat="backup in backups track by $index" value="{{backup}}">{{backup.BackupName}}</option>
+                        </select>
+        
+                        <div class="buttons">
+                            <a href="#" id="cancel" class="submit" translate>Cancel</a>
+                            <input type="button" id="save" class="submit" value="{{'Restore' | translate}}" ng-show="selectedBackup" ng-click="restore()" />
+                        </div>
                     </div>
                 </div>
                 <!-- .step2 -->
             </div>
             <!-- .steps-boxes -->
-        </div>
-        
-        <div ng-show="connecting == true &amp;&amp; taskid == null">
-            {{ConnectionProgress}}
-            <div ng-show="serverstate.programState == 'Paused'">
-                {{'Server is currently paused,' | translate}} <a style="cursor: pointer" ng-click="ServerStatus.resume()" translate>resume now</a>
-            </div>
         </div>
     </form>
 </div>
