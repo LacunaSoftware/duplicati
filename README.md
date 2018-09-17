@@ -5,6 +5,7 @@
 - On Visual Studio, set the Solution Configurations to build for Release and build the solution.
 - Make sure you have 7-Zip installed on `C:\Program Files\7-Zip`, if it is in another directory, edit the line 14 of the file `<repository folder>/Duplicati/Installer/Windows/build-msi.bat` with the correct directory.
 - Copy the `<repository folder>/Duplicati/Server/webroot` folder into `<repository folder>/Duplicati/GUI/Duplicati.GUI.TrayIcon/bin/Release`
+- Temporary fix: [duplicati#3384](https://github.com/duplicati/duplicati/issues/3384) - Copy the files `AlphaVSS.*.dll` from `<repository folder>/Duplicati/Library/Snapshot/bin/Release/` to `<repository folder>/Duplicati/GUI/Duplicati.GUI.TrayIcon/bin/Release/alphavss`
 - Open the directory `<repository folder>/Duplicati/GUI/Duplicati.GUI.TrayIcon/bin/Release`
 - Compress everything into a `.zip` file.
 - Open the  [Developer Command Prompt for Visual Studio](https://docs.microsoft.com/en-us/dotnet/framework/tools/developer-command-prompt-for-vs)
