@@ -3,17 +3,17 @@
 	<Fragment>
 
     <DirectoryRef Id="ProgramMenuFolder">
-      <Component Id="DuplicatiProgramMenuShortcutComponent" Guid="1D03AB64-E310-4974-835E-E9E8CFB18BBC">
-        <Shortcut Id="DuplicatiProgramMenuShortcut"
-                  Name="Duplicati 2"
+      <Component Id="ENBProgramMenuShortcutComponent" Guid="1D03AB64-E310-4974-835E-E9E8CFB18BBC">
+        <Shortcut Id="ENBProgramMenuShortcut"
+                  Name="Backup e-Notariado"
                   WorkingDirectory="INSTALLLOCATION"
-                  Description="Launch Duplicati"
+                  Description="Iniciar Backup e-Notariado"
                   Directory="ProgramMenuFolder"
                   Icon="DuplicatiIcon.exe"
                   IconIndex="0"
                   Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe"
                   />
-        <RegistryKey Root="HKCU" Key="Software\DuplicatiTeam\Duplicati\ProgramMenuShortcut">
+        <RegistryKey Root="HKCU" Key="Software\LacunaSoftware\ENotariadoBackup\ProgramMenuShortcut">
           <RegistryValue
                   Value="Installed"
                   Type="string"
@@ -23,17 +23,17 @@
     </DirectoryRef>
 
     <DirectoryRef Id="DesktopFolder">
-      <Component Id="DuplicatiDesktopShortcutComponent" Guid="7BF060B8-389F-4a95-931C-5D551E55902A">
-        <Shortcut Id="DuplicatiDesktopComponent"
-                  Name="Duplicati 2"
+      <Component Id="ENBDesktopShortcutComponent" Guid="7BF060B8-389F-4a95-931C-5D551E55902A">
+        <Shortcut Id="ENBDesktopComponent"
+                  Name="Backup e-Notariado"
                   WorkingDirectory="INSTALLLOCATION"
-                  Description="Launch Duplicati"
+                  Description="Iniciar Backup e-Notariado"
                   Directory="DesktopFolder"
                   Icon="DuplicatiIcon.exe"
                   IconIndex="0"
                   Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe"
                 />
-        <RegistryKey Root="HKCU" Key="Software\DuplicatiTeam\Duplicati\DesktopFolderShortcut">
+        <RegistryKey Root="HKCU" Key="Software\LacunaSoftware\ENotariadoBackup\DesktopFolderShortcut">
           <RegistryValue
                   Value="Installed"
                   Type="string"
@@ -45,17 +45,17 @@
     <DirectoryRef Id="ProgramMenuFolder">
       <Directory Id="StartupFolder">
         <Component Id="StartupMenuItem" Guid="A85B1D4E-26EF-4d6a-8C1F-279EAABCE8DE">
-          <Shortcut Id="DuplicatiStartupComponent"
-                    Name="Duplicati 2"
-                    WorkingDirectory="INSTALLLOCATION"
-                    Description="Launch Duplicati"
+          <Shortcut Id="ENBStartupComponent"
+                  Name="Backup e-Notariado"
+                  WorkingDirectory="INSTALLLOCATION"
+                  Description="Iniciar Backup e-Notariado"
                     Directory="StartupFolder"
                     Icon="DuplicatiIcon.exe"
                     IconIndex="0"
                     Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe"
                 />
           
-          <RegistryKey Root="HKCU" Key="Software\DuplicatiTeam\Duplicati\StartupShortcut">
+          <RegistryKey Root="HKCU" Key="Software\LacunaSoftware\ENotariadoBackup\StartupShortcut">
             <RegistryValue
                     Value="Installed"
                     Type="string"
