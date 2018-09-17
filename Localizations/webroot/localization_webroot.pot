@@ -33,8 +33,8 @@ msgstr ""
 msgid "AWS IAM Policy"
 msgstr ""
 
-#: index.html:216
-#: index.html:232
+#: index.html:215
+#: index.html:231
 msgid "About"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Add advanced option"
 msgstr ""
 
-#: index.html:204
+#: index.html:203
 msgid "Add backup"
 msgstr ""
 
@@ -103,10 +103,8 @@ msgstr ""
 msgid "Adjust path name?"
 msgstr ""
 
-#: templates/restore-enotariado.html:30
-#: templates/restore-enotariado.html:38
-#: templates/restoredirect.html:66
-#: templates/restoredirect.html:74
+#: templates/restoredirect.html:36
+#: templates/restoredirect.html:44
 msgid "Advanced Options"
 msgstr ""
 
@@ -126,7 +124,7 @@ msgstr ""
 msgid "All Microsoft SQL Databases"
 msgstr ""
 
-#: templates/settings.html:153
+#: templates/settings.html:146
 msgid "All usage reports are sent anonymously and do not contain any personal information. They contain information about hardware and operating system, the type of backend, backup duration, overall size of source data and similar data. They do not contain paths, filenames, usernames, passwords or similar sensitive information."
 msgstr ""
 
@@ -156,7 +154,7 @@ msgid ""
 " Do you wish to use the existing database?"
 msgstr ""
 
-#: templates/settings.html:141
+#: templates/settings.html:134
 msgid "Anonymous usage reports"
 msgstr ""
 
@@ -164,7 +162,7 @@ msgstr ""
 msgid "Application Code"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:91
+#: scripts/controllers/SystemSettingsController.js:93
 msgid "Application verified!"
 msgstr ""
 
@@ -242,8 +240,6 @@ msgid "Backup destination"
 msgstr ""
 
 #: templates/restore.html:21
-#: templates/restoredirect.html:21
-#: templates/restoredirect.html:31
 msgid "Backup location"
 msgstr ""
 
@@ -255,7 +251,7 @@ msgstr ""
 msgid "Backup:"
 msgstr ""
 
-#: templates/settings.html:118
+#: templates/settings.html:111
 msgid "Beta"
 msgstr ""
 
@@ -324,7 +320,7 @@ msgstr ""
 msgid "Cache Files"
 msgstr ""
 
-#: templates/settings.html:128
+#: templates/settings.html:121
 msgid "Canary"
 msgstr ""
 
@@ -339,7 +335,6 @@ msgstr ""
 #: scripts/controllers/EditBackupController.js:75
 #: scripts/controllers/LocalDatabaseController.js:72
 #: scripts/controllers/LocalDatabaseController.js:88
-#: scripts/controllers/RestoreDirectController.js:24
 #: scripts/controllers/StateController.js:103
 #: scripts/controllers/StateController.js:112
 #: scripts/services/CaptchaService.js:22
@@ -350,8 +345,8 @@ msgstr ""
 #: scripts/services/EditUriBuiltins.js:894
 #: templates/delete.html:52
 #: templates/export.html:26
-#: templates/restore-enotariado.html:63
-#: templates/settings.html:183
+#: templates/restoredirect.html:69
+#: templates/settings.html:176
 #: templates/waitarea.html:19
 msgid "Cancel"
 msgstr ""
@@ -399,8 +394,8 @@ msgstr ""
 msgid "Click the AuthID link to create an AuthID"
 msgstr ""
 
-#: index.html:141
-#: index.html:192
+#: index.html:140
+#: index.html:191
 msgid "Click to set throttle options"
 msgstr ""
 
@@ -451,16 +446,15 @@ msgstr ""
 msgid "Confirmation required"
 msgstr ""
 
-#: templates/restore-enotariado.html:44
-#: templates/restoredirect.html:80
+#: templates/restoredirect.html:50
 msgid "Connect"
 msgstr ""
 
-#: index.html:292
+#: index.html:284
 msgid "Connect now"
 msgstr ""
 
-#: index.html:288
+#: index.html:280
 msgid "Connecting to server ..."
 msgstr ""
 
@@ -468,11 +462,11 @@ msgstr ""
 msgid "Connecting to task ...."
 msgstr ""
 
-#: index.html:293
+#: index.html:285
 msgid "Connecting..."
 msgstr ""
 
-#: index.html:284
+#: index.html:276
 msgid "Connection lost"
 msgstr ""
 
@@ -481,7 +475,7 @@ msgstr ""
 msgid "Connection worked!"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:118
+#: scripts/controllers/SystemSettingsController.js:121
 msgid "Contacting e-Notariado ..."
 msgstr ""
 
@@ -502,7 +496,7 @@ msgstr ""
 msgid "Continue without encryption"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:107
+#: scripts/controllers/SystemSettingsController.js:110
 msgid "Copied {0} to clipboard"
 msgstr ""
 
@@ -515,7 +509,6 @@ msgid "Copy"
 msgstr ""
 
 #: templates/addoredit.html:99
-#: templates/restoredirect.html:42
 msgid "Copy Destination URL to Clipboard"
 msgstr ""
 
@@ -531,7 +524,7 @@ msgstr ""
 msgid "Core options"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:112
+#: scripts/controllers/SystemSettingsController.js:115
 msgid "Could not copy {0} to clipboard"
 msgstr ""
 
@@ -539,7 +532,7 @@ msgstr ""
 msgid "Counting ({{files}} files found, {{size}})"
 msgstr ""
 
-#: templates/settings.html:148
+#: templates/settings.html:141
 msgid "Crashes only"
 msgstr ""
 
@@ -634,7 +627,7 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: templates/settings.html:105
+#: templates/settings.html:98
 msgid "Default ({{channelname}})"
 msgstr ""
 
@@ -642,7 +635,7 @@ msgstr ""
 msgid "Default excludes"
 msgstr ""
 
-#: templates/settings.html:168
+#: templates/settings.html:161
 msgid "Default options"
 msgstr ""
 
@@ -696,10 +689,6 @@ msgstr ""
 msgid "Destination path"
 msgstr ""
 
-#: templates/restore.html:141
-msgid "Did we help save your files? If so, please consider supporting Duplicati with a donation. We suggest {{smallamount}} for private use and {{largeamount}} for commercial use."
-msgstr ""
-
 #: templates/log.html:31
 msgid "Disabled"
 msgstr ""
@@ -723,10 +712,6 @@ msgstr ""
 
 #: templates/backends/openstack.html:26
 msgid "Domain Name"
-msgstr ""
-
-#: index.html:240
-msgid "Donate"
 msgstr ""
 
 #: templates/export.html:45
@@ -753,7 +738,7 @@ msgstr ""
 msgid "Duplicate option {{opt}}"
 msgstr ""
 
-#: index.html:248
+#: index.html:240
 msgid "Duplicati forum"
 msgstr ""
 
@@ -771,13 +756,13 @@ msgstr ""
 
 #: templates/addoredit.html:170
 #: templates/edituri.html:39
-#: templates/settings.html:172
+#: templates/settings.html:165
 msgid "Edit as list"
 msgstr ""
 
 #: templates/addoredit.html:173
 #: templates/edituri.html:42
-#: templates/settings.html:178
+#: templates/settings.html:171
 msgid "Edit as text"
 msgstr ""
 
@@ -786,11 +771,9 @@ msgid "Encrypt file"
 msgstr ""
 
 #: templates/addoredit.html:43
-#: templates/restore-enotariado.html:15
-#: templates/restore-enotariado.html:22
 #: templates/restore.html:22
-#: templates/restoredirect.html:22
-#: templates/restoredirect.html:58
+#: templates/restoredirect.html:21
+#: templates/restoredirect.html:28
 msgid "Encryption"
 msgstr ""
 
@@ -802,12 +785,11 @@ msgstr ""
 msgid "Encryption modules:"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:87
+#: scripts/controllers/SystemSettingsController.js:89
 msgid "Enrolling ..."
 msgstr ""
 
 #: scripts/controllers/EditBackupController.js:75
-#: scripts/controllers/RestoreDirectController.js:24
 msgid "Enter URL"
 msgstr ""
 
@@ -823,12 +805,8 @@ msgstr ""
 msgid "Enter account name"
 msgstr ""
 
-#: templates/restore-enotariado.html:25
+#: templates/restoredirect.html:31
 msgid "Enter backup passphrase"
-msgstr ""
-
-#: templates/restoredirect.html:61
-msgid "Enter backup passphrase, if any"
 msgstr ""
 
 #: templates/addwizard.html:10
@@ -884,11 +862,8 @@ msgstr ""
 #: scripts/controllers/RestoreController.js:411
 #: scripts/controllers/RestoreController.js:421
 #: scripts/controllers/RestoreController.js:88
-#: scripts/controllers/RestoreDirectController.js:112
-#: scripts/controllers/RestoreDirectController.js:75
-#: scripts/controllers/RestoreENotariadoController.js:101
-#: scripts/controllers/RestoreENotariadoController.js:76
-#: scripts/controllers/SystemSettingsController.js:56
+#: scripts/controllers/RestoreDirectController.js:100
+#: scripts/controllers/RestoreDirectController.js:76
 #: scripts/directives/backupEditUri.js:143
 #: scripts/directives/backupEditUri.js:170
 #: scripts/directives/backupEditUri.js:205
@@ -909,7 +884,7 @@ msgstr ""
 msgid "Error: The application is not enrolled in e-Notariado"
 msgstr ""
 
-#: templates/settings.html:147
+#: templates/settings.html:140
 msgid "Errors and crashes"
 msgstr ""
 
@@ -953,7 +928,7 @@ msgstr ""
 msgid "Existing file found"
 msgstr ""
 
-#: templates/settings.html:123
+#: templates/settings.html:116
 msgid "Experimental"
 msgstr ""
 
@@ -986,7 +961,7 @@ msgstr ""
 msgid "FTP (Alternative)"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:112
+#: scripts/controllers/SystemSettingsController.js:115
 msgid "Fail"
 msgstr ""
 
@@ -994,7 +969,6 @@ msgstr ""
 msgid "Failed to build temporary database: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:56
 #: scripts/directives/backupEditUri.js:143
 #: scripts/directives/backupEditUri.js:205
 #: scripts/directives/backupEditUri.js:239
@@ -1009,11 +983,9 @@ msgstr ""
 #: scripts/controllers/RestoreController.js:331
 #: scripts/controllers/RestoreController.js:421
 #: scripts/controllers/RestoreController.js:88
-#: scripts/controllers/RestoreDirectController.js:112
-#: scripts/controllers/RestoreDirectController.js:75
-#: scripts/controllers/RestoreENotariadoController.js:101
-#: scripts/controllers/RestoreENotariadoController.js:36
-#: scripts/controllers/RestoreENotariadoController.js:76
+#: scripts/controllers/RestoreDirectController.js:100
+#: scripts/controllers/RestoreDirectController.js:37
+#: scripts/controllers/RestoreDirectController.js:76
 msgid "Failed to connect: {{message}}"
 msgstr ""
 
@@ -1038,7 +1010,7 @@ msgstr ""
 msgid "Failed to restore files: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:169
+#: scripts/controllers/SystemSettingsController.js:173
 msgid "Failed to save:"
 msgstr ""
 
@@ -1063,7 +1035,7 @@ msgstr ""
 msgid "Finished!"
 msgstr ""
 
-#: scripts/controllers/AppController.js:170
+#: scripts/controllers/AppController.js:199
 msgid "First run setup"
 msgstr ""
 
@@ -1125,7 +1097,7 @@ msgstr ""
 msgid "Getting file versions ..."
 msgstr ""
 
-#: scripts/controllers/RestoreENotariadoController.js:22
+#: scripts/controllers/RestoreDirectController.js:24
 msgid "Getting list of backups stored remotely ..."
 msgstr ""
 
@@ -1148,7 +1120,7 @@ msgstr ""
 msgid "Hide hidden folders"
 msgstr ""
 
-#: index.html:201
+#: index.html:200
 #: scripts/services/AppUtils.js:62
 msgid "Home"
 msgstr ""
@@ -1219,7 +1191,7 @@ msgstr ""
 msgid "If you want to use the backup later, you can export the configuration before deleting it"
 msgstr ""
 
-#: scripts/controllers/AppController.js:171
+#: scripts/controllers/AppController.js:200
 msgid ""
 "If your machine is in a multi-user environment (i.e. the machine has more than one account), you need to set a password to prevent other users from accessing data on your account.\n"
 "Do you want to set a password now?"
@@ -1230,7 +1202,6 @@ msgid "Import"
 msgstr ""
 
 #: templates/addoredit.html:96
-#: templates/restoredirect.html:39
 msgid "Import Destination URL"
 msgstr ""
 
@@ -1278,7 +1249,7 @@ msgstr ""
 msgid "Incorrect answer, try again"
 msgstr ""
 
-#: templates/settings.html:129
+#: templates/settings.html:122
 msgid "Individual builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -1355,8 +1326,7 @@ msgstr ""
 msgid "Libraries"
 msgstr ""
 
-#: scripts/controllers/RestoreDirectController.js:65
-#: scripts/controllers/RestoreENotariadoController.js:66
+#: scripts/controllers/RestoreDirectController.js:67
 msgid "Listing backup dates ..."
 msgstr ""
 
@@ -1440,7 +1410,7 @@ msgstr ""
 msgid "Log data from the server"
 msgstr ""
 
-#: index.html:219
+#: index.html:218
 msgid "Log out"
 msgstr ""
 
@@ -1469,13 +1439,12 @@ msgstr ""
 msgid "Max upload speed"
 msgstr ""
 
-#: index.html:137
+#: index.html:136
 #: templates/addoredit.html:123
 #: templates/addoredit.html:165
 #: templates/addoredit.html:378
 #: templates/addoredit.html:91
 #: templates/edituri.html:34
-#: templates/restoredirect.html:34
 msgid "Menu"
 msgstr ""
 
@@ -1569,7 +1538,6 @@ msgstr ""
 #: templates/addoredit.html:292
 #: templates/addoredit.html:78
 #: templates/addwizard.html:28
-#: templates/restoredirect.html:52
 #: templates/restorewizard.html:47
 msgid "Next"
 msgstr ""
@@ -1578,11 +1546,11 @@ msgstr ""
 msgid "Next scheduled run:"
 msgstr ""
 
-#: index.html:176
+#: index.html:175
 msgid "Next scheduled task:"
 msgstr ""
 
-#: index.html:173
+#: index.html:172
 msgid "Next task:"
 msgstr ""
 
@@ -1637,11 +1605,11 @@ msgstr ""
 msgid "No passphrase entered"
 msgstr ""
 
-#: index.html:178
+#: index.html:177
 msgid "No scheduled tasks"
 msgstr ""
 
-#: scripts/controllers/AppController.js:172
+#: scripts/controllers/AppController.js:201
 msgid "No, my machine has only a single account"
 msgstr ""
 
@@ -1649,8 +1617,12 @@ msgstr ""
 msgid "Non-matching passphrase"
 msgstr ""
 
-#: templates/settings.html:149
+#: templates/settings.html:142
 msgid "None / disabled"
+msgstr ""
+
+#: templates/throttle.html:22
+msgid "Note that speeds are entered in bytes, and line speeds are typically reported in bits. Use a factor of 8 to convert, such that an 8 mbit/s line is equivalent to 1 MByte/s."
 msgstr ""
 
 #: templates/addoredit.html:324
@@ -1659,17 +1631,17 @@ msgstr ""
 
 #: scripts/controllers/AppController.js:44
 #: scripts/controllers/AppController.js:59
+#: scripts/controllers/AppController.js:81
+#: scripts/controllers/AppController.js:88
 #: scripts/controllers/EditBackupController.js:75
 #: scripts/controllers/EditBackupController.js:83
-#: scripts/controllers/RestoreDirectController.js:24
-#: scripts/controllers/RestoreDirectController.js:33
 #: scripts/services/CaptchaService.js:22
 #: scripts/services/DialogService.js:28
 #: scripts/services/DialogService.js:50
 #: scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125
-#: templates/restore.html:146
-#: templates/settings.html:184
+#: templates/restore.html:142
+#: templates/settings.html:177
 msgid "OK"
 msgstr ""
 
@@ -1693,11 +1665,6 @@ msgstr ""
 msgid "Operating System"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:180
-#: scripts/controllers/SystemSettingsController.js:191
-msgid "Operation failed:"
-msgstr ""
-
 #: templates/home.html:20
 msgid "Operations:"
 msgstr ""
@@ -1712,12 +1679,12 @@ msgstr ""
 
 #: templates/addoredit.html:28
 #: templates/edituri.html:51
-#: templates/settings.html:171
-#: templates/settings.html:177
+#: templates/settings.html:164
+#: templates/settings.html:170
 msgid "Options"
 msgstr ""
 
-#: templates/settings.html:169
+#: templates/settings.html:162
 msgid "Options added here are applied to all backups, but can be overridden in each individual backup"
 msgstr ""
 
@@ -1739,8 +1706,7 @@ msgstr ""
 
 #: templates/addoredit.html:54
 #: templates/export.html:21
-#: templates/restore-enotariado.html:24
-#: templates/restoredirect.html:60
+#: templates/restoredirect.html:30
 msgid "Passphrase"
 msgstr ""
 
@@ -1828,12 +1794,11 @@ msgstr ""
 #: templates/addoredit.html:243
 #: templates/addoredit.html:293
 #: templates/addoredit.html:405
-#: templates/restoredirect.html:81
 msgid "Previous"
 msgstr ""
 
-#: templates/restore-enotariado.html:16
-#: templates/restore-enotariado.html:49
+#: templates/restoredirect.html:22
+#: templates/restoredirect.html:55
 msgid "Progress"
 msgstr ""
 
@@ -1861,7 +1826,7 @@ msgstr ""
 msgid "Re-enroll application"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:118
+#: scripts/controllers/SystemSettingsController.js:121
 msgid "Re-enrolling ..."
 msgstr ""
 
@@ -1875,10 +1840,6 @@ msgstr ""
 
 #: scripts/services/ServerStatus.js:56
 msgid "Recreating database ..."
-msgstr ""
-
-#: scripts/controllers/RestoreDirectController.js:41
-msgid "Registering temporary backup ..."
 msgstr ""
 
 #: scripts/controllers/EditBackupController.js:118
@@ -1942,9 +1903,9 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: index.html:207
-#: templates/restore-enotariado.html:64
+#: index.html:206
 #: templates/restore.html:131
+#: templates/restoredirect.html:70
 msgid "Restore"
 msgstr ""
 
@@ -1979,7 +1940,6 @@ msgstr ""
 #: templates/restore.html:24
 #: templates/restore.html:39
 #: templates/restore.html:76
-#: templates/restoredirect.html:24
 msgid "Restore options"
 msgstr ""
 
@@ -1992,11 +1952,11 @@ msgstr ""
 msgid "Restoring files ..."
 msgstr ""
 
-#: index.html:210
+#: index.html:209
 msgid "Resume"
 msgstr ""
 
-#: scripts/controllers/RestoreENotariadoController.js:29
+#: scripts/controllers/RestoreDirectController.js:30
 msgid "Retrieved information about {0} backups ..."
 msgstr ""
 
@@ -2021,7 +1981,7 @@ msgstr ""
 msgid "Running commandline entry"
 msgstr ""
 
-#: index.html:165
+#: index.html:164
 msgid "Running task:"
 msgstr ""
 
@@ -2029,7 +1989,7 @@ msgstr ""
 msgid "S3 Compatible"
 msgstr ""
 
-#: templates/settings.html:106
+#: templates/settings.html:99
 msgid "Same as the base install version: {{channelname}}"
 msgstr ""
 
@@ -2084,13 +2044,12 @@ msgstr ""
 msgid "Select a log level and see messages as they happen:"
 msgstr ""
 
-#: templates/restore-enotariado.html:57
+#: templates/restoredirect.html:63
 msgid "Select backup:"
 msgstr ""
 
 #: templates/restore.html:23
 #: templates/restore.html:38
-#: templates/restoredirect.html:23
 msgid "Select files"
 msgstr ""
 
@@ -2109,8 +2068,7 @@ msgid "Server hostname or IP"
 msgstr ""
 
 #: templates/commandline.html:49
-#: templates/restore-enotariado.html:53
-#: templates/restoredirect.html:95
+#: templates/restoredirect.html:59
 #: templates/waitarea.html:15
 msgid "Server is currently paused,"
 msgstr ""
@@ -2131,7 +2089,7 @@ msgstr ""
 msgid "Server state properties"
 msgstr ""
 
-#: index.html:213
+#: index.html:212
 #: templates/settings.html:2
 msgid "Settings"
 msgstr ""
@@ -2193,7 +2151,7 @@ msgstr ""
 msgid "Source:"
 msgstr ""
 
-#: templates/settings.html:124
+#: templates/settings.html:117
 msgid "Specific builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -2235,11 +2193,11 @@ msgstr ""
 msgid "Stop running task"
 msgstr ""
 
-#: index.html:161
+#: index.html:160
 msgid "Stopping after upload:"
 msgstr ""
 
-#: index.html:166
+#: index.html:165
 msgid "Stopping task:"
 msgstr ""
 
@@ -2263,9 +2221,9 @@ msgstr ""
 msgid "Strong"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:107
-#: scripts/controllers/SystemSettingsController.js:122
-#: scripts/controllers/SystemSettingsController.js:91
+#: scripts/controllers/SystemSettingsController.js:110
+#: scripts/controllers/SystemSettingsController.js:125
+#: scripts/controllers/SystemSettingsController.js:93
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2283,7 +2241,7 @@ msgstr ""
 msgid "System Files"
 msgstr ""
 
-#: templates/settings.html:144
+#: templates/settings.html:137
 msgid "System default ({{levelname}})"
 msgstr ""
 
@@ -2357,11 +2315,19 @@ msgstr ""
 msgid "The application is correctly configured."
 msgstr ""
 
+#: scripts/controllers/AppController.js:80
+msgid "The application is not enrolled in e-Notariado. Please re-enroll"
+msgstr ""
+
+#: scripts/controllers/AppController.js:87
+msgid "The application is not verified in e-Notariado. Please verify the application and recheck the status"
+msgstr ""
+
 #: templates/settings.html:8
 msgid "The application is not verified on e-Notariado"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:122
+#: scripts/controllers/SystemSettingsController.js:125
 msgid "The application was re-enrolled successfully!"
 msgstr ""
 
@@ -2373,7 +2339,7 @@ msgstr ""
 msgid "The bucket name should start with your username, prepend automatically?"
 msgstr ""
 
-#: index.html:285
+#: index.html:277
 msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 
@@ -2430,11 +2396,7 @@ msgstr ""
 msgid "The storage class affects the availability and price for a stored file"
 msgstr ""
 
-#: scripts/controllers/RestoreENotariadoController.js:97
-msgid "The target backup contains encrypted files, please supply the passphrase"
-msgstr ""
-
-#: scripts/controllers/RestoreDirectController.js:108
+#: scripts/controllers/RestoreDirectController.js:97
 msgid "The target folder contains encrypted files, please supply the passphrase"
 msgstr ""
 
@@ -2499,7 +2461,7 @@ msgstr ""
 msgid "Trust server certificate?"
 msgstr ""
 
-#: templates/settings.html:119
+#: templates/settings.html:112
 msgid "Try out the new features that we are working on. Currently the most stable version available. Test Restore data before using this in production environments."
 msgstr ""
 
@@ -2519,7 +2481,7 @@ msgstr ""
 msgid "Until resumed"
 msgstr ""
 
-#: templates/settings.html:102
+#: templates/settings.html:95
 msgid "Update channel"
 msgstr ""
 
@@ -2535,15 +2497,15 @@ msgstr ""
 msgid "Uploading verification file ..."
 msgstr ""
 
-#: templates/settings.html:151
+#: templates/settings.html:144
 msgid "Usage reports help us improve the user experience and evaluate impact of new features. We use them to generate <external-link link=\"link\">public usage statistics</external-link>"
 msgstr ""
 
-#: templates/settings.html:139
+#: templates/settings.html:132
 msgid "Usage statistics"
 msgstr ""
 
-#: templates/settings.html:145
+#: templates/settings.html:138
 msgid "Usage statistics, warnings, errors, and crashes"
 msgstr ""
 
@@ -2611,7 +2573,7 @@ msgstr ""
 msgid "Verifying answer"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:87
+#: scripts/controllers/SystemSettingsController.js:89
 msgid "Verifying application ..."
 msgstr ""
 
@@ -2661,12 +2623,8 @@ msgstr ""
 msgid "Waiting for upload to finish ..."
 msgstr ""
 
-#: templates/settings.html:146
+#: templates/settings.html:139
 msgid "Warnings, errors and crashes"
-msgstr ""
-
-#: templates/restore.html:142
-msgid "We accept donations via different services, such as OpenCollective, PayPal, BountySource and various crypto currencies."
 msgstr ""
 
 #: templates/addoredit.html:50
@@ -2703,7 +2661,7 @@ msgstr ""
 msgid "Years"
 msgstr ""
 
-#: scripts/controllers/AppController.js:172
+#: scripts/controllers/AppController.js:201
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:133
 #: scripts/controllers/EditBackupController.js:143
@@ -2892,7 +2850,12 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
-#: index.html:245
+#: scripts/controllers/AppController.js:79
+#: scripts/controllers/AppController.js:86
+msgid "e-Notariado error"
+msgstr ""
+
+#: index.html:237
 msgid "e-notariado"
 msgstr ""
 
@@ -2905,8 +2868,7 @@ msgid "is using the following third party libraries:"
 msgstr ""
 
 #: templates/commandline.html:49
-#: templates/restore-enotariado.html:53
-#: templates/restoredirect.html:95
+#: templates/restoredirect.html:59
 #: templates/waitarea.html:15
 msgid "resume now"
 msgstr ""

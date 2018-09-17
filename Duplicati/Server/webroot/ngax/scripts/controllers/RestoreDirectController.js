@@ -27,7 +27,6 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
             function(resp) {
                 
                 $scope.backups = resp.data;
-                console.log(resp);
                 $scope.ConnectionProgress.push(AppUtils.format(gettextCatalog.getString('Retrieved information about {0} backups ...'), resp.data.length));
             }, function(resp) {
                 var message = resp.statusText;
