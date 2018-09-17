@@ -51,10 +51,9 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     function handleError(data) {
         if (dlg != null)
             dlg.dismiss();
-
-        var message = data.statusText;
-        dlg = DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: ') + message);
-        dlg.ondismiss = getSettings
+        
+        AppUtils.connectionError(data);
+        getSettings();
     }
 
     function getSettings() {
