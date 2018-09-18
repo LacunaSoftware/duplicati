@@ -252,6 +252,10 @@ msgstr "Voltar"
 msgid "Backend modules:"
 msgstr "Módulos:"
 
+#: templates/home.html:89
+msgid "Backend progress:"
+msgstr "Progresso do backend:"
+
 #: scripts/services/ServerStatus.js:44
 msgid "Backup Complete!"
 msgstr "Backup concluído!"
@@ -431,7 +435,7 @@ msgstr "Compactar agora"
 
 #: scripts/services/ServerStatus.js:41 scripts/services/ServerStatus.js:64
 msgid "Compacting remote data ..."
-msgstr "Compactando dados remotos"
+msgstr "Compactando dados remotos ..."
 
 #: scripts/services/ServerStatus.js:38
 msgid "Completing backup ..."
@@ -485,7 +489,7 @@ msgstr "Conectando ao servidor ..."
 
 #: templates/commandline.html:51
 msgid "Connecting to task ...."
-msgstr "Conectando-se à tarefa"
+msgstr "Conectando-se à tarefa ..."
 
 #: index.html:285
 msgid "Connecting..."
@@ -592,11 +596,11 @@ msgstr "Criando backup temporario ..."
 msgid "Creating user..."
 msgstr "Criando usuário..."
 
-#: templates/home.html:75
+#: templates/home.html:76
 msgid "Current action:"
 msgstr "Ação atual:"
 
-#: templates/home.html:85
+#: templates/home.html:86
 msgid "Current file:"
 msgstr "Arquivo atual:"
 
@@ -638,7 +642,7 @@ msgstr "Classe de armazenamento personalizada ({{class}})"
 
 #: templates/home.html:36
 msgid "Database ..."
-msgstr "Banco de dados"
+msgstr "Banco de dados ..."
 
 #: scripts/services/AppUtils.js:91 templates/addoredit.html:347
 msgid "Days"
@@ -1040,7 +1044,7 @@ msgstr "Falha ao importar:"
 
 #: scripts/controllers/EditBackupController.js:668
 msgid "Failed to read backup defaults:"
-msgstr "Falha ao ler os padrões do backup"
+msgstr "Falha ao ler os padrões do backup:"
 
 #: scripts/controllers/RestoreController.js:411
 msgid "Failed to restore files: {{message}}"
@@ -1869,7 +1873,7 @@ msgstr "Anterior"
 msgid "Progress"
 msgstr "Progresso"
 
-#: templates/home.html:77
+#: templates/home.html:78
 msgid "Progress:"
 msgstr "Progresso:"
 
@@ -1907,7 +1911,7 @@ msgstr "Recriar (excluir e reparar)"
 
 #: scripts/services/ServerStatus.js:56
 msgid "Recreating database ..."
-msgstr "Recriar banco de dados"
+msgstr "Recriando banco de dados ..."
 
 #: scripts/controllers/EditBackupController.js:118
 msgid "Relative paths not allowed"
@@ -2636,10 +2640,6 @@ msgstr "Atualização falhou:"
 msgid "Updating with existing database"
 msgstr "Atualizando com o banco de dados existente"
 
-#: templates/home.html:87
-msgid "Upload of compressed files to storage:"
-msgstr "Upload dos arquivos compressos:"
-
 #: scripts/services/ServerStatus.js:42
 msgid "Uploading verification file ..."
 msgstr "Enviando arquivo de verificação ..."
@@ -2940,7 +2940,7 @@ msgstr "Você deve digitar uma senha para usar a API v3"
 
 #: scripts/controllers/EditBackupController.js:276
 msgid "You must enter a positive number of backups to keep"
-msgstr "Você deve inserir um número positivo de backups para manter."
+msgstr "Você deve inserir um número positivo de backups para manter"
 
 #: scripts/services/EditUriBuiltins.js:838
 msgid "You must enter a tenant (aka project) name to use v3 API"
@@ -3091,6 +3091,9 @@ msgstr "{{number}} Minutos"
 #: templates/home.html:51
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#~ msgid "Upload of compressed files to storage:"
+#~ msgstr "Upload dos arquivos compressos:"
 
 #~ msgid ""
 #~ "Did we help save your files? If so, please consider supporting Duplicati "

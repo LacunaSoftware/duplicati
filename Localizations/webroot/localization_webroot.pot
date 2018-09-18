@@ -231,6 +231,10 @@ msgstr ""
 msgid "Backend modules:"
 msgstr ""
 
+#: templates/home.html:89
+msgid "Backend progress:"
+msgstr ""
+
 #: scripts/services/ServerStatus.js:44
 msgid "Backup Complete!"
 msgstr ""
@@ -568,11 +572,11 @@ msgstr ""
 msgid "Creating user..."
 msgstr ""
 
-#: templates/home.html:75
+#: templates/home.html:76
 msgid "Current action:"
 msgstr ""
 
-#: templates/home.html:85
+#: templates/home.html:86
 msgid "Current file:"
 msgstr ""
 
@@ -1802,7 +1806,7 @@ msgstr ""
 msgid "Progress"
 msgstr ""
 
-#: templates/home.html:77
+#: templates/home.html:78
 msgid "Progress:"
 msgstr ""
 
@@ -2491,10 +2495,6 @@ msgstr ""
 
 #: scripts/controllers/LocalDatabaseController.js:88
 msgid "Updating with existing database"
-msgstr ""
-
-#: templates/home.html:87
-msgid "Upload of compressed files to storage:"
 msgstr ""
 
 #: scripts/services/ServerStatus.js:42

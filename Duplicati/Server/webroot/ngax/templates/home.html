@@ -71,20 +71,22 @@
                             <dd translate translate-n="parseInt(item.Backup.Metadata.BackupListCount)" translate-plural="{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Versions">{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Version</dd>
                         </div>
                     </div>
-                    <div ng-hide="item.Backup.ID != state.activeTask.Item2 || state.lastPgEvent.CurrentFilename == null">
-                        <dt translate>Current action:</dt>
-                        <dd>{{state.lastPgEvent.Phase}}</dd>
-                        <dt translate>Progress:</dt>
-                        <dd>
-                            <div class="progress-small-bg">
-                                <div class="progress-small" style="width: {{(1 - (state.lastPgEvent.CurrentFilesize - state.lastPgEvent.CurrentFileoffset) / state.lastPgEvent.CurrentFilesize) * 200}}px">
-                                    {{(1 - (state.lastPgEvent.CurrentFilesize - state.lastPgEvent.CurrentFileoffset) / state.lastPgEvent.CurrentFilesize) * 100 | number:2}}%
+                    <div ng-hide="item.Backup.ID != state.activeTask.Item2">
+                        <div ng-hide="state.lastPgEvent.CurrentFilename == null">
+                            <dt translate>Current action:</dt>
+                            <dd>{{state.lastPgEvent.Phase | translate}}</dd>
+                            <dt translate>Progress:</dt>
+                            <dd>
+                                <div class="progress-small-bg">
+                                    <div class="progress-small" style="width: {{(1 - (state.lastPgEvent.CurrentFilesize - state.lastPgEvent.CurrentFileoffset) / state.lastPgEvent.CurrentFilesize) * 200}}px">
+                                        {{(1 - (state.lastPgEvent.CurrentFilesize - state.lastPgEvent.CurrentFileoffset) / state.lastPgEvent.CurrentFilesize) * 100 | number:2}}%
+                                    </div>
                                 </div>
-                            </div>
-                        </dd>
-                        <dt translate>Current file:</dt>
-                        <dd>{{state.lastPgEvent.CurrentFilename}}</dd>
-                        <dt translate>Upload of compressed files to storage:</dt>
+                            </dd>
+                            <dt translate>Current file:</dt>
+                            <dd>{{state.lastPgEvent.CurrentFilename}}</dd>
+                        </div>
+                        <dt translate>Backend progress:</dt>
                         <dd>
                             <div class="progress-small-bg">
                                 <div class="progress-small" style="width: {{BackendProgressPercentage() * 200}}px">

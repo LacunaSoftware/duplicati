@@ -78,8 +78,16 @@ backupApp.controller('HomeController', function ($scope, $location, ServerStatus
 
     $scope.BackendProgressPercentage = function() {
         if ($scope.state && $scope.state.lastPgEvent && $scope.state.lastPgEvent.BackendFileProgress && $scope.state.lastPgEvent.BackendFileSize) {
-            var difference = Math.abs($scope.state.lastPgEvent.BackendFileSize - $scope.state.lastPgEvent.BackendFileProgress);
-            return (difference / Math.min($scope.state.lastPgEvent.BackendFileSize, $scope.state.lastPgEvent.BackendFileProgress));
+            var fileSize = $scope.state.lastPgEvent.BackendFileSize;
+            var fileProgress = $scope.state.lastPgEvent.BackendFileProgress;
+            if (fileSize > fileProgress) {
+                // download of dblock files to check remote data
+                return (fileProgress / fileSize);
+            }
+            // upload of dblock files
+            // for some reason fileProgress is always larger
+            // than fileSize
+            return ((fileProgress - fileSize) / (fileSize));
         }
         return 0;
     }
