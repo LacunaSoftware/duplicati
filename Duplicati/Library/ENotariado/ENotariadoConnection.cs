@@ -27,7 +27,7 @@ namespace Duplicati.Library.ENotariado
 
         private static bool HasValidAuthToken
         {
-            get { return !string.IsNullOrWhiteSpace(SessionToken) && DateTime.Now > SessionTokenExpiration; }
+            get { return !(string.IsNullOrWhiteSpace(SessionToken) || SessionTokenExpiration == null || SessionTokenExpiration < DateTime.Now); }
         }
 
         private static bool HasValidSASToken
