@@ -2493,6 +2493,10 @@ msgstr ""
 msgid "Updating with existing database"
 msgstr ""
 
+#: templates/home.html:87
+msgid "Upload of compressed files to storage:"
+msgstr ""
+
 #: scripts/services/ServerStatus.js:42
 msgid "Uploading verification file ..."
 msgstr ""

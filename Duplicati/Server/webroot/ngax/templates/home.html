@@ -84,6 +84,14 @@
                         </dd>
                         <dt translate>Current file:</dt>
                         <dd>{{state.lastPgEvent.CurrentFilename}}</dd>
+                        <dt translate>Upload of compressed files to storage:</dt>
+                        <dd>
+                            <div class="progress-small-bg">
+                                <div class="progress-small" style="width: {{BackendProgressPercentage() * 200}}px">
+                                    {{BackendProgressPercentage() * 100 | number:2}}%
+                                </div>
+                            </div>
+                        </dd>
                     </div>
                 </dl>
             </div>

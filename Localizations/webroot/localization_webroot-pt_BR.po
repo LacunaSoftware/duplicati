@@ -2636,6 +2636,10 @@ msgstr "Atualização falhou:"
 msgid "Updating with existing database"
 msgstr "Atualizando com o banco de dados existente"
 
+#: templates/home.html:87
+msgid "Upload of compressed files to storage:"
+msgstr "Upload dos arquivos compressos:"
+
 #: scripts/services/ServerStatus.js:42
 msgid "Uploading verification file ..."
 msgstr "Enviando arquivo de verificação ..."

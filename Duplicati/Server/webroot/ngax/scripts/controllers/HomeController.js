@@ -75,4 +75,12 @@ backupApp.controller('HomeController', function ($scope, $location, ServerStatus
         else
             return duration;
     };
+
+    $scope.BackendProgressPercentage = function() {
+        if ($scope.state && $scope.state.lastPgEvent && $scope.state.lastPgEvent.BackendFileProgress && $scope.state.lastPgEvent.BackendFileSize) {
+            var difference = Math.abs($scope.state.lastPgEvent.BackendFileSize - $scope.state.lastPgEvent.BackendFileProgress);
+            return (difference / Math.min($scope.state.lastPgEvent.BackendFileSize, $scope.state.lastPgEvent.BackendFileProgress));
+        }
+        return 0;
+    }
 });
