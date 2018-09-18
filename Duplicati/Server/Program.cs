@@ -814,6 +814,7 @@ namespace Duplicati.Server
         public static async Task<ENotariadoStatus> ResetENotariado()
         {
             ENotariadoApplicationId = Guid.Empty;
+            ENotariadoSubscriptionId = Guid.Empty;
             ENotariadoIsEnrolled = false;
             ENotariadoIsVerified = false;
             return await InitializeENotariado();

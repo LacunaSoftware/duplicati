@@ -27,18 +27,29 @@ namespace Duplicati.Library.ENotariado
 
         private static bool HasValidAuthToken
         {
-            get { return !(string.IsNullOrWhiteSpace(SessionToken) || SessionTokenExpiration == null || SessionTokenExpiration < DateTime.Now); }
+            get { return !(string.IsNullOrWhiteSpace(SessionToken) || SessionTokenExpiration < DateTime.Now); }
         }
 
         private static bool HasValidSASToken
         {
-            get { return !(string.IsNullOrWhiteSpace(SASToken) || SASTokenExpiration == null || SASTokenExpiration < DateTime.Now); }
+            get { return !(string.IsNullOrWhiteSpace(SASToken) || SASTokenExpiration < DateTime.Now); }
         }
 
         private static readonly string LOGTAG = "eNotariado Connection";
         private static readonly string PublicKeyAuthenticationSessionState = "X-Public-Key-Auth-Session-State";
         private static readonly string SubscriptionHeader = "X-Subscription";
         private static readonly string BaseURI = $"https://backup.e-notariado.org.br/api";
+
+        private static void ResetData()
+        {
+            SessionToken = null;
+            SessionTokenExpiration = DateTime.MinValue;
+            SASToken = null;
+            SASTokenExpiration = DateTime.MinValue;
+            ApplicationId = Guid.Empty;
+            SubscriptionId = Guid.Empty;
+            IsVerified = false;
+        }
 
         /// <summary>
         /// Simple method to init data regarding the application
@@ -55,6 +66,7 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static async Task<Guid> Enroll(X509Certificate2 cert)
         {
+            ResetData();
             var enrollment = new ApplicationEnrollRequest
             {
                 Certificate = cert.RawData,
