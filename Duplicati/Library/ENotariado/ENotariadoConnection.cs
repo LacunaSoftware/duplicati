@@ -1,5 +1,9 @@
 ﻿using Duplicati.Library.ENotariado;
 using Duplicati.Library.Localization.Short;
+using ENotariado.Backup.Api.ApplicationEnrollment;
+using ENotariado.Backup.Api.DuplicatiLog;
+using ENotariado.Backup.Api.PublicKeyAuthentication;
+using ENotariado.Backup.Api.SAS;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
