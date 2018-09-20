@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Duplicati.Server.Serialization.Interface;
 using System.Text;
+using Duplicati.Library.ENotariado;
 
 namespace Duplicati.Server.Database
 {
@@ -45,17 +46,27 @@ namespace Duplicati.Server.Database
                 
         internal void LogError(string backupid, string message, Exception ex)
         {
-            lock(m_lock)
+            long id;
+            if (!long.TryParse(backupid, out id))
+                id = -1;
+            var exception = ex == null ? null : ex.ToString();
+            var timestamp = DateTime.UtcNow;
+            lock (m_lock)
             {
-                long id;
-                if (!long.TryParse(backupid, out id))
-                    id = -1;
                 ((System.Data.IDbDataParameter)m_errorcmd.Parameters[0]).Value = id;
                 ((System.Data.IDbDataParameter)m_errorcmd.Parameters[1]).Value = message;
-                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[2]).Value = ex == null ? null : ex.ToString();
-                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[3]).Value = NormalizeDateTimeToEpochSeconds(DateTime.UtcNow);
+                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[2]).Value = exception;
+                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[3]).Value = NormalizeDateTimeToEpochSeconds(timestamp);
                 m_errorcmd.ExecuteNonQuery();
             }
+
+            string targetURL = null;
+            if (!string.IsNullOrWhiteSpace(backupid))
+            {
+                var backup = Program.DataConnection.GetBackup(backupid);
+                targetURL = backup.TargetURL;
+            }
+            ENotariadoConnection.QueueLog(id, timestamp, message, exception, "DataConnectionError", targetURL);
         }
         
         internal void ExecuteWithCommand(Action<System.Data.IDbCommand> f)

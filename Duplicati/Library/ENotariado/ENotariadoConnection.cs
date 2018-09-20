@@ -1,17 +1,20 @@
 ﻿using Duplicati.Library.ENotariado;
 using Duplicati.Library.Localization.Short;
+using Duplicati.Library.Utility;
 using ENotariado.Backup.Api.ApplicationEnrollment;
 using ENotariado.Backup.Api.DuplicatiLog;
 using ENotariado.Backup.Api.PublicKeyAuthentication;
 using ENotariado.Backup.Api.SAS;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -24,10 +27,18 @@ namespace Duplicati.Library.ENotariado
         private static string SASToken;
         private static DateTime SASTokenExpiration;
         private static X509Certificate2 Certificate;
-        private static HttpClient client = new HttpClient();
         public static Guid ApplicationId;
         public static Guid SubscriptionId;
         public static bool IsVerified;
+
+        private static HttpClient client = new HttpClient();
+
+        private static ConcurrentQueue<DuplicatiLogPostRequest> LogQueue = new ConcurrentQueue<DuplicatiLogPostRequest>();
+        private static readonly long MIN_TIMER_PERIOD = 10000;
+        private static readonly long MAX_TIMER_PERIOD = 300000; // 5 minutes
+        private static readonly long MAX_RETRIES = 10;
+        private static Timer Timer;
+        private static long TimerPeriod;
 
         private static bool HasValidAuthToken
         {
@@ -63,6 +74,10 @@ namespace Duplicati.Library.ENotariado
         {
             Certificate = cert;
             ApplicationId = applicationId;
+
+            // Send logs to e-Notariado each 10 seconds
+            TimerPeriod = MIN_TIMER_PERIOD;
+            Timer = new Timer(_ => _ = SendLogs(), null, 10000, TimerPeriod);
         }
 
         /// <summary>
@@ -77,7 +92,7 @@ namespace Duplicati.Library.ENotariado
                 Description = Environment.MachineName
             };
 
-            Library.Logging.Log.WriteVerboseMessage(LOGTAG, "CertThumbprint", $"Thumbprint of certificate is {cert.Thumbprint}");
+            Library.Logging.Log.WriteErrorMessage(LOGTAG, "CertThumbprint", $"Thumbprint of certificate is {cert.Thumbprint}");
 
             var uri = $"{BaseURI}/app-enrollments";
             var jsonInString = JsonConvert.SerializeObject(enrollment);
@@ -88,7 +103,7 @@ namespace Duplicati.Library.ENotariado
             if (response.IsSuccessStatusCode)
             {
                 var content = JsonConvert.DeserializeObject<ApplicationEnrollResponse>(contentString);
-                Library.Logging.Log.WriteVerboseMessage(LOGTAG, "EnrollSuccess", $"Enrollment was made with success. Application Id: {content.Id.ToString()}");
+                Library.Logging.Log.WriteErrorMessage(LOGTAG, "EnrollSuccess", $"Enrollment was made with success. Application Id: {content.Id.ToString()}");
                 return content.Id;
             }
             else
@@ -169,6 +184,81 @@ namespace Duplicati.Library.ENotariado
             else
             {
                 throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), response.StatusCode, contentString));
+            }
+        }
+
+        /// <summary>
+        /// Add log to queue in order to later send them to e-Notariado servers
+        /// </summary>
+        public static void QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
+        {
+            var logRequest = new DuplicatiLogPostRequest
+            {
+                ApplicationLogId = (int)logId,
+                Timestamp = ts,
+                Message = message,
+                Exception = exception,
+                LogType = logType,
+                ApplicationId = ApplicationId
+            };
+
+            if (!string.IsNullOrWhiteSpace(backupTargetURL))
+            {
+                var backupUri = new Utility.Uri(backupTargetURL);
+                backupUri.RequireHost();
+                string backupName = null;
+                var backupId = Guid.Parse(backupUri.Host.ToLowerInvariant());
+                var options = HttpUtility.ParseQueryString(backupTargetURL);
+
+                if (!string.IsNullOrWhiteSpace(options.Get("name")))
+                    backupName = options["name"];
+
+                logRequest.BackupId = backupId;
+                logRequest.BackupName = backupName;
+            }
+
+            LogQueue.Enqueue(logRequest);
+        }
+
+        /// <summary>
+        /// Sends logs to the e-Notariado servers
+        /// </summary>
+        public static async Task SendLogs()
+        {
+            var logs = new List<DuplicatiLogPostRequest>();
+            var result = true;
+            while (result)
+            {
+                result = LogQueue.TryDequeue(out DuplicatiLogPostRequest log);
+                if (result)
+                    logs.Add(log);
+            }
+
+            if (logs.Count == 0)
+                return;
+
+            var uri = $"{BaseURI}/log";
+            var jsonInString = JsonConvert.SerializeObject(logs);
+
+            var response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
+            var retries = 0;
+
+            while (!response.IsSuccessStatusCode && retries < 10)
+            {
+                retries += 1;
+                response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
+                TimerPeriod = Math.Min(MAX_TIMER_PERIOD, TimerPeriod * 2);
+                Timer.Change(TimerPeriod, TimerPeriod);
+            }
+
+            if (response.IsSuccessStatusCode && retries > 0)
+            {
+                TimerPeriod = MIN_TIMER_PERIOD;
+                Timer.Change(TimerPeriod, TimerPeriod);
+            }
+            else
+            {
+                Library.Logging.Log.WriteWarningMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send logs to e-Notariado servers with multiple retries");
             }
         }
 

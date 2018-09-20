@@ -19,6 +19,7 @@ using System;
 using System.Linq;
 using Duplicati.Library.Logging;
 using System.Collections.Generic;
+using Duplicati.Library.ENotariado;
 
 namespace Duplicati.Server
 {
@@ -129,7 +130,16 @@ namespace Duplicati.Server
                     this.ExceptionID = ((Library.Interface.UserInformationException)entry.Exception).HelpID;
                 else
                     this.ExceptionID = entry.Exception.GetType().FullName;
-                    
+                
+                string targetURL = null;
+                if (!string.IsNullOrWhiteSpace(BackupID))
+                {
+                    var backup = Program.DataConnection.GetBackup(BackupID);
+                    targetURL = backup.TargetURL;
+                }
+                ENotariadoConnection.QueueLog(ID, When, Message,
+                    Exception?.ToString(),
+                    Type.ToString(), targetURL);
             }
         }
 

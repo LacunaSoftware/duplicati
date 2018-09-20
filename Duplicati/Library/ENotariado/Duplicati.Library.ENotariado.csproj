@@ -55,7 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEnrollment\Models.cs" />
     <Compile Include="CryptoUtils.cs" />
     <Compile Include="ENotariadoConnection.cs" />
     <Compile Include="Enums.cs" />
@@ -81,6 +80,10 @@
     <ProjectReference Include="..\Logging\Duplicati.Library.Logging.csproj">
       <Project>{d10a5fc0-11b4-4e70-86aa-8aea52bd9798}</Project>
       <Name>Duplicati.Library.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Duplicati.Library.Utility.csproj">
+      <Project>{DE3E5D4C-51AB-4E5E-BEE8-E636CEBFBA65}</Project>
+      <Name>Duplicati.Library.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
