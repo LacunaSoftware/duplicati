@@ -18,6 +18,7 @@
 using System;
 using System.IO;
 using Duplicati.Library.Interface;
+using Duplicati.Library.Localization.Short;
 using Duplicati.Library.Main.Database;
 
 namespace Duplicati.Library.Main.Operation
@@ -48,15 +49,15 @@ namespace Duplicati.Library.Main.Operation
                 m_targetpath = m_targetpath + "." + module;
 
             if (System.IO.File.Exists(m_targetpath))
-                throw new UserInformationException(string.Format("Output file already exists, not overwriting: {0}", m_targetpath), "BugReportTargetAlreadyExists");
+                throw new UserInformationException(string.Format(LC.L(@"Output file already exists, not overwriting: {0}"), m_targetpath), "BugReportTargetAlreadyExists");
 
             if (!System.IO.File.Exists(m_options.Dbpath))
-                throw new UserInformationException(string.Format("Database file does not exist: {0}", m_options.Dbpath), "BugReportSourceDatabaseNotFound");
+                throw new UserInformationException(string.Format(LC.L(@"Database file does not exist: {0}"), m_options.Dbpath), "BugReportSourceDatabaseNotFound");
 
             m_result.OperationProgressUpdater.UpdatePhase(OperationPhase.BugReport_Running);
             m_result.OperationProgressUpdater.UpdateProgress(0);
 
-            Logging.Log.WriteInformationMessage(LOGTAG, "ScrubbingFilenames", "Scrubbing filenames from database, this may take a while, please wait");
+            Logging.Log.WriteInformationMessage(LOGTAG, "ScrubbingFilenames", LC.L(@"Scrubbing filenames from database, this may take a while, please wait"));
 
             using (var tmp = new Library.Utility.TempFile())
             {

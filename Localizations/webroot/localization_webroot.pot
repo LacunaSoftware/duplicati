@@ -1174,11 +1174,8 @@ msgid "If the backup and the remote storage is out of sync, Duplicati will requi
 msgstr ""
 
 #: templates/export.html:41
-msgid "If the backup file was not downloaded automatically, <a href=\"{{DownloadURL}}\" target=\"_blank\">right click and choose &quot;Save as ...&quot;</a>"
-msgstr ""
-
 #: templates/notificationarea.html:7
-msgid "If the backup file was not downloaded automatically, <a href=\"{{item.DownloadLink}}\" target=\"_blank\">right click and choose &quot;Save as ...&quot;</a>"
+msgid "If the file was not downloaded automatically"
 msgstr ""
 
 #: scripts/services/EditUriBackendConfig.js:106
@@ -2875,6 +2872,11 @@ msgstr ""
 #: templates/restoredirect.html:59
 #: templates/waitarea.html:15
 msgid "resume now"
+msgstr ""
+
+#: templates/export.html:41
+#: templates/notificationarea.html:7
+msgid "right click and choose \"Save As ...\""
 msgstr ""
 
 #: scripts/services/EditUriBuiltins.js:763

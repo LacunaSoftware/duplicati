@@ -1210,25 +1210,9 @@ msgstr ""
 "precisará de uma operação de reparo para realizar o sincronismo.  Caso o "
 "reparo não seja possível, você pode remover a base local e regenerá-la."
 
-#: templates/export.html:41
-msgid ""
-"If the backup file was not downloaded automatically, <a href="
-"\"{{DownloadURL}}\" target=\"_blank\">right click and choose &quot;Save "
-"as ...&quot;</a>"
-msgstr ""
-"Se o arquivo de backup não foi baixado automaticamente, <a href="
-"\"{{DownloadURL}}\" target=\"_blank\"> clique direito e escolha &quot;Salvar "
-"como ... &quot; </a>"
-
-#: templates/notificationarea.html:7
-msgid ""
-"If the backup file was not downloaded automatically, <a href=\"{{item."
-"DownloadLink}}\" target=\"_blank\">right click and choose &quot;Save as ..."
-"&quot;</a>"
-msgstr ""
-"Se o arquivo de backup não foi baixado automaticamente, <a href=\"{{item."
-"DownloadLink}}\" target=\"_blank\"> clique direito e escolha &quot;Salvar "
-"como ... &quot; </a>"
+#: templates/export.html:41 templates/notificationarea.html:7
+msgid "If the file was not downloaded automatically"
+msgstr "Se o arquivo não foi baixado automaticamente"
 
 #: scripts/services/EditUriBackendConfig.js:106
 msgid ""
@@ -3048,6 +3032,10 @@ msgstr "está usando as seguintes bibliotecas de terceiros:"
 msgid "resume now"
 msgstr "continuar agora"
 
+#: templates/export.html:41 templates/notificationarea.html:7
+msgid "right click and choose \"Save As ...\""
+msgstr "clique com o botão direito e escolha &quot;Salvar como …&quot;"
+
 #: scripts/services/EditUriBuiltins.js:763
 #: scripts/services/EditUriBuiltins.js:774
 msgid "unless you are explicitly specifying --group-id"
@@ -3091,6 +3079,28 @@ msgstr "{{number}} Minutos"
 #: templates/home.html:51
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#, fuzzy
+#~| msgid ""
+#~| "If the backup file was not downloaded automatically, <a href=\"{{item."
+#~| "DownloadLink}}\" target=\"_blank\">right click and choose &quot;Save "
+#~| "as ...&quot;</a>"
+#~ msgid ""
+#~ "If the file was not downloaded automatically, <a href=\"{{item."
+#~ "DownloadLink}}\" target=\"_blank\">right click and choose &quot;Save "
+#~ "as ...&quot;</a>"
+#~ msgstr ""
+#~ "Se o arquivo de backup não foi baixado automaticamente, <a href=\"{{item."
+#~ "DownloadLink}}\" target=\"_blank\"> clique direito e escolha &quot;Salvar "
+#~ "como ... &quot; </a>"
+
+#~ msgid ""
+#~ "If the file was not downloaded automatically, <a href=\"{{DownloadURL}}\" "
+#~ "target=\"_blank\">right click and choose &quot;Save as ...&quot;</a>"
+#~ msgstr ""
+#~ "Se o arquivo não foi baixado automaticamente, <a href=\"{{DownloadURL}}\" "
+#~ "target=\"_blank\"> clique com o botão direito e escolha &quot;Salvar "
+#~ "como ... &quot; </a>"
 
 #~ msgid "Upload of compressed files to storage:"
 #~ msgstr "Upload dos arquivos compressos:"

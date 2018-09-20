@@ -19,6 +19,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Server.Serialization;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server
 {
@@ -561,7 +562,7 @@ namespace Duplicati.Server
                                     Program.DataConnection.RegisterNotification(
                                         NotificationType.Information,
                                         "Bugreport ready",
-                                        "Bugreport is ready for download",
+                                        LC.L(@"Bugreport is ready for download"),
                                          null,
                                          null,
                                          "bug-report:created:" + tempid,
@@ -613,7 +614,7 @@ namespace Duplicati.Server
             }
             catch (Exception ex)
             {
-                Program.DataConnection.LogError(data.Backup.ID, string.Format("Failed while executing \"{0}\" with id: {1}", data.Operation, data.Backup.ID), ex);
+                Program.DataConnection.LogError(data.Backup.ID, string.Format(LC.L(@"Failed while executing ""{0}"" with id: {1}"), data.Operation, data.Backup.ID), ex);
                 UpdateMetadataError(data.Backup, ex);
                 Library.UsageReporter.Reporter.Report(ex);
 
@@ -683,7 +684,7 @@ namespace Duplicati.Server
             Program.DataConnection.RegisterNotification(
                 NotificationType.Error,
                 backup.IsTemporary ?
-                    "Error" : string.Format("Error while running {0}", backup.Name),
+                    "Error" : string.Format(LC.L(@"Error while running {0}"), backup.Name),
                 ex.Message,
                 ex,
                 backup.ID,
@@ -751,12 +752,12 @@ namespace Duplicati.Server
                     Program.DataConnection.RegisterNotification(
                         NotificationType.Error,
                         backup.IsTemporary ?
-                            "Warning" : string.Format("Warning while running {0}", backup.Name),
+                            "Warning" : string.Format(LC.L(@"Warning while running {0}"), backup.Name),
                             r.FilesWithError > 0 ?
-                                string.Format("Errors affected {0} file(s) ", r.FilesWithError) :
+                                string.Format(LC.L(@"Errors affected {0} file(s)"), r.FilesWithError) :
                                 (r.Errors.Any() ?
-                                 string.Format("Got {0} error(s)", r.Errors.Count()) :
-                                 string.Format("Got {0} warning(s)", r.Warnings.Count())
+                                 string.Format(LC.L(@"Got {0} error(s)"), r.Errors.Count()) :
+                                 string.Format(LC.L(@"Got {0} warning(s)"), r.Warnings.Count())
                                 )
                             ,
                         null,
@@ -789,13 +790,13 @@ namespace Duplicati.Server
 
                     var title = result.ParsedResult == Library.Interface.ParsedResultType.Warning
                                  ? (backup.IsTemporary ?
-                                    "Warning" : string.Format("Warning while running {0}", backup.Name))
+                                    "Warning" : string.Format(LC.L(@"Warning while running {0}"), backup.Name))
                                 : (backup.IsTemporary ?
-                                   "Error" : string.Format("Error while running {0}", backup.Name));
+                                   "Error" : string.Format(LC.L(@"Error while running {0}"), backup.Name));
 
                     var message = result.ParsedResult == Library.Interface.ParsedResultType.Warning
-                                        ? string.Format("Got {0} warning(s) ", result.Warnings.Count())
-                                        : string.Format("Got {0} error(s) ", result.Errors.Count());
+                                        ? string.Format(LC.L(@"Got {0} warning(s)"), result.Warnings.Count())
+                                        : string.Format(LC.L(@"Got {0} error(s)"), result.Errors.Count());
 
                     Program.DataConnection.RegisterNotification(
                         type,

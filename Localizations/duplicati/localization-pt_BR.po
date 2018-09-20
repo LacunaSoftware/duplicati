@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-14 14:07-0300\n"
-"PO-Revision-Date: 2018-09-14 14:10-0300\n"
+"POT-Creation-Date: 2018-09-20 11:46-0300\n"
+"PO-Revision-Date: 2018-09-20 11:46-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -2354,11 +2354,11 @@ msgstr "Falha ao invocar o GnuPG, o programa não terminará"
 msgid "Certificate with thumbprint {0} not found."
 msgstr "Certificado com digital {0} não encontrado."
 
-#: Library/ENotariado/ENotariadoConnection.cs:80
-#: Library/ENotariado/ENotariadoConnection.cs:113
-#: Library/ENotariado/ENotariadoConnection.cs:155
-#: Library/ENotariado/ENotariadoConnection.cs:189
-#: Library/ENotariado/ENotariadoConnection.cs:212
+#: Library/ENotariado/ENotariadoConnection.cs:115
+#: Library/ENotariado/ENotariadoConnection.cs:152
+#: Library/ENotariado/ENotariadoConnection.cs:196
+#: Library/ENotariado/ENotariadoConnection.cs:302
+#: Library/ENotariado/ENotariadoConnection.cs:325
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr "Código de resposta: '{0}'. Conteudo: '{1}'."
@@ -2559,6 +2559,167 @@ msgstr ""
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr "A listagem indica que o arquivo {0} foi excluído corretamente"
+
+#: Library/Main/Operation/CreateBugReportHandler.cs:52
+#, csharp-format
+msgid "Output file already exists, not overwriting: {0}"
+msgstr "Arquivo de saída já existe, não haverá sobrescrição: {0}"
+
+#: Library/Main/Operation/CreateBugReportHandler.cs:55
+#, csharp-format
+msgid "Database file does not exist: {0}"
+msgstr "Arquivo do banco de dados não existe: {0}"
+
+#: Library/Main/Operation/CreateBugReportHandler.cs:60
+msgid "Scrubbing filenames from database, this may take a while, please wait"
+msgstr ""
+"Verificando nomes de arquivos a partir do banco de dados, isto pode demorar um "
+"pouco, por favor aguarde"
+
+#: Library/Main/Operation/FilelistProcessor.cs:55
+#, csharp-format
+msgid "Removing remote file listed as {0}: {1}"
+msgstr "Removendo arquivo remote listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:62
+#, csharp-format
+msgid "Failed to erase file {0}, treating as deleted: {1}"
+msgstr "Falha ao excluir o arquivo {0}, tratando como deletado: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:68
+#, csharp-format
+msgid "Unknown state for remote file listed as {0}: {1}"
+msgstr "Estado desconhecido para arquivo remote listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:93
+#, csharp-format
+msgid "Extra unknown file: {0}"
+msgstr "Arquivo desconhecido extra: {0}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:99
+#, csharp-format
+msgid "Missing file: {0}"
+msgstr "Arquivo faltando: {0}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:105
+#, csharp-format
+msgid ""
+"Found {0} remote files that are not recorded in local storage, please run "
+"repair"
+msgstr ""
+"Foram achados {0} arquivos remotos que não estão salvos em armazenamento "
+"local, por favor repare o backup"
+
+#: Library/Main/Operation/FilelistProcessor.cs:115
+#, csharp-format
+msgid ""
+"Found remote files reported as duplicates, either the backend module is broken "
+"or you need to manually remove the extra copies.\\nThe following files were "
+"found multiple times: {0}"
+msgstr ""
+"Foram achados arquivos remotos relatados como duplicados, você precisa remover "
+"manualmente as cópias.\\n Os seguintes arquivos foram achados várias vezes: {0}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:124
+#, csharp-format
+msgid ""
+"Found {0} files that are missing from the remote storage, and no files with "
+"the backup prefix {1}, but found the following backup prefixes: {2}"
+msgstr ""
+"Foram achados {0} arquivos que estão faltando no armazenamento remote e nenhum "
+"arquivo com o prefixo de backup {1}, mas foram achados os seguintes prefixos "
+"de backup: {2}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:126
+#, csharp-format
+msgid ""
+"Found {0} files that are missing from the remote storage, please run repair"
+msgstr ""
+"Foram achados {0} arquivos remotos faltando no armazenamento remoto, por favor "
+"repare o backup"
+
+#: Library/Main/Operation/FilelistProcessor.cs:175
+#, csharp-format
+msgid "Would upload verification file: {0}, size: {1}"
+msgstr "Iria carregar o arquivo de verificação: {0}, tamanho: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:244
+#, csharp-format
+msgid "Backend quota has been exceeded: Using {0} of {1} ({2} available)"
+msgstr "Cota do e-Notariado foi excedida: Usando {0} de {1}({2} disponível)"
+
+#: Library/Main/Operation/FilelistProcessor.cs:253
+#, csharp-format
+msgid ""
+"Backend quota is close to being exceeded: Using {0} of {1} ({2} available)"
+msgstr ""
+"Cota do e-Notariado está perto de ser excedida: Usando {0} de {1}({2} "
+"disponível)"
+
+#: Library/Main/Operation/FilelistProcessor.cs:273
+#, csharp-format
+msgid ""
+"The remote volume {0} appears in the database with state {1} and a deleted "
+"state, cannot continue"
+msgstr ""
+"O volume remote {0} aparece no banco de dados com estado {1} e um estado de "
+"remoção, não é possível continuar"
+
+#: Library/Main/Operation/FilelistProcessor.cs:289
+#, csharp-format
+msgid "ignoring remote file listed as {0}: {1}"
+msgstr "ignorando arquivo remoto listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:297
+#, csharp-format
+msgid "removing remote file listed as {0}: {1}"
+msgstr "removendo arquivo remoto listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:304
+#, csharp-format
+msgid "keeping delete request for {0} until {1}"
+msgstr "mantendo requisição de deleção para {0} até {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:310
+#: Library/Main/Operation/FilelistProcessor.cs:331
+#: Library/Main/Operation/FilelistProcessor.cs:345
+#, csharp-format
+msgid "keeping protected incomplete remote file listed as {0}: {1}"
+msgstr "mantendo arquivo remoto incompleto protegido listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:314
+#, csharp-format
+msgid "removing file listed as {0}: {1}"
+msgstr "removendo arquivo listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:323
+#, csharp-format
+msgid "promoting uploaded complete file from {0} to {2}: {1}"
+msgstr "promovendo arquivo complete carregado de {0} para {2}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:336
+#, csharp-format
+msgid "scheduling missing file for deletion, currently listed as {0}: {1}"
+msgstr ""
+"agendando arquivo faltando para remoção, atualmente listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:349
+#, csharp-format
+msgid "removing incomplete remote file listed as {0}: {1}"
+msgstr "removendo arquivo remote incomplete listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:374
+#, csharp-format
+msgid "unknown state for remote file listed as {0}: {1}"
+msgstr "estado desconhecido para arquivo remote listado como {0}: {1}"
+
+#: Library/Main/Operation/FilelistProcessor.cs:385
+msgid ""
+"remote file {1} is listed as {0} with size {2} but should be {3}, please "
+"verify the sha256 hash \"{ 4}\""
+msgstr ""
+"arquivo remote {1} está listado como {0} com tamanho {2} mas deveria ser {3}, "
+"por favor verifique a hash sha256 \"{4}\""
 
 #: Library/Main/Strings.cs:8
 #, csharp-format
@@ -4201,7 +4362,7 @@ msgstr ""
 
 #: Library/Main/Strings.cs:248
 msgid "Disable filelist consistency checks"
-msgstr ""
+msgstr "Desativar verificação de consistência da lista de arquivos"
 
 #: Library/Main/Strings.cs:249
 msgid ""
@@ -4209,6 +4370,10 @@ msgid ""
 "large part of the backup time. If you disable the checks, make sure you run "
 "regular check commands to ensure that everything is working as expected."
 msgstr ""
+"Em backups com um grande número de conjuntos de arquivos, a verificação pode "
+"tomar uma grande parte do tempo do backup. Se desativar as verificações, "
+"execute verificações regulares para assegurar que tudo está funcionando como "
+"esperado."
 
 #: Library/Main/Strings.cs:250
 msgid "Disable the backup when on battery power"
@@ -5377,6 +5542,40 @@ msgstr ""
 "A cadeia {0} não representa um nome de grupo de filtros conhecido. Os valores "
 "válidos são: {1}"
 
+#: Server/Runner.cs:565
+msgid "Bugreport is ready for download"
+msgstr "O relatório de falhas está pronto para download"
+
+#: Server/Runner.cs:617
+#, csharp-format
+msgid "Failed while executing \"{0}\" with id: {1}"
+msgstr "Erro durante a execução de \"{0}\" com id: {1}"
+
+#: Server/Runner.cs:687 Server/Runner.cs:795
+#, csharp-format
+msgid "Error while running {0}"
+msgstr "Erro ao executar {0}"
+
+#: Server/Runner.cs:755 Server/Runner.cs:793
+#, csharp-format
+msgid "Warning while running {0}"
+msgstr "Aviso ao executar {0}"
+
+#: Server/Runner.cs:757
+#, csharp-format
+msgid "Errors affected {0} file(s)"
+msgstr "Erros afetaram {0} arquivo(s)"
+
+#: Server/Runner.cs:759 Server/Runner.cs:799
+#, csharp-format
+msgid "Got {0} error(s)"
+msgstr "Houveram {0} erro(s)"
+
+#: Server/Runner.cs:760 Server/Runner.cs:798
+#, csharp-format
+msgid "Got {0} warning(s)"
+msgstr "Houveram {0} avisos(s)"
+
 #: Server/Strings.cs:7
 msgid "Another instance is running, and was notified"
 msgstr "Outra instância está em execução e foi notificada"
@@ -5576,15 +5775,17 @@ msgstr ""
 msgid "Unable to open a socket for listening, tried ports: {0}"
 msgstr "Impossível abrir um socket para comunicação, tentar portas: {0}"
 
-#: Server/WebServer/RESTMethods/SystemInfo.cs:67
-#: Server/WebServer/RESTMethods/SystemInfo.cs:77
-msgid "The application is enrolled but not verified in e-Notariado servers"
-msgstr "A aplicação está registrada mas não foi verificada no e-Notariado"
+#: Server/WebServer/RESTMethods/BugReport.cs:33
+msgid "Invalid or missing bugreport id"
+msgstr "Id do relatório de falhas inválido ou faltando"
 
-#: Server/WebServer/RESTMethods/SystemInfo.cs:69
-#: Server/WebServer/RESTMethods/SystemInfo.cs:79
+#: Server/WebServer/RESTMethods/SystemInfo.cs:47
 msgid "The application is not enrolled. An unexpected error happened"
 msgstr "A aplicação não está cadastrada. Houve um erro inesperado"
+
+#: Server/WebServer/RESTMethods/SystemInfo.cs:48
+msgid "The application is enrolled but not verified in e-Notariado servers"
+msgstr "A aplicação está registrada mas não foi verificada no e-Notariado"
 
 #~ msgid ""
 #~ "Stores metadata, such as file timestamps and attributes. This increases the "

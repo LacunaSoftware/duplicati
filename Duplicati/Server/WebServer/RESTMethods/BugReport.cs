@@ -14,6 +14,7 @@
 //  You should have received a copy of the GNU Lesser General Public
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+using Duplicati.Library.Localization.Short;
 using System;
 using System.Linq;
 
@@ -29,7 +30,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             var tf = Program.DataConnection.GetTempFiles().Where(x => x.ID == id).FirstOrDefault();
             if (tf == null)
             {
-                info.ReportClientError("Invalid or missing bugreport id", System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"Invalid or missing bugreport id"), System.Net.HttpStatusCode.NotFound);
                 return;
             }
 
