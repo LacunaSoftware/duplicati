@@ -35,7 +35,7 @@ namespace Duplicati.Library.ENotariado
 
         private static ConcurrentQueue<DuplicatiLogPostRequest> LogQueue = new ConcurrentQueue<DuplicatiLogPostRequest>();
         private static readonly long MIN_TIMER_PERIOD = 10000;
-        private static readonly long MAX_TIMER_PERIOD = 300000; // 5 minutes
+        private static readonly long MAX_TIMER_PERIOD = 600000; // 10 minutes
         private static readonly long MAX_RETRIES = 10;
         private static Timer Timer;
         private static long TimerPeriod;
@@ -251,25 +251,20 @@ namespace Duplicati.Library.ENotariado
             var jsonInString = JsonConvert.SerializeObject(logs);
 
             var response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
-            var retries = 0;
 
-            while (!response.IsSuccessStatusCode && retries < 10)
+            if (!response.IsSuccessStatusCode)
+                Timer.Change(Timeout.Infinite, TimerPeriod);
+
+            while (!response.IsSuccessStatusCode)
             {
-                retries += 1;
-                response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
                 TimerPeriod = Math.Min(MAX_TIMER_PERIOD, TimerPeriod * 2);
-                Timer.Change(TimerPeriod, TimerPeriod);
+                Library.Logging.Log.WriteWarningMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send {logs.Count} logs to e-Notariado, retrying in {TimerPeriod / 1000} seconds...");
+                await Task.Delay(System.TimeSpan.FromMilliseconds(TimerPeriod));
+                response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
             }
 
-            if (response.IsSuccessStatusCode && retries > 0)
-            {
-                TimerPeriod = MIN_TIMER_PERIOD;
-                Timer.Change(TimerPeriod, TimerPeriod);
-            }
-            else
-            {
-                Library.Logging.Log.WriteWarningMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send logs to e-Notariado servers with multiple retries");
-            }
+            TimerPeriod = MIN_TIMER_PERIOD;
+            Timer.Change(0, TimerPeriod);
         }
 
         /// <summary>
