@@ -33,7 +33,7 @@ namespace Duplicati.Library.ENotariado
 
         private static HttpClient client = new HttpClient();
 
-        private static ConcurrentQueue<DuplicatiLogPostRequest> LogQueue = new ConcurrentQueue<DuplicatiLogPostRequest>();
+        private static ConcurrentQueue<DuplicatiLogModel> LogQueue = new ConcurrentQueue<DuplicatiLogModel>();
         private static readonly long MIN_TIMER_PERIOD = 10000;
         private static readonly long MAX_TIMER_PERIOD = 600000; // 10 minutes
         private static readonly long MAX_RETRIES = 10;
@@ -202,10 +202,10 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static void QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
         {
-            var logRequest = new DuplicatiLogPostRequest
+            var logRequest = new DuplicatiLogModel
             {
                 ApplicationLogId = (int)logId,
-                Timestamp = ts,
+                DuplicatiTimestamp = ts,
                 Message = message,
                 Exception = exception,
                 LogType = logType,
@@ -235,22 +235,27 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static async Task SendLogs()
         {
-            var logs = new List<DuplicatiLogPostRequest>();
-            var result = true;
+            var logs = new List<DuplicatiLogModel>();
+            var result = LogQueue.TryDequeue(out DuplicatiLogModel log); ;
             while (result)
             {
-                result = LogQueue.TryDequeue(out DuplicatiLogPostRequest log);
-                if (result)
-                    logs.Add(log);
+                logs.Add(log);
+                result = LogQueue.TryDequeue(out log);
             }
 
             if (logs.Count == 0)
                 return;
 
-            var uri = $"{BaseURI}/log";
+            if (!HasValidAuthToken)
+            {
+                await GetApplicationAuthToken();
+            }
+
+            var uri = $"{BaseURI}/duplicatilog";
             var jsonInString = JsonConvert.SerializeObject(logs);
 
             var response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
+            var contentString = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
                 Timer.Change(Timeout.Infinite, TimerPeriod);
@@ -258,7 +263,8 @@ namespace Duplicati.Library.ENotariado
             while (!response.IsSuccessStatusCode)
             {
                 TimerPeriod = Math.Min(MAX_TIMER_PERIOD, TimerPeriod * 2);
-                Library.Logging.Log.WriteWarningMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send {logs.Count} logs to e-Notariado, retrying in {TimerPeriod / 1000} seconds...");
+                Library.Logging.Log.WriteWarningMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send {logs.Count} logs to e-Notariado, retrying in {TimerPeriod / 1000} seconds..." +
+                    $"Error: {response.StatusCode} - Content: {contentString}");
                 await Task.Delay(System.TimeSpan.FromMilliseconds(TimerPeriod));
                 response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
             }
