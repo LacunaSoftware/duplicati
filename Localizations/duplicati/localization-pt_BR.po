@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-20 11:46-0300\n"
-"PO-Revision-Date: 2018-09-20 11:46-0300\n"
+"POT-Creation-Date: 2018-09-24 10:53-0300\n"
+"PO-Revision-Date: 2018-09-24 10:55-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -2349,16 +2349,11 @@ msgstr "Falha ao invocar GnuPG, o programa não descarregará a saída"
 msgid "Failure while invoking GnuPG, program won't terminate"
 msgstr "Falha ao invocar o GnuPG, o programa não terminará"
 
-#: Library/ENotariado/CryptoUtils.cs:45
-#, csharp-format
-msgid "Certificate with thumbprint {0} not found."
-msgstr "Certificado com digital {0} não encontrado."
-
-#: Library/ENotariado/ENotariadoConnection.cs:115
-#: Library/ENotariado/ENotariadoConnection.cs:152
+#: Library/ENotariado/ENotariadoConnection.cs:122
+#: Library/ENotariado/ENotariadoConnection.cs:159
 #: Library/ENotariado/ENotariadoConnection.cs:196
-#: Library/ENotariado/ENotariadoConnection.cs:302
-#: Library/ENotariado/ENotariadoConnection.cs:325
+#: Library/ENotariado/ENotariadoConnection.cs:301
+#: Library/ENotariado/ENotariadoConnection.cs:319
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr "Código de resposta: '{0}'. Conteudo: '{1}'."
@@ -2378,6 +2373,11 @@ msgstr "Houve um erro de conexão com o e-Notariado"
 #: Library/ENotariado/Exceptions.cs:51
 msgid "The application is not verified in e-Notariado"
 msgstr "A aplicação não está verificada no e-Notariado"
+
+#: Library/ENotariado/Exceptions.cs:62
+#, csharp-format
+msgid "Certificate with thumbprint {0} not found."
+msgstr "Certificado com digital {0} não encontrado."
 
 #: Library/Interface/CustomExceptions.cs:82
 #: Library/Interface/CustomExceptions.cs:90
@@ -2720,6 +2720,12 @@ msgid ""
 msgstr ""
 "arquivo remote {1} está listado como {0} com tamanho {2} mas deveria ser {3}, "
 "por favor verifique a hash sha256 \"{4}\""
+
+#: Library/Main/Operation/ListControlFilesHandler.cs:52
+#: Library/Main/Operation/ListFilesHandler.cs:93
+#: Library/Main/Operation/RestoreControlFilesHandler.cs:41
+msgid "No filesets found on remote target"
+msgstr "Não foram encontrados arquivos no armazenamento remoto."
 
 #: Library/Main/Strings.cs:8
 #, csharp-format

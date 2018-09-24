@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Duplicati.Library.Localization.Short;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,7 @@ namespace Duplicati.Library.Main.Operation
                 {
                     var filteredList = ListFilesHandler.ParseAndFilterFilesets(backend.List(), m_options);
                     if (filteredList.Count == 0)
-                        throw new Exception("No filesets found on remote target");
+                        throw new Exception(LC.L(@"No filesets found on remote target"));
     
                     Exception lastEx = new Exception("No suitable files found on remote target");
     

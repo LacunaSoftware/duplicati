@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Duplicati.Library.Interface;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Library.Main.Operation
 {    
@@ -89,7 +90,7 @@ namespace Duplicati.Library.Main.Operation
                 
                 var filteredList = ParseAndFilterFilesets(backend.List(), m_options);
                 if (filteredList.Count == 0)
-                    throw new UserInformationException("No filesets found on remote target", "EmptyRemoteFolder");
+                    throw new UserInformationException(LC.L(@"No filesets found on remote target"), "EmptyRemoteFolder");
 
                 var numberSeq = CreateResultSequence(filteredList);
                 if (filter.Empty)
