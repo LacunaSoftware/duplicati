@@ -739,7 +739,7 @@ namespace Duplicati.Server
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
-		    var keyStoreLocation = StoreLocation.LocalMachine;
+            var keyStoreLocation = StoreLocation.LocalMachine;
 #endif
 
             // Checks if certificate already exists and is in local storage,

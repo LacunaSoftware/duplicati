@@ -42,7 +42,7 @@ namespace Duplicati.Library.ENotariado
                 var certCollection = store.Certificates.Find(X509FindType.FindByThumbprint, certThumbprint, false);
                 if (certCollection.Count == 0)
                 {
-                    throw new CertificateNotFoundException(string.Format(LC.L("Certificate with thumbprint {0} not found."), certThumbprint));
+                    throw new CertificateNotFoundException(certThumbprint);
                 }
                 cert = certCollection[0];
             }

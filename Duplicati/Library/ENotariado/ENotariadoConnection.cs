@@ -26,6 +26,7 @@ namespace Duplicati.Library.ENotariado
         private static DateTime SessionTokenExpiration;
         private static string SASToken;
         private static DateTime SASTokenExpiration;
+
         private static X509Certificate2 Certificate;
         public static Guid ApplicationId;
         public static Guid SubscriptionId;
@@ -33,6 +34,7 @@ namespace Duplicati.Library.ENotariado
 
         private static HttpClient client = new HttpClient();
 
+        // Variables related to periodically sending logs to e-Notariado
         private static ConcurrentQueue<DuplicatiLogModel> LogQueue = new ConcurrentQueue<DuplicatiLogModel>();
         private static readonly long MIN_TIMER_PERIOD = 10000;
         private static readonly long MAX_TIMER_PERIOD = 600000; // 10 minutes
@@ -48,6 +50,11 @@ namespace Duplicati.Library.ENotariado
         private static bool HasValidSASToken
         {
             get { return !(string.IsNullOrWhiteSpace(SASToken) || SASTokenExpiration < DateTime.Now); }
+        }
+
+        public static string AzureAccountName
+        {
+            get { return SubscriptionId.ToString().Replace("-", "").Substring(0, 24); }
         }
 
         private static readonly string LOGTAG = "eNotariado Connection";
@@ -121,10 +128,8 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static async Task<Guid> CheckVerifiedStatus()
         {
-            if (Certificate == null || Guid.Empty == ApplicationId)
-            {
+            if (Certificate == null || ApplicationId == Guid.Empty)
                 throw new ENotariadoNotInitializedException();
-            }
 
             Logging.Log.WriteVerboseMessage(LOGTAG, "CheckVerifiedStatus", $"Verifying application in e-Notariado");
 
@@ -138,13 +143,15 @@ namespace Duplicati.Library.ENotariado
             {
                 var content = JsonConvert.DeserializeObject<ApplicationEnrollmentStatusQueryResponse>(contentString);
                 IsVerified = content.Approved && content.SubscriptionId != null;
+
                 if (IsVerified)
                 {
                     Logging.Log.WriteVerboseMessage(LOGTAG, "Verified", $"Application is verified in e-Notariado");
                     SubscriptionId = (Guid) content.SubscriptionId;
                     return SubscriptionId;
                 }
-                Logging.Log.WriteVerboseMessage(LOGTAG, "NotVerified", $"Application is yet to be verified in e-Notariado");
+
+                Logging.Log.WriteVerboseMessage(LOGTAG, "NotVerified", $"Application is not verified in e-Notariado");
                 return Guid.Empty;
             }
             else
@@ -159,19 +166,12 @@ namespace Duplicati.Library.ENotariado
         public static async Task<string> GetSASToken()
         {
             if (HasValidSASToken)
-            {
                 return SASToken;
-            }
 
             if (!HasValidAuthToken)
-            {
                 await GetApplicationAuthToken();
-            }
 
-            var sasRequest = new SASRequestModel
-            {
-                AppKeyId = ApplicationId
-            };
+            var sasRequest = new SASRequestModel { AppKeyId = ApplicationId };
 
             var uri = $"{BaseURI}/sas";
             var jsonInString = JsonConvert.SerializeObject(sasRequest);
@@ -204,7 +204,7 @@ namespace Duplicati.Library.ENotariado
         {
             var logRequest = new DuplicatiLogModel
             {
-                ApplicationLogId = (int)logId,
+                ApplicationLogId = logId,
                 DuplicatiTimestamp = ts,
                 Message = message,
                 Exception = exception,
@@ -215,16 +215,10 @@ namespace Duplicati.Library.ENotariado
             if (!string.IsNullOrWhiteSpace(backupTargetURL))
             {
                 var backupUri = new Utility.Uri(backupTargetURL);
-                backupUri.RequireHost();
-                string backupName = null;
-                var backupId = Guid.Parse(backupUri.Host.ToLowerInvariant());
-                var options = HttpUtility.ParseQueryString(backupTargetURL);
+                logRequest.BackupName = backupUri.QueryParameters["name"];
 
-                if (!string.IsNullOrWhiteSpace(options.Get("name")))
-                    backupName = options["name"];
-
-                logRequest.BackupId = backupId;
-                logRequest.BackupName = backupName;
+                if (!string.IsNullOrWhiteSpace(backupUri.Host))
+                    logRequest.BackupId = Guid.Parse(backupUri.Host.ToLowerInvariant());
             }
 
             LogQueue.Enqueue(logRequest);
@@ -235,6 +229,10 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static async Task SendLogs()
         {
+            if (!HasValidAuthToken)
+                await GetApplicationAuthToken();
+
+            // Empties current queue
             var logs = new List<DuplicatiLogModel>();
             var result = LogQueue.TryDequeue(out DuplicatiLogModel log); ;
             while (result)
@@ -243,23 +241,22 @@ namespace Duplicati.Library.ENotariado
                 result = LogQueue.TryDequeue(out log);
             }
 
+            // If there are no logs, just return
             if (logs.Count == 0)
                 return;
-
-            if (!HasValidAuthToken)
-            {
-                await GetApplicationAuthToken();
-            }
-
+            
             var uri = $"{BaseURI}/duplicatilog";
             var jsonInString = JsonConvert.SerializeObject(logs);
 
             var response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
             var contentString = await response.Content.ReadAsStringAsync();
 
+            // If the request fails, stop the timer to cancel any new calls to SendLogs
+            // Halts the sending of logs until the current ones are successfully sent
             if (!response.IsSuccessStatusCode)
                 Timer.Change(Timeout.Infinite, TimerPeriod);
-
+            
+            // Doubles waiting time up to MAX_TIMER_PERIOD milliseconds
             while (!response.IsSuccessStatusCode)
             {
                 TimerPeriod = Math.Min(MAX_TIMER_PERIOD, TimerPeriod * 2);
@@ -269,6 +266,7 @@ namespace Duplicati.Library.ENotariado
                 response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
             }
 
+            // Response is successful, reset timer
             TimerPeriod = MIN_TIMER_PERIOD;
             Timer.Change(0, TimerPeriod);
         }
@@ -279,14 +277,10 @@ namespace Duplicati.Library.ENotariado
         private static async Task GetApplicationAuthToken()
         {
             if (Certificate == null || Guid.Empty == ApplicationId)
-            {
                 throw new ENotariadoNotInitializedException();
-            }
         
             if (!IsVerified)
-            {
                 throw new ENotariadoNotVerifiedException();
-            }
 
             var start = new StartPublicKeyAuthenticationRequest
             {
@@ -304,19 +298,14 @@ namespace Duplicati.Library.ENotariado
             var contentString = await startResponse.Content.ReadAsStringAsync();
 
             if (!startResponse.IsSuccessStatusCode)
-            {
                 throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), startResponse.StatusCode, contentString));
-            }
 
             /* Request successful, challenge received and session header stored. */
             var startContent = JsonConvert.DeserializeObject<StartPublicKeyAuthenticationResponse>(contentString);
             var session = startResponse.Headers.GetValues(PublicKeyAuthenticationSessionState).FirstOrDefault();
 
             var signature = CryptoUtils.SignDataWithCertificate(startContent.ToSignData, Certificate);
-            var complete = new CompletePublicKeyAuthenticationRequest
-            {
-                Signature = signature
-            };
+            var complete = new CompletePublicKeyAuthenticationRequest { Signature = signature };
 
             var jsonCompleteString = JsonConvert.SerializeObject(complete);
 
@@ -327,9 +316,7 @@ namespace Duplicati.Library.ENotariado
             var completeContentString = await completeResponse.Content.ReadAsStringAsync();
 
             if (!completeResponse.IsSuccessStatusCode)
-            {
                 throw new FailedRequestException(string.Format(LC.L("Response code: '{0}'. Content: '{1}'."), completeResponse.StatusCode, contentString));
-            }
 
             /*
             Token received.
@@ -344,14 +331,11 @@ namespace Duplicati.Library.ENotariado
         public static List<Backend.AzureBlob.BackupData> GetStoredBackupNames()
         {
             if (!HasValidSASToken)
-            {
                 GetSASToken().GetAwaiter().GetResult();
-            }
 
             Logging.Log.WriteVerboseMessage(LOGTAG, "GetStoredBackups", $"Retrieving all backups stored remotely");
 
-            var accountName = SubscriptionId.ToString().Replace("-", "").Substring(0, 24);
-            return Backend.AzureBlob.AzureBlobWrapper.GetStoredBackups(accountName, SASToken);
+            return Backend.AzureBlob.AzureBlobWrapper.GetStoredBackups(AzureAccountName, SASToken);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Duplicati.Library.Backend.ENotariado
             uri.RequireHost();
             string backupName = null;
 
-            var accountName = ENotariadoConnection.SubscriptionId.ToString().Replace("-", "").Substring(0, 24);
+            var accountName = ENotariadoConnection.AzureAccountName;
             var sasToken = ENotariadoConnection.GetSASToken().GetAwaiter().GetResult();
             var containerName = uri.Host.ToLowerInvariant();
 

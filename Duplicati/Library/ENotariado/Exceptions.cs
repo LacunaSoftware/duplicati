@@ -59,17 +59,10 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class CertificateNotFoundException : Exception
     {
-        public CertificateNotFoundException()
-        {
-        }
+        public static readonly string ErrorMessage = LC.L("Certificate with thumbprint {0} not found.");
 
-        public CertificateNotFoundException(string message)
-            : base(message)
-        {
-        }
-
-        public CertificateNotFoundException(string message, Exception inner)
-            : base(message, inner)
+        public CertificateNotFoundException(string certThumbprint)
+            : base(string.Format(ErrorMessage, certThumbprint))
         {
         }
     }
