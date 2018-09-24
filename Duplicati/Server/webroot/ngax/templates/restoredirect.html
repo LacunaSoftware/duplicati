@@ -54,7 +54,7 @@
                 <div class="step step2" ng-class="{active: CurrentStep == 1}">
                     <h2 translate>Progress</h2>
                     <div>
-                        <p ng-repeat="line in ConnectionProgress track by $index">{{line}}</p>
+                        <p ng-repeat="line in logs track by $index">{{line}}</p>
                         <div ng-show="serverstate.programState == 'Paused'">
                             {{'Server is currently paused,' | translate}} <a style="cursor: pointer" ng-click="ServerStatus.resume()" translate>resume now</a>
                         </div>

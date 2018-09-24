@@ -7,7 +7,7 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
 
     $scope.CurrentStep = 0;
     $scope.connecting = false;
-    $scope.ConnectionProgress = [];
+    $scope.logs = [];
     $scope.backups = [];
 
     $scope.nextPage = function() {
@@ -21,20 +21,20 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
     $scope.doConnect = function() {
         $scope.CurrentStep = 1;
         $scope.connecting = true;
-        $scope.ConnectionProgress.push(gettextCatalog.getString('Getting list of backups stored remotely ...'));
+        $scope.logs.push(gettextCatalog.getString('Getting list of backups stored remotely ...'));
 
         AppService.get('/enotariado', {'headers': {'Content-Type': 'application/json'}}).then(
             function(resp) {
                 
                 $scope.backups = resp.data;
-                $scope.ConnectionProgress.push(AppUtils.format(gettextCatalog.getString('Retrieved information about {0} backups ...'), resp.data.length));
+                $scope.logs.push(AppUtils.format(gettextCatalog.getString('Retrieved information about {0} backups ...'), resp.data.length));
             }, function(resp) {
                 var message = resp.statusText;
                 if (resp.data != null && resp.data.Message != null)
                     message = resp.data.Message;
 
                 $scope.connecting = false;
-                $scope.ConnectionProgress.push(gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+                $scope.logs.push(gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
             }
         );
     };
@@ -64,7 +64,7 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         AppService.post('/backups?temporary=true', obj, {'headers': {'Content-Type': 'application/json'}}).then(
             function(resp) {
 
-                $scope.ConnectionProgress.push(gettextCatalog.getString('Listing backup dates ...'));
+                $scope.logs.push(gettextCatalog.getString('Listing backup dates ...'));
                 $scope.BackupID = resp.data.ID;
                 $scope.fetchBackupTimes();
             }, function(resp) {
