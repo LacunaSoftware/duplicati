@@ -137,7 +137,7 @@ namespace Duplicati.Server
                     var backup = Program.DataConnection.GetBackup(BackupID);
                     targetURL = backup.TargetURL;
                 }
-                ENotariadoConnection.QueueLog(ID, When, Message,
+                _ = ENotariadoConnection.QueueLog(ID, When, Message,
                     Exception?.ToString(),
                     Type.ToString(), targetURL);
             }

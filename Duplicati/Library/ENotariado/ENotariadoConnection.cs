@@ -200,7 +200,7 @@ namespace Duplicati.Library.ENotariado
         /// <summary>
         /// Add log to queue in order to later send them to e-Notariado servers
         /// </summary>
-        public static void QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
+        public static async Task QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
         {
             var logRequest = new DuplicatiLogModel
             {
