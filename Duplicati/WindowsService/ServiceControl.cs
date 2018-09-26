@@ -12,7 +12,7 @@ namespace Duplicati.WindowsService
     {
         private const string LOG_SOURCE = "Backup e-Notariado";
         private const string LOG_NAME = "Application";
-        public const string SERVICE_NAME = "Backup e-Notariado";
+        public const string SERVICE_NAME = "BackupENotariado";
         public const string DISPLAY_NAME = "Backup e-Notariado";
         public const string DESCRIPTION = "Executa Backup e-Notariado como um serviço";
 
