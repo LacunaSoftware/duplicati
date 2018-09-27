@@ -11,7 +11,7 @@
                   Directory="ProgramMenuFolder"
                   Icon="DuplicatiIcon.exe"
                   IconIndex="0"
-                  Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe"
+                  Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe --no-hosted-server"
                   />
         <RegistryKey Root="HKCU" Key="Software\LacunaSoftware\ENotariadoBackup\ProgramMenuShortcut">
           <RegistryValue
@@ -31,7 +31,7 @@
                   Directory="DesktopFolder"
                   Icon="DuplicatiIcon.exe"
                   IconIndex="0"
-                  Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe"
+                  Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe --no-hosted-server"
                 />
         <RegistryKey Root="HKCU" Key="Software\LacunaSoftware\ENotariadoBackup\DesktopFolderShortcut">
           <RegistryValue
@@ -52,7 +52,7 @@
                     Directory="StartupFolder"
                     Icon="DuplicatiIcon.exe"
                     IconIndex="0"
-                    Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe"
+                    Target="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe --no-hosted-server"
                 />
           
           <RegistryKey Root="HKCU" Key="Software\LacunaSoftware\ENotariadoBackup\StartupShortcut">

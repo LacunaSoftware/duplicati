@@ -75,16 +75,22 @@
     </Feature>
 
     <!-- Launch Backup e-Notariado setup -->
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Iniciar Backup e-Notariado agora" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Iniciar Backup e-Notariado" />
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
     <CustomAction Id="LaunchApplication" FileKey="Duplicati.GUI.TrayIcon.exe" Impersonate="yes" ExeCommand="" Return="asyncNoWait" />
 
     <!-- Set the Add/Remove icon -->
     <Property Id="ARPPRODUCTICON" Value="DuplicatiIcon.exe" />
 
-    <!-- Remove old versions -->
+    <!-- Remove old versions and initialize windows service -->
+    <CustomAction Id='InstallService' Directory='INSTALLLOCATION' Execute='deferred' Impersonate='no' ExeCommand='[INSTALLLOCATION]Duplicati.WindowsService.exe install' Return='check' />
+    <CustomAction Id='UninstallService' Directory='INSTALLLOCATION' Execute='deferred' Impersonate='no' ExeCommand='[INSTALLLOCATION]Duplicati.WindowsService.exe uninstall' Return='ignore' />
+    
     <InstallExecuteSequence>
+      <Custom Action='UninstallService' Before='RemoveFiles'></Custom>
       <RemoveExistingProducts Before='InstallInitialize' />
+      <Custom Action='InstallService' After='InstallFiles'>NOT ((NOT UPGRADINGPRODUCTCODE) AND (REMOVE="ALL"))</Custom> <!-- On everything except for uninstall -->
+      <ScheduleReboot After="InstallFinalize"/>
     </InstallExecuteSequence>
 
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
