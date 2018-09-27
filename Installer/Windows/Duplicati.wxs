@@ -37,6 +37,9 @@
 
     <UI>
       <UIRef Id="WixUI_FeatureTree"/>
+      <UIRef Id="WixUI_ErrorProgressText" />
+      <ProgressText Action="InstallService">Instalando o serviço do Backup e-Notariado</ProgressText>
+      <ProgressText Action="UninstallService">Desinstalando o serviço do Backup e-Notariado</ProgressText>
 
       <Publish Dialog="ExitDialog"
           Control="Finish"
