@@ -2,6 +2,7 @@ using Duplicati.Library.ENotariado;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -208,6 +209,8 @@ namespace Duplicati.Server
 
         public static int RealMain(string[] _args)
         {
+            // Enable TLS 1.2 support (necessary for communicating with instances hosted on Azure App Services)
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
             //If we are on Windows, append the bundled "win-tools" programs to the search path
             //We add it last, to allow the user to override with other versions
             if (Library.Utility.Utility.IsClientWindows)
