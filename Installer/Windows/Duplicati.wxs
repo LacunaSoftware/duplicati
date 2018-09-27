@@ -89,7 +89,7 @@
 
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
     <Upgrade Id="$(var.UpgradeCode)">
-      <UpgradeVersion Minimum="2.0.0.0" Property="PREVIOUSVERSIONSINSTALLED"  Maximum="99.0.0.0" IncludeMinimum="yes" IncludeMaximum="no" />
+      <UpgradeVersion Minimum="1.0.0" Property="PREVIOUSVERSIONSINSTALLED"  Maximum="99.0.0.0" IncludeMinimum="yes" IncludeMaximum="no" />
     </Upgrade>
 
   </Product>

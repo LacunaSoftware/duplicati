@@ -1,6 +1,6 @@
 <Include>
   <!-- Never change the UpgradeCode -->
-  <?define UpgradeCode="19e06ff9-aea2-4598-9322-f87ab4005e55" ?>
+  <?define UpgradeCode="31b1c71c-ac59-42fb-9a65-f1a47eeaa5b7" ?>
 
   <!-- Remember to change product version on each install -->
   <?define ProductVersion="1.0.0" ?>
