@@ -1,10 +1,11 @@
 RELEASE_TIMESTAMP=$(date +%Y-%m-%d)
 
-RELEASE_INC_VERSION=$(cat Updates/build_version.txt)
-RELEASE_INC_VERSION=$((RELEASE_INC_VERSION+1))
+RELEASE_NOR_VERSION=$(cat Updates/build_version.txt)
+RELEASE_INC_VERSION=$((RELEASE_NOR_VERSION+1))
 
 RELEASE_TYPE=$1
 
+OLD_RELEASE_VERSION="1.0.${RELEASE_NOR_VERSION}"
 RELEASE_VERSION="1.0.${RELEASE_INC_VERSION}"
 RELEASE_NAME="${RELEASE_VERSION}_${RELEASE_TYPE}_${RELEASE_TIMESTAMP}"
 
@@ -232,7 +233,7 @@ echo "Building signed package ..."
 "${MONO}" "BuildTools/AutoUpdateBuilder/bin/Debug/AutoUpdateBuilder.exe" --input="${UPDATE_SOURCE}" --output="${UPDATE_TARGET}" --keyfile="${UPDATER_KEYFILE}" --manifest=Updates/${RELEASE_TYPE}.manifest --changeinfo="${RELEASE_CHANGEINFO}" --displayname="${RELEASE_NAME}" --remoteurls="${UPDATE_ZIP_URLS}" --version="${RELEASE_VERSION}" --keyfile-password="${KEYFILE_PASSWORD}" --gpgkeyfile="${GPG_KEYFILE}" --gpgpath="${GPG}"
 
 if [ ! -f "${UPDATE_TARGET}/package.zip" ]; then
-	"${MONO}" "BuildTools/UpdateVersionStamp/bin/Debug/UpdateVersionStamp.exe" --version="2.0.0.7"	
+	"${MONO}" "BuildTools/UpdateVersionStamp/bin/Release/UpdateVersionStamp.exe" --version="${OLD_RELEASE_VERSION}"
 	
 	echo "Something went wrong while building the package, no output found"
 	exit 5
