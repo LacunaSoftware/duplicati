@@ -14,7 +14,7 @@ namespace UpdateVersionStamp
         
         static Program()
         {
-            var versionre = @"(?<version>\d+\.\d+\.(\*|(\d+(\.(\*|\d+)))?))";
+            var versionre = @"(?<version>\d+\.\d+\.(\*|(\d+)?))";
             FILEMAP = new Dictionary<string, Regex>(StringComparer.InvariantCultureIgnoreCase);
             FILEMAP.Add("AssemblyInfo.cs", new Regex(@"(\[assembly\: AssemblyVersion\(\""" + versionre + @"""\)\])|(\[assembly\: AssemblyFileVersion\(\""" + versionre + @"\""\)\])|(\[assembly\: AssemblyFileVersionAttribute\(\""" + versionre + @"\""\)\])"));
             FILEMAP.Add("UpgradeData.wxi", new Regex(@"\<\?define ProductVersion\=\""" + versionre + @"\"" \?\>"));
@@ -86,7 +86,7 @@ namespace UpdateVersionStamp
             }
             
             //Sanity check
-            var nv = new Version(opt.version).ToString(4);
+            var nv = new Version(opt.version).ToString(3);
 
             foreach (var p in paths)
             {
