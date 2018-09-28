@@ -1,27 +1,23 @@
 RELEASE_TIMESTAMP=$(date +%Y-%m-%d)
 
-RELEASE_INC_VERSION=$(cat Updates/build_version.txt)
-RELEASE_INC_VERSION=$((RELEASE_INC_VERSION+1))
+RELEASE_NOR_VERSION=$(cat Updates/build_version.txt)
+RELEASE_INC_VERSION=$((RELEASE_NOR_VERSION+1))
 
-if [ "x$1" == "x" ]; then
-	RELEASE_TYPE="canary"
-	echo "No release type specified, using ${RELEASE_TYPE}"
-else
-	RELEASE_TYPE=$1
-fi
+RELEASE_TYPE=$1
 
-RELEASE_VERSION="2.0.3.${RELEASE_INC_VERSION}"
+OLD_RELEASE_VERSION="1.0.${RELEASE_NOR_VERSION}"
+RELEASE_VERSION="1.0.${RELEASE_INC_VERSION}"
 RELEASE_NAME="${RELEASE_VERSION}_${RELEASE_TYPE}_${RELEASE_TIMESTAMP}"
 
 RELEASE_CHANGELOG_FILE="changelog.txt"
 RELEASE_CHANGELOG_NEWS_FILE="changelog-news.txt"
 
-RELEASE_FILE_NAME="duplicati-${RELEASE_NAME}"
+RELEASE_FILE_NAME="backup-enotariado-${RELEASE_NAME}"
 
 GIT_STASH_NAME="auto-build-${RELEASE_TIMESTAMP}"
 
-UPDATE_ZIP_URLS="https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip;https://alt.updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip"
-UPDATE_MANIFEST_URLS="https://updates.duplicati.com/${RELEASE_TYPE}/latest.manifest;https://alt.updates.duplicati.com/${RELEASE_TYPE}/latest.manifest"
+UPDATE_ZIP_URLS="https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip;https://alt.updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip"
+UPDATE_MANIFEST_URLS="https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.manifest;https://alt.updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.manifest"
 UPDATER_KEYFILE="${HOME}/.config/signkeys/Duplicati/updater-release.key"
 GPG_KEYFILE="${HOME}/.config/signkeys/Duplicati/updater-gpgkey.key"
 AUTHENTICODE_PFXFILE="${HOME}/.config/signkeys/Duplicati/authenticode.pfx"
@@ -29,10 +25,10 @@ AUTHENTICODE_PASSWORD="${HOME}/.config/signkeys/Duplicati/authenticode.key"
 
 GITHUB_TOKEN_FILE="${HOME}/.config/github-api-token"
 DISCOURSE_TOKEN_FILE="${HOME}/.config/discourse-api-token"
-XBUILD=/Library/Frameworks/Mono.framework/Commands/msbuild
-NUGET=/Library/Frameworks/Mono.framework/Commands/nuget
-MONO=/Library/Frameworks/Mono.framework/Commands/mono
-GPG=/usr/local/bin/gpg2
+XBUILD=/usr/bin/msbuild
+NUGET=/usr/bin/nuget
+MONO=/usr/bin/mono
+GPG=/usr/bin/gpg2
 
 # Newer GPG needs this to allow input from a non-terminal
 export GPG_TTY=$(tty)
@@ -234,10 +230,10 @@ fi
 echo
 echo "Building signed package ..."
 
-"${MONO}" "BuildTools/AutoUpdateBuilder/bin/Debug/AutoUpdateBuilder.exe" --input="${UPDATE_SOURCE}" --output="${UPDATE_TARGET}" --keyfile="${UPDATER_KEYFILE}" --manifest=Updates/${RELEASE_TYPE}.manifest --changeinfo="${RELEASE_CHANGEINFO}" --displayname="${RELEASE_NAME}" --remoteurls="${UPDATE_ZIP_URLS}" --version="${RELEASE_VERSION}" --keyfile-password="${KEYFILE_PASSWORD}" --gpgkeyfile="${GPG_KEYFILE}" --gpgpath="${GPG}"
+"${MONO}" "BuildTools/AutoUpdateBuilder/bin/Debug/AutoUpdateBuilder.exe" --input="${UPDATE_SOURCE}" --output="${UPDATE_TARGET}" --keyfile="${UPDATER_KEYFILE}" --manifest=Updates/${RELEASE_TYPE}.manifest --changeinfo="${RELEASE_CHANGEINFO}" --displayname="${RELEASE_NAME}" --remoteurls="${UPDATE_ZIP_URLS}" --version="${RELEASE_VERSION}" --keyfile-password="${KEYFILE_PASSWORD}"
 
 if [ ! -f "${UPDATE_TARGET}/package.zip" ]; then
-	"${MONO}" "BuildTools/UpdateVersionStamp/bin/Debug/UpdateVersionStamp.exe" --version="2.0.0.7"	
+	"${MONO}" "BuildTools/UpdateVersionStamp/bin/Release/UpdateVersionStamp.exe" --version="${OLD_RELEASE_VERSION}"
 	
 	echo "Something went wrong while building the package, no output found"
 	exit 5
@@ -254,15 +250,15 @@ cp "${UPDATE_TARGET}/latest.manifest" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.man
 cp "${UPDATE_TARGET}/latest.zip.sig" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig"
 cp "${UPDATE_TARGET}/latest.zip.sig.asc" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig.asc"
 
-"${MONO}" "BuildTools/UpdateVersionStamp/bin/Debug/UpdateVersionStamp.exe" --version="2.0.0.7"
+"${MONO}" "BuildTools/UpdateVersionStamp/bin/Debug/UpdateVersionStamp.exe" --version="${RELEASE_VERSION}"
 
 echo "Uploading binaries"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip" "s3://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig" "s3://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig.asc" "s3://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.manifest" "s3://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest"
+aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip"
+aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig"
+aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig.asc" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc"
+aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.manifest" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest"
 
-aws --profile=duplicati-upload s3 cp "s3://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest" "s3://updates.duplicati.com/${RELEASE_TYPE}/latest.manifest"
+aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.manifest"
 
 ZIP_MD5=$(md5 ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $NF}')
 ZIP_SHA1=$(shasum -a 1 ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $1}')
@@ -275,8 +271,8 @@ cat > "latest.json" <<EOF
 	"zipsig": "${RELEASE_FILE_NAME}.zip.sig",
 	"zipsigasc": "${RELEASE_FILE_NAME}.zip.sig.asc",
 	"manifest": "${RELEASE_FILE_NAME}.manifest",
-	"urlbase": "https://updates.duplicati.com/${RELEASE_TYPE}/",
-	"link": "https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip",
+	"urlbase": "https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/",
+	"link": "https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip",
 	"zipmd5": "${ZIP_MD5}",
 	"zipsha1": "${ZIP_SHA1}",
 	"zipsha256": "${ZIP_SHA256}"
@@ -287,13 +283,13 @@ echo "duplicati_version_info =" > "latest.js"
 cat "latest.json" >> "latest.js"
 echo ";" >> "latest.js"
 
-aws --profile=duplicati-upload s3 cp "latest.json" "s3://updates.duplicati.com/${RELEASE_TYPE}/latest.json"
-aws --profile=duplicati-upload s3 cp "latest.js" "s3://updates.duplicati.com/${RELEASE_TYPE}/latest.js"
+aws --profile=duplicati-upload s3 cp "latest.json" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.json"
+aws --profile=duplicati-upload s3 cp "latest.js" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.js"
 
 # echo "Propagating to other build types"
 # for OTHER in ${OTHER_UPLOADS}; do
-# 	aws --profile=duplicati-upload s3 cp "s3://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest" "s3://updates.duplicati.com/${OTHER}/latest.manifest"
-# 	aws --profile=duplicati-upload s3 cp "s3://updates.duplicati.com/${RELEASE_TYPE}/latest.json" "s3://updates.duplicati.com/${OTHER}/latest.json"
+# 	aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest" "s3://updates.backup.e-notariado.org.br/${OTHER}/latest.manifest"
+# 	aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.json" "s3://updates.backup.e-notariado.org.br/${OTHER}/latest.json"
 # done
 
 rm "${RELEASE_CHANGELOG_NEWS_FILE}"
@@ -303,8 +299,8 @@ git checkout "Duplicati/Library/AutoUpdater/AutoUpdateURL.txt"
 git checkout "Duplicati/Library/AutoUpdater/AutoUpdateBuildChannel.txt"
 git add "Updates/build_version.txt"
 git add "${RELEASE_CHANGELOG_FILE}"
-git commit -m "Version bump to v${RELEASE_VERSION}-${RELEASE_NAME}" -m "You can download this build from: " -m "Binaries: https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
-git tag "v${RELEASE_VERSION}-${RELEASE_NAME}"                       -m "You can download this build from: " -m "Binaries: https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://updates.duplicati.com/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
+git commit -m "Version bump to v${RELEASE_VERSION}-${RELEASE_NAME}" -m "You can download this build from: " -m "Binaries: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
+git tag "v${RELEASE_VERSION}-${RELEASE_NAME}"                       -m "You can download this build from: " -m "Binaries: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
 git push --tags
 
 PRE_RELEASE_LABEL="--pre-release"

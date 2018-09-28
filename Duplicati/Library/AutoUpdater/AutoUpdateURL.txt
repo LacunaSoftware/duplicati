@@ -1,1 +1,1 @@
-http://updates.duplicati.com/preview/latest.manifest;http://alt.updates.duplicati.com/preview/latest.manifest
+https://updatebackupenotariado.blob.core.windows.net/stable/latest.manifest;http://alt.updates.backup.e-notariado.org.br/stable/latest.manifest
