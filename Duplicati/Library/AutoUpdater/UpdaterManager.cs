@@ -496,6 +496,11 @@ namespace Duplicati.Library.AutoUpdater
                                     if (!System.IO.Directory.Exists(targetfolder))
                                         System.IO.Directory.CreateDirectory(targetfolder);
 
+                                    // If it is a directory, it was created in the previous line
+                                    // Proceeding to zs.CopyTo(fs) will throw an exception
+                                    if (file.Key.EndsWith("/") || file.Key.EndsWith("\\"))
+                                        continue;
+
                                     using (var zs = zip.OpenRead(file.Key))
                                     using (var fs = System.IO.File.Create(targetpath))
                                         zs.CopyTo(fs);
