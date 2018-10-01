@@ -498,7 +498,7 @@ namespace Duplicati.Library.AutoUpdater
 
                                     // If it is a directory, it was created in the previous line
                                     // Proceeding to zs.CopyTo(fs) will throw an exception
-                                    if (file.Key.EndsWith("/") || file.Key.EndsWith("\\"))
+                                    if (file.Key.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
                                         continue;
 
                                     using (var zs = zip.OpenRead(file.Key))
