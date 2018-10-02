@@ -20,25 +20,74 @@ using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
 using Duplicati.Library.ENotariado;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
-    public class ENotariado : IRESTMethodGET, IRESTMethodDocumented
+    public class ENotariado : IRESTMethodGET, IRESTMethodPOST, IRESTMethodDocumented
     {
 
         public void GET(string key, RequestInfo info)
         {
-            info.BodyWriter.OutputOK(ENotariadoConnection.GetStoredBackupNames());
+            switch ((key ?? "").ToLowerInvariant())
+            {
+                case "backup-list":
+                    info.BodyWriter.OutputOK(ENotariadoConnection.GetStoredBackupNames());
+                    return;
+
+                case "backup-password":
+                    info.BodyWriter.OutputOK(new { Password = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult() });
+                    return;
+
+                default:
+                    info.ReportClientError("No such action", System.Net.HttpStatusCode.NotFound);
+                    return;
+            }
         }
 
-        public string Description { get { return "Return a list of container names and their backups"; } }
+        public void POST(string key, RequestInfo info)
+        {
+            var input = info.Request.Form;
+            var enrolledErrorMessage = new { Message = LC.L(@"The application is not enrolled. An unexpected error happened") };
+            var verifiedErrorMessage = new { Message = LC.L(@"The application is enrolled but not verified in e-Notariado servers") };
+            switch ((key ?? "").ToLowerInvariant())
+            {
+                case "verify":
+                    var result = Program.InitializeENotariado().GetAwaiter().GetResult();
+                    if ((result & ENotariadoStatus.Verified) == ENotariadoStatus.Verified)
+                        Program.ENotariadoIsVerified = true;
+
+                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
+                        info.OutputOK();
+                    else if (result == (ENotariadoStatus.Enrolled))
+                        info.OutputError(item: verifiedErrorMessage);
+                    else if (result == (ENotariadoStatus.None))
+                        info.OutputError(item: enrolledErrorMessage);
+                    return;
+
+                case "reset":
+                    result = Program.ResetENotariado().GetAwaiter().GetResult();
+                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
+                        info.OutputOK();
+                    else if (result == (ENotariadoStatus.Enrolled))
+                        info.OutputError(item: verifiedErrorMessage);
+                    else if (result == (ENotariadoStatus.None))
+                        info.OutputError(item: enrolledErrorMessage);
+                    return;
+
+                default:
+                    info.ReportClientError("No such action", System.Net.HttpStatusCode.NotFound);
+                    return;
+            }
+        }
+
+        public string Description { get { return "Operações relacionadas a e-Notariado"; } }
 
         public IEnumerable<KeyValuePair<string, Type>> Types
         {
             get
             {
                 return new KeyValuePair<string, Type>[] {
-                    new KeyValuePair<string, Type>(HttpServer.Method.Get, typeof(List<Library.Backend.AzureBlob.BackupData>))
                 };
             }
         }

@@ -87,10 +87,22 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
 
     $scope.eNotariadoVerify = function() {
         dlg = DialogService.dialog(gettextCatalog.getString('Enrolling ...'), gettextCatalog.getString('Verifying application ...'), [], null, function() {       
-            AppService.post('/systeminfo/verify-enotariado').then(
-                function(resp) {
+            AppService.post('/enotariado/verify').then(
+                function() {
                     dlg.dismiss();
                     dlg = DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Application verified!'));
+                    dlg.ondismiss = getSettings
+                }, handleError
+            );
+        });
+    }
+
+    $scope.eNotariadoReset = function() {
+        dlg = DialogService.dialog(gettextCatalog.getString('Re-enrolling ...'), gettextCatalog.getString('Contacting e-Notariado ...'), [], null, function() {       
+            AppService.post('/enotariado/reset').then(
+                function() {
+                    dlg.dismiss();
+                    dlg = DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('The application was re-enrolled successfully!'));
                     dlg.ondismiss = getSettings
                 }, handleError
             );
@@ -115,18 +127,6 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             DialogService.dialog(gettextCatalog.getString('Fail'), AppUtils.format(gettextCatalog.getString('Could not copy {0} to clipboard'), sliced));
 
         }
-      }
-
-    $scope.eNotariadoReset = function() {
-        dlg = DialogService.dialog(gettextCatalog.getString('Re-enrolling ...'), gettextCatalog.getString('Contacting e-Notariado ...'), [], null, function() {       
-            AppService.post('/systeminfo/reset-enotariado').then(
-                function(resp) {
-                    dlg.dismiss();
-                    dlg = DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('The application was re-enrolled successfully!'));
-                    dlg.ondismiss = getSettings
-                }, handleError
-            );
-        });
     }
 
     $scope.save = function() {

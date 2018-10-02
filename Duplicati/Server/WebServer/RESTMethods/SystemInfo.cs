@@ -44,8 +44,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
         public void POST(string key, RequestInfo info)
         {
             var input = info.Request.Form;
-            var enrolledErrorMessage = new { Message = LC.L(@"The application is not enrolled. An unexpected error happened") };
-            var verifiedErrorMessage = new { Message = LC.L(@"The application is enrolled but not verified in e-Notariado servers") };
             switch ((key ?? "").ToLowerInvariant())
             {
                 case "suppressdonationmessages":
@@ -56,29 +54,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 case "showdonationmessages":
                     Library.Main.Utility.SuppressDonationMessages = false;
                     info.OutputOK();
-                    return;
-
-                case "verify-enotariado":
-                    var result = Program.InitializeENotariado().GetAwaiter().GetResult();
-                    if ((result & ENotariadoStatus.Verified) == ENotariadoStatus.Verified)
-                        Program.ENotariadoIsVerified = true;
-                    
-                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
-                        info.OutputOK();
-                    else if (result == (ENotariadoStatus.Enrolled))
-                        info.OutputError(item: verifiedErrorMessage);
-                    else if (result == (ENotariadoStatus.None))
-                        info.OutputError(item: enrolledErrorMessage);
-                    return;
-
-                case "reset-enotariado":
-                    result = Program.ResetENotariado().GetAwaiter().GetResult();
-                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
-                        info.OutputOK();
-                    else if (result == (ENotariadoStatus.Enrolled))
-                        info.OutputError(item: verifiedErrorMessage);
-                    else if (result == (ENotariadoStatus.None))
-                        info.OutputError(item: enrolledErrorMessage);
                     return;
 
                 default:

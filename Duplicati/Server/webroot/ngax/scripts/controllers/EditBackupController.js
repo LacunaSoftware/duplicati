@@ -187,7 +187,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
 
         if ($scope.Backup.Sources == null || $scope.Backup.Sources.length == 0) {
             DialogService.dialog(gettextCatalog.getString('Missing sources'), gettextCatalog.getString('You must choose at least one source folder'));
-            $scope.CurrentStep = 2;
+            $scope.CurrentStep = 1;
             return;
         }
 
@@ -328,15 +328,20 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
         }
     };
 
-
     function setupScope(data) {
         $scope.Backup = angular.copy(data.Backup);
         $scope.Schedule = angular.copy(data.Schedule);
 
         $scope.Options = {
-            'passphrase': 'abcdef', // placeholder, will be intercepted by server
             'encryption-module': 'aes'
         };
+        
+        AppService.get('/enotariado/backup-password').then(
+            function(resp) {
+                $scope.Options['passphrase'] = resp.data.Password;
+            }
+        );
+
         var extopts = {};
 
         for(var n in $scope.Backup.Settings) {
