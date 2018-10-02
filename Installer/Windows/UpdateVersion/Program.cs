@@ -40,7 +40,7 @@ namespace UpdateVersion
                 if ((lines[i] ?? string.Empty).Contains("ProductVersion"))
                 {
                     var m = new Regex(@"(?<pre>.*ProductVersion\s*=\s*\"")(?<version>[^\""]+)(?<post>\"".*)").Match(lines[i]);
-                    lines[i] = m.Groups["pre"] + version.ToString(4) + m.Groups["post"];
+                    lines[i] = m.Groups["pre"] + version.ToString(3) + m.Groups["post"];
                     found = true;
                     break;
                 }
@@ -53,7 +53,7 @@ namespace UpdateVersion
             }
 
             File.WriteAllLines(args[1], lines);
-            Console.WriteLine("Updated {0} with verison {1}", args[1], version.ToString(4));
+            Console.WriteLine("Updated {0} with verison {1}", args[1], version.ToString(3));
             return 0;
         }
     }

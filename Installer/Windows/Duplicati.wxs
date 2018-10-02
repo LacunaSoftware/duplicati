@@ -2,7 +2,7 @@
 
 <?include UpgradeData.wxi ?>
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
   <!-- Various nice-to-have shorthands for x64/x32 -->
   <?if $(var.Platform) = "x64" ?>
@@ -38,15 +38,6 @@
     <UI>
       <UIRef Id="WixUI_FeatureTree"/>
       <UIRef Id="WixUI_ErrorProgressText" />
-      <ProgressText Action="InstallService">Instalando o serviço do Backup e-Notariado</ProgressText>
-      <ProgressText Action="UninstallService">Desinstalando o serviço do Backup e-Notariado</ProgressText>
-
-      <Publish Dialog="ExitDialog"
-          Control="Finish"
-          Event="DoAction"
-          Value="LaunchApplication">
-        <![CDATA[WIXUI_EXITDIALOGOPTIONALCHECKBOX and NOT Installed]]>
-      </Publish>
     </UI>
 
 
@@ -55,7 +46,31 @@
       <Directory Id="DesktopFolder" Name="Desktop"/>
 
       <Directory Id="$(var.ProgramFilesFolder)">
-        <Directory Id="INSTALLLOCATION" Name="Backup e-Notariado" />
+        <Directory Id="INSTALLLOCATION" Name="Backup e-Notariado">
+          <!-- Installs the service -->
+          <Component Id="WindowsService" Guid="{a4912fdc-ca72-4046-8baf-8e1d0e82b6ef}">
+            <File Id="Duplicati.WindowsService.exe2" KeyPath="yes" Source="$(var.HarvestPath)\Duplicati.WindowsService.exe" />
+            <ServiceInstall
+              Id="ServiceInstaller"
+              Type="ownProcess"
+              Vital="yes"
+              Name="BackupENotariado"
+              DisplayName="Backup e-Notariado"
+              Description="Servidor local do Backup e-Notariado"
+              Start="auto"
+              Account="LocalSystem"
+              ErrorControl="normal"
+              Interactive="no" >
+              <util:ServiceConfig
+                FirstFailureActionType='restart'
+                SecondFailureActionType='restart'
+                ThirdFailureActionType='restart'
+                RestartServiceDelayInSeconds='60'
+                ResetPeriodInDays='1'/>
+            </ServiceInstall>
+            <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="BackupENotariado" Wait="yes" />
+          </Component>
+        </Directory>
       </Directory>
     </Directory>
 
@@ -63,6 +78,11 @@
 
     <!-- TODO: Make expanded -->
     <Feature Id="ProductFeature" Title="Backup e-Notariado" Level="1" Description="Instala o Backup e-Notariado." AllowAdvertise="no" TypicalDefault="install" InstallDefault="local" Absent="disallow" ConfigurableDirectory="INSTALLLOCATION" >
+      
+      <Feature Id="ServiceFeature" Title="Instala como serviço" Description ="Executa o Backup e-Notariado como serviço automático" Level="1" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local" Absent="disallow">
+        <ComponentRef Id="WindowsService" />
+      </Feature>
+      
       <Feature Id="ENBDesktopShortCutFeature" Title="Atalho na Área de Trabalho" Level="1" Description ="Instala um atalho para o Backup e-Notariado na área de trabalho" Absent="allow" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
         <ComponentRef Id="ENBDesktopShortcutComponent"/>
       </Feature>
@@ -70,35 +90,26 @@
       <Feature Id="ENBProgramMenuShortCutFeature" Title="Atalho no Menu de Programas" Level="1" Description ="Instala um atalho para o Backup e-Notariado no menu de programas" Absent="allow" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
         <ComponentRef Id="ENBProgramMenuShortcutComponent"/>
       </Feature>
+      
       <ComponentGroupRef Id="DUPLICATIBIN" />
+      
     </Feature>
 
-    <Feature Id="ENBStartupShortCutFeature" Title="Iniciar Backup e-Notariado ao inicializar" Level="1" Description ="Automaticamente inicia Backup e-Notariado quando inicializar o sistema" Absent="allow" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
+    <Feature Id="ENBStartupShortCutFeature" Title="Iniciar Backup e-Notariado ao inicializar" Level="1" Description ="Automaticamente inicia Backup e-Notariado quando inicializar o sistema" Absent="disallow" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
       <ComponentRef Id="StartupMenuItem"/>
     </Feature>
-
-    <!-- Launch Backup e-Notariado setup -->
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Iniciar Backup e-Notariado" />
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
-    <CustomAction Id="LaunchApplication" FileKey="Duplicati.GUI.TrayIcon.exe" Impersonate="yes" ExeCommand="" Return="asyncNoWait" />
 
     <!-- Set the Add/Remove icon -->
     <Property Id="ARPPRODUCTICON" Value="DuplicatiIcon.exe" />
 
-    <!-- Remove old versions and initialize windows service -->
-    <CustomAction Id='InstallService' Directory='INSTALLLOCATION' Execute='deferred' Impersonate='no' ExeCommand='[INSTALLLOCATION]Duplicati.WindowsService.exe install' Return='check' />
-    <CustomAction Id='UninstallService' Directory='INSTALLLOCATION' Execute='deferred' Impersonate='no' ExeCommand='[INSTALLLOCATION]Duplicati.WindowsService.exe uninstall' Return='ignore' />
-    
+    <!-- Remove old versions -->    
     <InstallExecuteSequence>
-      <Custom Action='UninstallService' Before='RemoveFiles'></Custom>
       <RemoveExistingProducts Before='InstallInitialize' />
-      <Custom Action='InstallService' After='InstallFiles'>NOT ((NOT UPGRADINGPRODUCTCODE) AND (REMOVE="ALL"))</Custom> <!-- On everything except for uninstall -->
-      <ScheduleReboot After="InstallFinalize"/>
     </InstallExecuteSequence>
 
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
     <Upgrade Id="$(var.UpgradeCode)">
-      <UpgradeVersion Minimum="1.0.0" Property="PREVIOUSVERSIONSINSTALLED"  Maximum="99.0.0.0" IncludeMinimum="yes" IncludeMaximum="no" />
+      <UpgradeVersion Minimum="1.0.0" Property="PREVIOUSVERSIONSINSTALLED"  Maximum="99.0.0" IncludeMinimum="yes" IncludeMaximum="no" />
     </Upgrade>
 
   </Product>
