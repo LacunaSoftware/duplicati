@@ -38,7 +38,6 @@ namespace Duplicati.Library.ENotariado
         private static ConcurrentQueue<DuplicatiLogModel> LogQueue = new ConcurrentQueue<DuplicatiLogModel>();
         private static readonly long MIN_TIMER_PERIOD = 10000;
         private static readonly long MAX_TIMER_PERIOD = 600000; // 10 minutes
-        private static readonly long MAX_RETRIES = 10;
         private static Timer Timer;
         private static long TimerPeriod;
 
@@ -59,7 +58,6 @@ namespace Duplicati.Library.ENotariado
 
         private static readonly string LOGTAG = "eNotariado Connection";
         private static readonly string PublicKeyAuthenticationSessionState = "X-Public-Key-Auth-Session-State";
-        private static readonly string SubscriptionHeader = "X-Subscription";
         private static readonly string BaseURI = $"https://backup.e-notariado.org.br/api";
 
         private static void ResetData()
@@ -202,26 +200,30 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static async Task QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
         {
-            var logRequest = new DuplicatiLogModel
+            // Avoids caller waiting for queue to be unlocked
+            await Task.Run(() =>
             {
-                ApplicationLogId = logId,
-                DuplicatiTimestamp = ts,
-                Message = message,
-                Exception = exception,
-                LogType = logType,
-                ApplicationId = ApplicationId
-            };
+                var logRequest = new DuplicatiLogModel
+                {
+                    ApplicationLogId = logId,
+                    DuplicatiTimestamp = ts,
+                    Message = message,
+                    Exception = exception,
+                    LogType = logType,
+                    ApplicationId = ApplicationId
+                };
 
-            if (!string.IsNullOrWhiteSpace(backupTargetURL))
-            {
-                var backupUri = new Utility.Uri(backupTargetURL);
-                logRequest.BackupName = backupUri.QueryParameters["name"];
+                if (!string.IsNullOrWhiteSpace(backupTargetURL))
+                {
+                    var backupUri = new Utility.Uri(backupTargetURL);
+                    logRequest.BackupName = backupUri.QueryParameters["name"];
 
-                if (!string.IsNullOrWhiteSpace(backupUri.Host))
-                    logRequest.BackupId = Guid.Parse(backupUri.Host.ToLowerInvariant());
-            }
+                    if (!string.IsNullOrWhiteSpace(backupUri.Host))
+                        logRequest.BackupId = Guid.Parse(backupUri.Host.ToLowerInvariant());
+                }
 
-            LogQueue.Enqueue(logRequest);
+                LogQueue.Enqueue(logRequest);
+            });
         }
 
         /// <summary>
