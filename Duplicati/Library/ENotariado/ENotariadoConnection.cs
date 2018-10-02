@@ -181,8 +181,6 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static async Task<string> GetBackupPassword()
         {
-            return "abcdef";
-
             if (!string.IsNullOrWhiteSpace(BackupPassword))
                 return BackupPassword;
 
@@ -202,7 +200,7 @@ namespace Duplicati.Library.ENotariado
 
             var sasRequest = new SASRequestModel { AppKeyId = ApplicationId };
 
-            var uri = $"{BaseURI}/sas";
+            var uri = $"{BaseURI}/credentials";
             var jsonInString = JsonConvert.SerializeObject(sasRequest);
 
             Logging.Log.WriteVerboseMessage(LOGTAG, "GetCredentials", $"Requesting credentials from e-Notariado");
@@ -216,7 +214,7 @@ namespace Duplicati.Library.ENotariado
                 var content = JsonConvert.DeserializeObject<SASResponseModel>(contentString);
 
                 SASToken = content.Token;
-                // BackupPassword = content.BackupPassword;
+                BackupPassword = content.BackupPassword;
 
                 var parsed = HttpUtility.ParseQueryString(SASToken);
                 var sasExpiration = parsed["se"];
