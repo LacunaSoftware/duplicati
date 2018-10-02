@@ -26,6 +26,7 @@ namespace Duplicati.Library.ENotariado
         private static DateTime SessionTokenExpiration;
         private static string SASToken;
         private static DateTime SASTokenExpiration;
+        private static string BackupPassword;
 
         private static X509Certificate2 Certificate;
         public static Guid ApplicationId;
@@ -169,12 +170,42 @@ namespace Duplicati.Library.ENotariado
             if (!HasValidAuthToken)
                 await GetApplicationAuthToken();
 
+            Logging.Log.WriteVerboseMessage(LOGTAG, "GetSASToken", $"Requesting SAS Token to e-Notariado");
+
+            await GetCredentials();
+            return SASToken;
+        }
+
+        /// <summary>
+        /// Asks the eNotariado server for the password to encrypt the backups
+        /// </summary>
+        public static async Task<string> GetBackupPassword()
+        {
+            return "abcdef";
+
+            if (!string.IsNullOrWhiteSpace(BackupPassword))
+                return BackupPassword;
+
+            if (!HasValidAuthToken)
+                await GetApplicationAuthToken();
+
+            Logging.Log.WriteVerboseMessage(LOGTAG, "GetBackupPassword", $"Requesting backup password to e-Notariado");
+
+            await GetCredentials();
+            return BackupPassword;
+        }
+
+        public static async Task GetCredentials()
+        {
+            if (!HasValidAuthToken)
+                await GetApplicationAuthToken();
+
             var sasRequest = new SASRequestModel { AppKeyId = ApplicationId };
 
             var uri = $"{BaseURI}/sas";
             var jsonInString = JsonConvert.SerializeObject(sasRequest);
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "GetSASToken", $"Requesting SAS Token to e-Notariado");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "GetCredentials", $"Requesting credentials from e-Notariado");
 
             var stringContent = new StringContent(jsonInString, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(uri, stringContent);
@@ -183,11 +214,13 @@ namespace Duplicati.Library.ENotariado
             if (response.IsSuccessStatusCode)
             {
                 var content = JsonConvert.DeserializeObject<SASResponseModel>(contentString);
+
                 SASToken = content.Token;
+                // BackupPassword = content.BackupPassword;
+
                 var parsed = HttpUtility.ParseQueryString(SASToken);
                 var sasExpiration = parsed["se"];
                 SASTokenExpiration = DateTime.Parse(sasExpiration);
-                return SASToken;
             }
             else
             {

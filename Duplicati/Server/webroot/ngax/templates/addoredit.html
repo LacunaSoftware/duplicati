@@ -39,40 +39,6 @@
                         <label for="name" translate>Name</label>
                         <input type="text" name="name" id="name" ng-model="Backup.Name" placeholder="{{'My Photos' | translate}}"/>
                     </div>
-                    <div class="input select" ng-hide="SystemInfo.EncryptionModules.length == 0">
-                        <label for="encryption" translate>Encryption</label>
-                        <select name="encryption" id="encryption" ng-model="Options['encryption-module']" ng-options="module.Key as module.DisplayName for module in SystemInfo.EncryptionModules">
-                            <option value="" translate>No encryption</option>
-                        </select>
-                    </div>
-
-                    <div class="input encryptionhint" ng-show="(Options['encryption-module'] || '').length == 0">
-                        <h3 class="warning" translate>We recommend that you encrypt all backups stored outside your system</h3>
-                    </div>
-
-                    <div class="input password" ng-hide="(Options['encryption-module'] || '').length == 0">
-                        <label for="passphrase" translate>Passphrase</label>
-                        <input type="{{ShowPassphrase ? 'text' : 'password'}}" name="passphrase" id="passphrase" ng-model="Options['passphrase']" />
-                    </div>
-                    <div class="input password" ng-hide="(Options['encryption-module'] || '').length == 0">
-                        <label for="repeat-passphrase" translate>Repeat Passphrase</label>
-                        <input type="{{ShowPassphrase ? 'text' : 'password'}}" name="repeat-passphrase" id="repeat-passphrase" ng-model="RepeatPasshrase"/>
-
-                        <div class="tools">
-                            <ul>
-                                <li>
-                                    <a href ng-click="togglePassphraseVisibility()" ng-show="ShowPassphrase" translate>Hide</a>
-                                    <a href ng-click="togglePassphraseVisibility()" ng-hide="ShowPassphrase" translate>Show</a>
-                                </li>
-                                <li>|</li>
-                                <li>
-                                    <a href ng-click="generatePassphrase()" translate>Generate</a>
-                                </li>
-                                <li ng-show="PassphraseScoreString">|</li>
-                                <li class="strength score-{{PassphraseScore}}" ng-show="PassphraseScoreString">{{PassphraseScore != 'x' ? 'Segurança: ' : ''}} {{PassphraseScoreString}}</li>
-                            </ul>
-                        </div>
-                    </div>
 
                     <div class="buttons">
                         <input class="submit next" type="button" id="nextStep1" ng-click="nextPage()" value="{{'Next' | translate}} &gt;" />

@@ -383,6 +383,8 @@ namespace Duplicati.Server.Database
             
             var disabled_encryption = false;
             var passphrase = string.Empty;
+            var encryptionModule = string.Empty;
+            var correctPassphrase = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult();
             if (item.Settings != null)
             {
                 foreach (var s in item.Settings)
@@ -390,6 +392,8 @@ namespace Duplicati.Server.Database
                         disabled_encryption = string.IsNullOrWhiteSpace(s.Value) ? true : Library.Utility.Utility.ParseBool(s.Value, false);
                     else if (string.Equals(s.Name, "passphrase", StringComparison.OrdinalIgnoreCase))
                         passphrase = s.Value;
+                    else if (string.Equals(s.Name, "encryption-module", StringComparison.OrdinalIgnoreCase))
+                        encryptionModule = s.Value;
                     else if (string.Equals(s.Name, "keep-versions", StringComparison.OrdinalIgnoreCase))
                     {
                         int i;
@@ -442,8 +446,8 @@ namespace Duplicati.Server.Database
                     }
             }
 
-            if (!disabled_encryption && string.IsNullOrWhiteSpace(passphrase))
-                return "Missing passphrase";
+            if (disabled_encryption || passphrase != correctPassphrase || encryptionModule != "aes")
+                return "Invalid encryption data";
 
             if (schedule != null)
             {
