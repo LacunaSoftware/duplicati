@@ -1,4 +1,4 @@
-backupApp.controller('AboutController', function($scope, $location, BrandingService, ServerStatus, AppService, SystemInfo, AppUtils, gettextCatalog) {
+backupApp.controller('AboutController', function($scope, $location, BrandingService, ServerStatus, AppService, SystemInfo, AppUtils, gettextCatalog, DialogService) {
     $scope.brandingService = BrandingService.watch($scope);
     $scope.Page = 'general';
     $scope.sysinfo = SystemInfo.watch($scope);
@@ -51,7 +51,11 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
     };
 
     $scope.doStartUpdateActivate = function() {
-        AppService.post('/updates/activate').then(function() {}, AppUtils.connectionError(gettextCatalog.getString('Activate failed:') + ' '));
+        DialogService.dialog(gettextCatalog.getString('Warning'), gettextCatalog.getString('This will stop the application and a reboot will be required to restart it. Do you wish to proceed?'), [gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function(ix) {
+            if (ix == 1) {
+                AppService.post('/updates/activate').then(function() {}, AppUtils.connectionError(gettextCatalog.getString('Activate failed:') + ' '));
+            }
+        });
     };
 
     $scope.doCheckForUpdates = function() {
