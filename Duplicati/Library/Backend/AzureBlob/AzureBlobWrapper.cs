@@ -104,11 +104,10 @@ namespace Duplicati.Library.Backend.AzureBlob
             foreach(var container in containers)
             {
                 container.FetchAttributes();
-                string backupName = null;
                 if (!container.Metadata.ContainsKey(BACKUP_NAME) || container.ListBlobs().Count() == 0)
                     continue;
 
-                backupName = container.Metadata[BACKUP_NAME];
+                var backupName = container.Metadata[BACKUP_NAME];
                 backupName = Encoding.UTF8.GetString(Convert.FromBase64String(backupName));
                 backups.Add(new BackupData()
                 {

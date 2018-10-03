@@ -32,6 +32,7 @@ using CoCoL;
 using System.Threading;
 using Duplicati.Library.Snapshots;
 using Duplicati.Library.Utility;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Library.Main.Operation
 {
@@ -377,13 +378,13 @@ namespace Duplicati.Library.Main.Operation
 
                 var probe_path = m_database.GetFirstPath();
                 if (probe_path != null && Duplicati.Library.Utility.Utility.GuessDirSeparator(probe_path) != System.IO.Path.DirectorySeparatorChar.ToString())
-                    throw new UserInformationException(string.Format("The backup contains files that belong to another operating system. Proceeding with a backup would cause the database to contain paths from two different operation systems, which is not supported. To proceed without losing remote data, delete all filesets and make sure the --{0} option is set, then run the backup again to re-use the existing data on the remote store.", "no-auto-compact"), "CrossOsDatabaseReuseNotSupported");
+                    throw new UserInformationException(string.Format(LC.L(@"The backup contains files that belong to another operating system. Proceeding with a backup would cause the database to contain paths from two different operation systems, which is not supported. To proceed without losing remote data, delete all filesets and make sure the --{0} option is set, then run the backup again to re-use the existing data on the remote store."), "no-auto-compact"), "CrossOsDatabaseReuseNotSupported");
 
                 if (m_database.PartiallyRecreated)
-                    throw new UserInformationException("The database was only partially recreated. This database may be incomplete and the repair process is not allowed to alter remote files as that could result in data loss.", "DatabaseIsPartiallyRecreated");
+                    throw new UserInformationException(LC.L(@"The database was only partially recreated. This database may be incomplete and the repair process is not allowed to alter remote files as that could result in data loss."), "DatabaseIsPartiallyRecreated");
                 
                 if (m_database.RepairInProgress)
-                    throw new UserInformationException("The database was attempted repaired, but the repair did not complete. This database may be incomplete and the backup process cannot continue. You may delete the local database and attempt to repair it again.", "DatabaseRepairInProgress");
+                    throw new UserInformationException(LC.L(@"The database was attempted repaired, but the repair did not complete. This database may be incomplete and the backup process cannot continue. You may delete the local database and attempt to repair it again."), "DatabaseRepairInProgress");
 
                 // If there is no filter, we set an empty filter to simplify the code
                 // If there is a filter, we make sure that the sources are included
@@ -449,7 +450,7 @@ namespace Duplicati.Library.Main.Operation
                                 // Grab the previous backup ID, if any
                                 var prevfileset = m_database.FilesetTimes.FirstOrDefault();
                                 if (prevfileset.Value.ToUniversalTime() > m_database.OperationTimestamp.ToUniversalTime())
-                                    throw new Exception(string.Format("The previous backup has time {0}, but this backup has time {1}. Something is wrong with the clock.", prevfileset.Value.ToLocalTime(), m_database.OperationTimestamp.ToLocalTime()));
+                                    throw new Exception(string.Format(LC.L(@"The previous backup has time {0}, but this backup has time {1}. Something is wrong with the clock."), prevfileset.Value.ToLocalTime(), m_database.OperationTimestamp.ToLocalTime()));
                                 
                                 var lastfilesetid = prevfileset.Value.Ticks == 0 ? -1 : prevfileset.Key;
 
@@ -467,7 +468,7 @@ namespace Duplicati.Library.Main.Operation
                                     filesetvolume.ResetRemoteFilename(m_options, m_database.OperationTimestamp.AddSeconds(repcnt++));
 
                                 if (await db.GetRemoteVolumeIDAsync(filesetvolume.RemoteFilename) >= 0)
-                                    throw new Exception("Unable to generate a unique fileset name");
+                                    throw new Exception(LC.L(@"Unable to generate a unique fileset name"));
 
                                 var filesetvolumeid = await db.RegisterRemoteVolumeAsync(filesetvolume.RemoteFilename, RemoteVolumeType.Files, RemoteVolumeState.Temporary);
                                 filesetid = await db.CreateFilesetAsync(filesetvolumeid, VolumeBase.ParseFilename(filesetvolume.RemoteFilename).Time);

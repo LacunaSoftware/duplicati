@@ -3,7 +3,7 @@
 	<Fragment>
 
     <DirectoryRef Id="ProgramMenuFolder">
-      <Component Id="ENBProgramMenuShortcutComponent" Guid="1D03AB64-E310-4974-835E-E9E8CFB18BBC">
+      <Component Id="ENBProgramMenuShortcutComponent" Guid="{1D03AB64-E310-4974-835E-E9E8CFB18BBC}">
         <Shortcut Id="ENBProgramMenuShortcut"
                   Name="Backup e-Notariado"
                   WorkingDirectory="INSTALLLOCATION"
@@ -24,7 +24,7 @@
     </DirectoryRef>
 
     <DirectoryRef Id="DesktopFolder">
-      <Component Id="ENBDesktopShortcutComponent" Guid="7BF060B8-389F-4a95-931C-5D551E55902A">
+      <Component Id="ENBDesktopShortcutComponent" Guid="{7BF060B8-389F-4a95-931C-5D551E55902A}">
         <Shortcut Id="ENBDesktopComponent"
                   Name="Backup e-Notariado"
                   WorkingDirectory="INSTALLLOCATION"
@@ -46,7 +46,7 @@
 
     <DirectoryRef Id="ProgramMenuFolder">
       <Directory Id="StartupFolder">
-        <Component Id="StartupMenuItem" Guid="A85B1D4E-26EF-4d6a-8C1F-279EAABCE8DE">
+        <Component Id="StartupMenuItem" Guid="{A85B1D4E-26EF-4d6a-8C1F-279EAABCE8DE}">
           <Shortcut Id="ENBStartupComponent"
                   Name="Backup e-Notariado"
                   WorkingDirectory="INSTALLLOCATION"
