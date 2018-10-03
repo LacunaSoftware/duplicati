@@ -105,7 +105,7 @@ namespace Duplicati.Library.Backend.AzureBlob
             {
                 container.FetchAttributes();
                 string backupName = null;
-                if (!container.Metadata.ContainsKey(BACKUP_NAME))
+                if (!container.Metadata.ContainsKey(BACKUP_NAME) || container.ListBlobs().Count() == 0)
                     continue;
 
                 backupName = container.Metadata[BACKUP_NAME];
