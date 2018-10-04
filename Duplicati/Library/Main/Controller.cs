@@ -547,7 +547,7 @@ namespace Duplicati.Library.Main
             m_options.LoadedModules.Clear();
 
             foreach (Library.Interface.IGenericModule m in DynamicLoader.GenericLoader.Modules)
-                m_options.LoadedModules.Add(new KeyValuePair<bool, Library.Interface.IGenericModule>(Array.IndexOf<string>(m_options.DisableModules, m.Key.ToLower()) < 0 && (m.LoadAsDefault || Array.IndexOf<string>(m_options.EnableModules, m.Key.ToLower()) >= 0), m));
+                m_options.LoadedModules.Add(new KeyValuePair<bool, Library.Interface.IGenericModule>(!m_options.DisableModules.Contains(m.Key, StringComparer.OrdinalIgnoreCase) && (m.LoadAsDefault || m_options.EnableModules.Contains(m.Key, StringComparer.OrdinalIgnoreCase)), m));
 
             // Make the filter read-n-write able in the generic modules
             var pristinefilter = string.Join(System.IO.Path.PathSeparator.ToString(), FilterExpression.Serialize(filter));
@@ -562,7 +562,7 @@ namespace Duplicati.Library.Main
             //// Since Configure in RunScript can alter the RawOptions, make sure it is first in the list for Configure
             var LoadedModules = new List<KeyValuePair<bool, Interface.IGenericModule>>();
             foreach (var mx in m_options.LoadedModules)
-                if (mx.Value.ToString().ToLower().Contains("runscript"))
+                if (mx.Value.ToString().IndexOf("runscript", StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     LoadedModules.Insert(0, mx);
                 }
@@ -749,7 +749,7 @@ namespace Duplicati.Library.Main
                 if (l != null)
                     foreach (Library.Interface.ICommandLineArgument a in l)
                     {
-                        if (supportedOptions.ContainsKey(a.Name) && Array.IndexOf(Options.KnownDuplicates, a.Name.ToLower()) < 0)
+                        if (supportedOptions.ContainsKey(a.Name) && !Options.KnownDuplicates.Contains(a.Name, StringComparer.OrdinalIgnoreCase))
                             Logging.Log.WriteWarningMessage(LOGTAG, "DuplicateOption", null, Strings.Controller.DuplicateOptionNameWarning(a.Name));
 
                         supportedOptions[a.Name] = a;
@@ -757,7 +757,7 @@ namespace Duplicati.Library.Main
                         if (a.Aliases != null)
                             foreach (string s in a.Aliases)
                             {
-                                if (supportedOptions.ContainsKey(s) && Array.IndexOf(Options.KnownDuplicates, s.ToLower()) < 0)
+                                if (supportedOptions.ContainsKey(s) && !Options.KnownDuplicates.Contains(s, StringComparer.OrdinalIgnoreCase))
                                     Logging.Log.WriteWarningMessage(LOGTAG, "DuplicateOption", null, Strings.Controller.DuplicateOptionNameWarning(s));
 
                                 supportedOptions[s] = a;

@@ -94,10 +94,8 @@ namespace Duplicati.Library.Backend.Box
         {
             var uri = new Utility.Uri(url);
 
-            m_path = uri.HostAndPath;
-            if (!m_path.EndsWith("/", StringComparison.Ordinal))
-                m_path += "/";
-            
+            m_path = Duplicati.Library.Utility.Utility.AppendDirSeparator(uri.HostAndPath, "/");
+
             string authid = null;
             if (options.ContainsKey(AUTHID_OPTION))
                 authid = options[AUTHID_OPTION];
@@ -218,7 +216,7 @@ namespace Duplicati.Library.Backend.Box
                 {
                     res = m_oauth.PostMultipartAndGetJSONData<FileList>(
                         string.Format("{0}/{1}/content", BOX_UPLOAD_URL, m_filecache[remotename]),
-                        new MultipartItem(stream, name: "file", filename: remotename)
+                        new MultipartItem(stream, "file", remotename)
                     ).Entries.First();
                 }
                 else
@@ -226,8 +224,8 @@ namespace Duplicati.Library.Backend.Box
 
                     res = m_oauth.PostMultipartAndGetJSONData<FileList>(
                         string.Format("{0}/content", BOX_UPLOAD_URL),
-                        new MultipartItem(createreq, name: "attributes"),
-                        new MultipartItem(stream, name: "file", filename: remotename)
+                        new MultipartItem(createreq, "attributes"),
+                        new MultipartItem(stream, "file", remotename)
                     ).Entries.First();
                 }
 
