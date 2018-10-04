@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Duplicati.Library.Interface;
+using Duplicati.Library.Localization.Short;
 using Duplicati.Library.Main.Database;
 using Duplicati.Library.Main.Volumes;
 
@@ -110,10 +111,10 @@ namespace Duplicati.Library.Main.Operation
                 Utility.VerifyParameters(db, m_options);
 
                 if (db.PartiallyRecreated)
-                    throw new UserInformationException("The database was only partially recreated. This database may be incomplete and the repair process is not allowed to alter remote files as that could result in data loss.", "DatabaseIsPartiallyRecreated");
+                    throw new UserInformationException(LC.L(@"The database was only partially recreated. This database may be incomplete and the repair process is not allowed to alter remote files as that could result in data loss."), "DatabaseIsPartiallyRecreated");
 
                 if (db.RepairInProgress)
-                    throw new UserInformationException("The database was attempted repaired, but the repair did not complete. This database may be incomplete and the repair process is not allowed to alter remote files as that could result in data loss.", "DatabaseIsInRepairState");
+                    throw new UserInformationException(LC.L(@"The database was attempted repaired, but the repair did not complete. This database may be incomplete and the repair process is not allowed to alter remote files as that could result in data loss."), "DatabaseIsInRepairState");
 
                 var tp = FilelistProcessor.RemoteListAnalysis(backend, m_options, db, m_result.BackendWriter, null);
                 var buffer = new byte[m_options.Blocksize];
@@ -139,7 +140,7 @@ namespace Duplicati.Library.Main.Operation
                     }
                     else if (tp.ParsedVolumes.Count() == 0 && tp.ExtraVolumes.Count() > 0)
                     {
-                        throw new UserInformationException(string.Format("No files were missing, but {0} remote files were, found, did you mean to run recreate-database?", tp.ExtraVolumes.Count()), "NoRemoteFilesMissing");
+                        throw new UserInformationException(string.Format(LC.L(@"No files were missing, but {0} remote files were, found, did you mean to run recreate-database?"), tp.ExtraVolumes.Count()), "NoRemoteFilesMissing");
                     }
                 }
 
@@ -266,7 +267,7 @@ namespace Duplicati.Library.Main.Operation
                     {
                         var missingDblocks = tp.MissingVolumes.Where(x => x.Type == RemoteVolumeType.Blocks).ToArray();
                         if (missingDblocks.Length > 0)
-                            throw new UserInformationException($"The backup storage destination is missing data files. You can either enable `--rebuild-missing-dblock-files` or run the purge command to remove these files. The following files are missing: {string.Join(", ", missingDblocks.Select(x => x.Name))}", "MissingDblockFiles");
+                            throw new UserInformationException(string.Format(LC.L(@"The backup storage destination is missing data files. You can either enable `--rebuild-missing-dblock-files` or run the purge command to remove these files. The following files are missing: {0}"), string.Join(", ", missingDblocks.Select(x => x.Name))), "MissingDblockFiles");
                     }
                             
                     foreach(var n in tp.MissingVolumes)
@@ -417,7 +418,7 @@ namespace Duplicati.Library.Main.Operation
                                         {
                                             Logging.Log.WriteInformationMessage(LOGTAG, "RecoverySuggestion", "This may be fixed by deleting the filesets and running repair again");
 
-                                            throw new UserInformationException(string.Format("Repair not possible, missing {0} blocks.\n" + recoverymsg, missingBlocks), "RepairIsNotPossible");
+                                            throw new UserInformationException(string.Format(LC.L(@"Repair not possible, missing {0} blocks.\n") + recoverymsg, missingBlocks), "RepairIsNotPossible");
                                         }
                                         else
                                         {

@@ -73,7 +73,7 @@ msgstr ""
 msgid "Add a new backup"
 msgstr ""
 
-#: templates/addoredit.html:115
+#: templates/addoredit.html:119
 msgid "Add a path directly"
 msgstr ""
 
@@ -85,11 +85,11 @@ msgstr ""
 msgid "Add backup"
 msgstr ""
 
-#: templates/addoredit.html:169
+#: templates/addoredit.html:173
 msgid "Add filter"
 msgstr ""
 
-#: templates/addoredit.html:118
+#: templates/addoredit.html:122
 msgid "Add path"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Advanced options"
 msgstr ""
 
-#: templates/home.html:34
+#: templates/home.html:39
 msgid "Advanced:"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Allow remote access (requires restart)"
 msgstr ""
 
-#: templates/addoredit.html:240
+#: templates/addoredit.html:244
 msgid "Allowed days"
 msgstr ""
 
@@ -195,7 +195,7 @@ msgstr ""
 msgid "Authentication username"
 msgstr ""
 
-#: templates/addoredit.html:220
+#: templates/addoredit.html:224
 msgid "Automatically run backups."
 msgstr ""
 
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Backend modules:"
 msgstr ""
 
-#: templates/home.html:89
+#: templates/home.html:94
 msgid "Backend progress:"
 msgstr ""
 
@@ -234,7 +234,7 @@ msgstr ""
 msgid "Backup Complete!"
 msgstr ""
 
-#: templates/addoredit.html:54
+#: templates/addoredit.html:58
 msgid "Backup destination"
 msgstr ""
 
@@ -242,11 +242,11 @@ msgstr ""
 msgid "Backup location"
 msgstr ""
 
-#: templates/addoredit.html:281
+#: templates/addoredit.html:285
 msgid "Backup retention"
 msgstr ""
 
-#: templates/home.html:70
+#: templates/home.html:75
 msgid "Backup:"
 msgstr ""
 
@@ -389,7 +389,7 @@ msgstr ""
 msgid "Click to set throttle options"
 msgstr ""
 
-#: templates/home.html:38
+#: templates/home.html:43
 msgid "Compact now"
 msgstr ""
 
@@ -418,7 +418,7 @@ msgstr ""
 msgid "Configuration file:"
 msgstr ""
 
-#: templates/home.html:26
+#: templates/home.html:31
 msgid "Configuration:"
 msgstr ""
 
@@ -494,7 +494,7 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: templates/addoredit.html:65
+#: templates/addoredit.html:69
 msgid "Copy Destination URL to Clipboard"
 msgstr ""
 
@@ -518,7 +518,7 @@ msgstr ""
 msgid "Crashes only"
 msgstr ""
 
-#: templates/home.html:45
+#: templates/home.html:50
 msgid "Create bug report ..."
 msgstr ""
 
@@ -550,11 +550,11 @@ msgstr ""
 msgid "Creating user..."
 msgstr ""
 
-#: templates/home.html:76
+#: templates/home.html:81
 msgid "Current action:"
 msgstr ""
 
-#: templates/home.html:86
+#: templates/home.html:91
 msgid "Current file:"
 msgstr ""
 
@@ -570,7 +570,7 @@ msgstr ""
 msgid "Custom authentication url"
 msgstr ""
 
-#: templates/addoredit.html:287
+#: templates/addoredit.html:291
 msgid "Custom backup retention"
 msgstr ""
 
@@ -596,12 +596,12 @@ msgstr ""
 msgid "Custom storage class ({{class}})"
 msgstr ""
 
-#: templates/home.html:36
+#: templates/home.html:41
 msgid "Database ..."
 msgstr ""
 
 #: scripts/services/AppUtils.js:91
-#: templates/addoredit.html:313
+#: templates/addoredit.html:317
 msgid "Days"
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: templates/home.html:30
+#: templates/home.html:35
 msgid "Delete ..."
 msgstr ""
 
@@ -634,7 +634,7 @@ msgstr ""
 msgid "Delete backup"
 msgstr ""
 
-#: templates/addoredit.html:284
+#: templates/addoredit.html:288
 msgid "Delete backups that are older than"
 msgstr ""
 
@@ -661,6 +661,14 @@ msgstr ""
 
 #: scripts/services/ServerStatus.js:40
 msgid "Deleting unwanted files ..."
+msgstr ""
+
+#: templates/addoredit.html:43
+msgid "Description"
+msgstr ""
+
+#: templates/home.html:20
+msgid "Description:"
 msgstr ""
 
 #: scripts/services/AppUtils.js:60
@@ -728,17 +736,17 @@ msgstr ""
 msgid "Each backup has a local database associated with it, which stores information about the remote backup on the local machine. When deleting a backup, you can also delete the local database without affecting the ability to restore the remote files. If you are using the local database for backups from the commandline, you should keep the database."
 msgstr ""
 
-#: templates/home.html:28
+#: templates/home.html:33
 msgid "Edit ..."
 msgstr ""
 
-#: templates/addoredit.html:136
+#: templates/addoredit.html:140
 #: templates/edituri.html:39
 #: templates/settings.html:165
 msgid "Edit as list"
 msgstr ""
 
-#: templates/addoredit.html:139
+#: templates/addoredit.html:143
 #: templates/edituri.html:42
 #: templates/settings.html:171
 msgid "Edit as text"
@@ -766,7 +774,7 @@ msgstr ""
 msgid "Enter URL"
 msgstr ""
 
-#: templates/addoredit.html:301
+#: templates/addoredit.html:305
 msgid "Enter a retention strategy manually. Placeholders are D/W/Y for days/weeks/years and U for unlimited. The syntax is: 7D:1D,4W:1W,36M:1M. This example keeps one backup for each of the next 7 days, one for each of the next 4 weeks, and one for each of the next 36 months. This can also be written as 1W:1D,1M:1W,3Y:1M."
 msgstr ""
 
@@ -791,7 +799,7 @@ msgstr ""
 msgid "Enter encryption passphrase"
 msgstr ""
 
-#: templates/addoredit.html:158
+#: templates/addoredit.html:162
 msgid "Enter expression here"
 msgstr ""
 
@@ -857,7 +865,7 @@ msgstr ""
 msgid "Errors and crashes"
 msgstr ""
 
-#: templates/addoredit.html:176
+#: templates/addoredit.html:180
 msgid "Exclude"
 msgstr ""
 
@@ -905,7 +913,7 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: templates/home.html:29
+#: templates/home.html:34
 msgid "Export ..."
 msgstr ""
 
@@ -972,7 +980,7 @@ msgstr ""
 msgid "Failed to import:"
 msgstr ""
 
-#: scripts/controllers/EditBackupController.js:536
+#: scripts/controllers/EditBackupController.js:534
 msgid "Failed to read backup defaults:"
 msgstr ""
 
@@ -993,11 +1001,11 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: templates/addoredit.html:199
+#: templates/addoredit.html:203
 msgid "Files larger than:"
 msgstr ""
 
-#: templates/addoredit.html:125
+#: templates/addoredit.html:129
 msgid "Filters"
 msgstr ""
 
@@ -1051,7 +1059,7 @@ msgstr ""
 msgid "General backup settings"
 msgstr ""
 
-#: templates/addoredit.html:267
+#: templates/addoredit.html:271
 msgid "General options"
 msgstr ""
 
@@ -1119,11 +1127,11 @@ msgstr ""
 msgid "ID:"
 msgstr ""
 
-#: templates/addoredit.html:223
+#: templates/addoredit.html:227
 msgid "If a date was missed, the job will run as soon as possible."
 msgstr ""
 
-#: templates/addoredit.html:321
+#: templates/addoredit.html:325
 msgid "If at least one newer backup is found, all backups older than this date are deleted."
 msgstr ""
 
@@ -1160,7 +1168,7 @@ msgstr ""
 msgid "Import"
 msgstr ""
 
-#: templates/addoredit.html:62
+#: templates/addoredit.html:66
 msgid "Import Destination URL"
 msgstr ""
 
@@ -1249,11 +1257,11 @@ msgstr ""
 msgid "KByte/s"
 msgstr ""
 
-#: templates/addoredit.html:285
+#: templates/addoredit.html:289
 msgid "Keep a specific number of backups"
 msgstr ""
 
-#: templates/addoredit.html:283
+#: templates/addoredit.html:287
 msgid "Keep all backups"
 msgstr ""
 
@@ -1269,7 +1277,7 @@ msgstr ""
 msgid "Last month"
 msgstr ""
 
-#: templates/home.html:50
+#: templates/home.html:55
 msgid "Last successful backup:"
 msgstr ""
 
@@ -1399,10 +1407,10 @@ msgid "Max upload speed"
 msgstr ""
 
 #: index.html:136
-#: templates/addoredit.html:131
-#: templates/addoredit.html:344
-#: templates/addoredit.html:57
-#: templates/addoredit.html:89
+#: templates/addoredit.html:135
+#: templates/addoredit.html:348
+#: templates/addoredit.html:61
+#: templates/addoredit.html:93
 #: templates/edituri.html:34
 msgid "Menu"
 msgstr ""
@@ -1442,7 +1450,7 @@ msgid "Mon"
 msgstr ""
 
 #: scripts/services/AppUtils.js:93
-#: templates/addoredit.html:315
+#: templates/addoredit.html:319
 msgid "Months"
 msgstr ""
 
@@ -1474,7 +1482,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: templates/home.html:57
+#: templates/home.html:62
 msgid "Never"
 msgstr ""
 
@@ -1488,16 +1496,16 @@ msgid ""
 "Updated credentials to use the new limited user"
 msgstr ""
 
-#: templates/addoredit.html:208
-#: templates/addoredit.html:258
-#: templates/addoredit.html:44
-#: templates/addoredit.html:75
+#: templates/addoredit.html:212
+#: templates/addoredit.html:262
+#: templates/addoredit.html:48
+#: templates/addoredit.html:79
 #: templates/addwizard.html:28
 #: templates/restorewizard.html:47
 msgid "Next"
 msgstr ""
 
-#: templates/home.html:61
+#: templates/home.html:66
 msgid "Next scheduled run:"
 msgstr ""
 
@@ -1509,7 +1517,7 @@ msgstr ""
 msgid "Next task:"
 msgstr ""
 
-#: templates/addoredit.html:226
+#: templates/addoredit.html:230
 msgid "Next time"
 msgstr ""
 
@@ -1572,7 +1580,7 @@ msgstr ""
 msgid "Note that speeds are entered in bytes, and line speeds are typically reported in bits. Use a factor of 8 to convert, such that an 8 mbit/s line is equivalent to 1 MByte/s."
 msgstr ""
 
-#: templates/addoredit.html:290
+#: templates/addoredit.html:294
 msgid "Nothing will be deleted. The backup size will grow with each change."
 msgstr ""
 
@@ -1592,7 +1600,7 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: templates/addoredit.html:308
+#: templates/addoredit.html:312
 msgid "Once there are more backups than the specified number, the oldest backups are deleted."
 msgstr ""
 
@@ -1612,7 +1620,7 @@ msgstr ""
 msgid "Operating System"
 msgstr ""
 
-#: templates/home.html:20
+#: templates/home.html:25
 msgid "Operations:"
 msgstr ""
 
@@ -1643,7 +1651,7 @@ msgstr ""
 msgid "Others"
 msgstr ""
 
-#: templates/addoredit.html:294
+#: templates/addoredit.html:298
 msgid "Over time backups will be deleted automatically. There will remain one backup for each of the last 7 days, each of the last 4 weeks, each of the last 12 months. There will always be at least one remaining backup."
 msgstr ""
 
@@ -1724,10 +1732,10 @@ msgstr ""
 msgid "Prevent tray icon automatic log-in"
 msgstr ""
 
-#: templates/addoredit.html:209
-#: templates/addoredit.html:259
-#: templates/addoredit.html:371
-#: templates/addoredit.html:76
+#: templates/addoredit.html:213
+#: templates/addoredit.html:263
+#: templates/addoredit.html:375
+#: templates/addoredit.html:80
 msgid "Previous"
 msgstr ""
 
@@ -1736,7 +1744,7 @@ msgstr ""
 msgid "Progress"
 msgstr ""
 
-#: templates/home.html:78
+#: templates/home.html:83
 msgid "Progress:"
 msgstr ""
 
@@ -1804,11 +1812,11 @@ msgstr ""
 msgid "Remote repository"
 msgstr ""
 
-#: templates/addoredit.html:269
+#: templates/addoredit.html:273
 msgid "Remote volume size"
 msgstr ""
 
-#: templates/addoredit.html:165
+#: templates/addoredit.html:169
 msgid "Remove"
 msgstr ""
 
@@ -1825,7 +1833,7 @@ msgstr ""
 msgid "Repairing database ..."
 msgstr ""
 
-#: templates/home.html:42
+#: templates/home.html:47
 msgid "Reporting:"
 msgstr ""
 
@@ -1847,7 +1855,7 @@ msgstr ""
 msgid "Restore files"
 msgstr ""
 
-#: templates/home.html:23
+#: templates/home.html:28
 msgid "Restore files ..."
 msgstr ""
 
@@ -1890,12 +1898,12 @@ msgstr ""
 msgid "Retrieved information about {0} backups ..."
 msgstr ""
 
-#: templates/addoredit.html:231
+#: templates/addoredit.html:235
 msgid "Run again every"
 msgstr ""
 
-#: templates/home.html:22
-#: templates/home.html:57
+#: templates/home.html:27
+#: templates/home.html:62
 msgid "Run now"
 msgstr ""
 
@@ -1927,7 +1935,7 @@ msgstr ""
 msgid "Sat"
 msgstr ""
 
-#: templates/addoredit.html:370
+#: templates/addoredit.html:374
 #: templates/localdatabase.html:32
 msgid "Save"
 msgstr ""
@@ -1952,7 +1960,7 @@ msgstr ""
 msgid "Scanning for local blocks ..."
 msgstr ""
 
-#: templates/addoredit.html:217
+#: templates/addoredit.html:221
 #: templates/addoredit.html:27
 msgid "Schedule"
 msgstr ""
@@ -2029,11 +2037,11 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
-#: templates/addoredit.html:94
+#: templates/addoredit.html:98
 msgid "Show advanced editor"
 msgstr ""
 
-#: templates/addoredit.html:105
+#: templates/addoredit.html:109
 #: templates/backends/file.html:16
 #: templates/restore.html:99
 msgid "Show hidden folders"
@@ -2043,11 +2051,11 @@ msgstr ""
 msgid "Show log"
 msgstr ""
 
-#: templates/home.html:44
+#: templates/home.html:49
 msgid "Show log ..."
 msgstr ""
 
-#: templates/addoredit.html:97
+#: templates/addoredit.html:101
 msgid "Show treeview"
 msgstr ""
 
@@ -2055,7 +2063,7 @@ msgstr ""
 msgid "Sia server password"
 msgstr ""
 
-#: templates/addoredit.html:286
+#: templates/addoredit.html:290
 msgid "Smart backup retention"
 msgstr ""
 
@@ -2068,15 +2076,15 @@ msgid "Source Data"
 msgstr ""
 
 #: scripts/directives/sourceFolderPicker.js:387
-#: templates/addoredit.html:86
+#: templates/addoredit.html:90
 msgid "Source data"
 msgstr ""
 
-#: templates/addoredit.html:111
+#: templates/addoredit.html:115
 msgid "Source folders"
 msgstr ""
 
-#: templates/home.html:66
+#: templates/home.html:71
 msgid "Source:"
 msgstr ""
 
@@ -2346,7 +2354,7 @@ msgstr ""
 msgid "This month"
 msgstr ""
 
-#: templates/addoredit.html:274
+#: templates/addoredit.html:278
 msgid "This option does not relate to your maximum backup or file size, nor does it affect deduplication rates. <external-link link=\"'https://www.duplicati.com/articles/Choosing-Sizes/#remote-volume-size'\">See this page before you change the remote volume size.</external-link>"
 msgstr ""
 
@@ -2481,11 +2489,11 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: templates/addoredit.html:117
+#: templates/addoredit.html:121
 msgid "Validating ..."
 msgstr ""
 
-#: templates/home.html:37
+#: templates/home.html:42
 msgid "Verify files"
 msgstr ""
 
@@ -2553,7 +2561,7 @@ msgid "Wed"
 msgstr ""
 
 #: scripts/services/AppUtils.js:92
-#: templates/addoredit.html:314
+#: templates/addoredit.html:318
 msgid "Weeks"
 msgstr ""
 
@@ -2566,7 +2574,7 @@ msgid "Where do you want to restore the files to?"
 msgstr ""
 
 #: scripts/services/AppUtils.js:94
-#: templates/addoredit.html:316
+#: templates/addoredit.html:320
 msgid "Years"
 msgstr ""
 
@@ -2717,8 +2725,8 @@ msgstr ""
 msgid "byte/s"
 msgstr ""
 
-#: templates/addoredit.html:234
-#: templates/addoredit.html:317
+#: templates/addoredit.html:238
+#: templates/addoredit.html:321
 #: templates/advancedoptionseditor.html:28
 #: templates/advancedoptionseditor.html:35
 msgid "custom"
@@ -2761,7 +2769,7 @@ msgstr ""
 msgid "{{files}} files ({{size}}) to go {{speed_txt}}"
 msgstr ""
 
-#: templates/home.html:71
+#: templates/home.html:76
 #: templates/restorewizard.html:34
 msgid "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Version"
 msgid_plural "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Versions"
@@ -2785,6 +2793,6 @@ msgstr ""
 msgid "{{number}} Minutes"
 msgstr ""
 
-#: templates/home.html:51
+#: templates/home.html:56
 msgid "{{time}} (took {{duration}})"
 msgstr ""

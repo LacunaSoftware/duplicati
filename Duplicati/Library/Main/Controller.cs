@@ -342,7 +342,7 @@ namespace Duplicati.Library.Main
             string targetmail;
             m_options.RawOptions.TryGetValue("send-mail-to", out targetmail);
             if (string.IsNullOrWhiteSpace(targetmail))
-                throw new Exception(string.Format("No email specified, please use --{0}", "send-mail-to"));
+                throw new Exception(string.Format(LC.L(@"No email specified, please use --{0}"), "send-mail-to"));
 
             m_options.RawOptions["disable-module"] = string.Join(
                 ",",

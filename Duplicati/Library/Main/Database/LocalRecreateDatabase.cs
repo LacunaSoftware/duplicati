@@ -1,3 +1,4 @@
+using Duplicati.Library.Localization.Short;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -287,7 +288,7 @@ namespace Duplicati.Library.Main.Database
                         fixcmd.ExecuteNonQuery(string.Format(@"CREATE TABLE ""{0}-Failure"" AS SELECT * FROM ""{0}"" ", m_tempsmalllist));
                     }
 
-                    throw new Exception("The recreate failed, please create a bug-report from this database and send it to the developers for further analysis");
+                    throw new Exception(LC.L(@"The recreate failed, please create a bug-report from this database and send it to the developers for further analysis"));
                 }
             }
         }
@@ -448,7 +449,7 @@ namespace Duplicati.Library.Main.Database
                 m_updateBlockVolumeCommand.SetParameterValue(2, size);
                 var c = m_updateBlockVolumeCommand.ExecuteNonQuery();
                 if (c != 1)
-                    throw new Exception(string.Format("Failed to update table, found {0} entries for key {1} with size {2}", c ,hash, size));
+                    throw new Exception(string.Format(LC.L(@"Failed to update table, found {0} entries for key {1} with size {2}"), c ,hash, size));
                     
                 return true;
             }

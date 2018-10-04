@@ -19,6 +19,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json.Serialization;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Library.Main
 {
@@ -126,7 +127,7 @@ namespace Duplicati.Library.Main
                 select n).ToList();
             
             if (matches.Count > 1)
-                throw new Duplicati.Library.Interface.UserInformationException(string.Format("Multiple sources found for: {0}", backend), "MultipleLocalDatabaseSourcesFound");
+                throw new Duplicati.Library.Interface.UserInformationException(string.Format(LC.L(@"Multiple sources found for: {0}"), backend), "MultipleLocalDatabaseSourcesFound");
             
             // Re-select
             if (matches.Count == 0 && anyUsername && string.IsNullOrEmpty(username))
@@ -164,7 +165,7 @@ namespace Duplicati.Library.Main
                     newpath = System.IO.Path.Combine(folder, GenerateRandomName());
                 
                 if (System.IO.File.Exists(newpath))
-                    throw new Duplicati.Library.Interface.UserInformationException("Unable to find a unique name for the database, please use --dbpath", "CannotCreateRandomName");
+                    throw new Duplicati.Library.Interface.UserInformationException(LC.L(@"Unable to find a unique name for the database, please use --dbpath"), "CannotCreateRandomName");
                 
                 //Create a new one, add it to the list, and save it
                 configs.Add(new BackendEntry() {

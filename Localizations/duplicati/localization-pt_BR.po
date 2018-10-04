@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-04 10:04-0300\n"
-"PO-Revision-Date: 2018-10-04 10:11-0300\n"
+"POT-Creation-Date: 2018-10-04 11:30-0300\n"
+"PO-Revision-Date: 2018-10-04 11:31-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -2530,23 +2530,37 @@ msgstr "O nome do servidor \"{0}\" não é válido"
 msgid "Cancelled"
 msgstr "Cancelado"
 
-#: Library/Main/BackendManager.cs:592
+#: Library/Main/BackendManager.cs:590
 #, csharp-format
 msgid "Failed to delete file {0}, testing if file exists"
 msgstr "Falha ao excluir o arquivo {0}, testando se o arquivo existe"
 
-#: Library/Main/BackendManager.cs:598
+#: Library/Main/BackendManager.cs:596
 #, csharp-format
 msgid "Recovered from problem with attempting to delete non-existing file {0}"
 msgstr ""
 "Recuperado do problema com a tentativa de excluir o arquivo não existente {0}"
 
-#: Library/Main/BackendManager.cs:603
+#: Library/Main/BackendManager.cs:601
 #, csharp-format
 msgid "Failed to recover from error deleting file {0}"
 msgstr "Falha ao recuperar-se do erro ao excluir o arquivo {0}"
 
-#: Library/Main/BackendManager.cs:1108
+#: Library/Main/BackendManager.cs:754
+#, csharp-format
+msgid "List verify failed, file was not found after upload: {0}"
+msgstr ""
+"A verificação da lista falhou, o arquivo não foi encontrado depois do upload: "
+"{0}"
+
+#: Library/Main/BackendManager.cs:756
+#, csharp-format
+msgid "List verify failed for file: {0}, size was {1} but expected to be {2}"
+msgstr ""
+"A verificação da lista falhou no arquivo: {0}, tamanho era {1} mas o esperado "
+"era {2}"
+
+#: Library/Main/BackendManager.cs:1106
 #: Library/Main/Operation/Common/BackendHandler.cs:537
 #, csharp-format
 msgid "Delete operation failed for {0} with FileNotFound, listing contents"
@@ -2554,15 +2568,108 @@ msgstr ""
 "A operação de exclusão falhou para {0} com \"arquivo não encontrado\", "
 "listando conteúdo"
 
-#: Library/Main/BackendManager.cs:1121
+#: Library/Main/BackendManager.cs:1119
 #: Library/Main/Operation/Common/BackendHandler.cs:550
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr "A listagem indica que o arquivo {0} foi excluído corretamente"
 
+#: Library/Main/Controller.cs:345
+#, csharp-format
+msgid "No email specified, please use --{0}"
+msgstr "Nenhum e-mail especificado, por favor use --{0}"
+
 #: Library/Main/Controller.cs:447
 msgid "Operation aborted by request"
 msgstr "A operação foi abortada por solicitação."
+
+#: Library/Main/Database/LocalBackupDatabase.cs:338
+msgid "Duplicate file entries detected, run repair to fix it"
+msgstr ""
+"Foram detectados registros duplicados de um arquivo, execute uma reparação "
+"para consertar"
+
+#: Library/Main/Database/LocalBackupDatabase.cs:343
+msgid "Detected blocks that are not reachable in the block table"
+msgstr ""
+"Foram detectados blocos que não são alcançáveis a partir da tabela de blocos"
+
+#: Library/Main/Database/LocalBackupDatabase.cs:484
+#, csharp-format
+msgid "Could not find any blocks with the given hash: {0}"
+msgstr "Não foi possível achar algum bloco com a hash: {0}"
+
+#: Library/Main/Database/LocalBackupDatabase.cs:489
+#, csharp-format
+msgid "Unexpected result count: {0}, expected {1}, check log for more messages"
+msgstr ""
+"Resultado de contagem inesperado: {0}, expectative {1}, confira os logs para "
+"mais mensagens"
+
+#: Library/Main/Database/LocalRecreateDatabase.cs:291
+msgid ""
+"The recreate failed, please create a bug-report from this database and send it "
+"to the developers for further analysis"
+msgstr ""
+"A recriação falhou, por favor crie um relatório de falhar a partir desse banco "
+"de dados e o envie para o suporte para análise"
+
+#: Library/Main/Database/LocalRecreateDatabase.cs:452
+#, csharp-format
+msgid "Failed to update table, found {0} entries for key {1} with size {2}"
+msgstr ""
+"Falha ao atualizar a tabela, foram achados {0} registros para a chave {1} com "
+"tamanho {2}"
+
+#: Library/Main/Database/LocalRepairDatabase.cs:297
+msgid "Repair failed, there are still duplicate metadatahashes!"
+msgstr "Reparação falhou, ainda há hashes duplicadas de metadados!"
+
+#: Library/Main/Database/LocalRepairDatabase.cs:332
+#: Library/Main/Database/LocalRepairDatabase.cs:477
+msgid "Repair failed, there are still duplicate file entries!"
+msgstr "Reparação falhou, ainda há registros duplicados de arquivos!"
+
+#: Library/Main/Database/LocalRepairDatabase.cs:437
+#, csharp-format
+msgid "Failed to repair, after repair {0} blocklisthashes were missing"
+msgstr ""
+"Falha ao reparar, depois da reparação {0} hashes de lista de blocos estavam "
+"faltando."
+
+#: Library/Main/Database/LocalRepairDatabase.cs:470
+#, csharp-format
+msgid "Unexpected number of results after fix, got: {0}, expected: {1}"
+msgstr ""
+"Número inesperado de resultados depois da reparação, atual: {0}, esperado: {1}"
+
+#: Library/Main/Database/LocalRepairDatabase.cs:482
+#, csharp-format
+msgid ""
+"Failed to repair, result should have been {0} blocklist hashes, but result was "
+"{1} blocklist hashes"
+msgstr ""
+"Falha ao reparar, o resultado deveria ter sido {0} hashes de lista de blocos, "
+"mas foi {1}"
+
+#: Library/Main/Database/LocalRepairDatabase.cs:490
+msgid ""
+"Repaired blocklisthashes, but the database was broken afterwards, rolled back "
+"changes"
+msgstr ""
+"Hashes de lista de blocos foram reparadas, porém o banco de dados foi "
+"corrompido depois, mudanças revertidas"
+
+#: Library/Main/DatabaseLocator.cs:130
+#, csharp-format
+msgid "Multiple sources found for: {0}"
+msgstr "Várias fontes encontradas para: {0}"
+
+#: Library/Main/DatabaseLocator.cs:168
+msgid "Unable to find a unique name for the database, please use --dbpath"
+msgstr ""
+"Não foi possível achar um nome único para o banco de dados, por favor use --"
+"dbpath"
 
 #: Library/Main/Operation/BackupHandler.cs:381
 #, csharp-format
@@ -2581,6 +2688,7 @@ msgstr ""
 "existentes no armazenamento remoto."
 
 #: Library/Main/Operation/BackupHandler.cs:384
+#: Library/Main/Operation/RepairHandler.cs:114
 msgid ""
 "The database was only partially recreated. This database may be incomplete and "
 "the repair process is not allowed to alter remote files as that could result "
@@ -2780,6 +2888,41 @@ msgstr ""
 #: Library/Main/Operation/RestoreControlFilesHandler.cs:41
 msgid "No filesets found on remote target"
 msgstr "Não foram encontrados arquivos no armazenamento remoto."
+
+#: Library/Main/Operation/RepairHandler.cs:117
+msgid ""
+"The database was attempted repaired, but the repair did not complete. This "
+"database may be incomplete and the repair process is not allowed to alter "
+"remote files as that could result in data loss."
+msgstr ""
+"O banco de dados foi recriado apenas parcialmente. Este banco de dados pode "
+"estar incomplete e o processo de reparação não tem permissão de alterar "
+"arquivos remotos pois isto pode resultar em perda de dados."
+
+#: Library/Main/Operation/RepairHandler.cs:143
+#, csharp-format
+msgid ""
+"No files were missing, but {0} remote files were, found, did you mean to run "
+"recreate-database?"
+msgstr ""
+"Nenhum arquivo estava faltando, porém {0} arquivos remotos estavam, sua "
+"intenção era recriar o banco de dados?"
+
+#: Library/Main/Operation/RepairHandler.cs:270
+#, csharp-format
+msgid ""
+"The backup storage destination is missing data files. You can either enable `--"
+"rebuild-missing-dblock-files` or run the purge command to remove these files. "
+"The following files are missing: {0}"
+msgstr ""
+"O destino de armazenamento do backup está com arquivos de dados faltando. Você "
+"pode ou habilitar `--rebuild-missing-dblock-files` ou executar o comando de "
+"purgação para remover estes arquivos. Os seguintes arquivos estão faltando: {0}"
+
+#: Library/Main/Operation/RepairHandler.cs:421
+#, csharp-format
+msgid "Repair not possible, missing {0} blocks.\\n"
+msgstr "Reparação impossível, {0} blocos faltando.\\n"
 
 #: Library/Main/Strings.cs:8
 #, csharp-format

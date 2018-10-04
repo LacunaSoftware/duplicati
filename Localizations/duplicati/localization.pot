@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-04 10:04-0300\n"
+"POT-Creation-Date: 2018-10-04 11:30-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2140,35 +2140,120 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-#: Library/Main/BackendManager.cs:592
+#: Library/Main/BackendManager.cs:590
 #, csharp-format
 msgid "Failed to delete file {0}, testing if file exists"
 msgstr ""
 
-#: Library/Main/BackendManager.cs:598
+#: Library/Main/BackendManager.cs:596
 #, csharp-format
 msgid "Recovered from problem with attempting to delete non-existing file {0}"
 msgstr ""
 
-#: Library/Main/BackendManager.cs:603
+#: Library/Main/BackendManager.cs:601
 #, csharp-format
 msgid "Failed to recover from error deleting file {0}"
 msgstr ""
 
-#: Library/Main/BackendManager.cs:1108
+#: Library/Main/BackendManager.cs:754
+#, csharp-format
+msgid "List verify failed, file was not found after upload: {0}"
+msgstr ""
+
+#: Library/Main/BackendManager.cs:756
+#, csharp-format
+msgid "List verify failed for file: {0}, size was {1} but expected to be {2}"
+msgstr ""
+
+#: Library/Main/BackendManager.cs:1106
 #: Library/Main/Operation/Common/BackendHandler.cs:537
 #, csharp-format
 msgid "Delete operation failed for {0} with FileNotFound, listing contents"
 msgstr ""
 
-#: Library/Main/BackendManager.cs:1121
+#: Library/Main/BackendManager.cs:1119
 #: Library/Main/Operation/Common/BackendHandler.cs:550
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr ""
 
+#: Library/Main/Controller.cs:345
+#, csharp-format
+msgid "No email specified, please use --{0}"
+msgstr ""
+
 #: Library/Main/Controller.cs:447
 msgid "Operation aborted by request"
+msgstr ""
+
+#: Library/Main/Database/LocalBackupDatabase.cs:338
+msgid "Duplicate file entries detected, run repair to fix it"
+msgstr ""
+
+#: Library/Main/Database/LocalBackupDatabase.cs:343
+msgid "Detected blocks that are not reachable in the block table"
+msgstr ""
+
+#: Library/Main/Database/LocalBackupDatabase.cs:484
+#, csharp-format
+msgid "Could not find any blocks with the given hash: {0}"
+msgstr ""
+
+#: Library/Main/Database/LocalBackupDatabase.cs:489
+#, csharp-format
+msgid "Unexpected result count: {0}, expected {1}, check log for more messages"
+msgstr ""
+
+#: Library/Main/Database/LocalRecreateDatabase.cs:291
+msgid ""
+"The recreate failed, please create a bug-report from this database and send "
+"it to the developers for further analysis"
+msgstr ""
+
+#: Library/Main/Database/LocalRecreateDatabase.cs:452
+#, csharp-format
+msgid "Failed to update table, found {0} entries for key {1} with size {2}"
+msgstr ""
+
+#: Library/Main/Database/LocalRepairDatabase.cs:297
+msgid "Repair failed, there are still duplicate metadatahashes!"
+msgstr ""
+
+#: Library/Main/Database/LocalRepairDatabase.cs:332
+#: Library/Main/Database/LocalRepairDatabase.cs:477
+msgid "Repair failed, there are still duplicate file entries!"
+msgstr ""
+
+#: Library/Main/Database/LocalRepairDatabase.cs:437
+#, csharp-format
+msgid "Failed to repair, after repair {0} blocklisthashes were missing"
+msgstr ""
+
+#: Library/Main/Database/LocalRepairDatabase.cs:470
+#, csharp-format
+msgid "Unexpected number of results after fix, got: {0}, expected: {1}"
+msgstr ""
+
+#: Library/Main/Database/LocalRepairDatabase.cs:482
+#, csharp-format
+msgid ""
+"Failed to repair, result should have been {0} blocklist hashes, but result "
+"was {1} blocklist hashes"
+msgstr ""
+
+#: Library/Main/Database/LocalRepairDatabase.cs:490
+msgid ""
+"Repaired blocklisthashes, but the database was broken afterwards, rolled "
+"back changes"
+msgstr ""
+
+#: Library/Main/DatabaseLocator.cs:130
+#, csharp-format
+msgid "Multiple sources found for: {0}"
+msgstr ""
+
+#: Library/Main/DatabaseLocator.cs:168
+msgid "Unable to find a unique name for the database, please use --dbpath"
 msgstr ""
 
 #: Library/Main/Operation/BackupHandler.cs:381
@@ -2183,6 +2268,7 @@ msgid ""
 msgstr ""
 
 #: Library/Main/Operation/BackupHandler.cs:384
+#: Library/Main/Operation/RepairHandler.cs:114
 msgid ""
 "The database was only partially recreated. This database may be incomplete "
 "and the repair process is not allowed to alter remote files as that could "
@@ -2354,6 +2440,33 @@ msgstr ""
 #: Library/Main/Operation/ListFilesHandler.cs:93
 #: Library/Main/Operation/RestoreControlFilesHandler.cs:41
 msgid "No filesets found on remote target"
+msgstr ""
+
+#: Library/Main/Operation/RepairHandler.cs:117
+msgid ""
+"The database was attempted repaired, but the repair did not complete. This "
+"database may be incomplete and the repair process is not allowed to alter "
+"remote files as that could result in data loss."
+msgstr ""
+
+#: Library/Main/Operation/RepairHandler.cs:143
+#, csharp-format
+msgid ""
+"No files were missing, but {0} remote files were, found, did you mean to run "
+"recreate-database?"
+msgstr ""
+
+#: Library/Main/Operation/RepairHandler.cs:270
+#, csharp-format
+msgid ""
+"The backup storage destination is missing data files. You can either enable "
+"`--rebuild-missing-dblock-files` or run the purge command to remove these "
+"files. The following files are missing: {0}"
+msgstr ""
+
+#: Library/Main/Operation/RepairHandler.cs:421
+#, csharp-format
+msgid "Repair not possible, missing {0} blocks.\\n"
 msgstr ""
 
 #: Library/Main/Strings.cs:8

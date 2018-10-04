@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Linq.Expressions;
-
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Library.Main.Database
 {
@@ -335,12 +335,12 @@ namespace Duplicati.Library.Main.Database
                     }
                     catch (Exception ex)
                     {
-                        throw new InvalidDataException("Duplicate file entries detected, run repair to fix it", ex);
+                        throw new InvalidDataException(LC.L(@"Duplicate file entries detected, run repair to fix it"), ex);
                     }
 
                 var tc = cmd.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""Remotevolume"" WHERE ""ID"" IN (SELECT DISTINCT ""VolumeID"" FROM ""Block"") AND ""State"" NOT IN (?, ?, ?, ?);", 0, RemoteVolumeState.Temporary.ToString(), RemoteVolumeState.Uploading.ToString(), RemoteVolumeState.Uploaded.ToString(), RemoteVolumeState.Verified.ToString());
                 if (tc > 0)
-                    throw new InvalidDataException("Detected blocks that are not reachable in the block table");
+                    throw new InvalidDataException(LC.L(@"Detected blocks that are not reachable in the block table"));
             }
 
 			if (options.UseBlockCache)
@@ -481,12 +481,12 @@ namespace Duplicati.Library.Main.Database
                         {
                             var bid = cmd.ExecuteScalarInt64(@"SELECT ""ID"" FROM ""Block"" WHERE ""Hash"" = ?", -1, h);
                             if (bid == -1)
-                                throw new Exception(string.Format("Could not find any blocks with the given hash: {0}", h));
+                                throw new Exception(string.Format(LC.L(@"Could not find any blocks with the given hash: {0}"), h));
                             foreach(var rd in cmd.ExecuteReaderEnumerable(@"SELECT ""Size"" FROM ""Block"" WHERE ""Hash"" = ?", h))
                                 Logging.Log.WriteErrorMessage(LOGTAG, "FoundIssue1400Error", null, "Found block with ID {0} and hash {1} and size {2}", bid, h, rd.ConvertValueToInt64(0, -1));
                         }
 
-                        throw new Exception(string.Format("Unexpected result count: {0}, expected {1}, check log for more messages", c, 1));
+                        throw new Exception(string.Format(LC.L(@"Unexpected result count: {0}, expected {1}, check log for more messages"), c, 1));
                     }
                     
                     ix++;
