@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-24 10:53-0300\n"
-"PO-Revision-Date: 2018-09-24 10:55-0300\n"
+"POT-Creation-Date: 2018-10-04 10:04-0300\n"
+"PO-Revision-Date: 2018-10-04 10:11-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -2349,11 +2349,11 @@ msgstr "Falha ao invocar GnuPG, o programa não descarregará a saída"
 msgid "Failure while invoking GnuPG, program won't terminate"
 msgstr "Falha ao invocar o GnuPG, o programa não terminará"
 
-#: Library/ENotariado/ENotariadoConnection.cs:122
-#: Library/ENotariado/ENotariadoConnection.cs:159
-#: Library/ENotariado/ENotariadoConnection.cs:196
-#: Library/ENotariado/ENotariadoConnection.cs:301
-#: Library/ENotariado/ENotariadoConnection.cs:319
+#: Library/ENotariado/ENotariadoConnection.cs:121
+#: Library/ENotariado/ENotariadoConnection.cs:158
+#: Library/ENotariado/ENotariadoConnection.cs:225
+#: Library/ENotariado/ENotariadoConnection.cs:334
+#: Library/ENotariado/ENotariadoConnection.cs:352
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr "Código de resposta: '{0}'. Conteudo: '{1}'."
@@ -2559,6 +2559,60 @@ msgstr ""
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr "A listagem indica que o arquivo {0} foi excluído corretamente"
+
+#: Library/Main/Controller.cs:447
+msgid "Operation aborted by request"
+msgstr "A operação foi abortada por solicitação."
+
+#: Library/Main/Operation/BackupHandler.cs:381
+#, csharp-format
+msgid ""
+"The backup contains files that belong to another operating system. Proceeding "
+"with a backup would cause the database to contain paths from two different "
+"operation systems, which is not supported. To proceed without losing remote "
+"data, delete all filesets and make sure the --{0} option is set, then run the "
+"backup again to re-use the existing data on the remote store."
+msgstr ""
+"O backup contém arquivos que pertencem à outro sistema operacional. Prosseguir "
+"com um backup iria fazer com que o banco de dados contenha caminhos de dois "
+"sistemas operacionais diferentes, o que não é possível. Para prosseguir sem "
+"perder dados remotos, remova todos os arquivos e garanta que a opção --{0} "
+"esteja definida, execute o backup novamente para reutilizer os dados "
+"existentes no armazenamento remoto."
+
+#: Library/Main/Operation/BackupHandler.cs:384
+msgid ""
+"The database was only partially recreated. This database may be incomplete and "
+"the repair process is not allowed to alter remote files as that could result "
+"in data loss."
+msgstr ""
+"O banco de dados foi recriado apenas parcialmente. Este banco de dados pode "
+"estar incomplete e o processo de reparação não tem permissão de alterar "
+"arquivos remotos pois isto pode resultar em perda de dados."
+
+#: Library/Main/Operation/BackupHandler.cs:387
+msgid ""
+"The database was attempted repaired, but the repair did not complete. This "
+"database may be incomplete and the backup process cannot continue. You may "
+"delete the local database and attempt to repair it again."
+msgstr ""
+"Houve uma tentative de reparação do banco de dados, mas a reparação não foi "
+"completada. Este banco de dados pode estar incomplete e o processo de backup "
+"não pode continuar. Você pode remover o banco de dados local e tentar recriá-"
+"lo."
+
+#: Library/Main/Operation/BackupHandler.cs:453
+#, csharp-format
+msgid ""
+"The previous backup has time {0}, but this backup has time {1}. Something is "
+"wrong with the clock."
+msgstr ""
+"O backup anterior foi feito em {0} e este backup {1}. Há algo de errado com o "
+"relógio."
+
+#: Library/Main/Operation/BackupHandler.cs:471
+msgid "Unable to generate a unique fileset name"
+msgstr "Não foi possível gerar um nome único para o conjunto de arquivos"
 
 #: Library/Main/Operation/CreateBugReportHandler.cs:52
 #, csharp-format
@@ -5365,7 +5419,7 @@ msgid ""
 msgstr ""
 "Falha na execução SQL: {0}\n"
 "Erro: {1}\n"
-"Base de dados NÃO foi atualizada. "
+"Base de dados NÃO foi atualizada."
 
 #: Library/Utility/FilterGroups.cs:182
 #, csharp-format
@@ -5664,8 +5718,8 @@ msgid ""
 "The port the webserver listens on. Multiple values may be supplied with a "
 "comma in between."
 msgstr ""
-"A porta do servidor web escuta em. Múltiplos valores podem ser suportados "
-"entre vírgulas"
+"A porta em que o servidor escuta por requests. Múltiplos valores podem ser "
+"suportados entre vírgulas"
 
 #: Server/Strings.cs:30
 msgid ""
@@ -5785,11 +5839,11 @@ msgstr "Impossível abrir um socket para comunicação, tentar portas: {0}"
 msgid "Invalid or missing bugreport id"
 msgstr "Id do relatório de falhas inválido ou faltando"
 
-#: Server/WebServer/RESTMethods/SystemInfo.cs:47
+#: Server/WebServer/RESTMethods/ENotariado.cs:51
 msgid "The application is not enrolled. An unexpected error happened"
 msgstr "A aplicação não está cadastrada. Houve um erro inesperado"
 
-#: Server/WebServer/RESTMethods/SystemInfo.cs:48
+#: Server/WebServer/RESTMethods/ENotariado.cs:52
 msgid "The application is enrolled but not verified in e-Notariado servers"
 msgstr "A aplicação está registrada mas não foi verificada no e-Notariado"
 

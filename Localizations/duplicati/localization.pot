@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-24 10:53-0300\n"
+"POT-Creation-Date: 2018-10-04 10:04-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1972,11 +1972,11 @@ msgstr ""
 msgid "Failure while invoking GnuPG, program won't terminate"
 msgstr ""
 
-#: Library/ENotariado/ENotariadoConnection.cs:122
-#: Library/ENotariado/ENotariadoConnection.cs:159
-#: Library/ENotariado/ENotariadoConnection.cs:196
-#: Library/ENotariado/ENotariadoConnection.cs:301
-#: Library/ENotariado/ENotariadoConnection.cs:319
+#: Library/ENotariado/ENotariadoConnection.cs:121
+#: Library/ENotariado/ENotariadoConnection.cs:158
+#: Library/ENotariado/ENotariadoConnection.cs:225
+#: Library/ENotariado/ENotariadoConnection.cs:334
+#: Library/ENotariado/ENotariadoConnection.cs:352
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr ""
@@ -2165,6 +2165,46 @@ msgstr ""
 #: Library/Main/Operation/Common/BackendHandler.cs:550
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
+msgstr ""
+
+#: Library/Main/Controller.cs:447
+msgid "Operation aborted by request"
+msgstr ""
+
+#: Library/Main/Operation/BackupHandler.cs:381
+#, csharp-format
+msgid ""
+"The backup contains files that belong to another operating system. "
+"Proceeding with a backup would cause the database to contain paths from two "
+"different operation systems, which is not supported. To proceed without "
+"losing remote data, delete all filesets and make sure the --{0} option is "
+"set, then run the backup again to re-use the existing data on the remote "
+"store."
+msgstr ""
+
+#: Library/Main/Operation/BackupHandler.cs:384
+msgid ""
+"The database was only partially recreated. This database may be incomplete "
+"and the repair process is not allowed to alter remote files as that could "
+"result in data loss."
+msgstr ""
+
+#: Library/Main/Operation/BackupHandler.cs:387
+msgid ""
+"The database was attempted repaired, but the repair did not complete. This "
+"database may be incomplete and the backup process cannot continue. You may "
+"delete the local database and attempt to repair it again."
+msgstr ""
+
+#: Library/Main/Operation/BackupHandler.cs:453
+#, csharp-format
+msgid ""
+"The previous backup has time {0}, but this backup has time {1}. Something is "
+"wrong with the clock."
+msgstr ""
+
+#: Library/Main/Operation/BackupHandler.cs:471
+msgid "Unable to generate a unique fileset name"
 msgstr ""
 
 #: Library/Main/Operation/CreateBugReportHandler.cs:52
@@ -4782,10 +4822,10 @@ msgstr ""
 msgid "Invalid or missing bugreport id"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/SystemInfo.cs:47
+#: Server/WebServer/RESTMethods/ENotariado.cs:51
 msgid "The application is not enrolled. An unexpected error happened"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/SystemInfo.cs:48
+#: Server/WebServer/RESTMethods/ENotariado.cs:52
 msgid "The application is enrolled but not verified in e-Notariado servers"
 msgstr ""
