@@ -23,6 +23,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Duplicati.Library.Utility;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Library.Main
 {
@@ -440,6 +441,10 @@ namespace Duplicati.Library.Main
                         Logging.Log.WriteInformationMessage(LOGTAG, "AbortOperation", "Aborting operation by request, requested result: {0}", oae.AbortReason);
 
                         return result;
+                    }
+                    else if (ex is System.Threading.ThreadAbortException tae)
+                    {
+                        throw new Exception(LC.L(@"Operation aborted by request"));
                     }
                     else
                     {
