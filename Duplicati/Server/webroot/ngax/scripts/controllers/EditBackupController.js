@@ -322,9 +322,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
                 }, AppUtils.connectionError);
             }
 
-            checkForChangedPassphrase(function() {
-                checkForValidBackupDestination(putDb);
-            });
+            checkForValidBackupDestination(putDb);
         }
     };
 
