@@ -750,13 +750,15 @@ namespace Duplicati.Server
             X509Certificate2 cert;
             try
             {
-                if (!string.IsNullOrWhiteSpace(CertificateThumbprint))
+                if (ENotariadoIsEnrolled || ENotariadoIsVerified || !string.IsNullOrWhiteSpace(CertificateThumbprint))
                     cert = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
                 else
                     cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
             catch (CertificateNotFoundException)
             {
+                ENotariadoIsEnrolled = false;
+                ENotariadoIsVerified = false;
                 cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
             CertificateThumbprint = cert.Thumbprint;
