@@ -1,1 +1,1 @@
-https://updatebackupenotariado.blob.core.windows.net/stable/latest.manifest;http://alt.updates.backup.e-notariado.org.br/stable/latest.manifest
+https://cdn.e-notariado.org.br/backup-client/updates/stable/latest.manifest;https://cdn2.e-notariado.org.br/backup-client/updates/stable/latest.manifest

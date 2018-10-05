@@ -16,15 +16,26 @@ RELEASE_FILE_NAME="backup-enotariado-${RELEASE_NAME}"
 
 GIT_STASH_NAME="auto-build-${RELEASE_TIMESTAMP}"
 
-UPDATE_ZIP_URLS="https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip;https://alt.updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip"
-UPDATE_MANIFEST_URLS="https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.manifest;https://alt.updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.manifest"
+UPDATE_ZIP_URLS="https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip;https://cdn2.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip"
+UPDATE_MANIFEST_URLS="https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/latest.manifest;https://cdn2.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/latest.manifest"
+
 UPDATER_KEYFILE="${HOME}/.config/signkeys/Duplicati/updater-release.key"
+
 GPG_KEYFILE="${HOME}/.config/signkeys/Duplicati/updater-gpgkey.key"
+
 AUTHENTICODE_PFXFILE="${HOME}/.config/signkeys/Duplicati/authenticode.pfx"
 AUTHENTICODE_PASSWORD="${HOME}/.config/signkeys/Duplicati/authenticode.key"
 
 GITHUB_TOKEN_FILE="${HOME}/.config/github-api-token"
 DISCOURSE_TOKEN_FILE="${HOME}/.config/discourse-api-token"
+
+
+FTPS_HOSTNAME="ftps://waws-prod-cq1-011.ftp.azurewebsites.windows.net"
+FTPS_USERNAME="cdn-enotariado\mikaelm"
+echo -n "Enter FTPS password: "
+read -s FTPS_PASSWORD
+echo
+
 XBUILD=/usr/bin/msbuild
 NUGET=/usr/bin/nuget
 MONO=/usr/bin/mono
@@ -189,43 +200,46 @@ rm -rf "${UPDATE_SOURCE}/"*.xml;
 find  . -type f -name ".DS_Store" | xargs rm -rf
 find  . -type f -name "Thumbs.db" | xargs rm -rf
 
+echo -n "Waiting for sign of files"
+read -s AAA
+echo
 # Sign all files with Authenticode
-if [ -f "${AUTHENTICODE_PFXFILE}" ] && [ -f "${AUTHENTICODE_PASSWORD}" ]; then
-	echo "Performing authenticode signing of executables and libraries"
+# if [ -f "${AUTHENTICODE_PFXFILE}" ] && [ -f "${AUTHENTICODE_PASSWORD}" ]; then
+# 	echo "Performing authenticode signing of executables and libraries"
 
-	authenticode_sign() {
-		NEST=""
-		for hashalg in sha1 sha256; do
-			SIGN_MSG=$(osslsigncode sign -pkcs12 "${AUTHENTICODE_PFXFILE}" -pass "${PFX_PASS}" -n "Duplicati" -i "http://www.duplicati.com" -h "${hashalg}" ${NEST} -t "http://timestamp.verisign.com/scripts/timstamp.dll" -in "$1" -out tmpfile)
-			if [ "${SIGN_MSG}" != "Succeeded" ]; then echo "${SIGN_MSG}"; fi
-			mv tmpfile "$1"
-			NEST="-nest"
-		done
-	}
+# 	authenticode_sign() {
+# 		NEST=""
+# 		for hashalg in sha1 sha256; do
+# 			SIGN_MSG=$(osslsigncode sign -pkcs12 "${AUTHENTICODE_PFXFILE}" -pass "${PFX_PASS}" -n "Duplicati" -i "http://www.duplicati.com" -h "${hashalg}" ${NEST} -t "http://timestamp.verisign.com/scripts/timstamp.dll" -in "$1" -out tmpfile)
+# 			if [ "${SIGN_MSG}" != "Succeeded" ]; then echo "${SIGN_MSG}"; fi
+# 			mv tmpfile "$1"
+# 			NEST="-nest"
+# 		done
+# 	}
 
-	PFX_PASS=$("${MONO}" "BuildTools/AutoUpdateBuilder/bin/Debug/SharpAESCrypt.exe" d "${KEYFILE_PASSWORD}" "${AUTHENTICODE_PASSWORD}")
+# 	PFX_PASS=$("${MONO}" "BuildTools/AutoUpdateBuilder/bin/Debug/SharpAESCrypt.exe" d "${KEYFILE_PASSWORD}" "${AUTHENTICODE_PASSWORD}")
 
-	DECRYPT_STATUS=$?
-	if [ "${DECRYPT_STATUS}" -ne 0 ]; then
-	    echo "Failed to decrypt, SharpAESCrypt gave status ${DECRYPT_STATUS}, exiting"
-	    exit 4
-	fi
+# 	DECRYPT_STATUS=$?
+# 	if [ "${DECRYPT_STATUS}" -ne 0 ]; then
+# 	    echo "Failed to decrypt, SharpAESCrypt gave status ${DECRYPT_STATUS}, exiting"
+# 	    exit 4
+# 	fi
 
-	if [ "x${PFX_PASS}" == "x" ]; then
-	    echo "Failed to decrypt, SharpAESCrypt gave empty password, exiting"
-	    exit 4
-	fi
+# 	if [ "x${PFX_PASS}" == "x" ]; then
+# 	    echo "Failed to decrypt, SharpAESCrypt gave empty password, exiting"
+# 	    exit 4
+# 	fi
 
-	for exec in "${UPDATE_SOURCE}/Duplicati."*.exe; do
-		authenticode_sign "${exec}"
-	done
-	for exec in "${UPDATE_SOURCE}/Duplicati."*.dll; do
-		authenticode_sign "${exec}"
-	done
+# 	for exec in "${UPDATE_SOURCE}/Duplicati."*.exe; do
+# 		authenticode_sign "${exec}"
+# 	done
+# 	for exec in "${UPDATE_SOURCE}/Duplicati."*.dll; do
+# 		authenticode_sign "${exec}"
+# 	done
 
-else
-	echo "Skipped authenticode signing as files are missing"
-fi
+# else
+# 	echo "Skipped authenticode signing as files are missing"
+# fi
 
 echo
 echo "Building signed package ..."
@@ -253,12 +267,6 @@ cp "${UPDATE_TARGET}/latest.zip.sig.asc" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.
 "${MONO}" "BuildTools/UpdateVersionStamp/bin/Debug/UpdateVersionStamp.exe" --version="${RELEASE_VERSION}"
 
 echo "Uploading binaries"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig.asc" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc"
-aws --profile=duplicati-upload s3 cp "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.manifest" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest"
-
-aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.manifest"
 
 ZIP_MD5=$(md5 ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $NF}')
 ZIP_SHA1=$(shasum -a 1 ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $1}')
@@ -283,14 +291,26 @@ echo "duplicati_version_info =" > "latest.js"
 cat "latest.json" >> "latest.js"
 echo ";" >> "latest.js"
 
-aws --profile=duplicati-upload s3 cp "latest.json" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.json"
-aws --profile=duplicati-upload s3 cp "latest.js" "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.js"
+
+ lftp -u "${FTPS_USERNAME}","${FTPS_PASSWORD}" "${FTPS_HOSTNAME}" <<EOF
+	cd "/site/wwwroot/backup-client/updates/${RELEASE_TYPE}"
+	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
+	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig"
+	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig.asc"
+	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.manifest"
+	mv  "${RELEASE_FILE_NAME}.manifest" "latest.manifest"
+	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.manifest"
+	put "latest.json"
+	put "latest.js"
+	bye
+EOF
 
 # echo "Propagating to other build types"
 # for OTHER in ${OTHER_UPLOADS}; do
 # 	aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest" "s3://updates.backup.e-notariado.org.br/${OTHER}/latest.manifest"
 # 	aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.json" "s3://updates.backup.e-notariado.org.br/${OTHER}/latest.json"
 # done
+exit 0
 
 rm "${RELEASE_CHANGELOG_NEWS_FILE}"
 
