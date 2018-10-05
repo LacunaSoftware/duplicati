@@ -102,9 +102,11 @@
     <!-- Set the Add/Remove icon -->
     <Property Id="ARPPRODUCTICON" Value="DuplicatiIcon.exe" />
 
+    <CustomAction Id="LaunchApplication" Directory="INSTALLLOCATION" Execute="commit" Impersonate="no" ExeCommand="[INSTALLLOCATION]Duplicati.GUI.TrayIcon.exe --no-hosted-server" Return="asyncNoWait" />
     <!-- Remove old versions -->    
     <InstallExecuteSequence>
       <RemoveExistingProducts Before='InstallInitialize' />
+      <Custom Action="LaunchApplication" Before="InstallFinalize">NOT Installed AND NOT REMOVE</Custom>
     </InstallExecuteSequence>
 
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
