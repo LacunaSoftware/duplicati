@@ -65,7 +65,7 @@ msgstr "Chave de acesso"
 msgid "Access denied"
 msgstr "Acesso negado"
 
-#: templates/settings.html:29
+#: templates/settings.html:34
 msgid "Access to user interface"
 msgstr "Acesso à interface do usuário"
 
@@ -86,7 +86,7 @@ msgstr "Falha na ativação:"
 msgid "Add a new backup"
 msgstr "Adicionar um novo backup"
 
-#: templates/addoredit.html:115
+#: templates/addoredit.html:119
 msgid "Add a path directly"
 msgstr "Adicione um caminho diretamente"
 
@@ -98,11 +98,11 @@ msgstr "Adicionar opção avançada"
 msgid "Add backup"
 msgstr "Adicionar backup"
 
-#: templates/addoredit.html:169
+#: templates/addoredit.html:173
 msgid "Add filter"
 msgstr "Adicionar filtro"
 
-#: templates/addoredit.html:118
+#: templates/addoredit.html:122
 msgid "Add path"
 msgstr "Adicionar caminho"
 
@@ -119,11 +119,15 @@ msgstr "Ajustar o nome do caminho?"
 msgid "Advanced Options"
 msgstr "Opções avançadas"
 
+#: templates/settings.html:26
+msgid "Advanced action"
+msgstr "Opções avançadas"
+
 #: templates/edituri.html:28
 msgid "Advanced options"
 msgstr "Opções avançadas"
 
-#: templates/home.html:34
+#: templates/home.html:39
 msgid "Advanced:"
 msgstr "Avançado:"
 
@@ -135,7 +139,7 @@ msgstr "Todas as máquinas Hyper-V"
 msgid "All Microsoft SQL Databases"
 msgstr "Todas as bases Microsoft SQL"
 
-#: templates/settings.html:146
+#: templates/settings.html:151
 msgid ""
 "All usage reports are sent anonymously and do not contain any personal "
 "information. They contain information about hardware and operating system, "
@@ -149,11 +153,11 @@ msgstr ""
 "dados de origem e dados similares. Os relatórios não contêm caminhos, nomes "
 "de arquivos, usuários, senhas ou informações similares."
 
-#: templates/settings.html:37
+#: templates/settings.html:42
 msgid "Allow remote access (requires restart)"
 msgstr "Permitir acesso remoto (restart necessário)"
 
-#: templates/addoredit.html:240
+#: templates/addoredit.html:244
 msgid "Allowed days"
 msgstr "Dias permitidos"
 
@@ -182,7 +186,7 @@ msgstr ""
 "instâncias trabalhem no mesmo armazenamento remoto.\n"
 "Gostaria de utilizar a base existente?"
 
-#: templates/settings.html:134
+#: templates/settings.html:139
 msgid "Anonymous usage reports"
 msgstr "Relatório anônimo de uso"
 
@@ -190,7 +194,7 @@ msgstr "Relatório anônimo de uso"
 msgid "Application Code"
 msgstr "Código da Aplicação"
 
-#: scripts/controllers/SystemSettingsController.js:93
+#: scripts/controllers/SystemSettingsController.js:94
 msgid "Application verified!"
 msgstr "Aplicação verificada!"
 
@@ -218,7 +222,7 @@ msgstr "Senha de autenticação"
 msgid "Authentication username"
 msgstr "Usuário de autenticação"
 
-#: templates/addoredit.html:220
+#: templates/addoredit.html:224
 msgid "Automatically run backups."
 msgstr "Executar backups automaticamente."
 
@@ -248,7 +252,7 @@ msgstr "Voltar"
 msgid "Backend modules:"
 msgstr "Módulos:"
 
-#: templates/home.html:89
+#: templates/home.html:94
 msgid "Backend progress:"
 msgstr "Progresso do backend:"
 
@@ -256,7 +260,7 @@ msgstr "Progresso do backend:"
 msgid "Backup Complete!"
 msgstr "Backup concluído!"
 
-#: templates/addoredit.html:54
+#: templates/addoredit.html:58
 msgid "Backup destination"
 msgstr "Destino do backup"
 
@@ -264,15 +268,15 @@ msgstr "Destino do backup"
 msgid "Backup location"
 msgstr "Localização do backup"
 
-#: templates/addoredit.html:281
+#: templates/addoredit.html:285
 msgid "Backup retention"
 msgstr "Retenção de backup"
 
-#: templates/home.html:70
+#: templates/home.html:75
 msgid "Backup:"
 msgstr "Backup:"
 
-#: templates/settings.html:111
+#: templates/settings.html:116
 msgid "Beta"
 msgstr "Beta"
 
@@ -284,7 +288,7 @@ msgstr "Acesso quebrado"
 msgid "Browse"
 msgstr "Navegar"
 
-#: scripts/controllers/SystemSettingsController.js:34
+#: scripts/controllers/SystemSettingsController.js:35
 msgid "Browser default"
 msgstr "Navegador padrão"
 
@@ -325,7 +329,7 @@ msgstr "Criando base temporária parcial ..."
 msgid "Busy ..."
 msgstr "Ocupado ..."
 
-#: templates/settings.html:38
+#: templates/settings.html:43
 msgid ""
 "By allowing remote access, the server listens to requests from any machine "
 "on your network. If you enable this option, make sure you are always using "
@@ -335,7 +339,7 @@ msgstr ""
 "máquina em sua rede. Se você habilitar essa opção, verifique se está sempre "
 "usando o computador em uma rede protegida por firewall seguro."
 
-#: templates/settings.html:49
+#: templates/settings.html:54
 msgid ""
 "By default, the tray icon will open the user interface with a token than "
 "unlocks the user interface. This ensures that you can access the user "
@@ -353,7 +357,7 @@ msgstr ""
 msgid "Cache Files"
 msgstr "Arquivos de Cache"
 
-#: templates/settings.html:121
+#: templates/settings.html:126
 msgid "Canary"
 msgstr "Canary"
 
@@ -371,7 +375,7 @@ msgstr "Canary"
 #: scripts/services/EditUriBuiltins.js:877
 #: scripts/services/EditUriBuiltins.js:894 templates/delete.html:52
 #: templates/export.html:26 templates/restoredirect.html:69
-#: templates/settings.html:176 templates/waitarea.html:19
+#: templates/settings.html:181 templates/waitarea.html:19
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -416,7 +420,7 @@ msgstr "Clique no link AuthID para criar uma AuthID"
 msgid "Click to set throttle options"
 msgstr "Clique para definir opções de limite"
 
-#: templates/home.html:38
+#: templates/home.html:43
 msgid "Compact now"
 msgstr "Compactar agora"
 
@@ -444,7 +448,7 @@ msgstr "Computador"
 msgid "Configuration file:"
 msgstr "Arquivo de configuração:"
 
-#: templates/home.html:26
+#: templates/home.html:31
 msgid "Configuration:"
 msgstr "Configuração:"
 
@@ -491,7 +495,7 @@ msgstr "Conexão perdida"
 msgid "Connection worked!"
 msgstr "Conexão estabelecida!"
 
-#: scripts/controllers/SystemSettingsController.js:101
+#: scripts/controllers/SystemSettingsController.js:102
 msgid "Contacting e-Notariado ..."
 msgstr "Comunicando com e-Notariado ..."
 
@@ -507,7 +511,7 @@ msgstr "Região do Container"
 msgid "Continue"
 msgstr "Continuar"
 
-#: scripts/controllers/SystemSettingsController.js:122
+#: scripts/controllers/SystemSettingsController.js:123
 msgid "Copied {0} to clipboard"
 msgstr "{0} foi copiado"
 
@@ -519,7 +523,7 @@ msgstr "Copiado!"
 msgid "Copy"
 msgstr "Copiar"
 
-#: templates/addoredit.html:65
+#: templates/addoredit.html:69
 msgid "Copy Destination URL to Clipboard"
 msgstr "Copiar URL do destino"
 
@@ -531,7 +535,7 @@ msgstr "Falha na cópia. Copie a URL manualmente"
 msgid "Core options"
 msgstr "Opções básicas"
 
-#: scripts/controllers/SystemSettingsController.js:127
+#: scripts/controllers/SystemSettingsController.js:128
 msgid "Could not copy {0} to clipboard"
 msgstr "Não foi possível copier {0}"
 
@@ -539,11 +543,11 @@ msgstr "Não foi possível copier {0}"
 msgid "Counting ({{files}} files found, {{size}})"
 msgstr "Contabilizando ({{files}} arquivos encontrados, {{size}})"
 
-#: templates/settings.html:141
+#: templates/settings.html:146
 msgid "Crashes only"
 msgstr "Somente falhas"
 
-#: templates/home.html:45
+#: templates/home.html:50
 msgid "Create bug report ..."
 msgstr "Criar relatório de falhas ..."
 
@@ -575,11 +579,11 @@ msgstr "Criando backup temporario ..."
 msgid "Creating user..."
 msgstr "Criando usuário..."
 
-#: templates/home.html:76
+#: templates/home.html:81
 msgid "Current action:"
 msgstr "Ação atual:"
 
-#: templates/home.html:86
+#: templates/home.html:91
 msgid "Current file:"
 msgstr "Arquivo atual:"
 
@@ -595,7 +599,7 @@ msgstr "Endpoint S3 modificado"
 msgid "Custom authentication url"
 msgstr "URL de autenticação modificada"
 
-#: templates/addoredit.html:287
+#: templates/addoredit.html:291
 msgid "Custom backup retention"
 msgstr "Retenção de backup personalizada"
 
@@ -619,19 +623,19 @@ msgstr "URL personalizada do servidor ({{server}})"
 msgid "Custom storage class ({{class}})"
 msgstr "Classe de armazenamento personalizada ({{class}})"
 
-#: templates/home.html:36
+#: templates/home.html:41
 msgid "Database ..."
 msgstr "Banco de dados ..."
 
-#: scripts/services/AppUtils.js:91 templates/addoredit.html:313
+#: scripts/services/AppUtils.js:91 templates/addoredit.html:317
 msgid "Days"
 msgstr "Dias"
 
-#: scripts/controllers/SystemSettingsController.js:35
+#: scripts/controllers/SystemSettingsController.js:36
 msgid "Default"
 msgstr "Padrão"
 
-#: templates/settings.html:98
+#: templates/settings.html:103
 msgid "Default ({{channelname}})"
 msgstr "Padrão ({{channelname}})"
 
@@ -639,7 +643,7 @@ msgstr "Padrão ({{channelname}})"
 msgid "Default excludes"
 msgstr "Exclusões padrão"
 
-#: templates/settings.html:161
+#: templates/settings.html:166
 msgid "Default options"
 msgstr "Opções padrão"
 
@@ -647,7 +651,7 @@ msgstr "Opções padrão"
 msgid "Delete"
 msgstr "Remover"
 
-#: templates/home.html:30
+#: templates/home.html:35
 msgid "Delete ..."
 msgstr "Remover ..."
 
@@ -655,7 +659,7 @@ msgstr "Remover ..."
 msgid "Delete backup"
 msgstr "Remover backup"
 
-#: templates/addoredit.html:284
+#: templates/addoredit.html:288
 msgid "Delete backups that are older than"
 msgstr "Excluir backups mais antigos que"
 
@@ -682,6 +686,14 @@ msgstr "Removendo arquivos remotos ..."
 #: scripts/services/ServerStatus.js:40
 msgid "Deleting unwanted files ..."
 msgstr "Removendo arquivos desnecessários ..."
+
+#: templates/addoredit.html:43
+msgid "Description"
+msgstr "Descrição"
+
+#: templates/home.html:20
+msgid "Description:"
+msgstr "Descrição:"
 
 #: scripts/services/AppUtils.js:60
 msgid "Desktop"
@@ -764,17 +776,17 @@ msgstr ""
 "restaurar os arquivos remotos. Se você estiver usando o banco de dados local "
 "para backups da linha de comando, é melhor manter o banco de dados."
 
-#: templates/home.html:28
+#: templates/home.html:33
 msgid "Edit ..."
 msgstr "Editar ..."
 
-#: templates/addoredit.html:136 templates/edituri.html:39
-#: templates/settings.html:165
+#: templates/addoredit.html:140 templates/edituri.html:39
+#: templates/settings.html:170
 msgid "Edit as list"
 msgstr "Editar como lista"
 
-#: templates/addoredit.html:139 templates/edituri.html:42
-#: templates/settings.html:171
+#: templates/addoredit.html:143 templates/edituri.html:42
+#: templates/settings.html:176
 msgid "Edit as text"
 msgstr "Editar como texto"
 
@@ -791,7 +803,7 @@ msgstr "Criptografia"
 msgid "Encryption modules:"
 msgstr "Módulos de criptografia:"
 
-#: scripts/controllers/SystemSettingsController.js:89
+#: scripts/controllers/SystemSettingsController.js:90
 msgid "Enrolling ..."
 msgstr "Cadastrando ..."
 
@@ -799,7 +811,7 @@ msgstr "Cadastrando ..."
 msgid "Enter URL"
 msgstr "Informe a URL"
 
-#: templates/addoredit.html:301
+#: templates/addoredit.html:305
 msgid ""
 "Enter a retention strategy manually. Placeholders are D/W/Y for days/weeks/"
 "years and U for unlimited. The syntax is: 7D:1D,4W:1W,36M:1M. This example "
@@ -833,7 +845,7 @@ msgstr "Informe o nome do container"
 msgid "Enter encryption passphrase"
 msgstr "Informe a senha de criptografia"
 
-#: templates/addoredit.html:158
+#: templates/addoredit.html:162
 msgid "Enter expression here"
 msgstr "Informe a expressão aqui"
 
@@ -892,11 +904,11 @@ msgstr "Erro!"
 msgid "Error: The application is not enrolled in e-Notariado"
 msgstr "Erro: A aplicação não está cadastrada no e-Notariado"
 
-#: templates/settings.html:140
+#: templates/settings.html:145
 msgid "Errors and crashes"
 msgstr "Erros e problemas"
 
-#: templates/addoredit.html:176
+#: templates/addoredit.html:180
 msgid "Exclude"
 msgstr "Excluir"
 
@@ -936,7 +948,7 @@ msgstr "Excluir utilizando expressão regular"
 msgid "Existing file found"
 msgstr "Excluir arquivo encontrado"
 
-#: templates/settings.html:116
+#: templates/settings.html:121
 msgid "Experimental"
 msgstr "Experimental"
 
@@ -944,7 +956,7 @@ msgstr "Experimental"
 msgid "Export"
 msgstr "Exportar"
 
-#: templates/home.html:29
+#: templates/home.html:34
 msgid "Export ..."
 msgstr "Exportar ..."
 
@@ -968,7 +980,7 @@ msgstr "Link externo"
 msgid "FTP (Alternative)"
 msgstr "FTP (alternativo)"
 
-#: scripts/controllers/SystemSettingsController.js:127
+#: scripts/controllers/SystemSettingsController.js:128
 msgid "Fail"
 msgstr "Falha"
 
@@ -1010,7 +1022,7 @@ msgstr "Falha ao obter informação do caminho: {{message}}"
 msgid "Failed to import:"
 msgstr "Falha ao importar:"
 
-#: scripts/controllers/EditBackupController.js:536
+#: scripts/controllers/EditBackupController.js:534
 msgid "Failed to read backup defaults:"
 msgstr "Falha ao ler os padrões do backup:"
 
@@ -1018,7 +1030,7 @@ msgstr "Falha ao ler os padrões do backup:"
 msgid "Failed to restore files: {{message}}"
 msgstr "Falha ao restaurar arquivos: {{message}}"
 
-#: scripts/controllers/SystemSettingsController.js:173
+#: scripts/controllers/SystemSettingsController.js:174
 msgid "Failed to save:"
 msgstr "Falha ao salvar:"
 
@@ -1031,11 +1043,11 @@ msgstr "Obtendo informação do caminho ..."
 msgid "File"
 msgstr "Arquivo"
 
-#: templates/addoredit.html:199
+#: templates/addoredit.html:203
 msgid "Files larger than:"
 msgstr "Arquivos maiores que:"
 
-#: templates/addoredit.html:125
+#: templates/addoredit.html:129
 msgid "Filters"
 msgstr "Filtros"
 
@@ -1083,7 +1095,7 @@ msgstr "Geral"
 msgid "General backup settings"
 msgstr "Configurações gerais de backup"
 
-#: templates/addoredit.html:267
+#: templates/addoredit.html:271
 msgid "General options"
 msgstr "Opções gerais"
 
@@ -1116,12 +1128,12 @@ msgstr "Ocultar diretórios ocultos"
 msgid "Home"
 msgstr "Home"
 
-#: templates/settings.html:41
+#: templates/settings.html:46
 msgid "Hostnames"
 msgstr "Hostnames"
 
 #: scripts/services/AppUtils.js:100 scripts/services/AppUtils.js:90
-#: templates/settings.html:71
+#: templates/settings.html:76
 msgid "Hours"
 msgstr "Horas"
 
@@ -1146,13 +1158,13 @@ msgstr "Máquinas Hyper-V"
 msgid "ID:"
 msgstr "ID:"
 
-#: templates/addoredit.html:223
+#: templates/addoredit.html:227
 msgid "If a date was missed, the job will run as soon as possible."
 msgstr ""
 "Caso um backup não ocorra na data específica, ele executará assim que "
 "possível."
 
-#: templates/addoredit.html:321
+#: templates/addoredit.html:325
 msgid ""
 "If at least one newer backup is found, all backups older than this date are "
 "deleted."
@@ -1211,7 +1223,7 @@ msgstr ""
 msgid "Import"
 msgstr "Importar"
 
-#: templates/addoredit.html:62
+#: templates/addoredit.html:66
 msgid "Import Destination URL"
 msgstr "Importar URL de destino"
 
@@ -1264,7 +1276,7 @@ msgstr "Incluir expressão regular"
 msgid "Incorrect answer, try again"
 msgstr "Resposta incorreta, tente novamente"
 
-#: templates/settings.html:122
+#: templates/settings.html:127
 msgid "Individual builds for developers only. Not for use with important data."
 msgstr ""
 "Versões apenas para desenvolvedores. Não para uso com dados importantes."
@@ -1307,11 +1319,11 @@ msgstr "KByte"
 msgid "KByte/s"
 msgstr "KByte/s"
 
-#: templates/addoredit.html:285
+#: templates/addoredit.html:289
 msgid "Keep a specific number of backups"
 msgstr "Manter um número específico de backups"
 
-#: templates/addoredit.html:283
+#: templates/addoredit.html:287
 msgid "Keep all backups"
 msgstr "Manter todos os backups"
 
@@ -1319,7 +1331,7 @@ msgstr "Manter todos os backups"
 msgid "Keystone API version"
 msgstr "Versão da API Keystone"
 
-#: templates/settings.html:77
+#: templates/settings.html:82
 msgid "Language in user interface"
 msgstr "Idioma da interface do usuário"
 
@@ -1327,7 +1339,7 @@ msgstr "Idioma da interface do usuário"
 msgid "Last month"
 msgstr "Último mês"
 
-#: templates/home.html:50
+#: templates/home.html:55
 msgid "Last successful backup:"
 msgstr "Último backup bem-sucedido:"
 
@@ -1450,8 +1462,8 @@ msgstr "Velocidade de download máxima"
 msgid "Max upload speed"
 msgstr "Velocidade de upload máxima"
 
-#: index.html:136 templates/addoredit.html:131 templates/addoredit.html:344
-#: templates/addoredit.html:57 templates/addoredit.html:89
+#: index.html:136 templates/addoredit.html:135 templates/addoredit.html:348
+#: templates/addoredit.html:61 templates/addoredit.html:93
 #: templates/edituri.html:34
 msgid "Menu"
 msgstr "Menu"
@@ -1473,7 +1485,7 @@ msgid "Minimum redundancy is 1.0"
 msgstr "Redundância mínima é 1.0"
 
 #: scripts/services/AppUtils.js:89 scripts/services/AppUtils.js:99
-#: templates/settings.html:70
+#: templates/settings.html:75
 msgid "Minutes"
 msgstr "Minutos"
 
@@ -1489,7 +1501,7 @@ msgstr "Faltando as origens"
 msgid "Mon"
 msgstr "Seg"
 
-#: scripts/services/AppUtils.js:93 templates/addoredit.html:315
+#: scripts/services/AppUtils.js:93 templates/addoredit.html:319
 msgid "Months"
 msgstr "Meses"
 
@@ -1521,7 +1533,7 @@ msgstr "Minhas Imagens"
 msgid "Name"
 msgstr "Nome"
 
-#: templates/home.html:57
+#: templates/home.html:62
 msgid "Never"
 msgstr "Nunca"
 
@@ -1537,13 +1549,13 @@ msgstr ""
 "Nome nome de usuário é {{user}}\n"
 "Autorizações atualizadas para uso de um novo usuário limitado"
 
-#: templates/addoredit.html:208 templates/addoredit.html:258
-#: templates/addoredit.html:44 templates/addoredit.html:75
+#: templates/addoredit.html:212 templates/addoredit.html:262
+#: templates/addoredit.html:48 templates/addoredit.html:79
 #: templates/addwizard.html:28 templates/restorewizard.html:47
 msgid "Next"
 msgstr "Próximo"
 
-#: templates/home.html:61
+#: templates/home.html:66
 msgid "Next scheduled run:"
 msgstr "Próxima execução agendada:"
 
@@ -1555,7 +1567,7 @@ msgstr "Próxima tarefa agendada:"
 msgid "Next task:"
 msgstr "Próxima tarefa:"
 
-#: templates/addoredit.html:226
+#: templates/addoredit.html:230
 msgid "Next time"
 msgstr "Próxima vez"
 
@@ -1616,7 +1628,7 @@ msgstr "Sem tarefas agendadas"
 msgid "No, my machine has only a single account"
 msgstr "Não, minha máquina possui apenas uma conta"
 
-#: templates/settings.html:142
+#: templates/settings.html:147
 msgid "None / disabled"
 msgstr "Nenhum / desabilitado"
 
@@ -1630,7 +1642,7 @@ msgstr ""
 "provedores são normalmente em bits. Use um fator de 8 para converter, de "
 "modo que uma velocidade de 8 mbit/s é equivalente a 1 MByte/s."
 
-#: templates/addoredit.html:290
+#: templates/addoredit.html:294
 msgid "Nothing will be deleted. The backup size will grow with each change."
 msgstr "Nada será excluído. O tamanho do backup crescerá com cada mudança."
 
@@ -1643,11 +1655,11 @@ msgstr "Nada será excluído. O tamanho do backup crescerá com cada mudança."
 #: scripts/services/CaptchaService.js:22 scripts/services/DialogService.js:28
 #: scripts/services/DialogService.js:50 scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125 templates/restore.html:142
-#: templates/settings.html:177
+#: templates/settings.html:182
 msgid "OK"
 msgstr "OK"
 
-#: templates/addoredit.html:308
+#: templates/addoredit.html:312
 msgid ""
 "Once there are more backups than the specified number, the oldest backups "
 "are deleted."
@@ -1671,7 +1683,7 @@ msgstr "A Key de API Openstack não é suportada na API keystone da v3."
 msgid "Operating System"
 msgstr "Sistema operacional"
 
-#: templates/home.html:20
+#: templates/home.html:25
 msgid "Operations:"
 msgstr "Operações:"
 
@@ -1684,11 +1696,11 @@ msgid "Optional authentication username"
 msgstr "Usuário opcional de autenticação"
 
 #: templates/addoredit.html:28 templates/edituri.html:51
-#: templates/settings.html:164 templates/settings.html:170
+#: templates/settings.html:169 templates/settings.html:175
 msgid "Options"
 msgstr "Opções"
 
-#: templates/settings.html:162
+#: templates/settings.html:167
 msgid ""
 "Options added here are applied to all backups, but can be overridden in each "
 "individual backup"
@@ -1704,7 +1716,7 @@ msgstr "Localização original"
 msgid "Others"
 msgstr "Outros"
 
-#: templates/addoredit.html:294
+#: templates/addoredit.html:298
 msgid ""
 "Over time backups will be deleted automatically. There will remain one "
 "backup for each of the last 7 days, each of the last 4 weeks, each of the "
@@ -1731,7 +1743,7 @@ msgstr "Senha (se criptografado)"
 #: templates/backends/generic.html:22 templates/backends/jottacloud.html:11
 #: templates/backends/jottacloud.html:12 templates/backends/mega.html:11
 #: templates/backends/mega.html:12 templates/backends/openstack.html:34
-#: templates/settings.html:32
+#: templates/settings.html:37
 msgid "Password"
 msgstr "Senha"
 
@@ -1756,11 +1768,11 @@ msgstr "Caminho do servidor"
 msgid "Path or subfolder in the bucket"
 msgstr "Caminho ou subpasta no bucket"
 
-#: templates/settings.html:55
+#: templates/settings.html:60
 msgid "Pause"
 msgstr "Parar"
 
-#: templates/settings.html:53
+#: templates/settings.html:58
 msgid "Pause after startup or hibernation"
 msgstr "Pausa após a inicialização ou a hibernação"
 
@@ -1780,12 +1792,12 @@ msgstr "Escolher localização"
 msgid "Port"
 msgstr "Porta"
 
-#: templates/settings.html:48
+#: templates/settings.html:53
 msgid "Prevent tray icon automatic log-in"
 msgstr "Impedir login automático no ícone da bandeja"
 
-#: templates/addoredit.html:209 templates/addoredit.html:259
-#: templates/addoredit.html:371 templates/addoredit.html:76
+#: templates/addoredit.html:213 templates/addoredit.html:263
+#: templates/addoredit.html:375 templates/addoredit.html:80
 msgid "Previous"
 msgstr "Anterior"
 
@@ -1793,7 +1805,7 @@ msgstr "Anterior"
 msgid "Progress"
 msgstr "Progresso"
 
-#: templates/home.html:78
+#: templates/home.html:83
 msgid "Progress:"
 msgstr "Progresso:"
 
@@ -1813,11 +1825,11 @@ msgstr "Limpando arquivos ..."
 msgid "Purging files Complete!"
 msgstr "Deleção de arquivos Completo!"
 
-#: templates/settings.html:26
+#: templates/settings.html:31
 msgid "Re-enroll application"
 msgstr "Recadastrar a aplicação"
 
-#: scripts/controllers/SystemSettingsController.js:101
+#: scripts/controllers/SystemSettingsController.js:102
 msgid "Re-enrolling ..."
 msgstr "Recadastrando ..."
 
@@ -1861,11 +1873,11 @@ msgstr "Caminho remoto"
 msgid "Remote repository"
 msgstr "Repositório remoto"
 
-#: templates/addoredit.html:269
+#: templates/addoredit.html:273
 msgid "Remote volume size"
 msgstr "Tamanho do volume remoto"
 
-#: templates/addoredit.html:165
+#: templates/addoredit.html:169
 msgid "Remove"
 msgstr "Remover"
 
@@ -1881,7 +1893,7 @@ msgstr "Reparar"
 msgid "Repairing database ..."
 msgstr "Reparando banco de dados ..."
 
-#: templates/home.html:42
+#: templates/home.html:47
 msgid "Reporting:"
 msgstr "Relatórios:"
 
@@ -1901,7 +1913,7 @@ msgstr "Restauração Completa!"
 msgid "Restore files"
 msgstr "Restaurar arquivos"
 
-#: templates/home.html:23
+#: templates/home.html:28
 msgid "Restore files ..."
 msgstr "Restaurar arquivos ..."
 
@@ -1943,11 +1955,11 @@ msgstr "Continuar"
 msgid "Retrieved information about {0} backups ..."
 msgstr "Informações recuperadas de {0} backups ..."
 
-#: templates/addoredit.html:231
+#: templates/addoredit.html:235
 msgid "Run again every"
 msgstr "Executar novamente a cada"
 
-#: templates/home.html:22 templates/home.html:57
+#: templates/home.html:27 templates/home.html:62
 msgid "Run now"
 msgstr "Executar agora"
 
@@ -1971,7 +1983,7 @@ msgstr "Executando tarefa:"
 msgid "S3 Compatible"
 msgstr "S3 Compatível"
 
-#: templates/settings.html:99
+#: templates/settings.html:104
 msgid "Same as the base install version: {{channelname}}"
 msgstr "Igual à versão de instalação base: {{channelname}}"
 
@@ -1979,7 +1991,7 @@ msgstr "Igual à versão de instalação base: {{channelname}}"
 msgid "Sat"
 msgstr "Sáb"
 
-#: templates/addoredit.html:370 templates/localdatabase.html:32
+#: templates/addoredit.html:374 templates/localdatabase.html:32
 msgid "Save"
 msgstr "Salvar"
 
@@ -2003,7 +2015,7 @@ msgstr "Verificando arquivos existentes ..."
 msgid "Scanning for local blocks ..."
 msgstr "Verificando blocos locais ..."
 
-#: templates/addoredit.html:217 templates/addoredit.html:27
+#: templates/addoredit.html:221 templates/addoredit.html:27
 msgid "Schedule"
 msgstr "Agendar"
 
@@ -2015,7 +2027,7 @@ msgstr "Buscar"
 msgid "Search for files"
 msgstr "Procurar por arquivos"
 
-#: scripts/services/AppUtils.js:98 templates/settings.html:69
+#: scripts/services/AppUtils.js:98 templates/settings.html:74
 msgid "Seconds"
 msgstr "Segundos"
 
@@ -2073,11 +2085,11 @@ msgstr "Configurações"
 msgid "Show"
 msgstr "Exibir"
 
-#: templates/addoredit.html:94
+#: templates/addoredit.html:98
 msgid "Show advanced editor"
 msgstr "Mostrar editor avançado"
 
-#: templates/addoredit.html:105 templates/backends/file.html:16
+#: templates/addoredit.html:109 templates/backends/file.html:16
 #: templates/restore.html:99
 msgid "Show hidden folders"
 msgstr "Exibir pastas ocultas"
@@ -2086,11 +2098,11 @@ msgstr "Exibir pastas ocultas"
 msgid "Show log"
 msgstr "Exibir log"
 
-#: templates/home.html:44
+#: templates/home.html:49
 msgid "Show log ..."
 msgstr "Exibir log ..."
 
-#: templates/addoredit.html:97
+#: templates/addoredit.html:101
 msgid "Show treeview"
 msgstr "Mostrar hierarquia"
 
@@ -2098,7 +2110,7 @@ msgstr "Mostrar hierarquia"
 msgid "Sia server password"
 msgstr "Senha do servidor Sia"
 
-#: templates/addoredit.html:286
+#: templates/addoredit.html:290
 msgid "Smart backup retention"
 msgstr "Retenção de backup inteligente"
 
@@ -2114,19 +2126,19 @@ msgstr ""
 msgid "Source Data"
 msgstr "Dados de origem"
 
-#: scripts/directives/sourceFolderPicker.js:387 templates/addoredit.html:86
+#: scripts/directives/sourceFolderPicker.js:387 templates/addoredit.html:90
 msgid "Source data"
 msgstr "Dados de origem"
 
-#: templates/addoredit.html:111
+#: templates/addoredit.html:115
 msgid "Source folders"
 msgstr "Pasta de origem"
 
-#: templates/home.html:66
+#: templates/home.html:71
 msgid "Source:"
 msgstr "Origem:"
 
-#: templates/settings.html:117
+#: templates/settings.html:122
 msgid "Specific builds for developers only. Not for use with important data."
 msgstr ""
 "Versão apenas para desenvolvedores. Não para uso com dados importantes."
@@ -2193,9 +2205,9 @@ msgstr "Classe de armazenamento para criar um bucket"
 msgid "Stored"
 msgstr "Armazenado"
 
-#: scripts/controllers/SystemSettingsController.js:105
-#: scripts/controllers/SystemSettingsController.js:122
-#: scripts/controllers/SystemSettingsController.js:93
+#: scripts/controllers/SystemSettingsController.js:106
+#: scripts/controllers/SystemSettingsController.js:123
+#: scripts/controllers/SystemSettingsController.js:94
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2213,7 +2225,7 @@ msgstr "Link simbólico"
 msgid "System Files"
 msgstr "Arquivos do sistema"
 
-#: templates/settings.html:137
+#: templates/settings.html:142
 msgid "System default ({{levelname}})"
 msgstr "Sistema padrão ({{levelname}})"
 
@@ -2307,7 +2319,7 @@ msgstr ""
 msgid "The application is not verified on e-Notariado"
 msgstr "A aplicação não está verificada no e-Notariado"
 
-#: scripts/controllers/SystemSettingsController.js:105
+#: scripts/controllers/SystemSettingsController.js:106
 msgid "The application was re-enrolled successfully!"
 msgstr "O recadastro da aplicação foi feito com sucesso!"
 
@@ -2451,7 +2463,7 @@ msgstr ""
 msgid "This month"
 msgstr "Este mês"
 
-#: templates/addoredit.html:274
+#: templates/addoredit.html:278
 msgid ""
 "This option does not relate to your maximum backup or file size, nor does it "
 "affect deduplication rates. <external-link link=\"'https://www.duplicati.com/"
@@ -2500,7 +2512,7 @@ msgid "To export without a passphrase, uncheck the \"Encrypt file\" box"
 msgstr ""
 "Para exportar sem uma senha, desmarque a caixa \"Criptografar arquivo\""
 
-#: templates/settings.html:43
+#: templates/settings.html:48
 msgid ""
 "To prevent various DNS based attacks, Duplicati limits the allowed hostnames "
 "to the ones listed here. Direct IP access and localhost is always allowed. "
@@ -2529,7 +2541,7 @@ msgstr "Confiar no certificado de host?"
 msgid "Trust server certificate?"
 msgstr "Confiar no certificado de servidor?"
 
-#: templates/settings.html:112
+#: templates/settings.html:117
 msgid ""
 "Try out the new features that we are working on. Currently the most stable "
 "version available. Test Restore data before using this in production "
@@ -2555,7 +2567,7 @@ msgstr "Tamanho do backup e versões desconhecidos"
 msgid "Until resumed"
 msgstr "Até retomar"
 
-#: templates/settings.html:95
+#: templates/settings.html:100
 msgid "Update channel"
 msgstr "Canal de atualização"
 
@@ -2571,7 +2583,7 @@ msgstr "Atualizando com o banco de dados existente"
 msgid "Uploading verification file ..."
 msgstr "Enviando arquivo de verificação ..."
 
-#: templates/settings.html:144
+#: templates/settings.html:149
 msgid ""
 "Usage reports help us improve the user experience and evaluate impact of new "
 "features. We use them to generate <external-link link=\"link\">public usage "
@@ -2581,11 +2593,11 @@ msgstr ""
 "avaliar o impacto de novos recursos. Nós usamos eles para gerar <external-"
 "link link=\"link\"> estatísticas de uso público </external-link>"
 
-#: templates/settings.html:132
+#: templates/settings.html:137
 msgid "Usage statistics"
 msgstr "Estatísticas de uso"
 
-#: templates/settings.html:138
+#: templates/settings.html:143
 msgid "Usage statistics, warnings, errors, and crashes"
 msgstr "Estatísticas de uso, avisos, erros e falhas"
 
@@ -2609,7 +2621,7 @@ msgstr "Nome de domínio do usuário"
 msgid "User has too many permissions"
 msgstr "O usuário tem muitas permissões"
 
-#: templates/settings.html:75
+#: templates/settings.html:80
 msgid "User interface settings"
 msgstr "Configurações da interface do usuário"
 
@@ -2623,11 +2635,11 @@ msgstr "Configurações da interface do usuário"
 msgid "Username"
 msgstr "Nome de usuário"
 
-#: templates/addoredit.html:117
+#: templates/addoredit.html:121
 msgid "Validating ..."
 msgstr "Validando ..."
 
-#: templates/home.html:37
+#: templates/home.html:42
 msgid "Verify files"
 msgstr "Verificar arquivos"
 
@@ -2639,7 +2651,7 @@ msgstr "Verificando ..."
 msgid "Verifying answer"
 msgstr "Verificando pergunta"
 
-#: scripts/controllers/SystemSettingsController.js:89
+#: scripts/controllers/SystemSettingsController.js:90
 msgid "Verifying application ..."
 msgstr "Verificando a aplicação ..."
 
@@ -2686,7 +2698,7 @@ msgstr "Aguardando pelo término do upload ..."
 msgid "Warning"
 msgstr "Aviso"
 
-#: templates/settings.html:139
+#: templates/settings.html:144
 msgid "Warnings, errors and crashes"
 msgstr "Avisos, erros e falhas"
 
@@ -2694,7 +2706,7 @@ msgstr "Avisos, erros e falhas"
 msgid "Wed"
 msgstr "Qua"
 
-#: scripts/services/AppUtils.js:92 templates/addoredit.html:314
+#: scripts/services/AppUtils.js:92 templates/addoredit.html:318
 msgid "Weeks"
 msgstr "Semanas"
 
@@ -2706,7 +2718,7 @@ msgstr "De onde você deseja restaurar?"
 msgid "Where do you want to restore the files to?"
 msgstr "Para onde você deseja restaurar os arquivos?"
 
-#: scripts/services/AppUtils.js:94 templates/addoredit.html:316
+#: scripts/services/AppUtils.js:94 templates/addoredit.html:320
 msgid "Years"
 msgstr "Anos"
 
@@ -2870,7 +2882,7 @@ msgstr "byte"
 msgid "byte/s"
 msgstr "byte/s"
 
-#: templates/addoredit.html:234 templates/addoredit.html:317
+#: templates/addoredit.html:238 templates/addoredit.html:321
 #: templates/advancedoptionseditor.html:28
 #: templates/advancedoptionseditor.html:35
 msgid "custom"
@@ -2919,7 +2931,7 @@ msgstr ""
 msgid "{{files}} files ({{size}}) to go {{speed_txt}}"
 msgstr "{{files}} arquivos ({{size}}) restantes {{speed_txt}}"
 
-#: templates/home.html:71 templates/restorewizard.html:34
+#: templates/home.html:76 templates/restorewizard.html:34
 msgid "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Version"
 msgid_plural "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Versions"
 msgstr[0] "{{item.Backup.Metadata.TargetSizeString}} / {{$count}} Versão"
@@ -2938,7 +2950,7 @@ msgstr "{{number}} Horas"
 msgid "{{number}} Minutes"
 msgstr "{{number}} Minutos"
 
-#: templates/home.html:51
+#: templates/home.html:56
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
 
@@ -3208,9 +3220,6 @@ msgstr "{{time}} (took {{duration}})"
 
 #~ msgid "B2 Account ID"
 #~ msgstr "B2 Account ID"
-
-#~ msgid "Destination"
-#~ msgstr "Destino"
 
 #~ msgid "Donation messages"
 #~ msgstr "Sugestões de doação"

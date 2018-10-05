@@ -3,6 +3,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     let dlg;
     $scope.SystemInfo = SystemInfo.watch($scope);    
     $scope.theme = $scope.$parent.$parent.saved_theme;
+    $scope.enrollSettings = false;
     if (($scope.theme || '').trim().length == 0)
         $scope.theme = 'default';
 

@@ -50,7 +50,7 @@ msgstr ""
 msgid "Access denied"
 msgstr ""
 
-#: templates/settings.html:29
+#: templates/settings.html:34
 msgid "Access to user interface"
 msgstr ""
 
@@ -107,6 +107,10 @@ msgstr ""
 msgid "Advanced Options"
 msgstr ""
 
+#: templates/settings.html:26
+msgid "Advanced action"
+msgstr ""
+
 #: templates/edituri.html:28
 msgid "Advanced options"
 msgstr ""
@@ -123,11 +127,11 @@ msgstr ""
 msgid "All Microsoft SQL Databases"
 msgstr ""
 
-#: templates/settings.html:146
+#: templates/settings.html:151
 msgid "All usage reports are sent anonymously and do not contain any personal information. They contain information about hardware and operating system, the type of backend, backup duration, overall size of source data and similar data. They do not contain paths, filenames, usernames, passwords or similar sensitive information."
 msgstr ""
 
-#: templates/settings.html:37
+#: templates/settings.html:42
 msgid "Allow remote access (requires restart)"
 msgstr ""
 
@@ -153,7 +157,7 @@ msgid ""
 " Do you wish to use the existing database?"
 msgstr ""
 
-#: templates/settings.html:134
+#: templates/settings.html:139
 msgid "Anonymous usage reports"
 msgstr ""
 
@@ -161,7 +165,7 @@ msgstr ""
 msgid "Application Code"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:93
+#: scripts/controllers/SystemSettingsController.js:94
 msgid "Application verified!"
 msgstr ""
 
@@ -250,7 +254,7 @@ msgstr ""
 msgid "Backup:"
 msgstr ""
 
-#: templates/settings.html:111
+#: templates/settings.html:116
 msgid "Beta"
 msgstr ""
 
@@ -263,7 +267,7 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:34
+#: scripts/controllers/SystemSettingsController.js:35
 msgid "Browser default"
 msgstr ""
 
@@ -307,11 +311,11 @@ msgstr ""
 msgid "Busy ..."
 msgstr ""
 
-#: templates/settings.html:38
+#: templates/settings.html:43
 msgid "By allowing remote access, the server listens to requests from any machine on your network. If you enable this option, make sure you are always using the computer on a secure firewall protected network."
 msgstr ""
 
-#: templates/settings.html:49
+#: templates/settings.html:54
 msgid "By default, the tray icon will open the user interface with a token than unlocks the user interface. This ensures that you can access the user interface from the tray icon, while requiring others to enter a password. If you prefer having to type in the password, even when accessing the user interface from the tray icon, enable this option."
 msgstr ""
 
@@ -319,7 +323,7 @@ msgstr ""
 msgid "Cache Files"
 msgstr ""
 
-#: templates/settings.html:121
+#: templates/settings.html:126
 msgid "Canary"
 msgstr ""
 
@@ -340,7 +344,7 @@ msgstr ""
 #: templates/delete.html:52
 #: templates/export.html:26
 #: templates/restoredirect.html:69
-#: templates/settings.html:176
+#: templates/settings.html:181
 #: templates/waitarea.html:19
 msgid "Cancel"
 msgstr ""
@@ -465,7 +469,7 @@ msgstr ""
 msgid "Connection worked!"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:101
+#: scripts/controllers/SystemSettingsController.js:102
 msgid "Contacting e-Notariado ..."
 msgstr ""
 
@@ -482,7 +486,7 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:122
+#: scripts/controllers/SystemSettingsController.js:123
 msgid "Copied {0} to clipboard"
 msgstr ""
 
@@ -506,7 +510,7 @@ msgstr ""
 msgid "Core options"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:127
+#: scripts/controllers/SystemSettingsController.js:128
 msgid "Could not copy {0} to clipboard"
 msgstr ""
 
@@ -514,7 +518,7 @@ msgstr ""
 msgid "Counting ({{files}} files found, {{size}})"
 msgstr ""
 
-#: templates/settings.html:141
+#: templates/settings.html:146
 msgid "Crashes only"
 msgstr ""
 
@@ -605,11 +609,11 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:35
+#: scripts/controllers/SystemSettingsController.js:36
 msgid "Default"
 msgstr ""
 
-#: templates/settings.html:98
+#: templates/settings.html:103
 msgid "Default ({{channelname}})"
 msgstr ""
 
@@ -617,7 +621,7 @@ msgstr ""
 msgid "Default excludes"
 msgstr ""
 
-#: templates/settings.html:161
+#: templates/settings.html:166
 msgid "Default options"
 msgstr ""
 
@@ -742,13 +746,13 @@ msgstr ""
 
 #: templates/addoredit.html:140
 #: templates/edituri.html:39
-#: templates/settings.html:165
+#: templates/settings.html:170
 msgid "Edit as list"
 msgstr ""
 
 #: templates/addoredit.html:143
 #: templates/edituri.html:42
-#: templates/settings.html:171
+#: templates/settings.html:176
 msgid "Edit as text"
 msgstr ""
 
@@ -766,7 +770,7 @@ msgstr ""
 msgid "Encryption modules:"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:89
+#: scripts/controllers/SystemSettingsController.js:90
 msgid "Enrolling ..."
 msgstr ""
 
@@ -861,7 +865,7 @@ msgstr ""
 msgid "Error: The application is not enrolled in e-Notariado"
 msgstr ""
 
-#: templates/settings.html:140
+#: templates/settings.html:145
 msgid "Errors and crashes"
 msgstr ""
 
@@ -905,7 +909,7 @@ msgstr ""
 msgid "Existing file found"
 msgstr ""
 
-#: templates/settings.html:116
+#: templates/settings.html:121
 msgid "Experimental"
 msgstr ""
 
@@ -938,7 +942,7 @@ msgstr ""
 msgid "FTP (Alternative)"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:127
+#: scripts/controllers/SystemSettingsController.js:128
 msgid "Fail"
 msgstr ""
 
@@ -988,7 +992,7 @@ msgstr ""
 msgid "Failed to restore files: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:173
+#: scripts/controllers/SystemSettingsController.js:174
 msgid "Failed to save:"
 msgstr ""
 
@@ -1095,13 +1099,13 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: templates/settings.html:41
+#: templates/settings.html:46
 msgid "Hostnames"
 msgstr ""
 
 #: scripts/services/AppUtils.js:100
 #: scripts/services/AppUtils.js:90
-#: templates/settings.html:71
+#: templates/settings.html:76
 msgid "Hours"
 msgstr ""
 
@@ -1216,7 +1220,7 @@ msgstr ""
 msgid "Incorrect answer, try again"
 msgstr ""
 
-#: templates/settings.html:122
+#: templates/settings.html:127
 msgid "Individual builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -1269,7 +1273,7 @@ msgstr ""
 msgid "Keystone API version"
 msgstr ""
 
-#: templates/settings.html:77
+#: templates/settings.html:82
 msgid "Language in user interface"
 msgstr ""
 
@@ -1433,7 +1437,7 @@ msgstr ""
 
 #: scripts/services/AppUtils.js:89
 #: scripts/services/AppUtils.js:99
-#: templates/settings.html:70
+#: templates/settings.html:75
 msgid "Minutes"
 msgstr ""
 
@@ -1572,7 +1576,7 @@ msgstr ""
 msgid "No, my machine has only a single account"
 msgstr ""
 
-#: templates/settings.html:142
+#: templates/settings.html:147
 msgid "None / disabled"
 msgstr ""
 
@@ -1596,7 +1600,7 @@ msgstr ""
 #: scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125
 #: templates/restore.html:142
-#: templates/settings.html:177
+#: templates/settings.html:182
 msgid "OK"
 msgstr ""
 
@@ -1634,12 +1638,12 @@ msgstr ""
 
 #: templates/addoredit.html:28
 #: templates/edituri.html:51
-#: templates/settings.html:164
-#: templates/settings.html:170
+#: templates/settings.html:169
+#: templates/settings.html:175
 msgid "Options"
 msgstr ""
 
-#: templates/settings.html:162
+#: templates/settings.html:167
 msgid "Options added here are applied to all backups, but can be overridden in each individual backup"
 msgstr ""
 
@@ -1677,7 +1681,7 @@ msgstr ""
 #: templates/backends/mega.html:11
 #: templates/backends/mega.html:12
 #: templates/backends/openstack.html:34
-#: templates/settings.html:32
+#: templates/settings.html:37
 msgid "Password"
 msgstr ""
 
@@ -1704,11 +1708,11 @@ msgstr ""
 msgid "Path or subfolder in the bucket"
 msgstr ""
 
-#: templates/settings.html:55
+#: templates/settings.html:60
 msgid "Pause"
 msgstr ""
 
-#: templates/settings.html:53
+#: templates/settings.html:58
 msgid "Pause after startup or hibernation"
 msgstr ""
 
@@ -1728,7 +1732,7 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: templates/settings.html:48
+#: templates/settings.html:53
 msgid "Prevent tray icon automatic log-in"
 msgstr ""
 
@@ -1764,11 +1768,11 @@ msgstr ""
 msgid "Purging files Complete!"
 msgstr ""
 
-#: templates/settings.html:26
+#: templates/settings.html:31
 msgid "Re-enroll application"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:101
+#: scripts/controllers/SystemSettingsController.js:102
 msgid "Re-enrolling ..."
 msgstr ""
 
@@ -1927,7 +1931,7 @@ msgstr ""
 msgid "S3 Compatible"
 msgstr ""
 
-#: templates/settings.html:99
+#: templates/settings.html:104
 msgid "Same as the base install version: {{channelname}}"
 msgstr ""
 
@@ -1974,7 +1978,7 @@ msgid "Search for files"
 msgstr ""
 
 #: scripts/services/AppUtils.js:98
-#: templates/settings.html:69
+#: templates/settings.html:74
 msgid "Seconds"
 msgstr ""
 
@@ -2088,7 +2092,7 @@ msgstr ""
 msgid "Source:"
 msgstr ""
 
-#: templates/settings.html:117
+#: templates/settings.html:122
 msgid "Specific builds for developers only. Not for use with important data."
 msgstr ""
 
@@ -2154,9 +2158,9 @@ msgstr ""
 msgid "Stored"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:105
-#: scripts/controllers/SystemSettingsController.js:122
-#: scripts/controllers/SystemSettingsController.js:93
+#: scripts/controllers/SystemSettingsController.js:106
+#: scripts/controllers/SystemSettingsController.js:123
+#: scripts/controllers/SystemSettingsController.js:94
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2174,7 +2178,7 @@ msgstr ""
 msgid "System Files"
 msgstr ""
 
-#: templates/settings.html:137
+#: templates/settings.html:142
 msgid "System default ({{levelname}})"
 msgstr ""
 
@@ -2260,7 +2264,7 @@ msgstr ""
 msgid "The application is not verified on e-Notariado"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:105
+#: scripts/controllers/SystemSettingsController.js:106
 msgid "The application was re-enrolled successfully!"
 msgstr ""
 
@@ -2386,7 +2390,7 @@ msgstr ""
 msgid "To export without a passphrase, uncheck the \"Encrypt file\" box"
 msgstr ""
 
-#: templates/settings.html:43
+#: templates/settings.html:48
 msgid "To prevent various DNS based attacks, Duplicati limits the allowed hostnames to the ones listed here. Direct IP access and localhost is always allowed. Multiple hostnames can be supplied with a semicolon separator. If any of the allowed hostnames is an asterisk (*), all hostnames are allowed and this feature is disabled. If the field is empty, only IP address and localhost access is allowed."
 msgstr ""
 
@@ -2402,7 +2406,7 @@ msgstr ""
 msgid "Trust server certificate?"
 msgstr ""
 
-#: templates/settings.html:112
+#: templates/settings.html:117
 msgid "Try out the new features that we are working on. Currently the most stable version available. Test Restore data before using this in production environments."
 msgstr ""
 
@@ -2422,7 +2426,7 @@ msgstr ""
 msgid "Until resumed"
 msgstr ""
 
-#: templates/settings.html:95
+#: templates/settings.html:100
 msgid "Update channel"
 msgstr ""
 
@@ -2438,15 +2442,15 @@ msgstr ""
 msgid "Uploading verification file ..."
 msgstr ""
 
-#: templates/settings.html:144
+#: templates/settings.html:149
 msgid "Usage reports help us improve the user experience and evaluate impact of new features. We use them to generate <external-link link=\"link\">public usage statistics</external-link>"
 msgstr ""
 
-#: templates/settings.html:132
+#: templates/settings.html:137
 msgid "Usage statistics"
 msgstr ""
 
-#: templates/settings.html:138
+#: templates/settings.html:143
 msgid "Usage statistics, warnings, errors, and crashes"
 msgstr ""
 
@@ -2471,7 +2475,7 @@ msgstr ""
 msgid "User has too many permissions"
 msgstr ""
 
-#: templates/settings.html:75
+#: templates/settings.html:80
 msgid "User interface settings"
 msgstr ""
 
@@ -2506,7 +2510,7 @@ msgstr ""
 msgid "Verifying answer"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:89
+#: scripts/controllers/SystemSettingsController.js:90
 msgid "Verifying application ..."
 msgstr ""
 
@@ -2552,7 +2556,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: templates/settings.html:139
+#: templates/settings.html:144
 msgid "Warnings, errors and crashes"
 msgstr ""
 

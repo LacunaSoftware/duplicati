@@ -16,14 +16,19 @@
             </p>
             
             <div class="input checkbox">
-                <input type="button" id="eNotariadoVerify" class="submit" value="{{'Check application status' | translate}}" ng-click="eNotariadoVerify()" />
+                <input type="button" id="eNotariadoVerify" class="button submit" value="{{'Check application status' | translate}}" ng-click="eNotariadoVerify()" />
             </div>
         </div>
 
         <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled" translate>The application is correctly configured.</h4>
         
-        <div class="input checkbox">
-            <input type="button" id="eNotariadoReset" class="submit" value="{{'Re-enroll application' | translate}}" ng-click="eNotariadoReset()" />
+        <div style="cursor: pointer" class="sublabel" ng-click="enrollSettings = !enrollSettings">
+            <span translate>Advanced action</span>&nbsp; 
+            <i ng-show="!enrollSettings" class="fa fa-arrow-down"></i>
+            <i ng-show="enrollSettings" class="fa fa-arrow-up"></i>
+        </div>
+        <div ng-show="enrollSettings" class="input checkbox">
+            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Re-enroll application' | translate}}" ng-click="eNotariadoReset()" />
         </div>
 
         <h2 translate>Access to user interface</h2>
