@@ -23,12 +23,7 @@ UPDATER_KEYFILE="${HOME}/.config/signkeys/Duplicati/updater-release.key"
 
 GPG_KEYFILE="${HOME}/.config/signkeys/Duplicati/updater-gpgkey.key"
 
-AUTHENTICODE_PFXFILE="${HOME}/.config/signkeys/Duplicati/authenticode.pfx"
-AUTHENTICODE_PASSWORD="${HOME}/.config/signkeys/Duplicati/authenticode.key"
-
 GITHUB_TOKEN_FILE="${HOME}/.config/github-api-token"
-DISCOURSE_TOKEN_FILE="${HOME}/.config/discourse-api-token"
-
 
 FTPS_HOSTNAME="ftps://waws-prod-cq1-011.ftp.azurewebsites.windows.net"
 FTPS_USERNAME="cdn-enotariado\mikaelm"
@@ -200,46 +195,9 @@ rm -rf "${UPDATE_SOURCE}/"*.xml;
 find  . -type f -name ".DS_Store" | xargs rm -rf
 find  . -type f -name "Thumbs.db" | xargs rm -rf
 
-echo -n "Waiting for sign of files"
+echo -n "Please sign all DLLs and EXEs using signtool.exe from a Dev Command Prompt. Press <enter> when ready... "
 read -s AAA
 echo
-# Sign all files with Authenticode
-# if [ -f "${AUTHENTICODE_PFXFILE}" ] && [ -f "${AUTHENTICODE_PASSWORD}" ]; then
-# 	echo "Performing authenticode signing of executables and libraries"
-
-# 	authenticode_sign() {
-# 		NEST=""
-# 		for hashalg in sha1 sha256; do
-# 			SIGN_MSG=$(osslsigncode sign -pkcs12 "${AUTHENTICODE_PFXFILE}" -pass "${PFX_PASS}" -n "Duplicati" -i "http://www.duplicati.com" -h "${hashalg}" ${NEST} -t "http://timestamp.verisign.com/scripts/timstamp.dll" -in "$1" -out tmpfile)
-# 			if [ "${SIGN_MSG}" != "Succeeded" ]; then echo "${SIGN_MSG}"; fi
-# 			mv tmpfile "$1"
-# 			NEST="-nest"
-# 		done
-# 	}
-
-# 	PFX_PASS=$("${MONO}" "BuildTools/AutoUpdateBuilder/bin/Debug/SharpAESCrypt.exe" d "${KEYFILE_PASSWORD}" "${AUTHENTICODE_PASSWORD}")
-
-# 	DECRYPT_STATUS=$?
-# 	if [ "${DECRYPT_STATUS}" -ne 0 ]; then
-# 	    echo "Failed to decrypt, SharpAESCrypt gave status ${DECRYPT_STATUS}, exiting"
-# 	    exit 4
-# 	fi
-
-# 	if [ "x${PFX_PASS}" == "x" ]; then
-# 	    echo "Failed to decrypt, SharpAESCrypt gave empty password, exiting"
-# 	    exit 4
-# 	fi
-
-# 	for exec in "${UPDATE_SOURCE}/Duplicati."*.exe; do
-# 		authenticode_sign "${exec}"
-# 	done
-# 	for exec in "${UPDATE_SOURCE}/Duplicati."*.dll; do
-# 		authenticode_sign "${exec}"
-# 	done
-
-# else
-# 	echo "Skipped authenticode signing as files are missing"
-# fi
 
 echo
 echo "Building signed package ..."
@@ -268,7 +226,7 @@ cp "${UPDATE_TARGET}/latest.zip.sig.asc" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.
 
 echo "Uploading binaries"
 
-ZIP_MD5=$(md5 ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $NF}')
+ZIP_MD5=$(md5sum ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $1}')
 ZIP_SHA1=$(shasum -a 1 ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $1}')
 ZIP_SHA256=$(shasum -a 256 ${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip | awk -F ' ' '{print $1}')
 
@@ -291,7 +249,7 @@ echo "duplicati_version_info =" > "latest.js"
 cat "latest.json" >> "latest.js"
 echo ";" >> "latest.js"
 
-
+echo "Uploading files to server"
 lftp -u "${FTPS_USERNAME}","${FTPS_PASSWORD}" "${FTPS_HOSTNAME}" <<EOF
 	cd "/site/wwwroot/backup-client/updates/${RELEASE_TYPE}"
 	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
@@ -365,38 +323,12 @@ else
 	    --file "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
 fi
 
-
-DISCOURSE_TOKEN=$(cat "${DISCOURSE_TOKEN_FILE}")
-
-if [ "x${DISCOURSE_TOKEN}" == "x" ]; then
-	echo "No DISCOURSE_TOKEN found in environment, you can manually create the post on the forum"
-else
-
-	body="# [${RELEASE_VERSION}-${RELEASE_NAME}](https://github.com/duplicati/duplicati/releases/tag/v${RELEASE_VERSION}-${RELEASE_NAME})
-
-${RELEASE_CHANGEINFO_NEWS}
-"
-
-	DISCOURSE_USERNAME=$(echo "${DISCOURSE_TOKEN}" | cut -d ":" -f 1)
-	DISCOURSE_APIKEY=$(echo "${DISCOURSE_TOKEN}" | cut -d ":" -f 2)
-
-	curl -X POST "https://forum.duplicati.com/posts" \
-		-F "api_key=${DISCOURSE_APIKEY}" \
-		-F "api_username=${DISCOURSE_USERNAME}" \
-		-F "category=Releases" \
-		-F "title=Release: ${RELEASE_VERSION} (${RELEASE_TYPE}) ${RELEASE_TIMESTAMP}" \
-		-F "raw=${body}"
-fi
-
 echo
 echo "Built ${RELEASE_TYPE} version: ${RELEASE_VERSION} - ${RELEASE_NAME}"
 echo "    in folder: ${UPDATE_TARGET}"
 echo
 echo
-echo "Building installers ..."
-
-# Send the password along to avoid typing it again
-export KEYFILE_PASSWORD
+echo "Build the installers separately"
 
 #bash "build-installers.sh" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
 
