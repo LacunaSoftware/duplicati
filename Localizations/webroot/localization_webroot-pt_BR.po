@@ -173,7 +173,7 @@ msgstr ""
 "Um arquivo foi encontrado no local escolhido\n"
 "Você tem certeza que quer apontar a database para um arquivo existente?"
 
-#: scripts/controllers/EditBackupController.js:294
+#: scripts/controllers/EditBackupController.js:302
 msgid ""
 "An existing local database for the storage has been found.\n"
 "Re-using the database will allow the command-line and server instances to "
@@ -363,8 +363,8 @@ msgstr "Canary"
 
 #: scripts/controllers/AppController.js:44
 #: scripts/controllers/AppController.js:59
-#: scripts/controllers/EditBackupController.js:294
-#: scripts/controllers/EditBackupController.js:39
+#: scripts/controllers/EditBackupController.js:302
+#: scripts/controllers/EditBackupController.js:47
 #: scripts/controllers/LocalDatabaseController.js:72
 #: scripts/controllers/LocalDatabaseController.js:88
 #: scripts/controllers/StateController.js:103
@@ -807,7 +807,7 @@ msgstr "Módulos de criptografia:"
 msgid "Enrolling ..."
 msgstr "Cadastrando ..."
 
-#: scripts/controllers/EditBackupController.js:39
+#: scripts/controllers/EditBackupController.js:47
 msgid "Enter URL"
 msgstr "Informe a URL"
 
@@ -885,8 +885,8 @@ msgstr ""
 #: scripts/controllers/RestoreController.js:411
 #: scripts/controllers/RestoreController.js:421
 #: scripts/controllers/RestoreController.js:88
-#: scripts/controllers/RestoreDirectController.js:116
-#: scripts/controllers/RestoreDirectController.js:92
+#: scripts/controllers/RestoreDirectController.js:123
+#: scripts/controllers/RestoreDirectController.js:99
 #: scripts/directives/backupEditUri.js:143
 #: scripts/directives/backupEditUri.js:170
 #: scripts/directives/backupEditUri.js:205
@@ -1002,10 +1002,9 @@ msgstr "Falha ao conectar:"
 #: scripts/controllers/RestoreController.js:331
 #: scripts/controllers/RestoreController.js:421
 #: scripts/controllers/RestoreController.js:88
-#: scripts/controllers/RestoreDirectController.js:116
-#: scripts/controllers/RestoreDirectController.js:19
-#: scripts/controllers/RestoreDirectController.js:53
-#: scripts/controllers/RestoreDirectController.js:92
+#: scripts/controllers/RestoreDirectController.js:123
+#: scripts/controllers/RestoreDirectController.js:60
+#: scripts/controllers/RestoreDirectController.js:99
 msgid "Failed to connect: {{message}}"
 msgstr "Falha ao conectar: {{message}}"
 
@@ -1022,7 +1021,7 @@ msgstr "Falha ao obter informação do caminho: {{message}}"
 msgid "Failed to import:"
 msgstr "Falha ao importar:"
 
-#: scripts/controllers/EditBackupController.js:534
+#: scripts/controllers/EditBackupController.js:549
 msgid "Failed to read backup defaults:"
 msgstr "Falha ao ler os padrões do backup:"
 
@@ -1107,7 +1106,7 @@ msgstr "Gerar política de acesso IAM"
 msgid "Getting file versions ..."
 msgstr "Obtendo versões de arquivos ..."
 
-#: scripts/controllers/RestoreDirectController.js:40
+#: scripts/controllers/RestoreDirectController.js:47
 msgid "Getting list of backups stored remotely ..."
 msgstr "Construindo lista dos backups armazenados remotamente ..."
 
@@ -1260,7 +1259,7 @@ msgstr ""
 "Para verificar a aplicação, copie os caracteres abaixo para a página de "
 "verificação do e-Notariado."
 
-#: scripts/controllers/EditBackupController.js:107
+#: scripts/controllers/EditBackupController.js:115
 msgid "Include a file?"
 msgstr "Incluir um arquivo?"
 
@@ -1297,9 +1296,9 @@ msgstr "Falha na instalação:"
 msgid "Invalid characters in path"
 msgstr "Caracteres inválidos no caminho"
 
-#: scripts/controllers/EditBackupController.js:218
-#: scripts/controllers/EditBackupController.js:225
-#: scripts/controllers/EditBackupController.js:232
+#: scripts/controllers/EditBackupController.js:226
+#: scripts/controllers/EditBackupController.js:233
+#: scripts/controllers/EditBackupController.js:240
 msgid "Invalid retention time"
 msgstr "Tempo de retenção inválido"
 
@@ -1357,7 +1356,7 @@ msgstr "Mais recentes"
 msgid "Libraries"
 msgstr "Bibliotecas"
 
-#: scripts/controllers/RestoreDirectController.js:83
+#: scripts/controllers/RestoreDirectController.js:90
 msgid "Listing backup dates ..."
 msgstr "Listando datas de backup ..."
 
@@ -1489,11 +1488,11 @@ msgstr "Redundância mínima é 1.0"
 msgid "Minutes"
 msgstr "Minutos"
 
-#: scripts/controllers/EditBackupController.js:183
+#: scripts/controllers/EditBackupController.js:191
 msgid "Missing name"
 msgstr "Faltando o nome"
 
-#: scripts/controllers/EditBackupController.js:189
+#: scripts/controllers/EditBackupController.js:197
 msgid "Missing sources"
 msgstr "Faltando as origens"
 
@@ -1573,9 +1572,9 @@ msgstr "Próxima vez"
 
 #: scripts/controllers/AboutController.js:54
 #: scripts/controllers/DeleteController.js:77
-#: scripts/controllers/EditBackupController.js:107
-#: scripts/controllers/EditBackupController.js:294
-#: scripts/controllers/EditBackupController.js:97
+#: scripts/controllers/EditBackupController.js:105
+#: scripts/controllers/EditBackupController.js:115
+#: scripts/controllers/EditBackupController.js:302
 #: scripts/controllers/HomeController.js:7
 #: scripts/controllers/LocalDatabaseController.js:28
 #: scripts/controllers/LocalDatabaseController.js:72
@@ -1650,8 +1649,8 @@ msgstr "Nada será excluído. O tamanho do backup crescerá com cada mudança."
 #: scripts/controllers/AppController.js:59
 #: scripts/controllers/AppController.js:81
 #: scripts/controllers/AppController.js:88
-#: scripts/controllers/EditBackupController.js:39
 #: scripts/controllers/EditBackupController.js:47
+#: scripts/controllers/EditBackupController.js:55
 #: scripts/services/CaptchaService.js:22 scripts/services/DialogService.js:28
 #: scripts/services/DialogService.js:50 scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125 templates/restore.html:142
@@ -1755,7 +1754,7 @@ msgstr "Aplicando patch nos arquivos com blocos locais ..."
 msgid "Path"
 msgstr "Caminho"
 
-#: scripts/controllers/EditBackupController.js:97
+#: scripts/controllers/EditBackupController.js:105
 msgid "Path not found"
 msgstr "Caminho não encontrado"
 
@@ -1845,7 +1844,7 @@ msgstr "Recriar (excluir e reparar)"
 msgid "Recreating database ..."
 msgstr "Recriando banco de dados ..."
 
-#: scripts/controllers/EditBackupController.js:82
+#: scripts/controllers/EditBackupController.js:90
 msgid "Relative paths not allowed"
 msgstr "Caminhos relativos não são permitidos"
 
@@ -1951,9 +1950,17 @@ msgstr "Restaurando arquivos ..."
 msgid "Resume"
 msgstr "Continuar"
 
-#: scripts/controllers/RestoreDirectController.js:46
+#: scripts/controllers/RestoreDirectController.js:53
 msgid "Retrieved information about {0} backups ..."
 msgstr "Informações recuperadas de {0} backups ..."
+
+#: scripts/controllers/EditBackupController.js:347
+msgid "Retrieving data to secure backup..."
+msgstr "Recuperando dados para proteger o backup..."
+
+#: scripts/controllers/RestoreDirectController.js:20
+msgid "Retrieving password to restore backup..."
+msgstr "Recuperando a senha para restaurar o backup..."
 
 #: templates/addoredit.html:235
 msgid "Run again every"
@@ -2030,6 +2037,11 @@ msgstr "Procurar por arquivos"
 #: scripts/services/AppUtils.js:98 templates/settings.html:74
 msgid "Seconds"
 msgstr "Segundos"
+
+#: scripts/controllers/EditBackupController.js:347
+#: scripts/controllers/RestoreDirectController.js:20
+msgid "Security"
+msgstr "Segurança"
 
 #: templates/log.html:29
 msgid "Select a log level and see messages as they happen:"
@@ -2371,12 +2383,12 @@ msgstr ""
 "A página ainda não foi carregada, isto pode ser causado por uma instalação "
 "defeituosa, um problema com o navegador ou uma conexão lenta."
 
-#: scripts/controllers/EditBackupController.js:97
+#: scripts/controllers/EditBackupController.js:105
 msgid "The path does not appear to exist, do you want to add it anyway?"
 msgstr ""
 "O caminho não parece existir, você deseja adicioná-lo de qualquer maneira?"
 
-#: scripts/controllers/EditBackupController.js:107
+#: scripts/controllers/EditBackupController.js:115
 msgid ""
 "The path does not end with a '{{dirsep}}' character, which means that you "
 "include a file, not a folder.\n"
@@ -2388,7 +2400,7 @@ msgstr ""
 "\n"
 "Deseja incluir o arquivo especificado?"
 
-#: scripts/controllers/EditBackupController.js:82
+#: scripts/controllers/EditBackupController.js:90
 msgid ""
 "The path must be an absolute path, i.e. it must start with a forward slash "
 "'/'"
@@ -2430,7 +2442,7 @@ msgstr ""
 "A classe de armazenamento afeta a disponibilidade e o preço de um arquivo "
 "armazenado"
 
-#: scripts/controllers/RestoreDirectController.js:113
+#: scripts/controllers/RestoreDirectController.js:120
 msgid ""
 "The target folder contains encrypted files, please supply the passphrase"
 msgstr "A pasta de destino contém arquivos criptografados. Forneça a senha"
@@ -2605,7 +2617,7 @@ msgstr "Estatísticas de uso, avisos, erros e falhas"
 msgid "Use SSL"
 msgstr "Utilizar SSL"
 
-#: scripts/controllers/EditBackupController.js:294
+#: scripts/controllers/EditBackupController.js:302
 msgid "Use existing database?"
 msgstr "Usar um banco de dados existente?"
 
@@ -2725,9 +2737,9 @@ msgstr "Anos"
 #: scripts/controllers/AboutController.js:54
 #: scripts/controllers/AppController.js:201
 #: scripts/controllers/DeleteController.js:77
-#: scripts/controllers/EditBackupController.js:107
-#: scripts/controllers/EditBackupController.js:294
-#: scripts/controllers/EditBackupController.js:97
+#: scripts/controllers/EditBackupController.js:105
+#: scripts/controllers/EditBackupController.js:115
+#: scripts/controllers/EditBackupController.js:302
 #: scripts/controllers/HomeController.js:7
 #: scripts/controllers/LocalDatabaseController.js:28
 #: scripts/controllers/LocalDatabaseController.js:72
@@ -2788,7 +2800,7 @@ msgstr ""
 msgid "You have chosen to restore to a new location, but not entered one"
 msgstr "Você escolheu restaurar para um novo local, mas não inseriu um"
 
-#: scripts/controllers/EditBackupController.js:189
+#: scripts/controllers/EditBackupController.js:197
 msgid "You must choose at least one source folder"
 msgstr "Você deve escolher pelo menos uma pasta de origem"
 
@@ -2796,7 +2808,7 @@ msgstr "Você deve escolher pelo menos uma pasta de origem"
 msgid "You must enter a domain name to use v3 API"
 msgstr "Você deve inserir um nome de domínio para usar a API v3"
 
-#: scripts/controllers/EditBackupController.js:183
+#: scripts/controllers/EditBackupController.js:191
 msgid "You must enter a name for the backup"
 msgstr "Você deve inserir um nome para o backup"
 
@@ -2804,7 +2816,7 @@ msgstr "Você deve inserir um nome para o backup"
 msgid "You must enter a password to use v3 API"
 msgstr "Você deve digitar uma senha para usar a API v3"
 
-#: scripts/controllers/EditBackupController.js:225
+#: scripts/controllers/EditBackupController.js:233
 msgid "You must enter a positive number of backups to keep"
 msgstr "Você deve inserir um número positivo de backups para manter"
 
@@ -2817,11 +2829,11 @@ msgstr ""
 msgid "You must enter a tenant name if you do not provide an API Key"
 msgstr "Você deve inserir um nome de projeto se não fornecer uma chave de API"
 
-#: scripts/controllers/EditBackupController.js:218
+#: scripts/controllers/EditBackupController.js:226
 msgid "You must enter a valid duration for the time to keep backups"
 msgstr "Você deve inserir uma duração válida de tempo para manter os backups"
 
-#: scripts/controllers/EditBackupController.js:232
+#: scripts/controllers/EditBackupController.js:240
 msgid "You must enter a valid rentention policy string"
 msgstr "Você deve inserir uma política de seqüência de retenção válida"
 
@@ -3117,9 +3129,6 @@ msgstr "{{time}} (took {{duration}})"
 
 #~ msgid "Operation failed:"
 #~ msgstr "Operação falhou:"
-
-#~ msgid "Registering temporary backup ..."
-#~ msgstr "Registrando cópia temporária ..."
 
 #~ msgid ""
 #~ "The target backup contains encrypted files, please supply the passphrase"
