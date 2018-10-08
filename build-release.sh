@@ -279,8 +279,8 @@ cat > "latest.json" <<EOF
 	"zipsig": "${RELEASE_FILE_NAME}.zip.sig",
 	"zipsigasc": "${RELEASE_FILE_NAME}.zip.sig.asc",
 	"manifest": "${RELEASE_FILE_NAME}.manifest",
-	"urlbase": "https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/",
-	"link": "https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip",
+	"urlbase": "https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/",
+	"link": "https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip",
 	"zipmd5": "${ZIP_MD5}",
 	"zipsha1": "${ZIP_SHA1}",
 	"zipsha256": "${ZIP_SHA256}"
@@ -292,7 +292,7 @@ cat "latest.json" >> "latest.js"
 echo ";" >> "latest.js"
 
 
- lftp -u "${FTPS_USERNAME}","${FTPS_PASSWORD}" "${FTPS_HOSTNAME}" <<EOF
+lftp -u "${FTPS_USERNAME}","${FTPS_PASSWORD}" "${FTPS_HOSTNAME}" <<EOF
 	cd "/site/wwwroot/backup-client/updates/${RELEASE_TYPE}"
 	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
 	put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip.sig"
@@ -305,12 +305,17 @@ echo ";" >> "latest.js"
 	bye
 EOF
 
-# echo "Propagating to other build types"
-# for OTHER in ${OTHER_UPLOADS}; do
-# 	aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.manifest" "s3://updates.backup.e-notariado.org.br/${OTHER}/latest.manifest"
-# 	aws --profile=duplicati-upload s3 cp "s3://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/latest.json" "s3://updates.backup.e-notariado.org.br/${OTHER}/latest.json"
-# done
-exit 0
+echo "Propagating to other build types"
+for OTHER in ${OTHER_UPLOADS}; do
+	lftp -u "${FTPS_USERNAME}","${FTPS_PASSWORD}" "${FTPS_HOSTNAME}" <<EOF
+		cd "/site/wwwroot/backup-client/updates/${OTHER}"
+		put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.manifest"
+		mv  "${RELEASE_FILE_NAME}.manifest" "latest.manifest"
+		put "latest.json"
+		put "latest.js"
+		bye
+EOF
+done
 
 rm "${RELEASE_CHANGELOG_NEWS_FILE}"
 
@@ -319,8 +324,8 @@ git checkout "Duplicati/Library/AutoUpdater/AutoUpdateURL.txt"
 git checkout "Duplicati/Library/AutoUpdater/AutoUpdateBuildChannel.txt"
 git add "Updates/build_version.txt"
 git add "${RELEASE_CHANGELOG_FILE}"
-git commit -m "Version bump to v${RELEASE_VERSION}-${RELEASE_NAME}" -m "You can download this build from: " -m "Binaries: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
-git tag "v${RELEASE_VERSION}-${RELEASE_NAME}"                       -m "You can download this build from: " -m "Binaries: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://updates.backup.e-notariado.org.br/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
+git commit -m "Version bump to v${RELEASE_VERSION}-${RELEASE_NAME}" -m "You can download this build from: " -m "Binaries: https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
+git tag "v${RELEASE_VERSION}-${RELEASE_NAME}"                       -m "You can download this build from: " -m "Binaries: https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip" -m "Signature file: https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig" -m "ASCII signature file: https://cdn.e-notariado.org.br/backup-client/updates/${RELEASE_TYPE}/${RELEASE_FILE_NAME}.zip.sig.asc" -m "MD5: ${ZIP_MD5}" -m "SHA1: ${ZIP_SHA1}" -m "SHA256: ${ZIP_SHA256}"
 git push --tags
 
 PRE_RELEASE_LABEL="--pre-release"
@@ -387,6 +392,6 @@ echo "Building installers ..."
 # Send the password along to avoid typing it again
 export KEYFILE_PASSWORD
 
-bash "build-installers.sh" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
+#bash "build-installers.sh" "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
 
 
