@@ -248,7 +248,7 @@ echo "Building signed package ..."
 
 if [ ! -f "${UPDATE_TARGET}/package.zip" ]; then
 	"${MONO}" "BuildTools/UpdateVersionStamp/bin/Release/UpdateVersionStamp.exe" --version="${OLD_RELEASE_VERSION}"
-	
+
 	echo "Something went wrong while building the package, no output found"
 	exit 5
 fi
@@ -313,6 +313,9 @@ for OTHER in ${OTHER_UPLOADS}; do
 	lftp -u "${FTPS_USERNAME}","${FTPS_PASSWORD}" "${FTPS_HOSTNAME}" <<EOF
 		cd "/site/wwwroot/backup-client/updates/${OTHER}"
 		put "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.manifest"
+		rm  "latest.manifest"
+		rm  "latest.json"
+		rm  "latest.js"
 		mv  "${RELEASE_FILE_NAME}.manifest" "latest.manifest"
 		put "latest.json"
 		put "latest.js"
