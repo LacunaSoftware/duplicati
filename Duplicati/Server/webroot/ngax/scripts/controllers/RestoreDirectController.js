@@ -4,21 +4,28 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
     $scope.AppUtils = AppUtils;
     $scope.ServerStatus = ServerStatus;
     $scope.serverstate = ServerStatus.watch($scope);
-    $scope.EncryptionPassphrase = '';
-    
-    function getPassphrase() {
-        AppService.get('/enotariado/backup-password').then(
-            function(resp) {
-                $scope.EncryptionPassphrase = resp.data.Password;
-            }, function(resp) {
-                var message = resp.statusText;
-                if (resp.data != null && resp.data.Message != null)
-                    message = resp.data.Message;
+    $scope.EncryptionPassphrase = $scope.BackupENotariadoPassword;
 
-                $scope.connecting = false;
-                $scope.logs.push(gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
-            }
-        );
+    var dlg;
+
+    function handleError(data) {
+        if (dlg != null)
+            dlg.dismiss();
+        
+        AppUtils.connectionError(data);
+    }
+    
+    function getPassphrase() {        
+        if ($scope.EncryptionPassphrase === undefined) {
+            dlg = DialogService.dialog(gettextCatalog.getString('Security'), gettextCatalog.getString('Retrieving password to restore backup...'), [], null, function() {       
+                AppService.get('/enotariado/backup-password').then(
+                    function(resp) {
+                        dlg.dismiss();
+                        $scope.EncryptionPassphrase = resp.data.Password;
+                    }, handleError
+                );
+            });
+        }
     }
 
     $scope.CurrentStep = 0;

@@ -22,6 +22,14 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
     ];
 
     var scope = $scope;
+    var dlg;
+    
+    function handleError(data) {
+        if (dlg != null)
+            dlg.dismiss();
+        
+        AppUtils.connectionError(data);
+    }
 
     $scope.nextPage = function() {
         $scope.CurrentStep = Math.min(3, $scope.CurrentStep + 1);
@@ -331,14 +339,21 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
         $scope.Schedule = angular.copy(data.Schedule);
 
         $scope.Options = {
-            'encryption-module': 'aes'
+            'encryption-module': 'aes',
+            'passphrase': $scope.BackupENotariadoPassword
         };
         
-        AppService.get('/enotariado/backup-password').then(
-            function(resp) {
-                $scope.Options['passphrase'] = resp.data.Password;
-            }
-        );
+        if ($scope.BackupENotariadoPassword === undefined) {
+            dlg = DialogService.dialog(gettextCatalog.getString('Security'), gettextCatalog.getString('Retrieving data to secure backup...'), [], null, function() {       
+                AppService.get('/enotariado/backup-password').then(
+                    function(resp) {
+                        dlg.dismiss();
+                        $scope.Options['passphrase'] = resp.data.Password;
+                        $scope.BackupENotariadoPassword = resp.data.Password;
+                    }, handleError
+                );
+            });
+        }
 
         var extopts = {};
 
