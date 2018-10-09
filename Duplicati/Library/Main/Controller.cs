@@ -159,7 +159,7 @@ namespace Duplicati.Library.Main
             return List((IEnumerable<string>)null, filter);
         }
 
-        public Duplicati.Library.Interface.IListResults List (string filterstring, Library.Utility.IFilter filter = null)
+        public Duplicati.Library.Interface.IListResults List(string filterstring)
         {
             return List(filterstring == null ? null : new string[] { filterstring }, null);
         }
@@ -672,7 +672,7 @@ namespace Duplicati.Library.Main
                 selectedRetentionOptions.Add("keep-versions");
             }
 
-            if (m_options.RetentionPolicy.Count() > 0)
+            if (m_options.RetentionPolicy.Any())
             {
                 selectedRetentionOptions.Add("retention-policy");
             }
