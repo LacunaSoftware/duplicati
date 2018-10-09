@@ -13,96 +13,6 @@ call "%VS140COMNTOOLS%vsvars32.bat"
 
 "C:\Program Files\7-Zip\7z.exe" x -oDuplicati %1
 
-IF EXIST "..\oem" (
-	echo Installing OEM files
-	xcopy ..\oem\* Duplicati\webroot\oem /e /s /y /i
-)
-
-IF EXIST "..\..\oem" (
-	echo Installing OEM files
-	xcopy ..\..\oem\* Duplicati\webroot\ /e /s /y /i
-)
-
-IF EXIST "..\..\..\oem" (
-	echo Installing OEM files
-	xcopy ..\..\..\oem\* Duplicati\webroot\ /e /s /y /i
-)
-
-IF EXIST "..\oem-app-name.txt" (
-	echo Installing OEM override file
-	xcopy ..\oem-app-name.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\oem-app-name.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\oem-app-name.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\..\oem-app-name.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\..\oem-app-name.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\oem-update-url.txt" (
-	echo Installing OEM override file
-	xcopy ..\oem-update-url.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\oem-update-url.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\oem-update-url.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\..\oem-update-url.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\..\oem-update-url.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\oem-update-key.txt" (
-	echo Installing OEM override file
-	xcopy ..\oem-update-key.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\oem-update-key.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\oem-update-key.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\..\oem-update-key.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\..\oem-update-key.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\oem-update-readme.txt" (
-	echo Installing OEM override file
-	xcopy ..\oem-update-readme.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\oem-update-readme.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\oem-update-readme.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\..\oem-update-readme.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\..\oem-update-readme.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\oem-update-installid.txt" (
-	echo Installing OEM override file
-	xcopy ..\oem-update-installid.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\oem-update-installid.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\oem-update-installid.txt Duplicati /e /s /y /i
-)
-
-IF EXIST "..\..\..\oem-update-installid.txt" (
-	echo Installing OEM override file
-	xcopy ..\..\..\oem-update-installid.txt Duplicati /e /s /y /i
-)
-
 rmdir /s /q obj
 rmdir /s /q bin
 
@@ -110,10 +20,10 @@ copy UpgradeData.wxi UpgradeData.wxi.orig
 UpdateVersion.exe Duplicati\Duplicati.GUI.TrayIcon.exe UpgradeData.wxi
 
 msbuild /property:Configuration=Release /property:Platform=x64
-move "bin\x64\Release\Backup e-Notariado.msi" "backup-eNotariado.msi"
+move "bin\x64\Release\Backup e-Notariado.msi" "backup-enotariado.msi"
 
 msbuild /property:Configuration=Release /property:Platform=x86
-move "bin\x86\Release\Backup e-Notariado.msi" "backup-eNotariado-32bit.msi"
+move "bin\x86\Release\Backup e-Notariado.msi" "backup-enotariado_32bit.msi"
 
 copy UpgradeData.wxi.orig UpgradeData.wxi
 del UpgradeData.wxi.orig

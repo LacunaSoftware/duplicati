@@ -2,11 +2,12 @@
 
 ## Building release for prod
 
+- Have both a shell and a Developer Command Prompt, the best way to do that is by using the Ubuntu Subsystem
 - Create the file `changelog-news.txt` and list the changes made in the new version
 - Have the private key of the updater under the directory defined in `UPDATER_KEYFILE` (defined in the `build-release.sh` file).
 - Check both FTPS hostname and username
 - Execute the `build-release.sh` script
-- When it asks for you to sign the DLLs and EXEs, open a Dev Command Prompt, cd to `<repository_path>/Updates/build/<build_dir>` and sign them using `signtool.exe sign /n <CERT NAME> /tr http://timestamp.digicert.com *.dll *.exe`.
+- When it asks for you to sign the DLLs and EXEs, open the Dev Command Prompt, cd to `<repository_path>/Updates/build/<build_dir>` and sign the files using `signtool.exe sign /n <CERT NAME> /tr http://timestamp.digicert.com *.dll *.exe`.
 - Go back to `build-release.sh`, press enter and let it finish the release.
 
 ## Building Windows installer
