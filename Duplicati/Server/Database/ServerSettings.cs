@@ -122,8 +122,6 @@ namespace Duplicati.Server.Database
 			System.Threading.Interlocked.Increment(ref Program.LastDataUpdateID);
 			Program.StatusEventNotifyer.SignalNewEvent();
 
-			// In case the usage reporter is enabled or disabled, refresh now
-			Program.StartOrStopUsageReporter();
             // If throttle options were changed, update now
             Program.UpdateThrottleSpeeds();
         }

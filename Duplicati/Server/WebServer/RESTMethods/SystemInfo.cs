@@ -75,7 +75,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 StartedBy = Duplicati.Server.Program.Origin,
                 BaseVersionName = Duplicati.Library.AutoUpdater.UpdaterManager.BaseVersion.Displayname,
                 DefaultUpdateChannel = Duplicati.Library.AutoUpdater.AutoUpdateSettings.DefaultUpdateChannel,
-                DefaultUsageReportLevel = Duplicati.Library.UsageReporter.Reporter.DefaultReportLevel,
                 ServerTime = DateTime.Now,
                 OSType = Library.Utility.Utility.IsClientLinux ? (Library.Utility.Utility.IsClientOSX ? "OSX" : "Linux") : "Windows",
                 DirectorySeparator = System.IO.Path.DirectorySeparatorChar,

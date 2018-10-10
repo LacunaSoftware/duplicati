@@ -97,20 +97,19 @@
             </select>
         </div> -->
 
-        <h2 translate>Update channel</h2>
+        <!-- <h2 translate>Update channel</h2>
         <div class="input checkbox">
             <input type="radio" class="checkbox" id="updateChannelDefault" value="" name="updateChannel" ng-model="updateChannel" />
             <label for="updateChannelDefault" translate translate-params-channelname="SystemInfo.DefaultUpdateChannel">Default ({{channelname}})</label>
             <div class="sublabel" class="" translate translate-params-channelname="SystemInfo.BaseVersionName">Same as the base install version: {{channelname}}</div>
         </div>
 
-        <!--
         <div class="input checkbox">
             <input type="radio" class="checkbox" id="updateChannelStable" value="stable" name="updateChannel" ng-model="updateChannel" />
             <label for="updateChannelStable" translate>Stable</label>
             <div class="sublabel" class="" translate>Official releases</div>
         </div>
-        -->
+        
         <div class="input checkbox">
             <input type="radio" class="checkbox" id="updateChannelBeta" value="beta" name="updateChannel" ng-model="updateChannel" />
             <label for="updateChannelBeta" translate>Beta</label>
@@ -126,15 +125,14 @@
             <label for="updateChannelCanary" translate>Canary</label>
             <div class="sublabel" translate>Individual builds for developers only. Not for use with important data.</div>
         </div>
-        <!--
+        
         <div class="input checkbox">
             <input type="radio" class="checkbox" id="updateChannelNightly" value="nightly" name="updateChannel" ng-model="updateChannel" />
             <label for="updateChannelNightly" translate>Nightly</label>
             <div class="sublabel" translate>Regular builds for developers only</div>
-        </div>
-        -->
+        </div> -->
 
-        <h2 ng-if="SystemInfo.DefaultUsageReportLevel != 'Disabled'" translate>Usage statistics</h2>
+        <!-- <h2 ng-if="SystemInfo.DefaultUsageReportLevel != 'Disabled'" translate>Usage statistics</h2>
         <div ng-if="SystemInfo.DefaultUsageReportLevel != 'Disabled'" class="input mixed multiple">
             <label for="usagereporterlevel" translate>Anonymous usage reports</label>
 
@@ -149,7 +147,7 @@
             <div class="sublabel"><p translate translate-params-link="'https://usage-reporter.duplicati.com/'">Usage reports help us improve the user experience and evaluate impact of new features. We use them to generate <external-link link="link">public usage statistics</external-link></p>
 
             <p translate>All usage reports are sent anonymously and do not contain any personal information. They contain information about hardware and operating system, the type of backend, backup duration, overall size of source data and similar data. They do not contain paths, filenames, usernames, passwords or similar sensitive information.</p></div>
-        </div>
+        </div> -->
 
         <div ng-repeat="module in ServerModules">
             <h2>{{module.DisplayName}}</h2>

@@ -107,18 +107,9 @@ namespace Duplicati.Library.Main
 
         public Duplicati.Library.Interface.IBackupResults Backup(string[] inputsources, IFilter filter = null)
         {
-            Library.UsageReporter.Reporter.Report("USE_BACKEND", new Library.Utility.Uri(m_backend).Scheme);
-            Library.UsageReporter.Reporter.Report("USE_COMPRESSION", m_options.CompressionModule);
-            Library.UsageReporter.Reporter.Report("USE_ENCRYPTION", m_options.EncryptionModule);
-            
             return RunAction(new BackupResults(), ref inputsources, ref filter, (result) => {
-
                 using (var h = new Operation.BackupHandler(m_backend, m_options, result))
                     h.Run(ExpandInputSources(inputsources, filter), filter);
-
-                Library.UsageReporter.Reporter.Report("BACKUP_FILECOUNT", result.ExaminedFiles);
-                Library.UsageReporter.Reporter.Report("BACKUP_FILESIZE", result.SizeOfExaminedFiles);
-                Library.UsageReporter.Reporter.Report("BACKUP_DURATION", (long)result.Duration.TotalSeconds);
             });
         }
 
@@ -126,10 +117,6 @@ namespace Duplicati.Library.Main
         {
             return RunAction(new RestoreResults(), ref paths, ref filter, (result) => {
                 new Operation.RestoreHandler(m_backend, m_options, result).Run(paths, filter);
-
-                Library.UsageReporter.Reporter.Report("RESTORE_FILECOUNT", result.FilesRestored);
-                Library.UsageReporter.Reporter.Report("RESTORE_FILESIZE", result.SizeOfRestoredFiles);
-                Library.UsageReporter.Reporter.Report("RESTORE_DURATION", (long)result.Duration.TotalSeconds);
             });
         }
 

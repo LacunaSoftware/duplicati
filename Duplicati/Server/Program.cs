@@ -334,8 +334,6 @@ namespace Duplicati.Server
                     throw new SingleInstance.MultipleInstanceException(Strings.Program.AnotherInstanceDetected);
                 }
 
-                StartOrStopUsageReporter();
-
                 if (commandlineOptions.ContainsKey("webservice-password"))
                     Program.DataConnection.ApplicationSettings.SetWebserverPassword(commandlineOptions["webservice-password"]);
 
@@ -507,8 +505,6 @@ namespace Duplicati.Server
                 if (PurgeTempFilesTimer != null)
                     PurgeTempFilesTimer.Dispose();
 
-                Library.UsageReporter.Reporter.ShutDown();
-
                 if (PingPongThread != null)
                     try { PingPongThread.Abort(); }
                     catch { }
@@ -645,20 +641,6 @@ namespace Duplicati.Server
             }
 
             return new Database.Connection(con);
-        }
-
-        public static void StartOrStopUsageReporter()
-        {
-            var disableUsageReporter =
-                string.Equals(DataConnection.ApplicationSettings.UsageReporterLevel, "none", StringComparison.OrdinalIgnoreCase)
-                ||
-                string.Equals(DataConnection.ApplicationSettings.UsageReporterLevel, "disabled", StringComparison.OrdinalIgnoreCase);
-
-            Library.UsageReporter.ReportType reportLevel;
-            if (!Enum.TryParse<Library.UsageReporter.ReportType>(DataConnection.ApplicationSettings.UsageReporterLevel, true, out reportLevel))
-                Library.UsageReporter.Reporter.SetReportLevel(null, disableUsageReporter);
-            else
-                Library.UsageReporter.Reporter.SetReportLevel(reportLevel, disableUsageReporter);
         }
 
         public static void UpdateThrottleSpeeds()

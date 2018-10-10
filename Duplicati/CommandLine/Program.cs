@@ -45,7 +45,6 @@ namespace Duplicati.CommandLine
 
         public static int RealMain(string[] args)
         {
-            Library.UsageReporter.Reporter.Initialize();
             FROM_COMMANDLINE = true;
             try
             {
@@ -67,7 +66,6 @@ namespace Duplicati.CommandLine
             }
             finally
             {
-                Library.UsageReporter.Reporter.ShutDown();
             }
         }
 
@@ -248,8 +246,6 @@ namespace Duplicati.CommandLine
             }
             catch (Exception ex)
             {
-                Library.UsageReporter.Reporter.Report(ex);
-
                 while (ex is System.Reflection.TargetInvocationException && ex.InnerException != null)
                     ex = ex.InnerException;
 
