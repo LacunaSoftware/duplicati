@@ -47,6 +47,9 @@ backupApp.config(['$routeProvider',
             when('/settings', {
                 templateUrl: 'templates/settings.html'
             }).
+            when('/enotariado', {
+                templateUrl: 'templates/enotariado.html'
+            }).
             when('/about', {
                 templateUrl: 'templates/about.html'
             }).

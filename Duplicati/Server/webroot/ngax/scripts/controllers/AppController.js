@@ -73,20 +73,20 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
     };
 
     const eNotariadoCheck = function (eNotariado) {
-        if (!eNotariado) return;
+        if (1 || !eNotariado) return;
         if (!eNotariado.isEnrolled) {
             DialogService.dialog(
                 gettextCatalog.getString('e-Notariado error'),
                 gettextCatalog.getString('The application is not enrolled in e-Notariado. Please re-enroll'),                
                 [gettextCatalog.getString('OK')],
-                () => $location.path('/settings')
+                () => $location.path('/enotariado')
             );
         } else if (!eNotariado.isVerified) {
             DialogService.dialog(
                 gettextCatalog.getString('e-Notariado error'),
                 gettextCatalog.getString('The application is not verified in e-Notariado. Please verify the application and recheck the status'),                
                 [gettextCatalog.getString('OK')],
-                () => $location.path('/settings')
+                () => $location.path('/enotariado')
             );
         }
     }
@@ -103,6 +103,8 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
             $scope.current_page = 'restore';
         else if ($location.$$path == '/settings')
             $scope.current_page = 'settings';
+        else if ($location.$$path == '/enotariado')
+            $scope.current_page = 'enotariado';
         else if ($location.$$path == '/log')
             $scope.current_page = 'log';
         else if ($location.$$path == '/about')
@@ -110,7 +112,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         else
             $scope.current_page = '';
 
-        if ($scope.current_page !== 'settings') eNotariadoCheck($scope.eNotariado);
+        if ($scope.current_page !== 'enotariado') eNotariadoCheck($scope.eNotariado);
     };
 
     $scope.$on('serverstatechanged', function() {

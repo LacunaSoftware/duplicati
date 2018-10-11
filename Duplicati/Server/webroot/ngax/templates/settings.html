@@ -2,35 +2,6 @@
     <h1 translate>Settings</h1>
 
     <form class="styled">
-        <h2 translate>eNotariado</h2>
-        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled" translate>Error: The application is not enrolled in e-Notariado</h4>
-        <div ng-hide="!eNotariado.isEnrolled || eNotariado.isVerified">
-            <h4 class="ui-state-error-text"translate>The application is not verified on e-Notariado</h4>
-            <p>
-                <span translate>In order to verify the application, copy the digits below into the verification page of the e-Notariado website.</span>
-                <div class="input text">
-                    <label for="certThumbprint" translate>Application Code</label>
-                    <input style="font-weight: bold" type="text" id="certThumbprint" ng-model="eNotariado.applicationId"/>
-                    <i id="copyToClip" href ng-click="copyToClipboard()" class="fa fa-copy" style="margin: 10px 10px 10px 10px"></i>
-                </div>
-            </p>
-            
-            <div class="input checkbox">
-                <input type="button" id="eNotariadoVerify" class="button submit" value="{{'Check application status' | translate}}" ng-click="eNotariadoVerify()" />
-            </div>
-        </div>
-
-        <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled" translate>The application is correctly configured.</h4>
-        
-        <div style="cursor: pointer" class="sublabel" ng-click="enrollSettings = !enrollSettings">
-            <span translate>Advanced action</span>&nbsp; 
-            <i ng-show="!enrollSettings" class="fa fa-arrow-down"></i>
-            <i ng-show="enrollSettings" class="fa fa-arrow-up"></i>
-        </div>
-        <div ng-show="enrollSettings" class="input checkbox">
-            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Re-enroll application' | translate}}" ng-click="eNotariadoReset()" />
-        </div>
-
         <h2 translate>Access to user interface</h2>
         <div class="input mixed multiple">
             <input type="checkbox" class="checkbox" id="hasPassword" name="hasPassword" ng-model="requireRemotePassword" />
