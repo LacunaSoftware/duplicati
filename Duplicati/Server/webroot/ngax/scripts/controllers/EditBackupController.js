@@ -265,6 +265,11 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
             });
         }
 
+        // Temporary fix to allow empty descriptions while DB sets Description as NOT NULL
+        if (!result.Backup.Description) {
+            result.Backup.Description = '';
+        }
+
         var filterstrings = result.Backup.Filters || [];
         result.Backup.Filters = [];
         for(var f in filterstrings)
