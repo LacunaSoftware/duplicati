@@ -14,6 +14,7 @@
 //  You should have received a copy of the GNU Lesser General Public
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+using Duplicati.Library.Localization.Short;
 using System;
 
 namespace Duplicati.Server.WebServer.RESTMethods
@@ -53,7 +54,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 long lastEventId;
                 if (!long.TryParse(input["lasteventid"].Value, out lastEventId))
                 {
-                    ReportClientError("When activating long poll, the request must include the last event id", System.Net.HttpStatusCode.BadRequest);
+                    ReportClientError(LC.L(@"When activating long poll, the request must include the last event id"), System.Net.HttpStatusCode.BadRequest);
                     isError = true;
                     return false;
                 }
@@ -62,14 +63,14 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 try { ts = Library.Utility.Timeparser.ParseTimeSpan(input["duration"].Value); }
                 catch (Exception ex)
                 {
-                    ReportClientError("Invalid duration: " + ex.Message, System.Net.HttpStatusCode.BadRequest);
+                    ReportClientError(LC.L(@"Invalid duration: ") + ex.Message, System.Net.HttpStatusCode.BadRequest);
                     isError = true;
                     return false;
                 }
 
                 if (ts <= TimeSpan.FromSeconds(10) || ts.TotalMilliseconds > int.MaxValue)
                 {
-                    ReportClientError("Invalid duration, must be at least 10 seconds, and less than " + int.MaxValue + " milliseconds", System.Net.HttpStatusCode.BadRequest);
+                    ReportClientError(string.Format(LC.L(@"Invalid duration, must be at least 10 seconds, and less than {0} milliseconds"), int.MaxValue), System.Net.HttpStatusCode.BadRequest);
                     isError = true;
                     return false;
                 }

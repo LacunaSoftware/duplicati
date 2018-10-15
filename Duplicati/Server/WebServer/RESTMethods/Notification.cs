@@ -14,6 +14,7 @@
 //  You should have received a copy of the GNU Lesser General Public
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+using Duplicati.Library.Localization.Short;
 using System;
 using System.Linq;
 
@@ -26,13 +27,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
             long id;
             if (!long.TryParse(key, out id))
             {
-                info.ReportClientError("Invalid ID", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Invalid ID"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
             var el = Program.DataConnection.GetNotifications().FirstOrDefault(x => x.ID == id);
             if (el == null)
-                info.ReportClientError("No such notification", System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"No such notification"), System.Net.HttpStatusCode.NotFound);
             else
                 info.OutputOK(el);
         }
@@ -42,13 +43,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
             long id;
             if (!long.TryParse(key, out id))
             {
-                info.ReportClientError("Invalid ID", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Invalid ID"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
             var el = Program.DataConnection.GetNotifications().FirstOrDefault(x => x.ID == id);
             if (el == null)
-                info.ReportClientError("No such notification", System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"No such notification"), System.Net.HttpStatusCode.NotFound);
             else
             {
                 Program.DataConnection.DismissNotification(id);

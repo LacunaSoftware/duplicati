@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using Duplicati.Server.Database;
 using System.IO;
 using Duplicati.Server.Serialization;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -57,7 +58,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             if (string.IsNullOrWhiteSpace(str))
             {
-                info.ReportClientError("Missing data object", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Missing data object"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
@@ -67,7 +68,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 data = Serializer.Deserialize<Dictionary<string, string>>(new StringReader(str));
                 if (data == null)
                 {
-                    info.ReportClientError("Data object had no entry", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"Data object had no entry"), System.Net.HttpStatusCode.BadRequest);
                     return;
                 }
 

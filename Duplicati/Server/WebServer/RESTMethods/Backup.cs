@@ -20,6 +20,7 @@ using Duplicati.Server.Serialization;
 using System.IO;
 using System.Linq;
 using Duplicati.Server.Serialization.Interface;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -47,7 +48,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             if (string.IsNullOrWhiteSpace(timestring) && !allversion)
             {
-                info.ReportClientError("Invalid or missing time", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Invalid or missing time"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
@@ -329,13 +330,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
         {
             var np = info.Request.Form["path"].Value;
             if (string.IsNullOrWhiteSpace(np))
-                info.ReportClientError("No target path supplied", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"No target path supplied"), System.Net.HttpStatusCode.BadRequest);
             else if (!Path.IsPathRooted(np))
-                info.ReportClientError("Target path is relative, please supply a fully qualified path", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Target path is relative, please supply a fully qualified path"), System.Net.HttpStatusCode.BadRequest);
             else
             {
                 if (move && (File.Exists(np) || Directory.Exists(np)))
-                    info.ReportClientError("A file already exists at the new location", System.Net.HttpStatusCode.Conflict);
+                    info.ReportClientError(LC.L(@"A file already exists at the new location"), System.Net.HttpStatusCode.Conflict);
                 else
                 {
                     if (move)
@@ -353,7 +354,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             var parts = (key ?? "").Split(new char[] { '/' }, 2);
             var bk = Program.DataConnection.GetBackup(parts.First());
             if (bk == null)
-                info.ReportClientError("Invalid or missing backup id", System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"Invalid or missing backup id"), System.Net.HttpStatusCode.NotFound);
             else
             {
                 if (parts.Length > 1)
@@ -387,7 +388,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                             IsActive(bk, info);
                             return;
                         default:
-                            info.ReportClientError(string.Format("Invalid component: {0}", operation), System.Net.HttpStatusCode.BadRequest);
+                            info.ReportClientError(string.Format(LC.L(@"Invalid component: {0}"), operation), System.Net.HttpStatusCode.BadRequest);
                             return;
                     }
 
@@ -416,7 +417,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             var parts = (key ?? "").Split(new char[] { '/' }, 2);
             var bk = Program.DataConnection.GetBackup(parts.First());
             if (bk == null)
-                info.ReportClientError("Invalid or missing backup id", System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"Invalid or missing backup id"), System.Net.HttpStatusCode.NotFound);
             else
             {
                 if (parts.Length > 1)
@@ -483,7 +484,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     }
                 }
 
-                info.ReportClientError("Invalid request", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Invalid request"), System.Net.HttpStatusCode.BadRequest);
             }
         }
             
@@ -495,7 +496,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             if (string.IsNullOrWhiteSpace(str))
             {
-                info.ReportClientError("Missing backup object", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Missing backup object"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
@@ -505,7 +506,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 data = Serializer.Deserialize<Backups.AddOrUpdateBackupData>(new StringReader(str));
                 if (data.Backup == null)
                 {
-                    info.ReportClientError("Data object had no backup entry", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"Data object had no backup entry"), System.Net.HttpStatusCode.BadRequest);
                     return;
                 }
 
@@ -514,7 +515,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
                 if (string.IsNullOrEmpty(data.Backup.ID))
                 {
-                    info.ReportClientError("Invalid or missing backup id", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"Invalid or missing backup id"), System.Net.HttpStatusCode.BadRequest);
                     return;
                 }          
 
@@ -535,13 +536,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
                         var backup = Program.DataConnection.GetBackup(data.Backup.ID);
                         if (backup == null)
                         {
-                            info.ReportClientError("Invalid or missing backup id", System.Net.HttpStatusCode.NotFound);
+                            info.ReportClientError(LC.L(@"Invalid or missing backup id"), System.Net.HttpStatusCode.NotFound);
                             return;
                         }
 
                         if (Program.DataConnection.Backups.Any(x => x.Name.Equals(data.Backup.Name, StringComparison.OrdinalIgnoreCase) && x.ID != data.Backup.ID))
                         {
-                            info.ReportClientError("There already exists a backup with the name: " + data.Backup.Name, System.Net.HttpStatusCode.Conflict);
+                            info.ReportClientError(LC.L(@"There already exists a backup with the name: ") + data.Backup.Name, System.Net.HttpStatusCode.Conflict);
                             return;
                         }
 
@@ -563,9 +564,9 @@ namespace Duplicati.Server.WebServer.RESTMethods
             catch (Exception ex)
             {
                 if (data == null)
-                    info.ReportClientError(string.Format("Unable to parse backup or schedule object: {0}", ex.Message), System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(string.Format(LC.L(@"Unable to parse backup or schedule object: {0}"), ex.Message), System.Net.HttpStatusCode.BadRequest);
                 else
-                    info.ReportClientError(string.Format("Unable to save backup or schedule: {0}", ex.Message), System.Net.HttpStatusCode.InternalServerError);
+                    info.ReportClientError(string.Format(LC.L(@"Unable to save backup or schedule: {0}"), ex.Message), System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
@@ -574,7 +575,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             var backup = Program.DataConnection.GetBackup(key);
             if (backup == null)
             {
-                info.ReportClientError("Invalid or missing backup id", System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"Invalid or missing backup id"), System.Net.HttpStatusCode.NotFound);
                 return;
             }
 
@@ -586,13 +587,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 var captcha_answer = info.Request.Param["captcha-answer"].Value;
                 if (string.IsNullOrWhiteSpace(captcha_token) || string.IsNullOrWhiteSpace(captcha_answer))
                 {
-                    info.ReportClientError("Missing captcha", System.Net.HttpStatusCode.Unauthorized);
+                    info.ReportClientError(LC.L(@"Missing captcha"), System.Net.HttpStatusCode.Unauthorized);
                     return;
                 }
 
                 if (!Captcha.SolvedCaptcha(captcha_token, "DELETE /backup/" + backup.ID, captcha_answer))
                 {
-                    info.ReportClientError("Invalid captcha", System.Net.HttpStatusCode.Forbidden);
+                    info.ReportClientError(LC.L(@"Invalid captcha"), System.Net.HttpStatusCode.Forbidden);
                     return;
                 }
             }
@@ -672,7 +673,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             info.OutputOK(new { Status = "OK", ID = task.TaskID });
         }
-        public string Description { get { return "Retrieves, updates or deletes an existing backup and schedule"; } }
+        public string Description { get { return LC.L(@"Retrieves, updates or deletes an existing backup and schedule"); } }
 
         public IEnumerable<KeyValuePair<string, Type>> Types
         {

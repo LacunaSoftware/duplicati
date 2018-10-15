@@ -14,6 +14,7 @@
 //  You should have received a copy of the GNU Lesser General Public
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+using Duplicati.Library.Localization.Short;
 using System;
 using System.Collections.Generic;
 
@@ -24,7 +25,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
         public void GET(string key, RequestInfo info)
         {
             if (Program.GenerateProgressState == null)
-                info.ReportClientError("No active backup", System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"No active backup"), System.Net.HttpStatusCode.NotFound);
             else
                 info.OutputOK(Program.GenerateProgressState());
         }

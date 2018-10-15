@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-04 11:30-0300\n"
+"POT-Creation-Date: 2018-10-15 11:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: CommandLine/Program.cs:292
+#: CommandLine/Program.cs:288
 msgid "Toggle automatic updates"
 msgstr ""
 
-#: CommandLine/Program.cs:292
+#: CommandLine/Program.cs:288
 msgid ""
 "Set this option if you prefer to have the commandline version automatically "
 "update"
@@ -2166,23 +2166,23 @@ msgid "List verify failed for file: {0}, size was {1} but expected to be {2}"
 msgstr ""
 
 #: Library/Main/BackendManager.cs:1106
-#: Library/Main/Operation/Common/BackendHandler.cs:537
+#: Library/Main/Operation/Common/BackendHandler.cs:540
 #, csharp-format
 msgid "Delete operation failed for {0} with FileNotFound, listing contents"
 msgstr ""
 
 #: Library/Main/BackendManager.cs:1119
-#: Library/Main/Operation/Common/BackendHandler.cs:550
+#: Library/Main/Operation/Common/BackendHandler.cs:553
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr ""
 
-#: Library/Main/Controller.cs:345
+#: Library/Main/Controller.cs:332
 #, csharp-format
 msgid "No email specified, please use --{0}"
 msgstr ""
 
-#: Library/Main/Controller.cs:447
+#: Library/Main/Controller.cs:434
 msgid "Operation aborted by request"
 msgstr ""
 
@@ -2307,39 +2307,39 @@ msgstr ""
 msgid "Scrubbing filenames from database, this may take a while, please wait"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:55
+#: Library/Main/Operation/FilelistProcessor.cs:53
 #, csharp-format
 msgid "Removing remote file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:62
+#: Library/Main/Operation/FilelistProcessor.cs:60
 #, csharp-format
 msgid "Failed to erase file {0}, treating as deleted: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:68
+#: Library/Main/Operation/FilelistProcessor.cs:66
 #, csharp-format
 msgid "Unknown state for remote file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:93
+#: Library/Main/Operation/FilelistProcessor.cs:91
 #, csharp-format
 msgid "Extra unknown file: {0}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:99
+#: Library/Main/Operation/FilelistProcessor.cs:97
 #, csharp-format
 msgid "Missing file: {0}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:105
+#: Library/Main/Operation/FilelistProcessor.cs:103
 #, csharp-format
 msgid ""
 "Found {0} remote files that are not recorded in local storage, please run "
 "repair"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:115
+#: Library/Main/Operation/FilelistProcessor.cs:113
 #, csharp-format
 msgid ""
 "Found remote files reported as duplicates, either the backend module is "
@@ -2347,90 +2347,90 @@ msgid ""
 "files were found multiple times: {0}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:124
+#: Library/Main/Operation/FilelistProcessor.cs:122
 #, csharp-format
 msgid ""
 "Found {0} files that are missing from the remote storage, and no files with "
 "the backup prefix {1}, but found the following backup prefixes: {2}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:126
+#: Library/Main/Operation/FilelistProcessor.cs:124
 #, csharp-format
 msgid ""
 "Found {0} files that are missing from the remote storage, please run repair"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:175
+#: Library/Main/Operation/FilelistProcessor.cs:173
 #, csharp-format
 msgid "Would upload verification file: {0}, size: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:244
+#: Library/Main/Operation/FilelistProcessor.cs:242
 #, csharp-format
 msgid "Backend quota has been exceeded: Using {0} of {1} ({2} available)"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:253
+#: Library/Main/Operation/FilelistProcessor.cs:251
 #, csharp-format
 msgid ""
 "Backend quota is close to being exceeded: Using {0} of {1} ({2} available)"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:273
+#: Library/Main/Operation/FilelistProcessor.cs:271
 #, csharp-format
 msgid ""
 "The remote volume {0} appears in the database with state {1} and a deleted "
 "state, cannot continue"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:289
+#: Library/Main/Operation/FilelistProcessor.cs:287
 #, csharp-format
 msgid "ignoring remote file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:297
+#: Library/Main/Operation/FilelistProcessor.cs:295
 #, csharp-format
 msgid "removing remote file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:304
+#: Library/Main/Operation/FilelistProcessor.cs:302
 #, csharp-format
 msgid "keeping delete request for {0} until {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:310
-#: Library/Main/Operation/FilelistProcessor.cs:331
-#: Library/Main/Operation/FilelistProcessor.cs:345
+#: Library/Main/Operation/FilelistProcessor.cs:308
+#: Library/Main/Operation/FilelistProcessor.cs:329
+#: Library/Main/Operation/FilelistProcessor.cs:343
 #, csharp-format
 msgid "keeping protected incomplete remote file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:314
+#: Library/Main/Operation/FilelistProcessor.cs:312
 #, csharp-format
 msgid "removing file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:323
+#: Library/Main/Operation/FilelistProcessor.cs:321
 #, csharp-format
 msgid "promoting uploaded complete file from {0} to {2}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:336
+#: Library/Main/Operation/FilelistProcessor.cs:334
 #, csharp-format
 msgid "scheduling missing file for deletion, currently listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:349
+#: Library/Main/Operation/FilelistProcessor.cs:347
 #, csharp-format
 msgid "removing incomplete remote file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:374
+#: Library/Main/Operation/FilelistProcessor.cs:372
 #, csharp-format
 msgid "unknown state for remote file listed as {0}: {1}"
 msgstr ""
 
-#: Library/Main/Operation/FilelistProcessor.cs:385
+#: Library/Main/Operation/FilelistProcessor.cs:383
 msgid ""
 "remote file {1} is listed as {0} with size {2} but should be {3}, please "
 "verify the sha256 hash \"{ 4}\""
@@ -4743,27 +4743,27 @@ msgstr ""
 msgid "Failed while executing \"{0}\" with id: {1}"
 msgstr ""
 
-#: Server/Runner.cs:687 Server/Runner.cs:795
+#: Server/Runner.cs:686 Server/Runner.cs:794
 #, csharp-format
 msgid "Error while running {0}"
 msgstr ""
 
-#: Server/Runner.cs:755 Server/Runner.cs:793
+#: Server/Runner.cs:754 Server/Runner.cs:792
 #, csharp-format
 msgid "Warning while running {0}"
 msgstr ""
 
-#: Server/Runner.cs:757
+#: Server/Runner.cs:756
 #, csharp-format
 msgid "Errors affected {0} file(s)"
 msgstr ""
 
-#: Server/Runner.cs:759 Server/Runner.cs:799
+#: Server/Runner.cs:758 Server/Runner.cs:798
 #, csharp-format
 msgid "Got {0} error(s)"
 msgstr ""
 
-#: Server/Runner.cs:760 Server/Runner.cs:798
+#: Server/Runner.cs:759 Server/Runner.cs:797
 #, csharp-format
 msgid "Got {0} warning(s)"
 msgstr ""
@@ -4931,8 +4931,137 @@ msgstr ""
 msgid "Unable to open a socket for listening, tried ports: {0}"
 msgstr ""
 
+#: Server/WebServer/RESTMethods/Backup.cs:51
+msgid "Invalid or missing time"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:333
+msgid "No target path supplied"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:335
+msgid "Target path is relative, please supply a fully qualified path"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:339
+msgid "A file already exists at the new location"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:357
+#: Server/WebServer/RESTMethods/Backup.cs:420
+#: Server/WebServer/RESTMethods/Backup.cs:518
+#: Server/WebServer/RESTMethods/Backup.cs:539
+#: Server/WebServer/RESTMethods/Backup.cs:578
+msgid "Invalid or missing backup id"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:391
+#, csharp-format
+msgid "Invalid component: {0}"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:487
+#: Server/WebServer/RESTMethods/Task.cs:63
+msgid "Invalid request"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:499
+msgid "Missing backup object"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:509
+#: Server/WebServer/RESTMethods/Backups.cs:178
+msgid "Data object had no backup entry"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:545
+#: Server/WebServer/RESTMethods/Backups.cs:210
+msgid "There already exists a backup with the name: "
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:567
+#: Server/WebServer/RESTMethods/Backups.cs:230
+#, csharp-format
+msgid "Unable to parse backup or schedule object: {0}"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:569
+#, csharp-format
+msgid "Unable to save backup or schedule: {0}"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:590
+msgid "Missing captcha"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:596
+msgid "Invalid captcha"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backup.cs:676
+msgid "Retrieves, updates or deletes an existing backup and schedule"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backups.cs:232
+#, csharp-format
+msgid "Unable to save schedule or backup object: {0}"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Backups.cs:237
+msgid "Return a list of current backups and their schedules"
+msgstr ""
+
 #: Server/WebServer/RESTMethods/BugReport.cs:33
 msgid "Invalid or missing bugreport id"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/BugReport.cs:39
+msgid "File is missing"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Captcha.cs:65
+msgid "Missing token value"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Captcha.cs:81
+msgid "No such entry"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Captcha.cs:109
+#: Server/WebServer/RESTMethods/Captcha.cs:156
+msgid "Missing target parameter"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Captcha.cs:133
+msgid "Too many captchas, wait 2 minutes and try again"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Captcha.cs:151
+msgid "Missing answer parameter"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Captcha.cs:163
+msgid "Incorrect"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Changelog.cs:49
+msgid "No update found"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/CommandLine.cs:152
+msgid "Only abort commands are allowed"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/CommandLine.cs:159
+msgid "No task key found"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/ENotariado.cs:43
+#: Server/WebServer/RESTMethods/ENotariado.cs:79
+#: Server/WebServer/RESTMethods/ServerState.cs:81
+#: Server/WebServer/RESTMethods/SystemInfo.cs:59
+#: Server/WebServer/RESTMethods/Updates.cs:51
+msgid "No such action"
 msgstr ""
 
 #: Server/WebServer/RESTMethods/ENotariado.cs:51
@@ -4941,4 +5070,86 @@ msgstr ""
 
 #: Server/WebServer/RESTMethods/ENotariado.cs:52
 msgid "The application is enrolled but not verified in e-Notariado servers"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Filesystem.cs:43
+msgid "No path parameter was found"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Filesystem.cs:72
+msgid "The path parameter must start with a forward-slash"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Filesystem.cs:148
+msgid "Failed to process the path: "
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Notification.cs:30
+#: Server/WebServer/RESTMethods/Notification.cs:46
+msgid "Invalid ID"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Notification.cs:36
+#: Server/WebServer/RESTMethods/Notification.cs:52
+msgid "No such notification"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/ProgressState.cs:28
+msgid "No active backup"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/RemoteOperation.cs:129
+msgid "No url or operation supplied"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/RemoteOperation.cs:151
+#: Server/WebServer/RESTMethods/RemoteOperation.cs:181
+msgid "No such method"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/RequestInfo.cs:57
+msgid "When activating long poll, the request must include the last event id"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/RequestInfo.cs:66
+msgid "Invalid duration: "
+msgstr ""
+
+#: Server/WebServer/RESTMethods/RequestInfo.cs:73
+#, csharp-format
+msgid ""
+"Invalid duration, must be at least 10 seconds, and less than {0} milliseconds"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/ServerSettings.cs:61
+msgid "Missing data object"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/ServerSettings.cs:71
+msgid "Data object had no entry"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Task.cs:48
+msgid "No such task found"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Task.cs:82
+msgid "No such task"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/Task.cs:100
+msgid "Invalid or missing task id"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/UISettings.cs:48
+msgid "Scheme is missing"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/UISettings.cs:59
+#, csharp-format
+msgid "Unable to parse settings object: {0}"
+msgstr ""
+
+#: Server/WebServer/RESTMethods/UISettings.cs:65
+msgid "Unable to parse settings object"
 msgstr ""

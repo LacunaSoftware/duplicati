@@ -56,7 +56,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     return;
 
                 default:
-                    info.ReportClientError("No such action", System.Net.HttpStatusCode.NotFound);
+                    info.ReportClientError(LC.L(@"No such action"), System.Net.HttpStatusCode.NotFound);
                     return;
             }
         }

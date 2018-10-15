@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using Duplicati.Library.Snapshots;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -39,7 +40,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
         {
             if (string.IsNullOrEmpty(path))
             {
-                info.ReportClientError("No path parameter was found", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"No path parameter was found"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
@@ -68,7 +69,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             if (Duplicati.Library.Utility.Utility.IsClientLinux && !path.StartsWith("/", StringComparison.Ordinal))
             {
-                info.ReportClientError("The path parameter must start with a forward-slash", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"The path parameter must start with a forward-slash"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
@@ -144,7 +145,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             }
             catch (Exception ex)
             {
-                info.ReportClientError("Failed to process the path: " + ex.Message, System.Net.HttpStatusCode.InternalServerError);
+                info.ReportClientError(LC.L(@"Failed to process the path: ") + ex.Message, System.Net.HttpStatusCode.InternalServerError);
             }
         }
 

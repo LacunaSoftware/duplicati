@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -44,7 +45,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                info.ReportClientError("Scheme is missing", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Scheme is missing"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
@@ -55,13 +56,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
             }
             catch (Exception ex)
             {
-                info.ReportClientError(string.Format("Unable to parse settings object: {0}", ex.Message), System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(string.Format(LC.L(@"Unable to parse settings object: {0}"), ex.Message), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
             if (data == null)
             {
-                info.ReportClientError("Unable to parse settings object", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Unable to parse settings object"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 

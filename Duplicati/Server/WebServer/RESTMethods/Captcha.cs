@@ -17,6 +17,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -61,7 +62,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                info.ReportClientError("Missing token value", System.Net.HttpStatusCode.Unauthorized);
+                info.ReportClientError(LC.L(@"Missing token value"), System.Net.HttpStatusCode.Unauthorized);
                 return;
             }
             else
@@ -77,7 +78,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
                 if (string.IsNullOrWhiteSpace(answer))
                 {
-                    info.ReportClientError("No such entry", System.Net.HttpStatusCode.NotFound);
+                    info.ReportClientError(LC.L(@"No such entry"), System.Net.HttpStatusCode.NotFound);
                     return;
                 }
 
@@ -105,7 +106,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 var target = info.Request.Param["target"].Value;
                 if (string.IsNullOrWhiteSpace(target))
                 {
-                    info.ReportClientError("Missing target parameter", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"Missing target parameter"), System.Net.HttpStatusCode.BadRequest);
                     return;
                 }
 
@@ -129,7 +130,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
                     if (m_captchas.Count > 3)
                     {
-                        info.ReportClientError("Too many captchas, wait 2 minutes and try again", System.Net.HttpStatusCode.ServiceUnavailable);
+                        info.ReportClientError(LC.L(@"Too many captchas, wait 2 minutes and try again"), System.Net.HttpStatusCode.ServiceUnavailable);
                         return;
                     }
 
@@ -147,19 +148,19 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 var target = info.Request.Param["target"].Value;
                 if (string.IsNullOrWhiteSpace(answer))
                 {
-                    info.ReportClientError("Missing answer parameter", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"Missing answer parameter"), System.Net.HttpStatusCode.BadRequest);
                     return;
                 }
                 if (string.IsNullOrWhiteSpace(target))
                 {
-                    info.ReportClientError("Missing target parameter", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"Missing target parameter"), System.Net.HttpStatusCode.BadRequest);
                     return;
                 }
 
                 if (SolvedCaptcha(key, target, answer))
                     info.OutputOK();
                 else
-                    info.ReportClientError("Incorrect", System.Net.HttpStatusCode.Forbidden);
+                    info.ReportClientError(LC.L(@"Incorrect"), System.Net.HttpStatusCode.Forbidden);
             }
         }
     }

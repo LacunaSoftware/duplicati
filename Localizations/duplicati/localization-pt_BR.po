@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-04 11:30-0300\n"
-"PO-Revision-Date: 2018-10-04 11:31-0300\n"
+"POT-Creation-Date: 2018-10-15 11:18-0300\n"
+"PO-Revision-Date: 2018-10-15 11:25-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.1.1\n"
 
-#: CommandLine/Program.cs:292
+#: CommandLine/Program.cs:288
 msgid "Toggle automatic updates"
 msgstr "Habilitar atualizações automáticas"
 
-#: CommandLine/Program.cs:292
+#: CommandLine/Program.cs:288
 msgid ""
 "Set this option if you prefer to have the commandline version automatically "
 "update"
 msgstr ""
 "Escolha esta opção caso você deseje que a linha de comando seja atualizada "
-"automaticamente."
+"automaticamente"
 
 #: CommandLine/Strings.cs:4
 #, csharp-format
@@ -143,11 +143,11 @@ msgstr ""
 "especificar filtros no arquivo e na linha de comando. Em vez disso, você pode "
 "usar as opções especiais --{2}, --{3}, ou --{4} para especificar filtros "
 "dentro do arquivo de parâmetro. Cada filtro dever ser prefixado com um + ou um "
-"-, e vários filtros devem ser associados com {5}"
+"-, e vários filtros devem ser associados com {5} "
 
 #: CommandLine/Strings.cs:22 Server/Strings.cs:16
 msgid "Path to a file with parameters"
-msgstr "Caminho para um arquivo com parâmetros "
+msgstr "Caminho para um arquivo com parâmetros"
 
 #: CommandLine/Strings.cs:23
 #, csharp-format
@@ -226,7 +226,7 @@ msgstr ""
 
 #: CommandLine/Strings.cs:32
 msgid "Disable console output"
-msgstr "Desativar console de saída "
+msgstr "Desativar console de saída"
 
 #: CommandLine/Strings.cs:34
 #, csharp-format
@@ -454,7 +454,7 @@ msgstr "Todos os arquivos serão gravados no contêiner especificado"
 
 #: Library/Backend/AzureBlob/Strings.cs:5
 msgid "The name of the storage container "
-msgstr "Nome do container de armazenamento"
+msgstr "Nome do container de armazenamento "
 
 #: Library/Backend/AzureBlob/Strings.cs:6
 msgid "Azure blob"
@@ -554,7 +554,7 @@ msgid ""
 "type. Refer to the B2 documentation for allowed types "
 msgstr ""
 "Por padrão, um bucket privado será criado. Use esta opção para definir o tipo "
-"de bucket desejado. Verifique a documentação do B2 para os tipos permitidos."
+"de bucket desejado. Verifique a documentação do B2 para os tipos permitidos"
 
 #: Library/Backend/Backblaze/Strings.cs:17
 msgid "The bucket type used when creating a bucket"
@@ -606,7 +606,7 @@ msgid ""
 msgstr ""
 "Depois de excluir um arquivo, ele pode acabar na pasta de lixo onde ele será "
 "excluído após um período de tempo. Use este comando para forçar a remoção "
-"imediata de arquivos de excluidos"
+"imediata de arquivos de excluidos."
 
 #: Library/Backend/CloudFiles/Strings.cs:4
 #, csharp-format
@@ -1400,7 +1400,7 @@ msgstr "Rclone"
 
 #: Library/Backend/Rclone/Strings.cs:7
 msgid "This backend can read and write data to Rclone."
-msgstr "Este backend pode ler e gravar dados no Rclone"
+msgstr "Este backend pode ler e gravar dados no Rclone."
 
 #: Library/Backend/Rclone/Strings.cs:8
 msgid "Local repository"
@@ -1432,11 +1432,11 @@ msgstr "Caminho remoto"
 
 #: Library/Backend/Rclone/Strings.cs:13
 msgid "Path on the Remote repository. "
-msgstr "Caminho no repositório remoto."
+msgstr "Caminho no repositório remoto"
 
 #: Library/Backend/Rclone/Strings.cs:14
 msgid "Rclone options."
-msgstr "Opções do Rclone"
+msgstr "Opções do Rclone."
 
 #: Library/Backend/Rclone/Strings.cs:15
 msgid "Options will be transferred to rclone."
@@ -1560,7 +1560,7 @@ msgstr "As opções--{0} e {1} são mutuamente exclusivas"
 #: Library/Backend/S3/Strings.cs:25 Library/Backend/S3/Strings.cs:38
 #, csharp-format
 msgid "Please use --{0}={1} instead"
-msgstr "Por favor utilize --{0}={1} em vez de "
+msgstr "Por favor utilize --{0}={1} no lugar"
 
 #: Library/Backend/S3/Strings.cs:26
 #, csharp-format
@@ -1672,7 +1672,7 @@ msgstr ""
 
 #: Library/Backend/SharePoint/Strings.cs:15
 msgid "Move deleted files to the recycle bin"
-msgstr "Move os arquivos deletados para a Lixeira."
+msgstr "Move os arquivos deletados para a Lixeira"
 
 #: Library/Backend/SharePoint/Strings.cs:17
 msgid ""
@@ -1923,7 +1923,7 @@ msgid ""
 "options is set to zero, the operations will not time out"
 msgstr ""
 "Use esta opção para gerenciar o tempo limite interno para operações SSH. Se "
-"essas opção for definida como zero, as operações não terão tempo limite."
+"essas opção for definida como zero, as operações não terão tempo limite"
 
 #: Library/Backend/SSHv2/Strings.cs:36
 msgid "Sets the operation timeout value"
@@ -1943,7 +1943,7 @@ msgstr ""
 
 #: Library/Backend/SSHv2/Strings.cs:38
 msgid "Sets a keepalive value"
-msgstr "Define um valor de conexão persistente  \"keepalive\""
+msgstr "Define um valor de conexão persistente, \"keepalive\""
 
 #: Library/Backend/SSHv2/Strings.cs:39
 msgid "SFTP (SSH)"
@@ -2127,15 +2127,15 @@ msgstr "Compressão Zip"
 
 #: Library/Compression/Strings.cs:16
 msgid "Archive not opened for writing"
-msgstr "Arquivo não aberto para escrita."
+msgstr "Arquivo não aberto para escrita"
 
 #: Library/Compression/Strings.cs:17
 msgid "Archive not opened for reading"
-msgstr "Arquivo não aberto para leitura."
+msgstr "Arquivo não aberto para leitura"
 
 #: Library/Compression/Strings.cs:18
 msgid "The given file is not part of this archive"
-msgstr "O conteúdo não faz parte deste arquivo."
+msgstr "O conteúdo não faz parte deste arquivo"
 
 #: Library/Compression/Strings.cs:19
 msgid "*Experimental*: 7z Archive with LZMA2 support."
@@ -2159,7 +2159,7 @@ msgstr "Número de tarefas utilizadas na compressão"
 
 #: Library/Compression/Strings.cs:24
 msgid "Sets the 7z compression level"
-msgstr "Selecione o nível 7z de compressão."
+msgstr "Selecione o nível 7z de compressão"
 
 #: Library/Compression/Strings.cs:25
 msgid ""
@@ -2561,7 +2561,7 @@ msgstr ""
 "era {2}"
 
 #: Library/Main/BackendManager.cs:1106
-#: Library/Main/Operation/Common/BackendHandler.cs:537
+#: Library/Main/Operation/Common/BackendHandler.cs:540
 #, csharp-format
 msgid "Delete operation failed for {0} with FileNotFound, listing contents"
 msgstr ""
@@ -2569,19 +2569,19 @@ msgstr ""
 "listando conteúdo"
 
 #: Library/Main/BackendManager.cs:1119
-#: Library/Main/Operation/Common/BackendHandler.cs:550
+#: Library/Main/Operation/Common/BackendHandler.cs:553
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr "A listagem indica que o arquivo {0} foi excluído corretamente"
 
-#: Library/Main/Controller.cs:345
+#: Library/Main/Controller.cs:332
 #, csharp-format
 msgid "No email specified, please use --{0}"
 msgstr "Nenhum e-mail especificado, por favor use --{0}"
 
-#: Library/Main/Controller.cs:447
+#: Library/Main/Controller.cs:434
 msgid "Operation aborted by request"
-msgstr "A operação foi abortada por solicitação."
+msgstr "A operação foi abortada por solicitação"
 
 #: Library/Main/Database/LocalBackupDatabase.cs:338
 msgid "Duplicate file entries detected, run repair to fix it"
@@ -2635,7 +2635,7 @@ msgstr "Reparação falhou, ainda há registros duplicados de arquivos!"
 msgid "Failed to repair, after repair {0} blocklisthashes were missing"
 msgstr ""
 "Falha ao reparar, depois da reparação {0} hashes de lista de blocos estavam "
-"faltando."
+"faltando"
 
 #: Library/Main/Database/LocalRepairDatabase.cs:470
 #, csharp-format
@@ -2738,32 +2738,32 @@ msgstr ""
 "Verificando nomes de arquivos a partir do banco de dados, isto pode demorar um "
 "pouco, por favor aguarde"
 
-#: Library/Main/Operation/FilelistProcessor.cs:55
+#: Library/Main/Operation/FilelistProcessor.cs:53
 #, csharp-format
 msgid "Removing remote file listed as {0}: {1}"
 msgstr "Removendo arquivo remote listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:62
+#: Library/Main/Operation/FilelistProcessor.cs:60
 #, csharp-format
 msgid "Failed to erase file {0}, treating as deleted: {1}"
 msgstr "Falha ao excluir o arquivo {0}, tratando como deletado: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:68
+#: Library/Main/Operation/FilelistProcessor.cs:66
 #, csharp-format
 msgid "Unknown state for remote file listed as {0}: {1}"
 msgstr "Estado desconhecido para arquivo remote listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:93
+#: Library/Main/Operation/FilelistProcessor.cs:91
 #, csharp-format
 msgid "Extra unknown file: {0}"
 msgstr "Arquivo desconhecido extra: {0}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:99
+#: Library/Main/Operation/FilelistProcessor.cs:97
 #, csharp-format
 msgid "Missing file: {0}"
 msgstr "Arquivo faltando: {0}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:105
+#: Library/Main/Operation/FilelistProcessor.cs:103
 #, csharp-format
 msgid ""
 "Found {0} remote files that are not recorded in local storage, please run "
@@ -2772,7 +2772,7 @@ msgstr ""
 "Foram achados {0} arquivos remotos que não estão salvos em armazenamento "
 "local, por favor repare o backup"
 
-#: Library/Main/Operation/FilelistProcessor.cs:115
+#: Library/Main/Operation/FilelistProcessor.cs:113
 #, csharp-format
 msgid ""
 "Found remote files reported as duplicates, either the backend module is broken "
@@ -2782,7 +2782,7 @@ msgstr ""
 "Foram achados arquivos remotos relatados como duplicados, você precisa remover "
 "manualmente as cópias.\\n Os seguintes arquivos foram achados várias vezes: {0}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:124
+#: Library/Main/Operation/FilelistProcessor.cs:122
 #, csharp-format
 msgid ""
 "Found {0} files that are missing from the remote storage, and no files with "
@@ -2792,7 +2792,7 @@ msgstr ""
 "arquivo com o prefixo de backup {1}, mas foram achados os seguintes prefixos "
 "de backup: {2}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:126
+#: Library/Main/Operation/FilelistProcessor.cs:124
 #, csharp-format
 msgid ""
 "Found {0} files that are missing from the remote storage, please run repair"
@@ -2800,17 +2800,17 @@ msgstr ""
 "Foram achados {0} arquivos remotos faltando no armazenamento remoto, por favor "
 "repare o backup"
 
-#: Library/Main/Operation/FilelistProcessor.cs:175
+#: Library/Main/Operation/FilelistProcessor.cs:173
 #, csharp-format
 msgid "Would upload verification file: {0}, size: {1}"
 msgstr "Iria carregar o arquivo de verificação: {0}, tamanho: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:244
+#: Library/Main/Operation/FilelistProcessor.cs:242
 #, csharp-format
 msgid "Backend quota has been exceeded: Using {0} of {1} ({2} available)"
 msgstr "Cota do e-Notariado foi excedida: Usando {0} de {1}({2} disponível)"
 
-#: Library/Main/Operation/FilelistProcessor.cs:253
+#: Library/Main/Operation/FilelistProcessor.cs:251
 #, csharp-format
 msgid ""
 "Backend quota is close to being exceeded: Using {0} of {1} ({2} available)"
@@ -2818,7 +2818,7 @@ msgstr ""
 "Cota do e-Notariado está perto de ser excedida: Usando {0} de {1}({2} "
 "disponível)"
 
-#: Library/Main/Operation/FilelistProcessor.cs:273
+#: Library/Main/Operation/FilelistProcessor.cs:271
 #, csharp-format
 msgid ""
 "The remote volume {0} appears in the database with state {1} and a deleted "
@@ -2827,55 +2827,55 @@ msgstr ""
 "O volume remote {0} aparece no banco de dados com estado {1} e um estado de "
 "remoção, não é possível continuar"
 
-#: Library/Main/Operation/FilelistProcessor.cs:289
+#: Library/Main/Operation/FilelistProcessor.cs:287
 #, csharp-format
 msgid "ignoring remote file listed as {0}: {1}"
 msgstr "ignorando arquivo remoto listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:297
+#: Library/Main/Operation/FilelistProcessor.cs:295
 #, csharp-format
 msgid "removing remote file listed as {0}: {1}"
 msgstr "removendo arquivo remoto listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:304
+#: Library/Main/Operation/FilelistProcessor.cs:302
 #, csharp-format
 msgid "keeping delete request for {0} until {1}"
 msgstr "mantendo requisição de deleção para {0} até {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:310
-#: Library/Main/Operation/FilelistProcessor.cs:331
-#: Library/Main/Operation/FilelistProcessor.cs:345
+#: Library/Main/Operation/FilelistProcessor.cs:308
+#: Library/Main/Operation/FilelistProcessor.cs:329
+#: Library/Main/Operation/FilelistProcessor.cs:343
 #, csharp-format
 msgid "keeping protected incomplete remote file listed as {0}: {1}"
 msgstr "mantendo arquivo remoto incompleto protegido listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:314
+#: Library/Main/Operation/FilelistProcessor.cs:312
 #, csharp-format
 msgid "removing file listed as {0}: {1}"
 msgstr "removendo arquivo listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:323
+#: Library/Main/Operation/FilelistProcessor.cs:321
 #, csharp-format
 msgid "promoting uploaded complete file from {0} to {2}: {1}"
 msgstr "promovendo arquivo complete carregado de {0} para {2}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:336
+#: Library/Main/Operation/FilelistProcessor.cs:334
 #, csharp-format
 msgid "scheduling missing file for deletion, currently listed as {0}: {1}"
 msgstr ""
 "agendando arquivo faltando para remoção, atualmente listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:349
+#: Library/Main/Operation/FilelistProcessor.cs:347
 #, csharp-format
 msgid "removing incomplete remote file listed as {0}: {1}"
 msgstr "removendo arquivo remote incomplete listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:374
+#: Library/Main/Operation/FilelistProcessor.cs:372
 #, csharp-format
 msgid "unknown state for remote file listed as {0}: {1}"
 msgstr "estado desconhecido para arquivo remote listado como {0}: {1}"
 
-#: Library/Main/Operation/FilelistProcessor.cs:385
+#: Library/Main/Operation/FilelistProcessor.cs:383
 msgid ""
 "remote file {1} is listed as {0} with size {2} but should be {3}, please "
 "verify the sha256 hash \"{ 4}\""
@@ -2887,7 +2887,7 @@ msgstr ""
 #: Library/Main/Operation/ListFilesHandler.cs:93
 #: Library/Main/Operation/RestoreControlFilesHandler.cs:41
 msgid "No filesets found on remote target"
-msgstr "Não foram encontrados arquivos no armazenamento remoto."
+msgstr "Não foram encontrados arquivos no armazenamento remoto"
 
 #: Library/Main/Operation/RepairHandler.cs:117
 msgid ""
@@ -3052,8 +3052,8 @@ msgid ""
 "Failed to apply 'force-locale' setting. Please try to update .NET-Framework. "
 "Exception was: \"{0}\" "
 msgstr ""
-"Falha na aplicação da configuração 'force-locale'. Por favor tente atualizar ."
-"NET-Framework. Exceção estava: \"{0}\""
+"Falha na aplicação da configuração 'force-locale'. Por favor tente atualizar "
+"a .NET-Framework. Exceção era: \"{0}\" "
 
 #: Library/Main/Strings.cs:29
 #, csharp-format
@@ -3733,11 +3733,11 @@ msgstr ""
 "Define um limite para o aviso de de que a cota do backend está quase superada. "
 "Este valor é dado como uma porcentagem em um aviso se a quantidade de cota "
 "disponível for menor que a porcentagem do tamanho total do backup. Se o "
-"backend não informar a cota, esse valor será ignorado."
+"backend não informar a cota, esse valor será ignorado"
 
 #: Library/Main/Strings.cs:127
 msgid "Threshold for warning about low quota"
-msgstr "Limite de aviso sobre quota baixa."
+msgstr "Limite de aviso sobre quota baixa"
 
 #: Library/Main/Strings.cs:128
 msgid "Symlink handling"
@@ -4011,6 +4011,8 @@ msgid ""
 "reasons."
 msgstr ""
 "Esta é uma opção bastante avançada! Esta opção pode ser usada para selecionar "
+"um algorithm de hash de blocos com tamanhos de hash maiores ou menores, por "
+"razões de performance ou espaço de armazenamento."
 
 #: Library/Main/Strings.cs:167
 msgid "The hash algorithm used on blocks"
@@ -4354,7 +4356,8 @@ msgid ""
 "from a volume before patching restored files with the data."
 msgstr ""
 "Utilize esta opção para incrementar a verificação por checagem de hash dos "
-"blocos escritos por um volume antes de "
+"blocos escritos por um volume antes de consertar arquivos restaurados com os "
+"dados."
 
 #: Library/Main/Strings.cs:220 Server/Strings.cs:37
 msgid "Clean up old log data"
@@ -4549,7 +4552,7 @@ msgstr ""
 
 #: Library/Main/Strings.cs:246
 msgid "Disable the read-ahead scanner"
-msgstr "Desabilitar o scanner read-ahead "
+msgstr "Desabilitar o scanner read-ahead"
 
 #: Library/Main/Strings.cs:247
 msgid ""
@@ -5018,7 +5021,7 @@ msgstr "Define o tempo limite do script"
 
 #: Library/Modules/Builtin/Strings.cs:71
 msgid "This module can send email after an operation completes"
-msgstr "Este modulo pode enviar email após completa uma operação."
+msgstr "Este modulo pode enviar email após completa uma operação"
 
 #: Library/Modules/Builtin/Strings.cs:72
 msgid "Send mail"
@@ -5357,7 +5360,7 @@ msgstr "O nome do parâmetro para enviar a mensagem como"
 
 #: Library/Modules/Builtin/Strings.cs:160
 msgid "The name of the parameter to send the message as."
-msgstr "O nome do parâmetro para enviar a mensagem como"
+msgstr "O nome do parâmetro para enviar a mensagem como."
 
 #: Library/Modules/Builtin/Strings.cs:161
 msgid "Extra parameters to add to the http message"
@@ -5754,27 +5757,27 @@ msgstr "O relatório de falhas está pronto para download"
 msgid "Failed while executing \"{0}\" with id: {1}"
 msgstr "Erro durante a execução de \"{0}\" com id: {1}"
 
-#: Server/Runner.cs:687 Server/Runner.cs:795
+#: Server/Runner.cs:686 Server/Runner.cs:794
 #, csharp-format
 msgid "Error while running {0}"
 msgstr "Erro ao executar {0}"
 
-#: Server/Runner.cs:755 Server/Runner.cs:793
+#: Server/Runner.cs:754 Server/Runner.cs:792
 #, csharp-format
 msgid "Warning while running {0}"
 msgstr "Aviso ao executar {0}"
 
-#: Server/Runner.cs:757
+#: Server/Runner.cs:756
 #, csharp-format
 msgid "Errors affected {0} file(s)"
 msgstr "Erros afetaram {0} arquivo(s)"
 
-#: Server/Runner.cs:759 Server/Runner.cs:799
+#: Server/Runner.cs:758 Server/Runner.cs:798
 #, csharp-format
 msgid "Got {0} error(s)"
 msgstr "Houveram {0} erro(s)"
 
-#: Server/Runner.cs:760 Server/Runner.cs:798
+#: Server/Runner.cs:759 Server/Runner.cs:797
 #, csharp-format
 msgid "Got {0} warning(s)"
 msgstr "Houveram {0} avisos(s)"
@@ -5862,7 +5865,7 @@ msgid ""
 "comma in between."
 msgstr ""
 "A porta em que o servidor escuta por requests. Múltiplos valores podem ser "
-"suportados entre vírgulas"
+"suportados entre vírgulas."
 
 #: Server/Strings.cs:30
 msgid ""
@@ -5978,9 +5981,140 @@ msgstr ""
 msgid "Unable to open a socket for listening, tried ports: {0}"
 msgstr "Impossível abrir um socket para comunicação, tentar portas: {0}"
 
+#: Server/WebServer/RESTMethods/Backup.cs:51
+msgid "Invalid or missing time"
+msgstr "Tempo inválido ou ausente"
+
+#: Server/WebServer/RESTMethods/Backup.cs:333
+msgid "No target path supplied"
+msgstr "Nenhum caminho de destino fornecido"
+
+#: Server/WebServer/RESTMethods/Backup.cs:335
+msgid "Target path is relative, please supply a fully qualified path"
+msgstr ""
+"O caminho de destino é relativo, por favor forneça um caminho totalmente "
+"qualificado"
+
+#: Server/WebServer/RESTMethods/Backup.cs:339
+msgid "A file already exists at the new location"
+msgstr "Um arquivo já existe no novo local"
+
+#: Server/WebServer/RESTMethods/Backup.cs:357
+#: Server/WebServer/RESTMethods/Backup.cs:420
+#: Server/WebServer/RESTMethods/Backup.cs:518
+#: Server/WebServer/RESTMethods/Backup.cs:539
+#: Server/WebServer/RESTMethods/Backup.cs:578
+msgid "Invalid or missing backup id"
+msgstr "ID de backup inválido ou ausente"
+
+#: Server/WebServer/RESTMethods/Backup.cs:391
+#, csharp-format
+msgid "Invalid component: {0}"
+msgstr "Componente inválido: {0}"
+
+#: Server/WebServer/RESTMethods/Backup.cs:487
+#: Server/WebServer/RESTMethods/Task.cs:63
+msgid "Invalid request"
+msgstr "Solicitação inválida"
+
+#: Server/WebServer/RESTMethods/Backup.cs:499
+msgid "Missing backup object"
+msgstr "Objeto de backup ausente"
+
+#: Server/WebServer/RESTMethods/Backup.cs:509
+#: Server/WebServer/RESTMethods/Backups.cs:178
+msgid "Data object had no backup entry"
+msgstr "Objeto de dados não tinha entrada de backup"
+
+#: Server/WebServer/RESTMethods/Backup.cs:545
+#: Server/WebServer/RESTMethods/Backups.cs:210
+msgid "There already exists a backup with the name: "
+msgstr "Já existe um backup com o nome: "
+
+#: Server/WebServer/RESTMethods/Backup.cs:567
+#: Server/WebServer/RESTMethods/Backups.cs:230
+#, csharp-format
+msgid "Unable to parse backup or schedule object: {0}"
+msgstr "Não é possível analisar o objeto de backup ou cronograma: {0}"
+
+#: Server/WebServer/RESTMethods/Backup.cs:569
+#, csharp-format
+msgid "Unable to save backup or schedule: {0}"
+msgstr "Não foi possível salvar o backup ou agendamento: {0}"
+
+#: Server/WebServer/RESTMethods/Backup.cs:590
+msgid "Missing captcha"
+msgstr "Captcha ausente"
+
+#: Server/WebServer/RESTMethods/Backup.cs:596
+msgid "Invalid captcha"
+msgstr "Captcha inválido"
+
+#: Server/WebServer/RESTMethods/Backup.cs:676
+msgid "Retrieves, updates or deletes an existing backup and schedule"
+msgstr "Recupera, atualiza ou deleta um backup e cronograma existentes"
+
+#: Server/WebServer/RESTMethods/Backups.cs:232
+#, csharp-format
+msgid "Unable to save schedule or backup object: {0}"
+msgstr "Não é possível salvar o cronograma ou o objeto de backup: {0}"
+
+#: Server/WebServer/RESTMethods/Backups.cs:237
+msgid "Return a list of current backups and their schedules"
+msgstr "Retorna uma lista de backups atuais e seus cronogramas"
+
 #: Server/WebServer/RESTMethods/BugReport.cs:33
 msgid "Invalid or missing bugreport id"
 msgstr "Id do relatório de falhas inválido ou faltando"
+
+#: Server/WebServer/RESTMethods/BugReport.cs:39
+msgid "File is missing"
+msgstr "O arquivo está faltando"
+
+#: Server/WebServer/RESTMethods/Captcha.cs:65
+msgid "Missing token value"
+msgstr "Valor de token ausente"
+
+#: Server/WebServer/RESTMethods/Captcha.cs:81
+msgid "No such entry"
+msgstr "Nenhuma entrada"
+
+#: Server/WebServer/RESTMethods/Captcha.cs:109
+#: Server/WebServer/RESTMethods/Captcha.cs:156
+msgid "Missing target parameter"
+msgstr "Parâmetro de destino ausente"
+
+#: Server/WebServer/RESTMethods/Captcha.cs:133
+msgid "Too many captchas, wait 2 minutes and try again"
+msgstr "Muitos CAPTCHAs, aguarde 2 minutos e tente novamente"
+
+#: Server/WebServer/RESTMethods/Captcha.cs:151
+msgid "Missing answer parameter"
+msgstr "Parâmetro \"answer\" ausente"
+
+#: Server/WebServer/RESTMethods/Captcha.cs:163
+msgid "Incorrect"
+msgstr "Incorreto"
+
+#: Server/WebServer/RESTMethods/Changelog.cs:49
+msgid "No update found"
+msgstr "Nenhuma atualização encontrada"
+
+#: Server/WebServer/RESTMethods/CommandLine.cs:152
+msgid "Only abort commands are allowed"
+msgstr "Somente commandos de \"abortar\" são permitidos"
+
+#: Server/WebServer/RESTMethods/CommandLine.cs:159
+msgid "No task key found"
+msgstr "Nenhuma chave de tarefa encontrada"
+
+#: Server/WebServer/RESTMethods/ENotariado.cs:43
+#: Server/WebServer/RESTMethods/ENotariado.cs:79
+#: Server/WebServer/RESTMethods/ServerState.cs:81
+#: Server/WebServer/RESTMethods/SystemInfo.cs:59
+#: Server/WebServer/RESTMethods/Updates.cs:51
+msgid "No such action"
+msgstr "Ação inexistente"
 
 #: Server/WebServer/RESTMethods/ENotariado.cs:51
 msgid "The application is not enrolled. An unexpected error happened"
@@ -5989,6 +6123,90 @@ msgstr "A aplicação não está cadastrada. Houve um erro inesperado"
 #: Server/WebServer/RESTMethods/ENotariado.cs:52
 msgid "The application is enrolled but not verified in e-Notariado servers"
 msgstr "A aplicação está registrada mas não foi verificada no e-Notariado"
+
+#: Server/WebServer/RESTMethods/Filesystem.cs:43
+msgid "No path parameter was found"
+msgstr "Parâmetro de caminho não encontrado"
+
+#: Server/WebServer/RESTMethods/Filesystem.cs:72
+msgid "The path parameter must start with a forward-slash"
+msgstr "O parâmetro de caminho deve começar com uma barra para frente"
+
+#: Server/WebServer/RESTMethods/Filesystem.cs:148
+msgid "Failed to process the path: "
+msgstr "Falha ao processor o caminho: "
+
+#: Server/WebServer/RESTMethods/Notification.cs:30
+#: Server/WebServer/RESTMethods/Notification.cs:46
+msgid "Invalid ID"
+msgstr "ID inválido"
+
+#: Server/WebServer/RESTMethods/Notification.cs:36
+#: Server/WebServer/RESTMethods/Notification.cs:52
+msgid "No such notification"
+msgstr "Não existe tal notificação"
+
+#: Server/WebServer/RESTMethods/ProgressState.cs:28
+msgid "No active backup"
+msgstr "Não há backups ativos"
+
+#: Server/WebServer/RESTMethods/RemoteOperation.cs:129
+msgid "No url or operation supplied"
+msgstr "Nenhuma URL ou operação fornecida"
+
+#: Server/WebServer/RESTMethods/RemoteOperation.cs:151
+#: Server/WebServer/RESTMethods/RemoteOperation.cs:181
+msgid "No such method"
+msgstr "Método não existe"
+
+#: Server/WebServer/RESTMethods/RequestInfo.cs:57
+msgid "When activating long poll, the request must include the last event id"
+msgstr "Ao ativar \"long poll\", a requisição deve incluir o id do ultimo evento"
+
+#: Server/WebServer/RESTMethods/RequestInfo.cs:66
+msgid "Invalid duration: "
+msgstr "Duração inválida: "
+
+#: Server/WebServer/RESTMethods/RequestInfo.cs:73
+#, csharp-format
+msgid ""
+"Invalid duration, must be at least 10 seconds, and less than {0} milliseconds"
+msgstr ""
+"Duração inválida, deve ser pelo menos 10 segundos e não mais do que {0} "
+"milissegundos"
+
+#: Server/WebServer/RESTMethods/ServerSettings.cs:61
+msgid "Missing data object"
+msgstr "Objeto de dados ausente"
+
+#: Server/WebServer/RESTMethods/ServerSettings.cs:71
+msgid "Data object had no entry"
+msgstr "Objeto de dados não tinha entradas"
+
+#: Server/WebServer/RESTMethods/Task.cs:48
+msgid "No such task found"
+msgstr "Tal tarefa não foi encontrada"
+
+#: Server/WebServer/RESTMethods/Task.cs:82
+msgid "No such task"
+msgstr "Tal tarefa não existe"
+
+#: Server/WebServer/RESTMethods/Task.cs:100
+msgid "Invalid or missing task id"
+msgstr "ID de tarefa inválido ou ausente"
+
+#: Server/WebServer/RESTMethods/UISettings.cs:48
+msgid "Scheme is missing"
+msgstr "Esquema está faltando"
+
+#: Server/WebServer/RESTMethods/UISettings.cs:59
+#, csharp-format
+msgid "Unable to parse settings object: {0}"
+msgstr "Não é possível analisar o objeto de configurações: {0}"
+
+#: Server/WebServer/RESTMethods/UISettings.cs:65
+msgid "Unable to parse settings object"
+msgstr "Não é possível analisar o objeto de configurações"
 
 #~ msgid ""
 #~ "Stores metadata, such as file timestamps and attributes. This increases the "

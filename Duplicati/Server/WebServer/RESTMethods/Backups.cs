@@ -19,6 +19,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -174,7 +175,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 data = Serializer.Deserialize<AddOrUpdateBackupData>(new StringReader(str));
                 if (data.Backup == null)
                 {
-                    info.ReportClientError("Data object had no backup entry", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"Data object had no backup entry"), System.Net.HttpStatusCode.BadRequest);
                     return;
                 }
 
@@ -206,7 +207,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     {
                         if (Program.DataConnection.Backups.Any(x => x.Name.Equals(data.Backup.Name, StringComparison.OrdinalIgnoreCase)))
                         {
-                            info.ReportClientError("There already exists a backup with the name: " + data.Backup.Name, System.Net.HttpStatusCode.Conflict);
+                            info.ReportClientError(LC.L(@"There already exists a backup with the name: ") + data.Backup.Name, System.Net.HttpStatusCode.Conflict);
                             return;
                         }
 
@@ -226,14 +227,14 @@ namespace Duplicati.Server.WebServer.RESTMethods
             catch (Exception ex)
             {
                 if (data == null)
-                    info.ReportClientError(string.Format("Unable to parse backup or schedule object: {0}", ex.Message), System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(string.Format(LC.L(@"Unable to parse backup or schedule object: {0}"), ex.Message), System.Net.HttpStatusCode.BadRequest);
                 else
-                    info.ReportClientError(string.Format("Unable to save schedule or backup object: {0}", ex.Message), System.Net.HttpStatusCode.InternalServerError);
+                    info.ReportClientError(string.Format(LC.L(@"Unable to save schedule or backup object: {0}"), ex.Message), System.Net.HttpStatusCode.InternalServerError);
             }
         }
 
 
-        public string Description { get { return "Return a list of current backups and their schedules"; } }
+        public string Description { get { return LC.L(@"Return a list of current backups and their schedules"); } }
 
         public IEnumerable<KeyValuePair<string, Type>> Types
         {

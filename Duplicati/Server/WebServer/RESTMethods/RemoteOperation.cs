@@ -17,6 +17,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -125,7 +126,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             if (parts.Length <= 1)
             {
-                info.ReportClientError("No url or operation supplied", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"No url or operation supplied"), System.Net.HttpStatusCode.BadRequest);
                 return;
             }
 
@@ -147,7 +148,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     TestConnection(url, info);
                     return;
                 default:
-                    info.ReportClientError("No such method", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"No such method"), System.Net.HttpStatusCode.BadRequest);
                     return;
             }
         }
@@ -177,7 +178,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     TestConnection(url, info);
                     return;
                 default:
-                    info.ReportClientError("No such method", System.Net.HttpStatusCode.BadRequest);
+                    info.ReportClientError(LC.L(@"No such method"), System.Net.HttpStatusCode.BadRequest);
                     return;
             }
         }

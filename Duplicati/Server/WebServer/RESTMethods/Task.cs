@@ -17,6 +17,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -44,7 +45,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                         matches = Program.TaskResultCache.Where(x => x.Key == taskid).ToArray();
                     
                     if (matches.Length == 0)
-                        info.ReportClientError("No such task found", System.Net.HttpStatusCode.NotFound);
+                        info.ReportClientError(LC.L(@"No such task found"), System.Net.HttpStatusCode.NotFound);
                     else
                         info.OutputOK(new { 
                             Status = matches[0].Value == null ? "Completed" : "Failed", 
@@ -59,7 +60,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             }
             else
             {
-                info.ReportClientError("Invalid request", System.Net.HttpStatusCode.BadRequest);
+                info.ReportClientError(LC.L(@"Invalid request"), System.Net.HttpStatusCode.BadRequest);
             }
         }
 
@@ -78,7 +79,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 task = tasks.FirstOrDefault(x => x.TaskID == taskid);
                 if (task == null)
                 {
-                    info.ReportClientError("No such task", System.Net.HttpStatusCode.NotFound);
+                    info.ReportClientError(LC.L(@"No such task"), System.Net.HttpStatusCode.NotFound);
                     return;
                 }
 
@@ -96,7 +97,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 }
             }
 
-            info.ReportClientError("Invalid or missing task id", System.Net.HttpStatusCode.NotFound);
+            info.ReportClientError(LC.L(@"Invalid or missing task id"), System.Net.HttpStatusCode.NotFound);
         }
     }
 }
