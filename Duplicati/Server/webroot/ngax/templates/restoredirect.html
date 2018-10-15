@@ -31,20 +31,20 @@
                         <input readonly type="password" id="password" name="password" ng-model="EncryptionPassphrase" />
                     </div>
 
-                    <div class="expandable">
+                    <!-- <div class="expandable">
                         <a href ng-click="showAdvanced = !showAdvanced">
                             <h2 translate>Advanced Options</h2>
                             <img ng-show="showAdvanced" src="img/arrow_collapse_green.png">
                             <img ng-hide="showAdvanced" src="img/arrow_expand_green.png">
                         </a>
-                    </div>
+                    </div> -->
 
-                    <div ng-show="showAdvanced">
+                    <!-- <div ng-show="showAdvanced">
                         <div class="input textarea">
                             <label for="options">{{'Advanced Options' | translate}}<span class="info">i</span></label>
                             <textarea id="options" name="options" ng-model="ExtendedOptions" placeholder="{{AppUtils.format(AppUtils.exampleOptionString, '--prefix')}}"></textarea>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="buttons" ng-hide="connecting">
                         <input class="submit" type="button" id="connect" ng-click="doConnect()" value="{{'Connect' | translate}}" />
