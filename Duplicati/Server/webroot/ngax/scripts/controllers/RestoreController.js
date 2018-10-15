@@ -79,13 +79,9 @@ backupApp.controller('RestoreController', function ($rootScope, $scope, $routePa
             },
 
             function(resp) {
-                var message = resp.statusText;
-                if (resp.data != null && resp.data.Message != null)
-                    message = resp.data.Message;
-
                 $scope.connecting = false;
                 $scope.ConnectionProgress = '';
-                DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+                AppUtils.connectionError(resp);
             }
         );
     };
@@ -107,11 +103,7 @@ backupApp.controller('RestoreController', function ($rootScope, $scope, $routePa
             delete inProgress[version];
             $scope.connecting = false;
             $scope.ConnectionProgress = '';
-
-            var message = resp.statusText;
-            if (resp.data != null && resp.data.Message != null)
-                message = resp.data.Message;
-            DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to fetch path information: {{message}}', { message: message }));
+            AppUtils.connectionError(resp);
         };
 
         if (filesetsBuilt[version] == null) {
@@ -282,13 +274,9 @@ backupApp.controller('RestoreController', function ($rootScope, $scope, $routePa
             },
             function(resp) {
                 $scope.Searching = false;
-                var message = resp.statusText;
-                if (resp.data != null && resp.data.Message != null)
-                    message = resp.data.Message;
-
                 $scope.connecting = false;
                 $scope.ConnectionProgress = '';
-                DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+                AppUtils.connectionError(resp);
             }
         );
     };
@@ -321,14 +309,10 @@ backupApp.controller('RestoreController', function ($rootScope, $scope, $routePa
         $scope.restore_step = 2;
 
         function handleError(resp) {
-            var message = resp.statusText;
-            if (resp.data != null && resp.data.Message != null)
-                message = resp.data.Message;
-
             $scope.restore_step = 1;
             $scope.connecting = false;
             $scope.ConnectionProgress = '';
-            DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+            AppUtils.connectionError(resp);
         };
 
         var p = {
@@ -411,14 +395,10 @@ backupApp.controller('RestoreController', function ($rootScope, $scope, $routePa
                 DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to restore files: {{message}}', { message: resp.data.ErrorMessage }));
             }
         }, function(resp) {
-            var message = resp.statusText;
-            if (resp.data != null && resp.data.Message != null)
-                message = resp.data.Message;
-
             $scope.restore_step = 1;
             $scope.connecting = false;
             $scope.ConnectionProgress = '';
-            DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+            AppUtils.connectionError(resp);
         });
     };
 

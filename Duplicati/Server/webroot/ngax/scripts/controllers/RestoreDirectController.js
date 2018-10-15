@@ -52,12 +52,8 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
                 $scope.backups = resp.data;
                 $scope.logs.push(AppUtils.format(gettextCatalog.getString('Retrieved information about {0} backups ...'), resp.data.length));
             }, function(resp) {
-                var message = resp.statusText;
-                if (resp.data != null && resp.data.Message != null)
-                    message = resp.data.Message;
-
                 $scope.connecting = false;
-                $scope.logs.push(gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+                AppUtils.connectionError(resp);
             }
         );
     };
@@ -91,12 +87,8 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
                 $scope.BackupID = resp.data.ID;
                 $scope.fetchBackupTimes();
             }, function(resp) {
-                var message = resp.statusText;
-                if (resp.data != null && resp.data.Message != null)
-                    message = resp.data.Message;
-
                 $scope.connecting = false;
-                DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to connect: {{message}}', { message: message }));
+                AppUtils.connectionError(resp);
             }
         );
     }
@@ -115,6 +107,8 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
                 var message = resp.statusText;
                 if (resp.data != null && resp.data.Message != null)
                     message = resp.data.Message;
+                else if (resp.data != null && resp.data.Error != null)
+                    message = resp.data.Error;
 
                 if (message == 'encrypted-storage')
                     message = gettextCatalog.getString('The target folder contains encrypted files, please supply the passphrase');

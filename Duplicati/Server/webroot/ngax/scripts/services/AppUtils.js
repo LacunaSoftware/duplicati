@@ -355,6 +355,8 @@ backupApp.service('AppUtils', function($rootScope, $timeout, $cookies, DialogSer
 
         if (msg && msg.data && msg.data.Message)
             DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.data.Message);
+        else if (msg && msg.data && msg.data.Error)
+            DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.data.Error);
         else
             DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.statusText);
     };
