@@ -1,0 +1,7 @@
+2018-10-15 - 1.0.1_stable_2018-10-15
+==========
+- Arruma logs não serem armazenados nem localmente nem no e-Notariado
+- Atualiza e adiciona várias traduções
+- Arruma erro em que notificações poderiam possuir caracteres inválidos
+- Permite descrições vazias para backups
+
