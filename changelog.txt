@@ -1,4 +1,4 @@
-2018-10-15 - 1.0.1_stable_2018-10-15
+2018-10-15 - 1.0.2_stable_2018-10-15
 ==========
 - Arruma logs não serem armazenados nem localmente nem no e-Notariado
 - Atualiza e adiciona várias traduções
