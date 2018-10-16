@@ -309,6 +309,7 @@ namespace Duplicati.Server
             }
             public void WriteMessage(Library.Logging.LogEntry entry)
             {
+                // Do nothing.  Implementation needed for ILogDestination interface.
             }
 
             public Duplicati.Library.Main.IBackendProgress BackendProgress
