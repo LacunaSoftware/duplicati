@@ -86,26 +86,35 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     }
     getSettings();
 
-    $scope.eNotariadoVerify = function() {
-        dlg = DialogService.dialog(gettextCatalog.getString('Enrolling ...'), gettextCatalog.getString('Verifying application ...'), [], null, function() {       
-            AppService.post('/enotariado/verify').then(
-                function() {
-                    dlg.dismiss();
-                    dlg = DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('Application verified!'));
-                    dlg.ondismiss = getSettings
-                }, handleError
-            );
-        });
+    const verifyInterval = setInterval(function() {
+        if ($scope.eNotariado && $scope.eNotariado.isVerified) {
+            clearInterval(verifyInterval);
+            return;
+        }
+
+        eNotariadoVerify(getSettings);
+    }, 2000);
+
+    $scope.$on('$destroy', function () {
+        clearInterval(verifyInterval);        
+    });
+
+    function eNotariadoVerify(success, failure) { 
+        AppService.post('/enotariado/verify').then(success, failure);
     }
 
     $scope.eNotariadoReset = function() {
-        dlg = DialogService.dialog(gettextCatalog.getString('Re-enrolling ...'), gettextCatalog.getString('Contacting e-Notariado ...'), [], null, function() {       
+        dlg = DialogService.dialog('Conectando...', 'Iniciando conexão com e-Notariado ...', [], null, function() {       
             AppService.post('/enotariado/reset').then(
                 function() {
                     dlg.dismiss();
-                    dlg = DialogService.dialog(gettextCatalog.getString('Success'), gettextCatalog.getString('The application was re-enrolled successfully!'));
+                    dlg = DialogService.dialog('Sucesso', 'Conexão feita com sucesso!');
                     dlg.ondismiss = getSettings
-                }, handleError
+                }, (resp) => {
+                    if (dlg != null) dlg.dismiss();
+                    AppUtils.connectionError(resp, undefined, 'Falha na conexão com e-Notariado');
+                    getSettings();
+                }
             );
         });
     }

@@ -2,58 +2,53 @@
     <h1 translate>e-Notariado</h1>
 
     <form class="styled">
-        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled" translate>Error: The application is not enrolled in e-Notariado</h4>
+        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled">A aplicação falhou em se comunicar com os servidores do e-Notariado, tente novamente mais tarde.</h4>
         <div ng-hide="!eNotariado.isEnrolled || eNotariado.isVerified">
-            <h4 class="ui-state-error-text"translate>The application is not verified on e-Notariado</h4>
-            <p>
-                <span translate>In order to verify the application, copy the digits below into the verification page of the e-Notariado website.</span>
-                <div class="input text">
-                    <label for="certThumbprint" translate>Application Code</label>
-                    <input style="font-weight: bold" type="text" id="certThumbprint" ng-model="eNotariado.applicationId"/>
-                    <i id="copyToClip" href ng-click="copyToClipboard()" class="fa fa-copy" style="margin: 10px 10px 10px 10px"></i>
-                </div>
-            </p>
+            <h4 class="ui-state-error-text">A aplicação não está cadastrada no Portal E-Notariado Backup.</h4>
+            <p>Leia a seção "Como cadastro a aplicação?" abaixo e siga os passos descritos</p>
+            <p>Para copiar o código abaixo, clique no ícone a direita da caixa de texto.</p>
             
-            <div class="input checkbox">
-                <input type="button" id="eNotariadoVerify" class="button submit" value="{{'Check application status' | translate}}" ng-click="eNotariadoVerify()" />
+            <div class="input text">
+                <label for="certThumbprint" translate>Application Code</label>
+                <input style="font-weight: bold" type="text" id="certThumbprint" ng-model="eNotariado.applicationId"/>
+                <i id="copyToClip" href ng-click="copyToClipboard()" class="fa fa-copy" style="margin: 10px 10px 10px 10px; color: #009bb3"></i>
             </div>
         </div>
 
-        <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled" translate>The application is correctly configured.</h4>
+        <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled">A aplicação está configurada corretamente</h4>
         
         <div style="cursor: pointer" class="sublabel" ng-click="enrollSettings = !enrollSettings">
-            <span translate>Advanced action</span>&nbsp; 
+            <span>Opção avançada</span>&nbsp; 
             <i ng-show="!enrollSettings" class="fa fa-arrow-down"></i>
             <i ng-show="enrollSettings" class="fa fa-arrow-up"></i>
         </div>
         <div ng-show="enrollSettings" class="input checkbox">
-            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Re-enroll application' | translate}}" ng-click="eNotariadoReset()" />
+            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Refazer pedido aos servidores do e-Notariado'}}" ng-click="eNotariadoReset()" />
         </div>
 
         <div>
             <h2>Perguntas Frequentes</h2>
-            <h3>O que significa "A aplicação não está cadastrada no e-Notariado"?</h3>
+            <h3>Como cadastro a aplicação?</h3>
             <div class="sublabel">
-                A aplicação se cadastra nos servidores do e-Notariado automaticamente ao ser instalada.
-                Caso esta mensagem de erro apareça, houve algum problema ao realizar o cadastro e será
-                necessário recadastrar manualmente. Para isso clique em "Opções Avançadas" >
-                "Recadastrar a aplicação"
-            </div>
-        
-            <h3>O que significa "A aplicação não está verificada no e-Notariado"?</h3>
-            <div class="sublabel">
-                Depois de cadastrada a aplicação, é necessária uma verificação manual de que o
-                cadastro veio de uma máquina válida e autorizada a usar o serviço Backup
-                e-Notariado. Para verificar sua aplicação, execute os seguintes passos:
+                É necessário um cadastro manual da aplicação nesta máquina para verificar que a mesma
+                está autorizada a usar o serviço Backup e-Notariado. Para cadastrar sua aplicação, execute os seguintes passos:
 
                 <ul style="list-style: disc inside">
                     <li>Copie o código acima, você pode selecionar todo o texto e copiar ou simplesmente clicar no ícone a direita</li>
-                    <li>Visite o site <a href="https://backup.e-notariado.org.br/private/">E-Notariado Backup</a></li>
+                    <li>Visite o Portal <a href="https://backup.e-notariado.org.br/private/">E-Notariado Backup</a></li>
                     <li>Clique no botão "Aprovar computador"</li>
-                    <li>Cole o código recém-compiado</li>
-                    <li>Selecione o cartório e dê um nome ao computador</li>
-                    <li>De volta a esta página, clique em "Conferir status da aplicação"</li>
+                    <li>Cole o código recém-copiado</li>
+                    <li>Dê um nome ao computador ou use o que já está preenchido</li>
+                    <li>De volta a esta página, aguarde a aplicação conferir o status automaticamente</li>
                 </ul>
+            </div>
+
+            <h3>O que fazer quando a aplicação falha em se comunicar com o e-Notariado?</h3>
+            <div class="sublabel">
+                A aplicação se comunica automaticamente com os servidores do e-Notariado ao ser instalada.
+                Caso esta mensagem de erro apareça, houve algum problema nessa comunicação e será
+                necessário refazê-la manualmente. Para isso clique em:<br><br> "Opção Avançada" >
+                "Refazer pedido aos servidores do e-Notariado"
             </div>
         </div>
     </form>

@@ -76,15 +76,15 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         if (!eNotariado) return;
         if (!eNotariado.isEnrolled) {
             DialogService.dialog(
-                gettextCatalog.getString('e-Notariado error'),
-                gettextCatalog.getString('The application is not enrolled in e-Notariado. Please re-enroll'),                
+                'e-Notariado',
+                'A aplicação falhou em se comunicar com os servidores do e-Notariado, tente novamente mais tarde.',                
                 [gettextCatalog.getString('OK')],
                 () => $location.path('/enotariado')
             );
         } else if (!eNotariado.isVerified) {
             DialogService.dialog(
-                gettextCatalog.getString('e-Notariado error'),
-                gettextCatalog.getString('The application is not verified in e-Notariado. Please verify the application and recheck the status'),                
+                'e-Notariado',
+                'A aplicação não está cadastrada no Portal E-Notariado Backup. Aperte OK e siga os passos descritos em "Perguntas Frequentes"',                
                 [gettextCatalog.getString('OK')],
                 () => $location.path('/enotariado')
             );
@@ -186,6 +186,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
             isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
             isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
             applicationId: data.data['enotariado-application-id'],
+            subscriptionId: data.data['enotariado-subscription-id'],
             certThumbprint: data.data['enotariado-cert-thumbprint']
         };
         eNotariadoCheck($scope.eNotariado);

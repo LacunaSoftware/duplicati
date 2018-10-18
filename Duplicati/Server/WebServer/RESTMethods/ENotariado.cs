@@ -1,20 +1,4 @@
-﻿//  Copyright (C) 2015, The Duplicati Team
-//  http://www.duplicati.com, info@duplicati.com
-//
-//  This library is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU Lesser General Public License as
-//  published by the Free Software Foundation; either version 2.1 of the
-//  License, or (at your option) any later version.
-//
-//  This library is distributed in the hope that it will be useful, but
-//  WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-//  Lesser General Public License for more details.
-//
-//  You should have received a copy of the GNU Lesser General Public
-//  License along with this library; if not, write to the Free Software
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Server.Serialization;
@@ -48,25 +32,22 @@ namespace Duplicati.Server.WebServer.RESTMethods
         public void POST(string key, RequestInfo info)
         {
             var input = info.Request.Form;
-            var enrolledErrorMessage = new { Message = LC.L(@"The application is not enrolled. An unexpected error happened") };
-            var verifiedErrorMessage = new { Message = LC.L(@"The application is enrolled but not verified in e-Notariado servers") };
+            var enrolledErrorMessage = new { Message = "Houve um erro na comunicação com o e-Notariado. Tente novamente mais tarde." };
+            var verifiedErrorMessage = new { Message = "O agente ainda não foi cadastrado no e-Notariado." };
+            var failedVerification   = new { Message = "A aplicação ainda não foi cadastrada no Portal Backup e-Notariado." };
             switch ((key ?? "").ToLowerInvariant())
             {
                 case "verify":
-                    var result = Program.InitializeENotariado().GetAwaiter().GetResult();
-                    if ((result & ENotariadoStatus.Verified) == ENotariadoStatus.Verified)
-                        Program.ENotariadoIsVerified = true;
+                    var resultVerify = Program.VerifyENotariado().GetAwaiter().GetResult();
 
-                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
+                    if (resultVerify)
                         info.OutputOK();
-                    else if (result == (ENotariadoStatus.Enrolled))
-                        info.OutputError(item: verifiedErrorMessage);
-                    else if (result == (ENotariadoStatus.None))
-                        info.OutputError(item: enrolledErrorMessage);
+                    else
+                        info.OutputError(item: failedVerification);
                     return;
 
                 case "reset":
-                    result = Program.ResetENotariado().GetAwaiter().GetResult();
+                    var result = Program.ResetENotariado().GetAwaiter().GetResult();
                     if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
                         info.OutputOK();
                     else if (result == (ENotariadoStatus.Enrolled))
