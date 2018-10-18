@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-15 11:18-0300\n"
-"PO-Revision-Date: 2018-10-15 11:25-0300\n"
+"POT-Creation-Date: 2018-10-18 10:51-0300\n"
+"PO-Revision-Date: 2018-10-18 10:52-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -2349,11 +2349,11 @@ msgstr "Falha ao invocar GnuPG, o programa não descarregará a saída"
 msgid "Failure while invoking GnuPG, program won't terminate"
 msgstr "Falha ao invocar o GnuPG, o programa não terminará"
 
-#: Library/ENotariado/ENotariadoConnection.cs:121
-#: Library/ENotariado/ENotariadoConnection.cs:158
-#: Library/ENotariado/ENotariadoConnection.cs:225
-#: Library/ENotariado/ENotariadoConnection.cs:334
-#: Library/ENotariado/ENotariadoConnection.cs:352
+#: Library/ENotariado/ENotariadoConnection.cs:122
+#: Library/ENotariado/ENotariadoConnection.cs:159
+#: Library/ENotariado/ENotariadoConnection.cs:226
+#: Library/ENotariado/ENotariadoConnection.cs:335
+#: Library/ENotariado/ENotariadoConnection.cs:353
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr "Código de resposta: '{0}'. Conteudo: '{1}'."
@@ -2560,7 +2560,7 @@ msgstr ""
 "A verificação da lista falhou no arquivo: {0}, tamanho era {1} mas o esperado "
 "era {2}"
 
-#: Library/Main/BackendManager.cs:1106
+#: Library/Main/BackendManager.cs:1107
 #: Library/Main/Operation/Common/BackendHandler.cs:540
 #, csharp-format
 msgid "Delete operation failed for {0} with FileNotFound, listing contents"
@@ -2568,7 +2568,7 @@ msgstr ""
 "A operação de exclusão falhou para {0} com \"arquivo não encontrado\", "
 "listando conteúdo"
 
-#: Library/Main/BackendManager.cs:1119
+#: Library/Main/BackendManager.cs:1120
 #: Library/Main/Operation/Common/BackendHandler.cs:553
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
@@ -5748,36 +5748,36 @@ msgstr ""
 "A cadeia {0} não representa um nome de grupo de filtros conhecido. Os valores "
 "válidos são: {1}"
 
-#: Server/Runner.cs:565
+#: Server/Runner.cs:566
 msgid "Bugreport is ready for download"
 msgstr "O relatório de falhas está pronto para download"
 
-#: Server/Runner.cs:617
+#: Server/Runner.cs:618
 #, csharp-format
 msgid "Failed while executing \"{0}\" with id: {1}"
 msgstr "Erro durante a execução de \"{0}\" com id: {1}"
 
-#: Server/Runner.cs:686 Server/Runner.cs:794
+#: Server/Runner.cs:687 Server/Runner.cs:795
 #, csharp-format
 msgid "Error while running {0}"
 msgstr "Erro ao executar {0}"
 
-#: Server/Runner.cs:754 Server/Runner.cs:792
+#: Server/Runner.cs:755 Server/Runner.cs:793
 #, csharp-format
 msgid "Warning while running {0}"
 msgstr "Aviso ao executar {0}"
 
-#: Server/Runner.cs:756
+#: Server/Runner.cs:757
 #, csharp-format
 msgid "Errors affected {0} file(s)"
 msgstr "Erros afetaram {0} arquivo(s)"
 
-#: Server/Runner.cs:758 Server/Runner.cs:798
+#: Server/Runner.cs:759 Server/Runner.cs:799
 #, csharp-format
 msgid "Got {0} error(s)"
 msgstr "Houveram {0} erro(s)"
 
-#: Server/Runner.cs:759 Server/Runner.cs:797
+#: Server/Runner.cs:760 Server/Runner.cs:798
 #, csharp-format
 msgid "Got {0} warning(s)"
 msgstr "Houveram {0} avisos(s)"
@@ -6108,21 +6108,13 @@ msgstr "Somente commandos de \"abortar\" são permitidos"
 msgid "No task key found"
 msgstr "Nenhuma chave de tarefa encontrada"
 
-#: Server/WebServer/RESTMethods/ENotariado.cs:43
-#: Server/WebServer/RESTMethods/ENotariado.cs:79
+#: Server/WebServer/RESTMethods/ENotariado.cs:27
+#: Server/WebServer/RESTMethods/ENotariado.cs:60
 #: Server/WebServer/RESTMethods/ServerState.cs:81
 #: Server/WebServer/RESTMethods/SystemInfo.cs:59
 #: Server/WebServer/RESTMethods/Updates.cs:51
 msgid "No such action"
 msgstr "Ação inexistente"
-
-#: Server/WebServer/RESTMethods/ENotariado.cs:51
-msgid "The application is not enrolled. An unexpected error happened"
-msgstr "A aplicação não está cadastrada. Houve um erro inesperado"
-
-#: Server/WebServer/RESTMethods/ENotariado.cs:52
-msgid "The application is enrolled but not verified in e-Notariado servers"
-msgstr "A aplicação está registrada mas não foi verificada no e-Notariado"
 
 #: Server/WebServer/RESTMethods/Filesystem.cs:43
 msgid "No path parameter was found"
@@ -6207,6 +6199,12 @@ msgstr "Não é possível analisar o objeto de configurações: {0}"
 #: Server/WebServer/RESTMethods/UISettings.cs:65
 msgid "Unable to parse settings object"
 msgstr "Não é possível analisar o objeto de configurações"
+
+#~ msgid "The application is not enrolled. An unexpected error happened"
+#~ msgstr "A aplicação não está cadastrada. Houve um erro inesperado"
+
+#~ msgid "The application is enrolled but not verified in e-Notariado servers"
+#~ msgstr "A aplicação está registrada mas não foi verificada no e-Notariado"
 
 #~ msgid ""
 #~ "Stores metadata, such as file timestamps and attributes. This increases the "

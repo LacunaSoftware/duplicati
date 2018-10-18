@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-15 11:18-0300\n"
+"POT-Creation-Date: 2018-10-18 10:51-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1972,11 +1972,11 @@ msgstr ""
 msgid "Failure while invoking GnuPG, program won't terminate"
 msgstr ""
 
-#: Library/ENotariado/ENotariadoConnection.cs:121
-#: Library/ENotariado/ENotariadoConnection.cs:158
-#: Library/ENotariado/ENotariadoConnection.cs:225
-#: Library/ENotariado/ENotariadoConnection.cs:334
-#: Library/ENotariado/ENotariadoConnection.cs:352
+#: Library/ENotariado/ENotariadoConnection.cs:122
+#: Library/ENotariado/ENotariadoConnection.cs:159
+#: Library/ENotariado/ENotariadoConnection.cs:226
+#: Library/ENotariado/ENotariadoConnection.cs:335
+#: Library/ENotariado/ENotariadoConnection.cs:353
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr ""
@@ -2165,13 +2165,13 @@ msgstr ""
 msgid "List verify failed for file: {0}, size was {1} but expected to be {2}"
 msgstr ""
 
-#: Library/Main/BackendManager.cs:1106
+#: Library/Main/BackendManager.cs:1107
 #: Library/Main/Operation/Common/BackendHandler.cs:540
 #, csharp-format
 msgid "Delete operation failed for {0} with FileNotFound, listing contents"
 msgstr ""
 
-#: Library/Main/BackendManager.cs:1119
+#: Library/Main/BackendManager.cs:1120
 #: Library/Main/Operation/Common/BackendHandler.cs:553
 #, csharp-format
 msgid "Listing indicates file {0} is deleted correctly"
@@ -4734,36 +4734,36 @@ msgid ""
 "are: {1}"
 msgstr ""
 
-#: Server/Runner.cs:565
+#: Server/Runner.cs:566
 msgid "Bugreport is ready for download"
 msgstr ""
 
-#: Server/Runner.cs:617
+#: Server/Runner.cs:618
 #, csharp-format
 msgid "Failed while executing \"{0}\" with id: {1}"
 msgstr ""
 
-#: Server/Runner.cs:686 Server/Runner.cs:794
+#: Server/Runner.cs:687 Server/Runner.cs:795
 #, csharp-format
 msgid "Error while running {0}"
 msgstr ""
 
-#: Server/Runner.cs:754 Server/Runner.cs:792
+#: Server/Runner.cs:755 Server/Runner.cs:793
 #, csharp-format
 msgid "Warning while running {0}"
 msgstr ""
 
-#: Server/Runner.cs:756
+#: Server/Runner.cs:757
 #, csharp-format
 msgid "Errors affected {0} file(s)"
 msgstr ""
 
-#: Server/Runner.cs:758 Server/Runner.cs:798
+#: Server/Runner.cs:759 Server/Runner.cs:799
 #, csharp-format
 msgid "Got {0} error(s)"
 msgstr ""
 
-#: Server/Runner.cs:759 Server/Runner.cs:797
+#: Server/Runner.cs:760 Server/Runner.cs:798
 #, csharp-format
 msgid "Got {0} warning(s)"
 msgstr ""
@@ -5056,20 +5056,12 @@ msgstr ""
 msgid "No task key found"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/ENotariado.cs:43
-#: Server/WebServer/RESTMethods/ENotariado.cs:79
+#: Server/WebServer/RESTMethods/ENotariado.cs:27
+#: Server/WebServer/RESTMethods/ENotariado.cs:60
 #: Server/WebServer/RESTMethods/ServerState.cs:81
 #: Server/WebServer/RESTMethods/SystemInfo.cs:59
 #: Server/WebServer/RESTMethods/Updates.cs:51
 msgid "No such action"
-msgstr ""
-
-#: Server/WebServer/RESTMethods/ENotariado.cs:51
-msgid "The application is not enrolled. An unexpected error happened"
-msgstr ""
-
-#: Server/WebServer/RESTMethods/ENotariado.cs:52
-msgid "The application is enrolled but not verified in e-Notariado servers"
 msgstr ""
 
 #: Server/WebServer/RESTMethods/Filesystem.cs:43
