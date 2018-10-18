@@ -760,10 +760,25 @@ namespace Duplicati.Server
             // Initializes ENotariadoConnection with appropriate data
             if (ENotariadoIsEnrolled)
                 ENotariadoConnection.Init(ENotariadoApplicationId, cert);
+            
+            await VerifyENotariado();
+            
+            if (ENotariadoIsEnrolled)
+                result |= ENotariadoStatus.Enrolled;
+            if (ENotariadoIsVerified)
+                result |= ENotariadoStatus.Verified;
+
+            return result;
+        }
+
+        public static async Task<bool> VerifyENotariado()
+        {
+            if (!ENotariadoIsEnrolled || ENotariadoApplicationId == Guid.Empty)
+                return false;
 
             // If we are not verified, tries to verify on startup
             // CheckVerifiedStatus will throw with an undefined ID
-            if (ENotariadoIsEnrolled && (!ENotariadoIsVerified || ENotariadoSubscriptionId == Guid.Empty))
+            if (!ENotariadoIsVerified || ENotariadoSubscriptionId == Guid.Empty)
             {
                 try
                 {
@@ -776,18 +791,16 @@ namespace Duplicati.Server
                     ENotariadoIsVerified = false;
                 }
             }
-            else if (ENotariadoIsEnrolled) // is enrolled and verified
+            else // is enrolled and verified
             {
                 ENotariadoConnection.IsVerified = ENotariadoIsVerified;
                 ENotariadoConnection.SubscriptionId = ENotariadoSubscriptionId;
             }
-            
-            if (ENotariadoIsEnrolled)
-                result |= ENotariadoStatus.Enrolled;
-            if (ENotariadoIsVerified)
-                result |= ENotariadoStatus.Verified;
 
-            return result;
+            if (ENotariadoIsVerified)
+                return true;
+
+            return false;
         }
         
         /// <summary>
