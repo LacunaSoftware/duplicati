@@ -339,14 +339,16 @@ backupApp.service('AppUtils', function($rootScope, $timeout, $cookies, DialogSer
         return false;
     };
 
-    this.connectionError = function(txt, msg) {
+    this.connectionError = function(txt, msg, title) {
+        title = title ? title : gettextCatalog.getString('Error');
+
         if (typeof(txt) == typeof('')) {
             if (msg == null)
                 return function(msg) {
                     if (msg && msg.data && msg.data.Message)
-                        DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.data.Message);
+                        DialogService.dialog(title, txt + msg.data.Message);
                     else
-                        DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.statusText);
+                        DialogService.dialog(title, txt + msg.statusText);
                 };
         } else {
             msg = txt;
@@ -354,11 +356,11 @@ backupApp.service('AppUtils', function($rootScope, $timeout, $cookies, DialogSer
         }
 
         if (msg && msg.data && msg.data.Message)
-            DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.data.Message);
+            DialogService.dialog(title, txt + msg.data.Message);
         else if (msg && msg.data && msg.data.Error)
-            DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.data.Error);
+            DialogService.dialog(title, txt + msg.data.Error);
         else
-            DialogService.dialog(gettextCatalog.getString('Error'), txt + msg.statusText);
+            DialogService.dialog(title, txt + msg.statusText);
     };
 
     this.generatePassphrase = function() {

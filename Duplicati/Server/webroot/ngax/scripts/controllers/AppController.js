@@ -73,7 +73,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
     };
 
     const eNotariadoCheck = function (eNotariado) {
-        if (1 || !eNotariado) return;
+        if (!eNotariado) return;
         if (!eNotariado.isEnrolled) {
             DialogService.dialog(
                 gettextCatalog.getString('e-Notariado error'),
@@ -215,6 +215,6 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
     AppService.get('/enotariado/backup-password').then(
         function(resp) {
             $scope.BackupENotariadoPassword = resp.data.Password;
-        }, AppUtils.connectionError
+        }, () => {}
     );
 });
