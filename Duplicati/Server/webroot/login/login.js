@@ -33,7 +33,7 @@ $(document).ready(function() {
                 var txt = data;
                 if (txt && txt.statusText)
                     txt = txt.statusText;
-                alert('Login failed: ' + txt);
+                alert('Falha na autenticação. Senha incorreta');
                 processing = false;
             });
         })

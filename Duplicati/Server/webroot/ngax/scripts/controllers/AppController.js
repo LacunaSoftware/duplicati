@@ -84,7 +84,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         } else if (!eNotariado.isVerified) {
             DialogService.dialog(
                 'e-Notariado',
-                'A aplicação não está cadastrada no Portal E-Notariado Backup. Aperte OK e siga os passos descritos em "Perguntas Frequentes"',                
+                'A aplicação não está cadastrada no Portal E-Notariado Backup. Aperte OK e siga os passos descritos em "Como cadastro a aplicação?"',                
                 [gettextCatalog.getString('OK')],
                 () => $location.path('/enotariado')
             );

@@ -24,7 +24,7 @@ backupApp.service('DialogService', function(gettextCatalog) {
         if (config == null || (config.message == null && config.htmltemplate == null && config.enableTextarea == null))
             return;
 
-        config.title = config.title || gettextCatalog.getString('Information');
+        config.title = config.title || gettextCatalog.getString('Informação');
         config.buttons = config.buttons || [gettextCatalog.getString('OK')];
 
         state.Queue.push(config);

@@ -1,4 +1,4 @@
-backupApp.service('AppService', function($http, $cookies, $q, $cookies, DialogService, appConfig) {
+backupApp.service('AppService', function($http, $cookies, $q, $cookies, DialogService, appConfig, gettextCatalog) {
     this.apiurl = '../api/v1';
     this.proxy_url = null;
 
@@ -50,7 +50,7 @@ backupApp.service('AppService', function($http, $cookies, $q, $cookies, DialogSe
         }, function errorCallback(response) {                            
             if (response.status == 401){
                 DialogService.dismissAll();
-                DialogService.accept('Not logged in', function () {
+                DialogService.accept(gettextCatalog.getString('Acesso não autorizado. É necessário digitar a senha novamente'), function () {
                     window.location = appConfig.login_url;
                 });
                 return;
