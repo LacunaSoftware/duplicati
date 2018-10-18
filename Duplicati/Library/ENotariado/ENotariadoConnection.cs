@@ -72,6 +72,7 @@ namespace Duplicati.Library.ENotariado
             ApplicationId = Guid.Empty;
             SubscriptionId = Guid.Empty;
             IsVerified = false;
+            BackupPassword = null;
         }
 
         /// <summary>
