@@ -8,25 +8,25 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
 
     var dlg;
     
-    function getPassphrase() {        
+    function getPassphrase() {    
         if ($scope.EncryptionPassphrase === undefined) {
-            dlg = DialogService.dialog(gettextCatalog.getString('Security'), gettextCatalog.getString('Retrieving password to restore backup...'), [], null, function() {       
-                AppService.get('/enotariado/backup-password').then(
-                    function(resp) {
-                        dlg.dismiss();
-                        $scope.EncryptionPassphrase = resp.data.Password;
-                    }, (resp) => {
-                        if (dlg != null) dlg.dismiss();
-                        AppUtils.connectionError(resp, undefined, gettextCatalog.getString('Failure to retrieve security data'));
-                    }
-                );
-            });
+            AppService.get('/enotariado/backup-password').then(
+                function(resp) {
+                    $scope.EncryptionPassphrase = resp.data.Password;
+                    $scope.logs.push('Dados de segurança para restauração recuperados com sucesso.');
+                }, (resp) => {
+                    $scope.logs.push('Dados de segurança para restauração não foram recuperados. Atualize a página ou tente novamente mais tarde.');
+                }
+            );
+        }
+        else {
+            $scope.logs.push('Dados de segurança para restauração recuperados com sucesso.');
         }
     }
 
     $scope.CurrentStep = 0;
     $scope.connecting = false;
-    $scope.logs = [];
+    $scope.logs = ['Recuperando dados de segurança para restauração...'];
     $scope.backups = [];
 
     $scope.nextPage = function() {

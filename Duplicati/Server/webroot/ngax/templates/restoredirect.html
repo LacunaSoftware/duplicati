@@ -25,10 +25,9 @@
 
             <div class="steps-boxes">
                 <div class="step step1" ng-class="{active: CurrentStep == 0}">
-                    <h2 translate>Encryption</h2>
-                    <div class="input password">
-                        <label for="password" translate>Passphrase</label>
-                        <input readonly type="password" id="password" name="password" ng-model="EncryptionPassphrase" />
+                    <h2 translate>Security</h2>
+                    <div>
+                        <p ng-repeat="line in logs track by $index">{{line}}</p>
                     </div>
 
                     <!-- <div class="expandable">
@@ -47,7 +46,7 @@
                     </div> -->
 
                     <div class="buttons" ng-hide="connecting">
-                        <input class="submit" type="button" id="connect" ng-click="doConnect()" value="{{'Connect' | translate}}" />
+                        <input class="submit" ng-hide="EncryptionPassphrase === undefined" type="button" id="connect" ng-click="doConnect()" value="{{'Connect' | translate}}" />
                     </div>
                 </div>
                 <!-- .step2 -->
@@ -58,6 +57,7 @@
                         <div ng-show="serverstate.programState == 'Paused'">
                             {{'Server is currently paused,' | translate}} <a style="cursor: pointer" ng-click="ServerStatus.resume()" translate>resume now</a>
                         </div>
+                    </div>
                     </div>
                     <div ng-show="backups.length > 0" class="input mixed multiple">
                         <label for="backups" translate>Select backup: </label>
