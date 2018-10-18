@@ -7,13 +7,6 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
     $scope.EncryptionPassphrase = $scope.BackupENotariadoPassword;
 
     var dlg;
-
-    function handleError(data) {
-        if (dlg != null)
-            dlg.dismiss();
-        
-        AppUtils.connectionError(data);
-    }
     
     function getPassphrase() {        
         if ($scope.EncryptionPassphrase === undefined) {
@@ -22,7 +15,10 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
                     function(resp) {
                         dlg.dismiss();
                         $scope.EncryptionPassphrase = resp.data.Password;
-                    }, handleError
+                    }, (resp) => {
+                        if (dlg != null) dlg.dismiss();
+                        AppUtils.connectionError(resp, undefined, gettextCatalog.getString('Failure to retrieve security data'));
+                    }
                 );
             });
         }

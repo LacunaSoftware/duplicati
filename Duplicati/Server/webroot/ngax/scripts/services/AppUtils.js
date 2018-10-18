@@ -339,9 +339,7 @@ backupApp.service('AppUtils', function($rootScope, $timeout, $cookies, DialogSer
         return false;
     };
 
-    this.connectionError = function(txt, msg, title) {
-        title = title ? title : gettextCatalog.getString('Error');
-
+    this.connectionError = function(txt, msg, title = gettextCatalog.getString('Error')) {
         if (typeof(txt) == typeof('')) {
             if (msg == null)
                 return function(msg) {

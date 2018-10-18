@@ -23,13 +23,6 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
 
     var scope = $scope;
     var dlg;
-    
-    function handleError(data) {
-        if (dlg != null)
-            dlg.dismiss();
-        
-        AppUtils.connectionError(data);
-    }
 
     $scope.nextPage = function() {
         $scope.CurrentStep = Math.min(3, $scope.CurrentStep + 1);
@@ -355,7 +348,10 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
                         dlg.dismiss();
                         $scope.Options['passphrase'] = resp.data.Password;
                         $scope.BackupENotariadoPassword = resp.data.Password;
-                    }, handleError
+                    }, (resp) => {
+                        if (dlg != null) dlg.dismiss();
+                        AppUtils.connectionError(resp, undefined, gettextCatalog.getString('Failure to retrieve security data'));
+                    }
                 );
             });
         }
