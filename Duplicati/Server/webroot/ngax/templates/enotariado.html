@@ -23,7 +23,7 @@
             <i ng-show="enrollSettings" class="fa fa-arrow-up"></i>
         </div>
         <div ng-show="enrollSettings" class="input checkbox">
-            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Refazer pedido aos servidores do e-Notariado'}}" ng-click="eNotariadoReset()" />
+            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Reiniciar identificação com e-Notariado'}}" ng-click="eNotariadoReset()" />
         </div>
 
         <div>
@@ -43,12 +43,13 @@
                 </ul>
             </div>
 
-            <h3>O que fazer quando a aplicação falha em se comunicar com o e-Notariado?</h3>
+            <h3>O que fazer quando a aplicação não mostra a mensagem que está configurada corretamente e falha em se comunicar com o e-Notariado?</h3>
             <div class="sublabel">
                 A aplicação se comunica automaticamente com os servidores do e-Notariado ao ser instalada.
-                Caso esta mensagem de erro apareça, houve algum problema nessa comunicação e será
+                Caso acima não mostre a mensagem "A aplicação está configurada corretamente" e uma mensagem
+                de erro sobre falha de comunicação apareça, houve algum problema nessa comunicação e será
                 necessário refazê-la manualmente. Para isso clique em:<br><br> "Opção Avançada" >
-                "Refazer pedido aos servidores do e-Notariado"
+                "Reiniciar identificação com e-Notariado"
             </div>
         </div>
     </form>
