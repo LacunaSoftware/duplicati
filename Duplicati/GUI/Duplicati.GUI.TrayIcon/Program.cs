@@ -135,7 +135,7 @@ namespace Duplicati.GUI.TrayIcon
             }
 
             HostedInstanceKeeper hosted = null;
-            var openui = false;
+            var openui = true;
             string password = null;
             var saltedpassword = false;
             var serverURL = new Uri(DEFAULT_HOSTURL);
@@ -153,7 +153,6 @@ namespace Duplicati.GUI.TrayIcon
 
                 // We have a hosted server, if this is the first run, 
                 // we should open the main page
-                openui = Duplicati.Server.Program.IsFirstRun || Duplicati.Server.Program.ServerPortChanged;
                 password = Duplicati.Server.Program.DataConnection.ApplicationSettings.WebserverPassword;
                 saltedpassword = true;
                 // Tell the hosted server it was started by the TrayIcon
@@ -233,7 +232,7 @@ namespace Duplicati.GUI.TrayIcon
                                 {
                                     try
                                     {
-                                        tk.ShowUrlInWindow(Connection.StatusWindowURL);
+                                        tk.ShowUrlInWindow(serverURL.ToString());
 
                                         Duplicati.Server.Program.IsFirstRun = false;
                                         Duplicati.Server.Program.ServerPortChanged = false;
