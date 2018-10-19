@@ -74,17 +74,14 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
 
     const eNotariadoCheck = function (eNotariado) {
         if (!eNotariado) return;
-        if (!eNotariado.isEnrolled) {
+        if (!eNotariado.isEnrolled || !eNotariado.isVerified) {
+            const message = eNotariado.isEnrolled ?
+                'A aplicação não está cadastrada no Portal E-Notariado Backup. Aperte OK e siga os passos descritos em "Como cadastro a aplicação?"' :
+                'A aplicação falhou em se comunicar com os servidores do e-Notariado, tente novamente mais tarde.';
+            
             DialogService.dialog(
                 'e-Notariado',
-                'A aplicação falhou em se comunicar com os servidores do e-Notariado, tente novamente mais tarde.',                
-                [gettextCatalog.getString('OK')],
-                () => $location.path('/enotariado')
-            );
-        } else if (!eNotariado.isVerified) {
-            DialogService.dialog(
-                'e-Notariado',
-                'A aplicação não está cadastrada no Portal E-Notariado Backup. Aperte OK e siga os passos descritos em "Como cadastro a aplicação?"',                
+                message,                
                 [gettextCatalog.getString('OK')],
                 () => $location.path('/enotariado')
             );

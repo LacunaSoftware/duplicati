@@ -341,19 +341,16 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
             'passphrase': $scope.BackupENotariadoPassword
         };
         
-        if ($scope.BackupENotariadoPassword === undefined) {
-            dlg = DialogService.dialog(gettextCatalog.getString('Security'), gettextCatalog.getString('Retrieving data to secure backup...'), [], null, function() {       
-                AppService.get('/enotariado/backup-password').then(
-                    function(resp) {
-                        dlg.dismiss();
-                        $scope.Options['passphrase'] = resp.data.Password;
-                        $scope.BackupENotariadoPassword = resp.data.Password;
-                    }, (resp) => {
-                        if (dlg != null) dlg.dismiss();
-                        AppUtils.connectionError(resp, undefined, gettextCatalog.getString('Failure to retrieve security data'));
-                    }
-                );
-            });
+        if ($scope.eNotariado && $scope.eNotariado.isVerified && $scope.BackupENotariadoPassword === undefined) {
+            AppService.get('/enotariado/backup-password').then(
+                function(resp) {
+                    $scope.Options['passphrase'] = resp.data.Password;
+                    $scope.BackupENotariadoPassword = resp.data.Password;
+                }, (resp) => {
+                    if (dlg != null) dlg.dismiss();
+                    AppUtils.connectionError(resp, undefined, gettextCatalog.getString('Failure to retrieve security data'));
+                }
+            );
         }
 
         var extopts = {};
