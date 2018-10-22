@@ -533,7 +533,7 @@ namespace Duplicati.Server.Database
                            
                             return new object[] {
                                 n.Name,
-                                n.Description,
+                                n.Description == null ? "" : n.Description, // Description is optional but the column is set to NOT NULL, an additional check is welcome
                                 string.Join(",", n.Tags ?? new string[0]),
                                 n.TargetURL,
                                 update ? (object)item.ID : (object)n.DBPath 
@@ -1023,15 +1023,6 @@ namespace Duplicati.Server.Database
                 else
                     return null;
 
-        }
-
-        private T ConvertToEnum<T>(System.Data.IDataReader rd, int index, T @default)
-            where T : struct
-        {
-            T res;
-            if (!Enum.TryParse<T>(ConvertToString(rd, index), true, out res))
-                return @default;
-            return res;
         }
 
         private object ConvertToEnum(Type enumType, System.Data.IDataReader rd, int index, object @default)

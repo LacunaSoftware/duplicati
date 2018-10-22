@@ -258,11 +258,6 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
             });
         }
 
-        // Temporary fix to allow empty descriptions while DB sets Description as NOT NULL
-        if (!result.Backup.Description) {
-            result.Backup.Description = '';
-        }
-
         var filterstrings = result.Backup.Filters || [];
         result.Backup.Filters = [];
         for(var f in filterstrings)
@@ -365,6 +360,13 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
 
         var filters = $scope.Backup.Filters;
         $scope.Backup.Filters = [];
+
+        // If Description is anything other than a string, we are either creating a new
+        // backup or something went wrong when retrieving an existing one
+        // Either way we should set it to an empty string
+        if (typeof $scope.Backup.Description !== 'string') {
+            $scope.Backup.Description = '';
+        }
 
         $scope.Backup.Sources = $scope.Backup.Sources || [];
 
