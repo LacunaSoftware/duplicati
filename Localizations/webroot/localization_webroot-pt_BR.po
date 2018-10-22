@@ -115,7 +115,7 @@ msgstr "Ajustar o nome do bucket?"
 msgid "Adjust path name?"
 msgstr "Ajustar o nome do caminho?"
 
-#: templates/restoredirect.html:44
+#: templates/restoredirect.html:43
 msgid "Advanced Options"
 msgstr "Opções avançadas"
 
@@ -155,7 +155,7 @@ msgstr ""
 "Um arquivo foi encontrado no local escolhido\n"
 "Você tem certeza que quer apontar a database para um arquivo existente?"
 
-#: scripts/controllers/EditBackupController.js:300
+#: scripts/controllers/EditBackupController.js:295
 msgid ""
 "An existing local database for the storage has been found.\n"
 "Re-using the database will allow the command-line and server instances to "
@@ -329,7 +329,7 @@ msgstr "Arquivos de Cache"
 
 #: scripts/controllers/AppController.js:44
 #: scripts/controllers/AppController.js:59
-#: scripts/controllers/EditBackupController.js:300
+#: scripts/controllers/EditBackupController.js:295
 #: scripts/controllers/EditBackupController.js:40
 #: scripts/controllers/LocalDatabaseController.js:72
 #: scripts/controllers/LocalDatabaseController.js:88
@@ -428,7 +428,7 @@ msgstr "Confirmar remoção"
 msgid "Confirmation required"
 msgstr "Confirmação necessária"
 
-#: templates/restoredirect.html:50
+#: templates/restoredirect.html:49
 msgid "Connect"
 msgstr "Conectar"
 
@@ -638,8 +638,8 @@ msgid "Deleting unwanted files ..."
 msgstr "Removendo arquivos desnecessários ..."
 
 #: templates/addoredit.html:43
-msgid "Description"
-msgstr "Descrição"
+msgid "Description (optional)"
+msgstr "Descrição (opcional)"
 
 #: templates/home.html:21
 msgid "Description:"
@@ -745,7 +745,6 @@ msgid "Encrypt file"
 msgstr "Criptografar arquivo"
 
 #: templates/restore.html:22 templates/restoredirect.html:21
-#: templates/restoredirect.html:28
 msgid "Encryption"
 msgstr "Criptografia"
 
@@ -936,7 +935,7 @@ msgstr "Falha ao obter informação do caminho: {{message}}"
 msgid "Failed to import:"
 msgstr "Falha ao importar:"
 
-#: scripts/controllers/EditBackupController.js:550
+#: scripts/controllers/EditBackupController.js:549
 msgid "Failed to read backup defaults:"
 msgstr "Falha ao ler os padrões do backup:"
 
@@ -948,8 +947,7 @@ msgstr "Falha ao restaurar arquivos: {{message}}"
 msgid "Failed to save:"
 msgstr "Falha ao salvar:"
 
-#: scripts/controllers/EditBackupController.js:353
-#: scripts/controllers/RestoreDirectController.js:20
+#: scripts/controllers/EditBackupController.js:346
 msgid "Failure to retrieve security data"
 msgstr "Falha ao coletar dados de segurança"
 
@@ -974,7 +972,7 @@ msgstr "Filtros"
 msgid "Finished!"
 msgstr "Finalizado!"
 
-#: scripts/controllers/AppController.js:202
+#: scripts/controllers/AppController.js:199
 msgid "First run setup"
 msgstr "Configuração inicial"
 
@@ -1126,7 +1124,7 @@ msgstr ""
 "Se você quiser usar o backup mais tarde, você pode exportar a configuração "
 "antes de excluí-la"
 
-#: scripts/controllers/AppController.js:203
+#: scripts/controllers/AppController.js:200
 msgid ""
 "If your machine is in a multi-user environment (i.e. the machine has more "
 "than one account), you need to set a password to prevent other users from "
@@ -1480,7 +1478,7 @@ msgstr "Próxima vez"
 #: scripts/controllers/AboutController.js:54
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
-#: scripts/controllers/EditBackupController.js:300
+#: scripts/controllers/EditBackupController.js:295
 #: scripts/controllers/EditBackupController.js:98
 #: scripts/controllers/HomeController.js:7
 #: scripts/controllers/LocalDatabaseController.js:28
@@ -1530,7 +1528,7 @@ msgstr "Nenhuma senha inserida"
 msgid "No scheduled tasks"
 msgstr "Sem tarefas agendadas"
 
-#: scripts/controllers/AppController.js:204
+#: scripts/controllers/AppController.js:201
 msgid "No, my machine has only a single account"
 msgstr "Não, minha máquina possui apenas uma conta"
 
@@ -1550,8 +1548,7 @@ msgstr "Nada será excluído. O tamanho do backup crescerá com cada mudança."
 
 #: scripts/controllers/AppController.js:44
 #: scripts/controllers/AppController.js:59
-#: scripts/controllers/AppController.js:81
-#: scripts/controllers/AppController.js:88
+#: scripts/controllers/AppController.js:85
 #: scripts/controllers/EditBackupController.js:40
 #: scripts/controllers/EditBackupController.js:48
 #: scripts/services/CaptchaService.js:22 scripts/services/DialogService.js:28
@@ -1632,7 +1629,7 @@ msgstr ""
 msgid "Overwrite"
 msgstr "Sobrescrever"
 
-#: templates/export.html:21 templates/restoredirect.html:30
+#: templates/export.html:21
 msgid "Passphrase"
 msgstr "Frase de segurança"
 
@@ -1703,7 +1700,7 @@ msgstr "Impedir login automático no ícone da bandeja"
 msgid "Previous"
 msgstr "Anterior"
 
-#: templates/restoredirect.html:22 templates/restoredirect.html:55
+#: templates/restoredirect.html:22 templates/restoredirect.html:54
 msgid "Progress"
 msgstr "Progresso"
 
@@ -1849,14 +1846,6 @@ msgstr "Continuar"
 msgid "Retrieved information about {0} backups ..."
 msgstr "Informações recuperadas de {0} backups ..."
 
-#: scripts/controllers/EditBackupController.js:345
-msgid "Retrieving data to secure backup..."
-msgstr "Recuperando dados para proteger o backup..."
-
-#: scripts/controllers/RestoreDirectController.js:13
-msgid "Retrieving password to restore backup..."
-msgstr "Recuperando a senha para restaurar o backup..."
-
 #: templates/addoredit.html:235
 msgid "Run again every"
 msgstr "Executar novamente a cada"
@@ -1929,8 +1918,7 @@ msgstr "Procurar por arquivos"
 msgid "Seconds"
 msgstr "Segundos"
 
-#: scripts/controllers/EditBackupController.js:345
-#: scripts/controllers/RestoreDirectController.js:13
+#: templates/restoredirect.html:28
 msgid "Security"
 msgstr "Segurança"
 
@@ -1959,7 +1947,7 @@ msgstr "Servidor e porta"
 msgid "Server hostname or IP"
 msgstr "Nome do servidor ou IP"
 
-#: templates/commandline.html:49 templates/restoredirect.html:59
+#: templates/commandline.html:49 templates/restoredirect.html:58
 #: templates/waitarea.html:15
 msgid "Server is currently paused,"
 msgstr "Servidor está atualmente parado,"
@@ -2440,7 +2428,7 @@ msgstr "Enviando arquivo de verificação ..."
 msgid "Use SSL"
 msgstr "Utilizar SSL"
 
-#: scripts/controllers/EditBackupController.js:300
+#: scripts/controllers/EditBackupController.js:295
 msgid "Use existing database?"
 msgstr "Usar um banco de dados existente?"
 
@@ -2550,10 +2538,10 @@ msgid "Years"
 msgstr "Anos"
 
 #: scripts/controllers/AboutController.js:54
-#: scripts/controllers/AppController.js:204
+#: scripts/controllers/AppController.js:201
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
-#: scripts/controllers/EditBackupController.js:300
+#: scripts/controllers/EditBackupController.js:295
 #: scripts/controllers/EditBackupController.js:98
 #: scripts/controllers/HomeController.js:7
 #: scripts/controllers/LocalDatabaseController.js:28
@@ -2723,7 +2711,7 @@ msgstr "e-Notariado"
 msgid "is using the following third party libraries:"
 msgstr "está usando as seguintes bibliotecas de terceiros:"
 
-#: templates/commandline.html:49 templates/restoredirect.html:59
+#: templates/commandline.html:49 templates/restoredirect.html:58
 #: templates/waitarea.html:15
 msgid "resume now"
 msgstr "continuar agora"
@@ -2775,6 +2763,12 @@ msgstr "{{number}} Minutos"
 #: templates/home.html:58
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#~ msgid "Retrieving data to secure backup..."
+#~ msgstr "Recuperando dados para proteger o backup..."
+
+#~ msgid "Retrieving password to restore backup..."
+#~ msgstr "Recuperando a senha para restaurar o backup..."
 
 #~ msgid "Advanced action"
 #~ msgstr "Opções avançadas"
