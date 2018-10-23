@@ -20,6 +20,8 @@ namespace UpdateVersionStamp
             FILEMAP.Add("UpgradeData.wxi", new Regex(@"\<\?define ProductVersion\=\""" + versionre + @"\"" \?\>"));
             FILEMAP.Add("AssemblyRedirects.xml", new Regex(@"newVersion\=\""" + versionre + @"\"""));
             FILEMAP.Add("index.html", new Regex(@"\?ver\=" + versionre));
+            FILEMAP.Add("login.html", new Regex(@"\?ver\=" + versionre));
+            FILEMAP.Add("app.js", new Regex(@"\?v\=" + versionre));
         }
         
         private class Options
