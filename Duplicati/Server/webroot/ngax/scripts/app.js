@@ -11,86 +11,86 @@ var backupApp = angular.module(
 );
 
 backupApp.constant('appConfig', {
-    login_url: '/login.html'
+    login_url: '/login.html?v=1.0.0'
 });
 
 backupApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
             when('/home', {
-                templateUrl: 'templates/home.html'
+                templateUrl: 'templates/home.html?v=1.0.0'
             }).
             when('/add', {
-                templateUrl: 'templates/addoredit.html'
+                templateUrl: 'templates/addoredit.html?v=1.0.0'
             }).
             when('/add-import', {
-                templateUrl: 'templates/addoredit.html'
+                templateUrl: 'templates/addoredit.html?v=1.0.0'
             }).
             when('/restorestart', {
-                templateUrl: 'templates/restorewizard.html'
+                templateUrl: 'templates/restorewizard.html?v=1.0.0'
             }).
             when('/addstart', {
-                templateUrl: 'templates/addwizard.html'
+                templateUrl: 'templates/addwizard.html?v=1.0.0'
             }).
             when('/edit/:backupid', {
-                templateUrl: 'templates/addoredit.html'
+                templateUrl: 'templates/addoredit.html?v=1.0.0'
             }).
             when('/restoredirect', {
-                templateUrl: 'templates/restoredirect.html'
+                templateUrl: 'templates/restoredirect.html?v=1.0.0'
             }).
             when('/restoredirect-import', {
-                templateUrl: 'templates/restoredirect.html'
+                templateUrl: 'templates/restoredirect.html?v=1.0.0'
             }).
             when('/restore/:backupid', {
-                templateUrl: 'templates/restore.html'
+                templateUrl: 'templates/restore.html?v=1.0.0'
             }).
             when('/settings', {
-                templateUrl: 'templates/settings.html'
+                templateUrl: 'templates/settings.html?v=1.0.0'
             }).
             when('/enotariado', {
-                templateUrl: 'templates/enotariado.html'
+                templateUrl: 'templates/enotariado.html?v=1.0.0'
             }).
             when('/about', {
-                templateUrl: 'templates/about.html'
+                templateUrl: 'templates/about.html?v=1.0.0'
             }).
             when('/delete/:backupid', {
-                templateUrl: 'templates/delete.html'
+                templateUrl: 'templates/delete.html?v=1.0.0'
             }).
             when('/log/:backupid', {
-                templateUrl: 'templates/log.html'
+                templateUrl: 'templates/log.html?v=1.0.0'
             }).
             when('/log', {
-                templateUrl: 'templates/log.html'
+                templateUrl: 'templates/log.html?v=1.0.0'
             }).
             when('/updatechangelog', {
-                templateUrl: 'templates/updatechangelog.html'
+                templateUrl: 'templates/updatechangelog.html?v=1.0.0'
             }).
             when('/export/:backupid', {
-                templateUrl: 'templates/export.html'
+                templateUrl: 'templates/export.html?v=1.0.0'
             }).
             when('/import', {
-                templateUrl: 'templates/import.html'
+                templateUrl: 'templates/import.html?v=1.0.0'
             }).
             when('/restore-import', {
-                templateUrl: 'templates/import.html'
+                templateUrl: 'templates/import.html?v=1.0.0'
             }).
             when('/restore-enotariado', {
-                templateUrl: 'templates/restoredirect.html'
+                templateUrl: 'templates/restoredirect.html?v=1.0.0'
             }).
             when('/localdb/:backupid', {
-                templateUrl: 'templates/localdatabase.html'
+                templateUrl: 'templates/localdatabase.html?v=1.0.0'
             }).
             when('/commandline', {
-                templateUrl: 'templates/commandline.html'
+                templateUrl: 'templates/commandline.html?v=1.0.0'
             }).
             when('/commandline/:backupid', {
-                templateUrl: 'templates/commandline.html'
+                templateUrl: 'templates/commandline.html?v=1.0.0'
             }).
             when('/commandline/view/:viewid', {
-                templateUrl: 'templates/commandline.html'
+                templateUrl: 'templates/commandline.html?v=1.0.0'
             }).
             otherwise({
-                templateUrl: 'templates/home.html'
+                templateUrl: 'templates/home.html?v=1.0.0'
                 //redirectTo: '/home'
         });
 }]);
