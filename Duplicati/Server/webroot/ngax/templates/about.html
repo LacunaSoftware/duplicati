@@ -2,47 +2,34 @@
     <h1 translate translate-params-appname="brandingService.appName">About {{appname}}</h1>
     <ul class="tabs">
         <li ng-class="{active: Page=='general'}"><a href ng-click="Page='general'" translate>General</a></li>
-        <!-- <li ng-class="{active: Page=='changelog'}"><a href ng-click="Page='changelog'" translate>Changelog</a></li> -->
+        <li ng-class="{active: Page=='changelog'}"><a href ng-click="Page='changelog'" translate>Últimas mudanças</a></li>
         <li ng-class="{active: Page=='licenses'}"><a href ng-click="Page='licenses'" translate>Libraries</a></li>
         <li ng-class="{active: Page=='sysinfo'}"><a href ng-click="Page='sysinfo'" translate>System info</a></li>
         <li ng-class="{active: Page=='logdata'}"><a href="#/log" translate>Show log</a></li>
     </ul>
 
     <div ng-show="Page == 'general'">
-        <div translate
-            translate-params-appname="brandingService.appName" 
-            translate-params-dev1="'Kenneth Skovhede'" 
-            translate-params-dev2="'Rene Stach'" 
-            translate-params-mail1="'mailto:kenneth@duplicati.com'"
-            translate-params-mail2="'mailto:rene@duplicati.com'"
-            translate-params-websitename="'duplicati.com'" 
-            translate-params-websitelink="'http://www.duplicati.com'" 
-            translate-params-licensename="'GNU Lesser General Public License'" 
-            translate-params-licenselink="'https://www.gnu.org/licenses/lgpl.html'" 
-            >
-            {{appname}} was primarily developed by <a href="{{mail1}}">{{dev1}}</a> and <a href="{{mail2}}">{{dev2}}</a>. {{appname}} can be downloaded from <a href="{{websitelink}}">{{websitename}}</a>. {{appname}} is licensed under the <a href="{{licenselink}}">{{licensename}}</a>.
+        <div>
+            O módulo agente do Backup em Nuvem e-Notariado é licenciado sob a GNU Lesser General Public License e pode ser baixado no <a href="https://backup.e-notariado.org.br">Portal Backup e-Notariado</a>.
         </div>
 
         <div>&nbsp;</div>
-        <div translate translate-params-appname="brandingService.appName" translate-params-version="sysinfo.ServerVersionName || 'unknown'">You are currently running {{appname}} {{version}}</div>
+        <div translate translate-params-appname="brandingService.appName" translate-params-version="sysinfo.ServerVersionName || 'unknown'">A versão atual do módulo agente é Backup e-Notariado {{version}}</div>
 
         <div ng-show="state.updatedVersion != null &amp;&amp; !state.updateReady &amp;&amp; state.updaterState == 'Waiting'">
-            Update <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> is available, <a href ng-click="doStartUpdateDownload()">download now</a>
+            Uma atualização para <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> está disponível, <a href ng-click="doStartUpdateDownload()">faça o download agora</a>
         </div>
         <div ng-show="state.updatedVersion != null &amp;&amp; state.updateReady &amp;&amp; state.updaterState == 'Waiting'">
-            Update <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> is installed, restart the computer to activate it.<!--<a href ng-click="doStartUpdateActivate()">activate now</a>-->
+            A atualização para <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> está instalada, reinicie o seu computador para ativá-la.<!--<a href ng-click="doStartUpdateActivate()">activate now</a>-->
         </div>
 
-        <a ng-show="state.updaterState == 'Waiting'" href ng-click="doCheckForUpdates()" translate>Check for updates now</a>
-        <div ng-show="state.updaterState == 'Checking'"  translate>Checking for updates ...</div>
+        <a ng-show="state.updaterState == 'Waiting'" href ng-click="doCheckForUpdates()" translate>Procurar por atualizações agora</a>
+        <div ng-show="state.updaterState == 'Checking'"  translate>Procurando por atualizações...</div>
 
-        <progress-bar ng-show="state.updaterState == 'Downloading'" ng-text="'Downloading update ...'", ng-progress="state.updateDownloadProgress">
+        <progress-bar ng-show="state.updaterState == 'Downloading'" ng-text="'Baixando atualização...'", ng-progress="state.updateDownloadProgress">
         </progress-bar>
 
         <div>&nbsp;</div>
-
-        <div class="prewrapped-text" ng-show="Acknowledgements">{{Acknowledgements}}</div>
-        <div class="prewrapped-text" ng-hide="Acknowledgements" translate="">Loading ...</div>
     </div>
 
     <div ng-show="Page == 'changelog'">

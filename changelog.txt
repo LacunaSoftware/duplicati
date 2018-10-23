@@ -1,7 +1,7 @@
 2018-10-15 - 1.0.2_stable_2018-10-15
 ==========
-- Arruma logs não serem armazenados nem localmente nem no e-Notariado
+- Ajustes no armazenamento de logs localmente e no Módulo Gerenciador
 - Atualiza e adiciona várias traduções
-- Arruma erro em que notificações poderiam possuir caracteres inválidos
+- Ajuste nas notificações para impedir a exibição de caracteres inválidos
 - Permite descrições vazias para backups
 
