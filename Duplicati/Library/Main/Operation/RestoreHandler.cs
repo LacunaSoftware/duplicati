@@ -322,24 +322,28 @@ namespace Duplicati.Library.Main.Operation
                 m_result.OperationProgressUpdater.UpdatePhase(OperationPhase.Restore_CreateFileList);
                 using(new Logging.Timer(LOGTAG, "PrepareBlockList", "PrepareBlockList"))
                     PrepareBlockAndFileList(database, m_options, filter, result);
+                m_result.OperationProgressUpdater.UpdateProgress(0.05f);
 
                 //Make the entire output setup
                 m_result.OperationProgressUpdater.UpdatePhase(OperationPhase.Restore_CreateTargetFolders);
                 using(new Logging.Timer(LOGTAG, "CreateDirectory", "CreateDirectory"))
                     CreateDirectoryStructure(database, m_options, result);
-                
+                m_result.OperationProgressUpdater.UpdateProgress(0.1f);
+
                 //If we are patching an existing target folder, do not touch stuff that is already updated
                 m_result.OperationProgressUpdater.UpdatePhase(OperationPhase.Restore_ScanForExistingFiles);
                 using(new Logging.Timer(LOGTAG, "ScanForExistingTargetBlocks", "ScanForExistingTargetBlocks"))
                     ScanForExistingTargetBlocks(database, m_blockbuffer, blockhasher, filehasher, m_options, result);
+                m_result.OperationProgressUpdater.UpdateProgress(0.25f);
 
                 //Look for existing blocks in the original source files only
-                using(new Logging.Timer(LOGTAG, "ScanForExistingSourceBlocksFast", "ScanForExistingSourceBlocksFast"))
+                using (new Logging.Timer(LOGTAG, "ScanForExistingSourceBlocksFast", "ScanForExistingSourceBlocksFast"))
                     if (!m_options.NoLocalBlocks && !string.IsNullOrEmpty(m_options.Restorepath))
                     {
                         m_result.OperationProgressUpdater.UpdatePhase(OperationPhase.Restore_ScanForLocalBlocks);
                         ScanForExistingSourceBlocksFast(database, m_options, m_blockbuffer, blockhasher, result);
                     }
+                m_result.OperationProgressUpdater.UpdateProgress(0.5f);
 
                 if (m_result.TaskControlRendevouz() == TaskControlState.Stop)
                 {
@@ -371,6 +375,7 @@ namespace Duplicati.Library.Main.Operation
                     Logging.Log.WriteInformationMessage(LOGTAG, "RemoteFileCount", "{0} remote files are required to restore", volumes.Count);
                     m_result.OperationProgressUpdater.UpdatePhase(OperationPhase.Restore_DownloadingRemoteFiles);
                 }
+                m_result.OperationProgressUpdater.UpdateProgress(0.7f);
 
                 var brokenFiles = new List<string>();
                 foreach(var blockvolume in new AsyncDownloader(volumes, backend))
@@ -457,7 +462,8 @@ namespace Duplicati.Library.Main.Operation
                             }
                         }
                 }
-                    
+                m_result.OperationProgressUpdater.UpdateProgress(0.9f);
+
                 if (fileErrors > 0 && brokenFiles.Count > 0)
                     Logging.Log.WriteInformationMessage(LOGTAG, "RestoreFailures", "Failed to restore {0} files, additionally the following files failed to download, which may be the cause:{1}{2}", fileErrors, Environment.NewLine, string.Join(Environment.NewLine, brokenFiles));
                 else if (fileErrors > 0)
@@ -469,6 +475,7 @@ namespace Duplicati.Library.Main.Operation
             }
             
             m_result.OperationProgressUpdater.UpdatePhase(OperationPhase.Restore_Complete);
+            m_result.OperationProgressUpdater.UpdateProgress(1.0f);
             result.EndTime = DateTime.UtcNow;
         }
 
