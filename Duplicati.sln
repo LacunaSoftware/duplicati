@@ -57,7 +57,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Library.Backend.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Library.ENotariado", "Duplicati\Library\ENotariado\Duplicati.Library.ENotariado.csproj", "{32B7900A-B22C-448D-8BD4-6C2825719926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsServiceManager", "WindowsServiceManager\WindowsServiceManager.csproj", "{27D5E8F0-A3FD-47FD-9B9D-1AC4931DC3DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsServiceManager", "Duplicati\WindowsServiceManager\WindowsServiceManager.csproj", "{27D5E8F0-A3FD-47FD-9B9D-1AC4931DC3DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

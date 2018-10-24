@@ -164,6 +164,10 @@
       <Project>{d4c37c33-5e73-4b56-b2c3-dc4a6baa36bb}</Project>
       <Name>Duplicati.Library.OAuthHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Library\ENotariado\Duplicati.Library.ENotariado.csproj">
+      <Project>{32b7900a-b22c-448d-8bd4-6c2825719926}</Project>
+      <Name>Duplicati.Library.ENotariado</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Server\Duplicati.Server.csproj">
       <Project>{19E661D2-C5DA-4F35-B3EE-7586E5734B5F}</Project>
       <Name>Duplicati.Server</Name>
@@ -243,6 +247,10 @@
     <ProjectReference Include="..\..\CommandLine\RecoveryTool\Duplicati.CommandLine.RecoveryTool.csproj">
       <Project>{4A010589-76E6-4F05-A5C4-4598D5DF11F8}</Project>
       <Name>Duplicati.CommandLine.RecoveryTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WindowsServiceManager\WindowsServiceManager.csproj">
+      <Project>{27d5e8f0-a3fd-47fd-9b9d-1ac4931dc3db}</Project>
+      <Name>WindowsServiceManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WindowsService\WindowsService.csproj">
       <Project>{bef7af9a-3978-4f90-8592-198bf6ea6c6b}</Project>

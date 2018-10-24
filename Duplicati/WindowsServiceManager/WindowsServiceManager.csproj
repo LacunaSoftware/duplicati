@@ -6,11 +6,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{27D5E8F0-A3FD-47FD-9B9D-1AC4931DC3DB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WindowsServiceManager</RootNamespace>
-    <AssemblyName>WindowsServiceManager</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Duplicati.WindowsServiceManager</RootNamespace>
+    <AssemblyName>Gerenciador e-Notariado</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +39,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>application_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,14 +66,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Duplicati\Library\AutoUpdater\Duplicati.Library.AutoUpdater.csproj">
+    <ProjectReference Include="..\Library\AutoUpdater\Duplicati.Library.AutoUpdater.csproj">
       <Project>{7e119745-1f62-43f0-936c-f312a1912c0b}</Project>
       <Name>Duplicati.Library.AutoUpdater</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Duplicati\WindowsService\WindowsService.csproj">
+    <ProjectReference Include="..\WindowsService\WindowsService.csproj">
       <Project>{bef7af9a-3978-4f90-8592-198bf6ea6c6b}</Project>
       <Name>WindowsService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="application_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
