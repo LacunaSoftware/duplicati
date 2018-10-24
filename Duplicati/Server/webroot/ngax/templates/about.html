@@ -20,7 +20,7 @@
             Uma atualização para <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> está disponível, <a href ng-click="doStartUpdateDownload()">faça o download agora</a>
         </div>
         <div ng-show="state.updatedVersion != null &amp;&amp; state.updateReady &amp;&amp; state.updaterState == 'Waiting'">
-            A atualização para <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> está instalada, reinicie o seu computador para ativá-la.<!--<a href ng-click="doStartUpdateActivate()">activate now</a>-->
+            A atualização para <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> está instalada, <a href ng-click="doStartUpdateActivate()">clique aqui para ativá-la</a>-->
         </div>
 
         <a ng-show="state.updaterState == 'Waiting'" href ng-click="doCheckForUpdates()" translate>Procurar por atualizações agora</a>

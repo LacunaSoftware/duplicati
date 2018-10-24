@@ -51,11 +51,16 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
     };
 
     $scope.doStartUpdateActivate = function() {
-        DialogService.dialog(gettextCatalog.getString('Warning'), gettextCatalog.getString('This will stop the application and a reboot will be required to restart it. Do you wish to proceed?'), [gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function(ix) {
-            if (ix == 1) {
-                AppService.post('/updates/activate').then(function() {}, AppUtils.connectionError(gettextCatalog.getString('Activate failed:') + ' '));
-            }
-        });
+        if ($scope.state.activeTask == null) {
+            DialogService.dialog(gettextCatalog.getString('Warning'), gettextCatalog.getString('Ao continuar o Módulo Agente será reiniciado e quaisquer operações ocorrendo atualmente serão perdidas, continuar?'), [gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function(ix) {
+                if (ix == 1) {
+                    AppService.post('/enotariado/restart-application').then(function() {}, AppUtils.connectionError(gettextCatalog.getString('Activate failed:') + ' '));
+                }
+            });
+        }
+        else {
+            DialogService.dialog(gettextCatalog.getString('Error'), gettextCatalog.getString('A nova atualização não pode ser ativada enquanto houverem tarefas sendo executadas'));
+        }
     };
 
     $scope.doCheckForUpdates = function() {
