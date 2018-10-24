@@ -294,7 +294,7 @@ namespace Duplicati.Library.ENotariado
             while (!response.IsSuccessStatusCode)
             {
                 TimerPeriod = Math.Min(MAX_TIMER_PERIOD, TimerPeriod * 2);
-                Library.Logging.Log.WriteWarningMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send {logs.Count} logs to e-Notariado, retrying in {TimerPeriod / 1000} seconds..." +
+                Library.Logging.Log.WriteRetryMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send {logs.Count} logs to e-Notariado, retrying in {TimerPeriod / 1000} seconds..." +
                     $"Error: {response.StatusCode} - Content: {contentString}");
                 await Task.Delay(System.TimeSpan.FromMilliseconds(TimerPeriod));
                 response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));

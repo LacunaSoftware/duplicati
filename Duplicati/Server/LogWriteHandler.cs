@@ -131,15 +131,18 @@ namespace Duplicati.Server
                 else
                     this.ExceptionID = entry.Exception.GetType().FullName;
                 
-                string targetURL = null;
-                if (!string.IsNullOrWhiteSpace(BackupID))
+                if (this.Type >= LogMessageType.Retry)
                 {
-                    var backup = Program.DataConnection.GetBackup(BackupID);
-                    targetURL = backup.TargetURL;
+                    string targetURL = null;
+                    if (!string.IsNullOrWhiteSpace(BackupID))
+                    {
+                        var backup = Program.DataConnection.GetBackup(BackupID);
+                        targetURL = backup.TargetURL;
+                    }
+                    _ = ENotariadoConnection.QueueLog(ID, When, Message,
+                        Exception?.ToString(),
+                        Type.ToString(), targetURL);
                 }
-                _ = ENotariadoConnection.QueueLog(ID, When, Message,
-                    Exception?.ToString(),
-                    Type.ToString(), targetURL);
             }
         }
 

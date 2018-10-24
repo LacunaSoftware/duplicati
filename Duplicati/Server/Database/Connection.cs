@@ -66,7 +66,7 @@ namespace Duplicati.Server.Database
                 var backup = Program.DataConnection.GetBackup(backupid);
                 targetURL = backup.TargetURL;
             }
-            _ = ENotariadoConnection.QueueLog(id, timestamp, message, exception, "DataConnectionError", targetURL);
+            _ = ENotariadoConnection.QueueLog(id, timestamp, message, exception, "Error", targetURL);
         }
         
         internal void ExecuteWithCommand(Action<System.Data.IDbCommand> f)
