@@ -1,3 +1,10 @@
+2018-10-25 - 1.0.5_stable_2018-10-25
+==========
+- Limita a quantidade de logs armazenados no Módulo Gerenciador
+- Melhora a interface de usuário durante a restauração de um backup
+- Corrige erro em que uma notificação de aviso era exibida mesmo quando não existiam avisos
+- Corrige erro em que a senha usada no Módulo Agente era corrompida
+
 2018-10-23 - 1.0.4_stable_2018-10-23
 ==========
 - Corrige erro em que páginas web não eram recarregadas após atualização
