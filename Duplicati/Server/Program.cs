@@ -337,6 +337,26 @@ namespace Duplicati.Server
                     throw new SingleInstance.MultipleInstanceException(Strings.Program.AnotherInstanceDetected);
                 }
 
+                /* 
+                 * If current hashed string is not a valid base64 econded string, logging in will silently fail
+                 * forever, therefore we remove the password to allow retaking control of the application
+                 * without manually accessing the database
+                 * 
+                 * This should never happen, unless on old installs where the problem fixed in this commit happened:
+                 * https://github.com/LacunaSoftware/duplicati/commit/12ff45b8d6108b3da9208909898e25e12cd7f2e2
+                 */
+                if (!string.IsNullOrWhiteSpace(DataConnection.ApplicationSettings.WebserverPassword))
+                {
+                    try
+                    {
+                        Convert.FromBase64String(DataConnection.ApplicationSettings.WebserverPassword);
+                    }
+                    catch
+                    {
+                        DataConnection.ApplicationSettings.SetWebserverPassword(null);
+                    }
+                }
+
                 if (commandlineOptions.ContainsKey("webservice-password"))
                     Program.DataConnection.ApplicationSettings.SetWebserverPassword(commandlineOptions["webservice-password"]);
 
