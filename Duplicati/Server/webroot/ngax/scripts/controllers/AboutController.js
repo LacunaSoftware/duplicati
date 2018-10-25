@@ -52,9 +52,19 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
 
     $scope.doStartUpdateActivate = function() {
         if ($scope.state.activeTask == null) {
+            const oldVersion = $scope.sysinfo.ServerVersion;
             DialogService.dialog(gettextCatalog.getString('Warning'), gettextCatalog.getString('Ao continuar o Módulo Agente será reiniciado e quaisquer operações ocorrendo atualmente serão perdidas, continuar?'), [gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function(ix) {
                 if (ix == 1) {
-                    AppService.post('/enotariado/restart-application').then(function() {}, AppUtils.connectionError(gettextCatalog.getString('Activate failed:') + ' '));
+                    AppService.post('/enotariado/restart-application').then(function() {
+                        var interval = setInterval(() => {
+                            SystemInfo.loadSystemInfo(true, () => {});
+                            if (oldVersion != $scope.sysinfo.ServerVersion) {
+                                console.log(oldVersion + ' ayy ' + $scope.sysinfo.ServerVersion);
+                                window.location.reload();
+                                clearInterval(interval);
+                            }
+                        }, 1000);
+                    }, AppUtils.connectionError(gettextCatalog.getString('Activate failed:') + ' '));
                 }
             });
         }

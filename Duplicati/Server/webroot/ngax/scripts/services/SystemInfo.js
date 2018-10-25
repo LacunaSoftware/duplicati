@@ -114,7 +114,7 @@ backupApp.service('SystemInfo', function($rootScope, $timeout, $cookies, AppServ
         $rootScope.$broadcast('systeminfochanged');
     };
 
-    function loadSystemInfo(reload) {
+    this.loadSystemInfo = function(reload, errorHandler = AppUtils.connectionError) {
         AppService.get('/systeminfo').then(function(data) {
             angular.copy(data.data, state);
             
@@ -130,11 +130,11 @@ backupApp.service('SystemInfo', function($rootScope, $timeout, $cookies, AppServ
             reloadTexts();
             reloadBackendConfig();
             $rootScope.$broadcast('systeminfochanged');
-        }, AppUtils.connectionError)
+        }, errorHandler)
     }
-    
-    loadSystemInfo();
-    $rootScope.$on('ui_language_changed', function() {
-        loadSystemInfo(true);
+
+    this.loadSystemInfo();
+    $rootScope.$on('ui_language_changed', () => {
+        this.loadSystemInfo(true);
     });
 });
