@@ -1251,7 +1251,7 @@ msgstr "Último backup bem-sucedido:"
 msgid "Last successful restore: {{time}} (took {{duration || '0 seconds'}})"
 msgstr ""
 "Última restauração bem-sucedida: {{time}} (duração de {{duration || '0 "
-"seconds'}})"
+"segundos'}})"
 
 #: scripts/controllers/RestoreController.js:56
 msgid "Latest"
