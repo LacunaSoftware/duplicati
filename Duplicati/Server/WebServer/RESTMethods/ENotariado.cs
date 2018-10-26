@@ -56,19 +56,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
                         info.OutputError(item: enrolledErrorMessage);
                     return;
 
-                case "restart-application":
-                    if (Library.Utility.Utility.IsClientWindows)
-                    {
-                        var resultService = ServiceManager.Restart();
-                        if (resultService)
-                            info.OutputOK();
-                        else
-                            info.OutputError();
-                        return;
-                    }
-                    info.OutputError(item: new { Message = "Atualmente não é possível reiniciar a aplicação em outro SO além de Windows" });
-                    return;
-
                 default:
                     info.ReportClientError(LC.L(@"No such action"), System.Net.HttpStatusCode.NotFound);
                     return;

@@ -55,7 +55,7 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
             const oldVersion = $scope.sysinfo.ServerVersion;
             DialogService.dialog(gettextCatalog.getString('Warning'), gettextCatalog.getString('Ao continuar o Módulo Agente será reiniciado e quaisquer operações ocorrendo atualmente serão perdidas, continuar?'), [gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function(ix) {
                 if (ix == 1) {
-                    AppService.post('/enotariado/restart-application').then(function() {
+                    AppService.post('/updates/activate').then(function() {
                         var interval = setInterval(() => {
                             SystemInfo.loadSystemInfo(true, () => {});
                             if (oldVersion != $scope.sysinfo.ServerVersion) {
@@ -64,7 +64,7 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
                                 clearInterval(interval);
                             }
                         }, 1000);
-                    }, AppUtils.connectionError(gettextCatalog.getString('Activate failed:') + ' '));
+                    }, AppUtils.connectionError("Falha ao ativar a atualização: "));
                 }
             });
         }
@@ -74,7 +74,8 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
     };
 
     $scope.doCheckForUpdates = function() {
-        AppService.post('/updates/check');
+        AppService.post('/updates/check').then(() => {}, 
+            AppUtils.connectionError("Falha ao conferir atualizações: "));
 
     };
 
