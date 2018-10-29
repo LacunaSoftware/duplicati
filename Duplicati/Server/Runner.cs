@@ -562,7 +562,7 @@ namespace Duplicati.Server
 
                                     Program.DataConnection.RegisterNotification(
                                         NotificationType.Information,
-                                        "Bugreport ready",
+                                        LC.L(@"Bugreport ready"),
                                         LC.L(@"Bugreport is ready for download"),
                                          null,
                                          null,
@@ -684,7 +684,7 @@ namespace Duplicati.Server
             Program.DataConnection.RegisterNotification(
                 NotificationType.Error,
                 backup.IsTemporary ?
-                    "Error" : string.Format(LC.L(@"Error while running {0}"), backup.Name),
+                    LC.L(@"Error") : string.Format(LC.L(@"Error while running {0}"), backup.Name),
                 ex.Message,
                 ex,
                 backup.ID,
@@ -752,7 +752,7 @@ namespace Duplicati.Server
                     Program.DataConnection.RegisterNotification(
                         NotificationType.Error,
                         backup.IsTemporary ?
-                            "Warning" : string.Format(LC.L(@"Warning while running {0}"), backup.Name),
+                            LC.L(@"Warning") : string.Format(LC.L(@"Warning while running {0}"), backup.Name),
                             r.FilesWithError > 0 ?
                                 string.Format(LC.L(@"Errors affected {0} file(s)"), r.FilesWithError) :
                                 (r.Errors.Any() ?
@@ -788,9 +788,9 @@ namespace Duplicati.Server
 
                 var title = result.ParsedResult == Library.Interface.ParsedResultType.Warning
                                 ? (backup.IsTemporary ?
-                                "Warning" : string.Format(LC.L(@"Warning while running {0}"), backup.Name))
+                                LC.L(@"Warning") : string.Format(LC.L(@"Warning while running {0}"), backup.Name))
                             : (backup.IsTemporary ?
-                                "Error" : string.Format(LC.L(@"Error while running {0}"), backup.Name));
+                                LC.L(@"Error") : string.Format(LC.L(@"Error while running {0}"), backup.Name));
 
                 var message = result.ParsedResult == Library.Interface.ParsedResultType.Warning
                                     ? string.Format(LC.L(@"Got {0} warning(s)"), result.Warnings.Count())

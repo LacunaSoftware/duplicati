@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-18 10:51-0300\n"
+"POT-Creation-Date: 2018-10-29 08:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: CommandLine/Program.cs:288
+#: CommandLine/Program.cs:289
 msgid "Toggle automatic updates"
 msgstr ""
 
-#: CommandLine/Program.cs:288
+#: CommandLine/Program.cs:289
 msgid ""
 "Set this option if you prefer to have the commandline version automatically "
 "update"
@@ -3810,7 +3810,7 @@ msgid "Applies filters to the console log data"
 msgstr ""
 
 #: Library/Main/Strings.cs:262
-msgid "Sets the processe to use low IO priority"
+msgid "Sets the process to use low IO priority"
 msgstr ""
 
 #: Library/Main/Strings.cs:263
@@ -4734,6 +4734,10 @@ msgid ""
 "are: {1}"
 msgstr ""
 
+#: Server/Runner.cs:565
+msgid "Bugreport ready"
+msgstr ""
+
 #: Server/Runner.cs:566
 msgid "Bugreport is ready for download"
 msgstr ""
@@ -4743,12 +4747,20 @@ msgstr ""
 msgid "Failed while executing \"{0}\" with id: {1}"
 msgstr ""
 
-#: Server/Runner.cs:687 Server/Runner.cs:795
+#: Server/Runner.cs:687 Server/Runner.cs:793
+msgid "Error"
+msgstr ""
+
+#: Server/Runner.cs:687 Server/Runner.cs:793
 #, csharp-format
 msgid "Error while running {0}"
 msgstr ""
 
-#: Server/Runner.cs:755 Server/Runner.cs:793
+#: Server/Runner.cs:755 Server/Runner.cs:791
+msgid "Warning"
+msgstr ""
+
+#: Server/Runner.cs:755 Server/Runner.cs:791
 #, csharp-format
 msgid "Warning while running {0}"
 msgstr ""
@@ -4758,12 +4770,12 @@ msgstr ""
 msgid "Errors affected {0} file(s)"
 msgstr ""
 
-#: Server/Runner.cs:759 Server/Runner.cs:799
+#: Server/Runner.cs:759 Server/Runner.cs:797
 #, csharp-format
 msgid "Got {0} error(s)"
 msgstr ""
 
-#: Server/Runner.cs:760 Server/Runner.cs:798
+#: Server/Runner.cs:760 Server/Runner.cs:796
 #, csharp-format
 msgid "Got {0} warning(s)"
 msgstr ""
@@ -4931,6 +4943,10 @@ msgstr ""
 msgid "Unable to open a socket for listening, tried ports: {0}"
 msgstr ""
 
+#: Server/UpdatePollThread.cs:182
+msgid "Found update"
+msgstr ""
+
 #: Server/WebServer/RESTMethods/Backup.cs:51
 msgid "Invalid or missing time"
 msgstr ""
@@ -5060,7 +5076,7 @@ msgstr ""
 #: Server/WebServer/RESTMethods/ENotariado.cs:60
 #: Server/WebServer/RESTMethods/ServerState.cs:81
 #: Server/WebServer/RESTMethods/SystemInfo.cs:59
-#: Server/WebServer/RESTMethods/Updates.cs:51
+#: Server/WebServer/RESTMethods/Updates.cs:66
 msgid "No such action"
 msgstr ""
 

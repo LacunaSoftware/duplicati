@@ -18,6 +18,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using Duplicati.Library.Localization.Short;
 using Duplicati.Server.Serialization;
 
 namespace Duplicati.Server
@@ -178,7 +179,7 @@ namespace Duplicati.Server
                     {
                         Program.DataConnection.RegisterNotification(
                                     NotificationType.Information,
-                                    "Found update",
+                                    LC.L(@"Found update"),
                                     Program.DataConnection.ApplicationSettings.UpdatedVersion.Displayname,
                                     null,
                                     null,

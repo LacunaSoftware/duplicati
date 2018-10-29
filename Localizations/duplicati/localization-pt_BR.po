@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-18 10:51-0300\n"
-"PO-Revision-Date: 2018-10-18 10:52-0300\n"
+"POT-Creation-Date: 2018-10-29 08:14-0300\n"
+"PO-Revision-Date: 2018-10-29 09:22-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.1.1\n"
 
-#: CommandLine/Program.cs:288
+#: CommandLine/Program.cs:289
 msgid "Toggle automatic updates"
 msgstr "Habilitar atualizações automáticas"
 
-#: CommandLine/Program.cs:288
+#: CommandLine/Program.cs:289
 msgid ""
 "Set this option if you prefer to have the commandline version automatically "
 "update"
@@ -520,7 +520,7 @@ msgid ""
 "Backblaze account, this can also be supplied through the \"auth-username\" "
 "property"
 msgstr ""
-"A \"B2 Cloud Storage Application key\" pode ser obtida após logar na sua conta "
+"A \"B2 Cloud Storage Application ID\" pode ser obtida após logar na sua conta "
 "do Backblaze, ela também pode ser fornecida através da propriedade \"auth-"
 "username\""
 
@@ -4635,7 +4635,7 @@ msgid "Applies filters to the console log data"
 msgstr "Aplica filtros aos dados de log do console"
 
 #: Library/Main/Strings.cs:262
-msgid "Sets the processe to use low IO priority"
+msgid "Sets the process to use low IO priority"
 msgstr "Define o processo para usar baixa prioridade de IO"
 
 #: Library/Main/Strings.cs:263
@@ -5748,6 +5748,10 @@ msgstr ""
 "A cadeia {0} não representa um nome de grupo de filtros conhecido. Os valores "
 "válidos são: {1}"
 
+#: Server/Runner.cs:565
+msgid "Bugreport ready"
+msgstr "Relatório de falhas pronto"
+
 #: Server/Runner.cs:566
 msgid "Bugreport is ready for download"
 msgstr "O relatório de falhas está pronto para download"
@@ -5757,12 +5761,20 @@ msgstr "O relatório de falhas está pronto para download"
 msgid "Failed while executing \"{0}\" with id: {1}"
 msgstr "Erro durante a execução de \"{0}\" com id: {1}"
 
-#: Server/Runner.cs:687 Server/Runner.cs:795
+#: Server/Runner.cs:687 Server/Runner.cs:793
+msgid "Error"
+msgstr "Erro"
+
+#: Server/Runner.cs:687 Server/Runner.cs:793
 #, csharp-format
 msgid "Error while running {0}"
 msgstr "Erro ao executar {0}"
 
-#: Server/Runner.cs:755 Server/Runner.cs:793
+#: Server/Runner.cs:755 Server/Runner.cs:791
+msgid "Warning"
+msgstr "Aviso"
+
+#: Server/Runner.cs:755 Server/Runner.cs:791
 #, csharp-format
 msgid "Warning while running {0}"
 msgstr "Aviso ao executar {0}"
@@ -5772,12 +5784,12 @@ msgstr "Aviso ao executar {0}"
 msgid "Errors affected {0} file(s)"
 msgstr "Erros afetaram {0} arquivo(s)"
 
-#: Server/Runner.cs:759 Server/Runner.cs:799
+#: Server/Runner.cs:759 Server/Runner.cs:797
 #, csharp-format
 msgid "Got {0} error(s)"
 msgstr "Houveram {0} erro(s)"
 
-#: Server/Runner.cs:760 Server/Runner.cs:798
+#: Server/Runner.cs:760 Server/Runner.cs:796
 #, csharp-format
 msgid "Got {0} warning(s)"
 msgstr "Houveram {0} avisos(s)"
@@ -5981,6 +5993,10 @@ msgstr ""
 msgid "Unable to open a socket for listening, tried ports: {0}"
 msgstr "Impossível abrir um socket para comunicação, tentar portas: {0}"
 
+#: Server/UpdatePollThread.cs:182
+msgid "Found update"
+msgstr "Atualização encontrada"
+
 #: Server/WebServer/RESTMethods/Backup.cs:51
 msgid "Invalid or missing time"
 msgstr "Tempo inválido ou ausente"
@@ -6112,7 +6128,7 @@ msgstr "Nenhuma chave de tarefa encontrada"
 #: Server/WebServer/RESTMethods/ENotariado.cs:60
 #: Server/WebServer/RESTMethods/ServerState.cs:81
 #: Server/WebServer/RESTMethods/SystemInfo.cs:59
-#: Server/WebServer/RESTMethods/Updates.cs:51
+#: Server/WebServer/RESTMethods/Updates.cs:66
 msgid "No such action"
 msgstr "Ação inexistente"
 
