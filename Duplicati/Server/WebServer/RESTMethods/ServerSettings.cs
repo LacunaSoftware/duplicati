@@ -80,6 +80,16 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 serversettings.Remove("server-ssl-certificate");
 				serversettings.Remove("ServerSSLCertificate");
 
+                if (serversettings.ContainsKey("allowed-hostnames") || serversettings.ContainsKey("disable-tray-icon-login")||
+                    serversettings.ContainsKey("#-server-passphrase") || serversettings.ContainsKey("#-server-passphrase-salt"))
+                {
+                    if (!info.Request.RemoteEndPoint.Address.Equals(System.Net.IPAddress.Parse("127.0.0.1")))
+                    {
+                        info.ReportClientError("Configurações da seção \"Acesso à interface do usuário\" só podem ser alteradas a partir da máquina que possui o Módulo Agente instalado");
+                        return;
+                    }
+                }
+
                 if (serversettings.Any())
 				    Program.DataConnection.ApplicationSettings.UpdateSettings(serversettings, false);
 
