@@ -59,7 +59,6 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
                         var interval = setInterval(() => {
                             SystemInfo.loadSystemInfo(true, () => {});
                             if (oldVersion != $scope.sysinfo.ServerVersion) {
-                                console.log(oldVersion + ' ayy ' + $scope.sysinfo.ServerVersion);
                                 window.location.reload();
                                 clearInterval(interval);
                             }

@@ -13,6 +13,10 @@ msgstr ""
 msgid "...loading..."
 msgstr ""
 
+#: scripts/controllers/AboutController.js:71
+msgid "A nova atualização não pode ser ativada enquanto houverem tarefas sendo executadas"
+msgstr ""
+
 #: templates/backends/openstack.html:44
 msgid "API Key"
 msgstr ""
@@ -59,12 +63,10 @@ msgstr ""
 msgid "Account name"
 msgstr ""
 
-#: templates/notificationarea.html:29
 #: templates/updatechangelog.html:11
 msgid "Activate"
 msgstr ""
 
-#: scripts/controllers/AboutController.js:56
 #: scripts/controllers/UpdateChangelogController.js:18
 msgid "Activate failed:"
 msgstr ""
@@ -106,6 +108,7 @@ msgstr ""
 msgid "Advanced Options"
 msgstr ""
 
+#: templates/addoredit.html:342
 #: templates/edituri.html:28
 msgid "Advanced options"
 msgstr ""
@@ -122,7 +125,7 @@ msgstr ""
 msgid "All Microsoft SQL Databases"
 msgstr ""
 
-#: templates/settings.html:13
+#: templates/settings.html:20
 msgid "Allow remote access (requires restart)"
 msgstr ""
 
@@ -146,6 +149,10 @@ msgid ""
 "Re-using the database will allow the command-line and server instances to work on the same remote storage.\n"
 "\n"
 " Do you wish to use the existing database?"
+msgstr ""
+
+#: scripts/controllers/AboutController.js:56
+msgid "Ao continuar o Módulo Agente será reiniciado e quaisquer operações ocorrendo atualmente serão perdidas, continuar?"
 msgstr ""
 
 #: templates/enotariado.html:12
@@ -209,7 +216,7 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: templates/about.html:67
+#: templates/about.html:54
 msgid "Backend modules:"
 msgstr ""
 
@@ -246,7 +253,7 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:35
+#: scripts/controllers/SystemSettingsController.js:37
 msgid "Browser default"
 msgstr ""
 
@@ -290,11 +297,11 @@ msgstr ""
 msgid "Busy ..."
 msgstr ""
 
-#: templates/settings.html:14
+#: templates/settings.html:21
 msgid "By allowing remote access, the server listens to requests from any machine on your network. If you enable this option, make sure you are always using the computer on a secure firewall protected network."
 msgstr ""
 
-#: templates/settings.html:25
+#: templates/settings.html:32
 msgid "By default, the tray icon will open the user interface with a token than unlocks the user interface. This ensures that you can access the user interface from the tray icon, while requiring others to enter a password. If you prefer having to type in the password, even when accessing the user interface from the tray icon, enable this option."
 msgstr ""
 
@@ -319,13 +326,17 @@ msgstr ""
 #: templates/delete.html:52
 #: templates/export.html:26
 #: templates/restoredirect.html:69
-#: templates/settings.html:150
+#: templates/settings.html:156
 #: templates/waitarea.html:19
 msgid "Cancel"
 msgstr ""
 
 #: scripts/controllers/LocalDatabaseController.js:103
 msgid "Cannot move to existing file"
+msgstr ""
+
+#: templates/about.html:5
+msgid "Changelog"
 msgstr ""
 
 #: templates/updatechangelog.html:2
@@ -336,16 +347,8 @@ msgstr ""
 msgid "Check failed:"
 msgstr ""
 
-#: templates/about.html:36
-msgid "Check for updates now"
-msgstr ""
-
 #: templates/captcha.html:10
 msgid "Checking ..."
-msgstr ""
-
-#: templates/about.html:37
-msgid "Checking for updates ..."
 msgstr ""
 
 #: templates/edituri.html:16
@@ -381,7 +384,7 @@ msgstr ""
 msgid "Completing previous backup ..."
 msgstr ""
 
-#: templates/about.html:68
+#: templates/about.html:55
 msgid "Compression modules:"
 msgstr ""
 
@@ -405,6 +408,10 @@ msgstr ""
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/LocalDatabaseController.js:28
 msgid "Confirm delete"
+msgstr ""
+
+#: templates/settings.html:12
+msgid "Confirm password"
 msgstr ""
 
 #: scripts/services/EditUriBackendConfig.js:66
@@ -453,7 +460,7 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:132
+#: scripts/controllers/SystemSettingsController.js:135
 msgid "Copied {0} to clipboard"
 msgstr ""
 
@@ -473,11 +480,11 @@ msgstr ""
 msgid "Copy failed. Please manually copy the URL"
 msgstr ""
 
-#: scripts/services/AppUtils.js:641
+#: scripts/services/AppUtils.js:643
 msgid "Core options"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:137
+#: scripts/controllers/SystemSettingsController.js:140
 msgid "Could not copy {0} to clipboard"
 msgstr ""
 
@@ -572,7 +579,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:36
+#: scripts/controllers/SystemSettingsController.js:38
 msgid "Default"
 msgstr ""
 
@@ -580,7 +587,7 @@ msgstr ""
 msgid "Default excludes"
 msgstr ""
 
-#: templates/settings.html:135
+#: templates/settings.html:141
 msgid "Default options"
 msgstr ""
 
@@ -704,14 +711,16 @@ msgid "Edit ..."
 msgstr ""
 
 #: templates/addoredit.html:140
+#: templates/addoredit.html:353
 #: templates/edituri.html:39
-#: templates/settings.html:139
+#: templates/settings.html:145
 msgid "Edit as list"
 msgstr ""
 
 #: templates/addoredit.html:143
+#: templates/addoredit.html:356
 #: templates/edituri.html:42
-#: templates/settings.html:145
+#: templates/settings.html:151
 msgid "Edit as text"
 msgstr ""
 
@@ -724,7 +733,7 @@ msgstr ""
 msgid "Encryption"
 msgstr ""
 
-#: templates/about.html:69
+#: templates/about.html:56
 msgid "Encryption modules:"
 msgstr ""
 
@@ -786,6 +795,7 @@ msgstr ""
 msgid "Enter the full destination path, including the server name, but without https"
 msgstr ""
 
+#: scripts/controllers/AboutController.js:71
 #: scripts/controllers/CommandlineController.js:74
 #: scripts/controllers/RestoreController.js:136
 #: scripts/controllers/RestoreController.js:362
@@ -873,7 +883,7 @@ msgstr ""
 msgid "FTP (Alternative)"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:137
+#: scripts/controllers/SystemSettingsController.js:140
 msgid "Fail"
 msgstr ""
 
@@ -912,7 +922,7 @@ msgstr ""
 msgid "Failed to restore files: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:183
+#: scripts/controllers/SystemSettingsController.js:188
 msgid "Failed to save:"
 msgstr ""
 
@@ -1023,13 +1033,13 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: templates/settings.html:17
+#: templates/settings.html:24
 msgid "Hostnames"
 msgstr ""
 
 #: scripts/services/AppUtils.js:100
 #: scripts/services/AppUtils.js:90
-#: templates/settings.html:47
+#: templates/settings.html:53
 msgid "Hours"
 msgstr ""
 
@@ -1189,7 +1199,7 @@ msgstr ""
 msgid "Keystone API version"
 msgstr ""
 
-#: templates/settings.html:53
+#: templates/settings.html:59
 msgid "Language in user interface"
 msgstr ""
 
@@ -1243,9 +1253,8 @@ msgstr ""
 msgid "Load one of the backups stored in your e-Notariado account"
 msgstr ""
 
-#: templates/about.html:45
-#: templates/about.html:50
-#: templates/about.html:56
+#: templates/about.html:37
+#: templates/about.html:43
 #: templates/captcha.html:14
 #: templates/log.html:15
 #: templates/log.html:22
@@ -1353,7 +1362,7 @@ msgstr ""
 
 #: scripts/services/AppUtils.js:89
 #: scripts/services/AppUtils.js:99
-#: templates/settings.html:46
+#: templates/settings.html:52
 msgid "Minutes"
 msgstr ""
 
@@ -1441,7 +1450,7 @@ msgstr ""
 msgid "Next time"
 msgstr ""
 
-#: scripts/controllers/AboutController.js:54
+#: scripts/controllers/AboutController.js:56
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
 #: scripts/controllers/EditBackupController.js:295
@@ -1511,7 +1520,7 @@ msgstr ""
 #: scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125
 #: templates/restore.html:142
-#: templates/settings.html:151
+#: templates/settings.html:157
 msgid "OK"
 msgstr ""
 
@@ -1549,12 +1558,12 @@ msgstr ""
 
 #: templates/addoredit.html:28
 #: templates/edituri.html:51
-#: templates/settings.html:138
 #: templates/settings.html:144
+#: templates/settings.html:150
 msgid "Options"
 msgstr ""
 
-#: templates/settings.html:136
+#: templates/settings.html:142
 msgid "Options added here are applied to all backups, but can be overridden in each individual backup"
 msgstr ""
 
@@ -1618,11 +1627,11 @@ msgstr ""
 msgid "Path or subfolder in the bucket"
 msgstr ""
 
-#: templates/settings.html:31
+#: templates/settings.html:37
 msgid "Pause"
 msgstr ""
 
-#: templates/settings.html:29
+#: templates/settings.html:35
 msgid "Pause after startup or hibernation"
 msgstr ""
 
@@ -1642,7 +1651,7 @@ msgstr ""
 msgid "Port"
 msgstr ""
 
-#: templates/settings.html:24
+#: templates/settings.html:31
 msgid "Prevent tray icon automatic log-in"
 msgstr ""
 
@@ -1876,7 +1885,7 @@ msgid "Search for files"
 msgstr ""
 
 #: scripts/services/AppUtils.js:98
-#: templates/settings.html:45
+#: templates/settings.html:51
 msgid "Seconds"
 msgstr ""
 
@@ -1929,7 +1938,7 @@ msgstr ""
 msgid "Server paused"
 msgstr ""
 
-#: templates/about.html:72
+#: templates/about.html:59
 msgid "Server state properties"
 msgstr ""
 
@@ -2056,7 +2065,7 @@ msgstr ""
 msgid "Stored"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:132
+#: scripts/controllers/SystemSettingsController.js:135
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2082,7 +2091,7 @@ msgstr ""
 msgid "System info"
 msgstr ""
 
-#: templates/about.html:64
+#: templates/about.html:51
 msgid "System properties"
 msgstr ""
 
@@ -2169,6 +2178,10 @@ msgstr ""
 msgid "The page is not yet loaded, this can be caused by a defective install, a browser issue or a slow connection."
 msgstr ""
 
+#: scripts/controllers/SystemSettingsController.js:162
+msgid "The passwords do not match"
+msgstr ""
+
 #: scripts/controllers/EditBackupController.js:98
 msgid "The path does not appear to exist, do you want to add it anyway?"
 msgstr ""
@@ -2238,10 +2251,6 @@ msgstr ""
 msgid "This week"
 msgstr ""
 
-#: scripts/controllers/AboutController.js:54
-msgid "This will stop the application and a reboot will be required to restart it. Do you wish to proceed?"
-msgstr ""
-
 #: scripts/controllers/AppController.js:57
 msgid "Throttle settings"
 msgstr ""
@@ -2262,7 +2271,7 @@ msgstr ""
 msgid "To export without a passphrase, uncheck the \"Encrypt file\" box"
 msgstr ""
 
-#: templates/settings.html:19
+#: templates/settings.html:26
 msgid "To prevent various DNS based attacks, Duplicati limits the allowed hostnames to the ones listed here. Direct IP access and localhost is always allowed. Multiple hostnames can be supplied with a semicolon separator. If any of the allowed hostnames is an asterisk (*), all hostnames are allowed and this feature is disabled. If the field is empty, only IP address and localhost access is allowed."
 msgstr ""
 
@@ -2327,7 +2336,7 @@ msgstr ""
 msgid "User has too many permissions"
 msgstr ""
 
-#: templates/settings.html:51
+#: templates/settings.html:57
 msgid "User interface settings"
 msgstr ""
 
@@ -2400,7 +2409,7 @@ msgstr ""
 msgid "Waiting for upload to finish ..."
 msgstr ""
 
-#: scripts/controllers/AboutController.js:54
+#: scripts/controllers/AboutController.js:56
 msgid "Warning"
 msgstr ""
 
@@ -2426,7 +2435,7 @@ msgstr ""
 msgid "Years"
 msgstr ""
 
-#: scripts/controllers/AboutController.js:54
+#: scripts/controllers/AboutController.js:56
 #: scripts/controllers/AppController.js:201
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
@@ -2461,10 +2470,6 @@ msgstr ""
 msgid ""
 "You are changing the database path away from an existing database.\n"
 "Are you sure this is what you want?"
-msgstr ""
-
-#: templates/about.html:27
-msgid "You are currently running {{appname}} {{version}}"
 msgstr ""
 
 #: scripts/controllers/StateController.js:102
@@ -2585,7 +2590,7 @@ msgstr ""
 msgid "e-Notariado"
 msgstr ""
 
-#: templates/about.html:54
+#: templates/about.html:41
 msgid "is using the following third party libraries:"
 msgstr ""
 
@@ -2603,10 +2608,6 @@ msgstr ""
 #: scripts/services/EditUriBuiltins.js:763
 #: scripts/services/EditUriBuiltins.js:774
 msgid "unless you are explicitly specifying --group-id"
-msgstr ""
-
-#: templates/about.html:12
-msgid "{{appname}} was primarily developed by <a href=\"{{mail1}}\">{{dev1}}</a> and <a href=\"{{mail2}}\">{{dev2}}</a>. {{appname}} can be downloaded from <a href=\"{{websitelink}}\">{{websitename}}</a>. {{appname}} is licensed under the <a href=\"{{licenselink}}\">{{licensename}}</a>."
 msgstr ""
 
 #: scripts/controllers/StateController.js:50

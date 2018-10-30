@@ -4,6 +4,8 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     $scope.SystemInfo = SystemInfo.watch($scope);    
     $scope.theme = $scope.$parent.$parent.saved_theme;
     $scope.enrollSettings = false;
+    $scope.passwordError = false;
+    $scope.passwordErrorMessage = '';
     if (($scope.theme || '').trim().length == 0)
         $scope.theme = 'default';
 
@@ -64,6 +66,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
 
             $scope.requireRemotePassword = AppUtils.parseBoolString(data.data['has-password-protection']);
             $scope.remotePassword = data.data['placeholder-password'];
+            $scope.confirmPassword = '';
             $scope.allowRemoteAccess = data.data['server-listen-interface'] != 'loopback';
             $scope.startupDelayDurationValue = data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1) == "" ? "0" : data.data['startup-delay'].substr(0, data.data['startup-delay'].length - 1);
             $scope.startupDelayDurationMultiplier = data.data['startup-delay'].substr(-1) == "" ? "s" : data.data['startup-delay'].substr(-1);
@@ -153,7 +156,12 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             'disable-tray-icon-login': $scope.disableTrayIconLogin
         };
 
-        if ($scope.requireRemotePassword && $scope.remotePassword != $scope.rawdata['placeholder-password']) {
+        if ($scope.requireRemotePassword && ($scope.remotePassword != $scope.rawdata['placeholder-password'])) {
+            if ($scope.remotePassword != $scope.confirmPassword) {
+                $scope.passwordError = true;
+                $scope.passwordErrorMessage = gettextCatalog.getString('The passwords do not match');
+                return;
+            }
             patchdata['#-server-passphrase-salt'] =  CryptoJS.lib.WordArray.random(256/8).toString(CryptoJS.enc.Base64);
             patchdata['#-server-passphrase'] = CryptoJS.SHA256(CryptoJS.enc.Hex.parse(CryptoJS.enc.Utf8.parse($scope.remotePassword) + CryptoJS.enc.Base64.parse(patchdata['#-server-passphrase-salt']))).toString(CryptoJS.enc.Base64);
         } else if (!$scope.requireRemotePassword) {

@@ -31,6 +31,12 @@ msgstr "- selecione uma opção -"
 msgid "...loading..."
 msgstr "...carregando..."
 
+#: scripts/controllers/AboutController.js:71
+msgid ""
+"A nova atualização não pode ser ativada enquanto houverem tarefas sendo "
+"executadas"
+msgstr ""
+
 #: templates/backends/openstack.html:44
 msgid "API Key"
 msgstr "Chave da API"
@@ -73,11 +79,10 @@ msgstr "Acesso à interface do usuário"
 msgid "Account name"
 msgstr "Nome do usuário"
 
-#: templates/notificationarea.html:29 templates/updatechangelog.html:11
+#: templates/updatechangelog.html:11
 msgid "Activate"
 msgstr "Ativar"
 
-#: scripts/controllers/AboutController.js:56
 #: scripts/controllers/UpdateChangelogController.js:18
 msgid "Activate failed:"
 msgstr "Falha na ativação:"
@@ -119,7 +124,7 @@ msgstr "Ajustar o nome do caminho?"
 msgid "Advanced Options"
 msgstr "Opções avançadas"
 
-#: templates/edituri.html:28
+#: templates/addoredit.html:342 templates/edituri.html:28
 msgid "Advanced options"
 msgstr "Opções avançadas"
 
@@ -135,7 +140,7 @@ msgstr "Todas as máquinas Hyper-V"
 msgid "All Microsoft SQL Databases"
 msgstr "Todas as bases Microsoft SQL"
 
-#: templates/settings.html:13
+#: templates/settings.html:20
 msgid "Allow remote access (requires restart)"
 msgstr "Permitir acesso remoto (restart necessário)"
 
@@ -167,6 +172,12 @@ msgstr ""
 "Reutilizar a basa permitirá que as ferramentas de linha de comando e as "
 "instâncias trabalhem no mesmo armazenamento remoto.\n"
 "Gostaria de utilizar a base existente?"
+
+#: scripts/controllers/AboutController.js:56
+msgid ""
+"Ao continuar o Módulo Agente será reiniciado e quaisquer operações ocorrendo "
+"atualmente serão perdidas, continuar?"
+msgstr ""
 
 #: templates/enotariado.html:12
 msgid "Application Code"
@@ -201,10 +212,8 @@ msgid "Automatically run backups."
 msgstr "Executar backups automaticamente."
 
 #: templates/backends/b2.html:12
-#, fuzzy
-#| msgid "B2 Cloud Storage Application Key"
 msgid "B2 Account ID or Application ID"
-msgstr "B2 Cloud Storage Application Key"
+msgstr "ID de Conta ou Aplicação B2"
 
 #: templates/backends/b2.html:16
 msgid "B2 Application Key"
@@ -222,7 +231,7 @@ msgstr "B2 Cloud Storage Application Key"
 msgid "Back"
 msgstr "Voltar"
 
-#: templates/about.html:67
+#: templates/about.html:54
 msgid "Backend modules:"
 msgstr "Módulos:"
 
@@ -258,7 +267,7 @@ msgstr "Acesso quebrado"
 msgid "Browse"
 msgstr "Navegar"
 
-#: scripts/controllers/SystemSettingsController.js:35
+#: scripts/controllers/SystemSettingsController.js:37
 msgid "Browser default"
 msgstr "Navegador padrão"
 
@@ -299,7 +308,7 @@ msgstr "Criando base temporária parcial ..."
 msgid "Busy ..."
 msgstr "Ocupado ..."
 
-#: templates/settings.html:14
+#: templates/settings.html:21
 msgid ""
 "By allowing remote access, the server listens to requests from any machine "
 "on your network. If you enable this option, make sure you are always using "
@@ -309,7 +318,7 @@ msgstr ""
 "máquina em sua rede. Se você habilitar essa opção, verifique se está sempre "
 "usando o computador em uma rede protegida por firewall seguro."
 
-#: templates/settings.html:25
+#: templates/settings.html:32
 msgid ""
 "By default, the tray icon will open the user interface with a token than "
 "unlocks the user interface. This ensures that you can access the user "
@@ -341,13 +350,17 @@ msgstr "Arquivos de Cache"
 #: scripts/services/EditUriBuiltins.js:877
 #: scripts/services/EditUriBuiltins.js:894 templates/delete.html:52
 #: templates/export.html:26 templates/restoredirect.html:69
-#: templates/settings.html:150 templates/waitarea.html:19
+#: templates/settings.html:156 templates/waitarea.html:19
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: scripts/controllers/LocalDatabaseController.js:103
 msgid "Cannot move to existing file"
 msgstr "Não permitido mover para um arquivo existente"
+
+#: templates/about.html:5
+msgid "Changelog"
+msgstr "Últimas mudanças"
 
 #: templates/updatechangelog.html:2
 msgid "Changelog for {{appname}} {{version}}"
@@ -357,17 +370,9 @@ msgstr "Changelog para {{appname}} {{version}}"
 msgid "Check failed:"
 msgstr "Falha na verificação:"
 
-#: templates/about.html:36
-msgid "Check for updates now"
-msgstr "Buscar atualizações"
-
 #: templates/captcha.html:10
 msgid "Checking ..."
 msgstr "Verificando ..."
-
-#: templates/about.html:37
-msgid "Checking for updates ..."
-msgstr "Procurando atualizações ..."
 
 #: templates/edituri.html:16
 msgid "Chose a storage type to get started"
@@ -398,7 +403,7 @@ msgstr "Finalizando backup..."
 msgid "Completing previous backup ..."
 msgstr "Completando o backup anterior ..."
 
-#: templates/about.html:68
+#: templates/about.html:55
 msgid "Compression modules:"
 msgstr "Módulos de compressão:"
 
@@ -423,6 +428,10 @@ msgstr "Configurar novo backup"
 #: scripts/controllers/LocalDatabaseController.js:28
 msgid "Confirm delete"
 msgstr "Confirmar remoção"
+
+#: templates/settings.html:12
+msgid "Confirm password"
+msgstr "Confirmar senha"
 
 #: scripts/services/EditUriBackendConfig.js:66
 msgid "Confirmation required"
@@ -469,7 +478,7 @@ msgstr "Região do Container"
 msgid "Continue"
 msgstr "Continuar"
 
-#: scripts/controllers/SystemSettingsController.js:132
+#: scripts/controllers/SystemSettingsController.js:135
 msgid "Copied {0} to clipboard"
 msgstr "{0} foi copiado"
 
@@ -489,11 +498,11 @@ msgstr "Copiar URL do destino"
 msgid "Copy failed. Please manually copy the URL"
 msgstr "Falha na cópia. Copie a URL manualmente"
 
-#: scripts/services/AppUtils.js:641
+#: scripts/services/AppUtils.js:643
 msgid "Core options"
 msgstr "Opções básicas"
 
-#: scripts/controllers/SystemSettingsController.js:137
+#: scripts/controllers/SystemSettingsController.js:140
 msgid "Could not copy {0} to clipboard"
 msgstr "Não foi possível copier {0}"
 
@@ -585,7 +594,7 @@ msgstr "Banco de dados ..."
 msgid "Days"
 msgstr "Dias"
 
-#: scripts/controllers/SystemSettingsController.js:36
+#: scripts/controllers/SystemSettingsController.js:38
 msgid "Default"
 msgstr "Padrão"
 
@@ -593,7 +602,7 @@ msgstr "Padrão"
 msgid "Default excludes"
 msgstr "Exclusões padrão"
 
-#: templates/settings.html:135
+#: templates/settings.html:141
 msgid "Default options"
 msgstr "Opções padrão"
 
@@ -730,13 +739,13 @@ msgstr ""
 msgid "Edit ..."
 msgstr "Editar ..."
 
-#: templates/addoredit.html:140 templates/edituri.html:39
-#: templates/settings.html:139
+#: templates/addoredit.html:140 templates/addoredit.html:353
+#: templates/edituri.html:39 templates/settings.html:145
 msgid "Edit as list"
 msgstr "Editar como lista"
 
-#: templates/addoredit.html:143 templates/edituri.html:42
-#: templates/settings.html:145
+#: templates/addoredit.html:143 templates/addoredit.html:356
+#: templates/edituri.html:42 templates/settings.html:151
 msgid "Edit as text"
 msgstr "Editar como texto"
 
@@ -748,7 +757,7 @@ msgstr "Criptografar arquivo"
 msgid "Encryption"
 msgstr "Criptografia"
 
-#: templates/about.html:69
+#: templates/about.html:56
 msgid "Encryption modules:"
 msgstr "Módulos de criptografia:"
 
@@ -819,6 +828,7 @@ msgstr ""
 "Digite o caminho de destino completo, incluindo o nome do servidor, mas sem "
 "https"
 
+#: scripts/controllers/AboutController.js:71
 #: scripts/controllers/CommandlineController.js:74
 #: scripts/controllers/RestoreController.js:136
 #: scripts/controllers/RestoreController.js:362
@@ -904,7 +914,7 @@ msgstr "Link externo"
 msgid "FTP (Alternative)"
 msgstr "FTP (alternativo)"
 
-#: scripts/controllers/SystemSettingsController.js:137
+#: scripts/controllers/SystemSettingsController.js:140
 msgid "Fail"
 msgstr "Falha"
 
@@ -943,7 +953,7 @@ msgstr "Falha ao ler os padrões do backup:"
 msgid "Failed to restore files: {{message}}"
 msgstr "Falha ao restaurar arquivos: {{message}}"
 
-#: scripts/controllers/SystemSettingsController.js:183
+#: scripts/controllers/SystemSettingsController.js:188
 msgid "Failed to save:"
 msgstr "Falha ao salvar:"
 
@@ -1045,12 +1055,12 @@ msgstr "Ocultar diretórios ocultos"
 msgid "Home"
 msgstr "Home"
 
-#: templates/settings.html:17
+#: templates/settings.html:24
 msgid "Hostnames"
 msgstr "Hostnames"
 
 #: scripts/services/AppUtils.js:100 scripts/services/AppUtils.js:90
-#: templates/settings.html:47
+#: templates/settings.html:53
 msgid "Hours"
 msgstr "Horas"
 
@@ -1235,7 +1245,7 @@ msgstr "Manter todos os backups"
 msgid "Keystone API version"
 msgstr "Versão da API Keystone"
 
-#: templates/settings.html:53
+#: templates/settings.html:59
 msgid "Language in user interface"
 msgstr "Idioma da interface do usuário"
 
@@ -1291,10 +1301,10 @@ msgstr "Abrir dados antigos"
 msgid "Load one of the backups stored in your e-Notariado account"
 msgstr "Restaure um dos backups armazenados na sua conta do e-Notariado"
 
-#: templates/about.html:45 templates/about.html:50 templates/about.html:56
-#: templates/captcha.html:14 templates/log.html:15 templates/log.html:22
-#: templates/log.html:45 templates/log.html:53 templates/log.html:60
-#: templates/log.html:67 templates/updatechangelog.html:7
+#: templates/about.html:37 templates/about.html:43 templates/captcha.html:14
+#: templates/log.html:15 templates/log.html:22 templates/log.html:45
+#: templates/log.html:53 templates/log.html:60 templates/log.html:67
+#: templates/updatechangelog.html:7
 msgid "Loading ..."
 msgstr "Abrindo ..."
 
@@ -1389,7 +1399,7 @@ msgid "Minimum redundancy is 1.0"
 msgstr "Redundância mínima é 1.0"
 
 #: scripts/services/AppUtils.js:89 scripts/services/AppUtils.js:99
-#: templates/settings.html:46
+#: templates/settings.html:52
 msgid "Minutes"
 msgstr "Minutos"
 
@@ -1475,7 +1485,7 @@ msgstr "Próxima tarefa:"
 msgid "Next time"
 msgstr "Próxima vez"
 
-#: scripts/controllers/AboutController.js:54
+#: scripts/controllers/AboutController.js:56
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
 #: scripts/controllers/EditBackupController.js:295
@@ -1554,7 +1564,7 @@ msgstr "Nada será excluído. O tamanho do backup crescerá com cada mudança."
 #: scripts/services/CaptchaService.js:22 scripts/services/DialogService.js:28
 #: scripts/services/DialogService.js:50 scripts/services/DialogService.js:58
 #: scripts/services/EditUriBuiltins.js:125 templates/restore.html:142
-#: templates/settings.html:151
+#: templates/settings.html:157
 msgid "OK"
 msgstr "OK"
 
@@ -1595,11 +1605,11 @@ msgid "Optional authentication username"
 msgstr "Usuário opcional de autenticação"
 
 #: templates/addoredit.html:28 templates/edituri.html:51
-#: templates/settings.html:138 templates/settings.html:144
+#: templates/settings.html:144 templates/settings.html:150
 msgid "Options"
 msgstr "Opções"
 
-#: templates/settings.html:136
+#: templates/settings.html:142
 msgid ""
 "Options added here are applied to all backups, but can be overridden in each "
 "individual backup"
@@ -1667,11 +1677,11 @@ msgstr "Caminho do servidor"
 msgid "Path or subfolder in the bucket"
 msgstr "Caminho ou subpasta no bucket"
 
-#: templates/settings.html:31
+#: templates/settings.html:37
 msgid "Pause"
 msgstr "Parar"
 
-#: templates/settings.html:29
+#: templates/settings.html:35
 msgid "Pause after startup or hibernation"
 msgstr "Pausa após a inicialização ou a hibernação"
 
@@ -1691,7 +1701,7 @@ msgstr "Escolher localização"
 msgid "Port"
 msgstr "Porta"
 
-#: templates/settings.html:24
+#: templates/settings.html:31
 msgid "Prevent tray icon automatic log-in"
 msgstr "Impedir login automático no ícone da bandeja"
 
@@ -1914,7 +1924,7 @@ msgstr "Buscar"
 msgid "Search for files"
 msgstr "Procurar por arquivos"
 
-#: scripts/services/AppUtils.js:98 templates/settings.html:45
+#: scripts/services/AppUtils.js:98 templates/settings.html:51
 msgid "Seconds"
 msgstr "Segundos"
 
@@ -1964,7 +1974,7 @@ msgstr "Senha do servidor"
 msgid "Server paused"
 msgstr "Servidor parado"
 
-#: templates/about.html:72
+#: templates/about.html:59
 msgid "Server state properties"
 msgstr "Propriedades do estado do servidor"
 
@@ -2091,7 +2101,7 @@ msgstr "Classe de armazenamento para criar um bucket"
 msgid "Stored"
 msgstr "Armazenado"
 
-#: scripts/controllers/SystemSettingsController.js:132
+#: scripts/controllers/SystemSettingsController.js:135
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2117,7 +2127,7 @@ msgstr "Arquivos do sistema"
 msgid "System info"
 msgstr "Informação do sistema"
 
-#: templates/about.html:64
+#: templates/about.html:51
 msgid "System properties"
 msgstr "Propriedades do sistema"
 
@@ -2225,6 +2235,10 @@ msgid ""
 msgstr ""
 "A página ainda não foi carregada, isto pode ser causado por uma instalação "
 "defeituosa, um problema com o navegador ou uma conexão lenta."
+
+#: scripts/controllers/SystemSettingsController.js:162
+msgid "The passwords do not match"
+msgstr "As senhas não são iguais"
 
 #: scripts/controllers/EditBackupController.js:98
 msgid "The path does not appear to exist, do you want to add it anyway?"
@@ -2334,14 +2348,6 @@ msgstr ""
 msgid "This week"
 msgstr "Esta semana"
 
-#: scripts/controllers/AboutController.js:54
-msgid ""
-"This will stop the application and a reboot will be required to restart it. "
-"Do you wish to proceed?"
-msgstr ""
-"Isto irá encerrar a aplicação e será necessário reiniciar o computador. "
-"Deseja continuar?"
-
 #: scripts/controllers/AppController.js:57
 msgid "Throttle settings"
 msgstr "Configurações de limitação"
@@ -2367,7 +2373,7 @@ msgid "To export without a passphrase, uncheck the \"Encrypt file\" box"
 msgstr ""
 "Para exportar sem uma senha, desmarque a caixa \"Criptografar arquivo\""
 
-#: templates/settings.html:19
+#: templates/settings.html:26
 msgid ""
 "To prevent various DNS based attacks, Duplicati limits the allowed hostnames "
 "to the ones listed here. Direct IP access and localhost is always allowed. "
@@ -2444,7 +2450,7 @@ msgstr "Nome de domínio do usuário"
 msgid "User has too many permissions"
 msgstr "O usuário tem muitas permissões"
 
-#: templates/settings.html:51
+#: templates/settings.html:57
 msgid "User interface settings"
 msgstr "Configurações da interface do usuário"
 
@@ -2513,7 +2519,7 @@ msgstr "Aguardando a tarefa começar ..."
 msgid "Waiting for upload to finish ..."
 msgstr "Aguardando pelo término do upload ..."
 
-#: scripts/controllers/AboutController.js:54
+#: scripts/controllers/AboutController.js:56
 msgid "Warning"
 msgstr "Aviso"
 
@@ -2537,7 +2543,7 @@ msgstr "Para onde você deseja restaurar os arquivos?"
 msgid "Years"
 msgstr "Anos"
 
-#: scripts/controllers/AboutController.js:54
+#: scripts/controllers/AboutController.js:56
 #: scripts/controllers/AppController.js:201
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
@@ -2578,10 +2584,6 @@ msgstr ""
 "Você está mudando o caminho do banco de dados para longe de um banco de "
 "dados existente.\n"
 "Tem certeza de que isso é o que deseja?"
-
-#: templates/about.html:27
-msgid "You are currently running {{appname}} {{version}}"
-msgstr "Você está atualmente executando {{appname}} {{version}}"
 
 #: scripts/controllers/StateController.js:102
 msgid ""
@@ -2707,7 +2709,7 @@ msgstr "personalizado"
 msgid "e-Notariado"
 msgstr "e-Notariado"
 
-#: templates/about.html:54
+#: templates/about.html:41
 msgid "is using the following third party libraries:"
 msgstr "está usando as seguintes bibliotecas de terceiros:"
 
@@ -2724,18 +2726,6 @@ msgstr "clique com o botão direito e escolha &quot;Salvar como …&quot;"
 #: scripts/services/EditUriBuiltins.js:774
 msgid "unless you are explicitly specifying --group-id"
 msgstr "a menos que você esteja explicitamente especificando --group-id"
-
-#: templates/about.html:12
-msgid ""
-"{{appname}} was primarily developed by <a href=\"{{mail1}}\">{{dev1}}</a> "
-"and <a href=\"{{mail2}}\">{{dev2}}</a>. {{appname}} can be downloaded from "
-"<a href=\"{{websitelink}}\">{{websitename}}</a>. {{appname}} is licensed "
-"under the <a href=\"{{licenselink}}\">{{licensename}}</a>."
-msgstr ""
-"{{appname}} foi desenvolvido inicialmente por <a href=\"{{mail1}}\">{{dev1}}"
-"</a> e<a href=\"{{mail2}}\">{{dev2}}</a>. {{appname}} pode ser baixado em <a "
-"href=\"{{websitelink}}\">{{websitename}}</a>. {{appname}} é licenciado sob a "
-"<a href=\"{{licenselink}}\">{{licensename}}</a>."
 
 #: scripts/controllers/StateController.js:50
 msgid "{{files}} files ({{size}}) to go {{speed_txt}}"
@@ -2763,6 +2753,34 @@ msgstr "{{number}} Minutos"
 #: templates/home.html:58
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#~ msgid "Check for updates now"
+#~ msgstr "Buscar atualizações"
+
+#~ msgid "Checking for updates ..."
+#~ msgstr "Procurando atualizações ..."
+
+#~ msgid ""
+#~ "This will stop the application and a reboot will be required to restart "
+#~ "it. Do you wish to proceed?"
+#~ msgstr ""
+#~ "Isto irá encerrar a aplicação e será necessário reiniciar o computador. "
+#~ "Deseja continuar?"
+
+#~ msgid "You are currently running {{appname}} {{version}}"
+#~ msgstr "Você está atualmente executando {{appname}} {{version}}"
+
+#~ msgid ""
+#~ "{{appname}} was primarily developed by <a href=\"{{mail1}}\">{{dev1}}</a> "
+#~ "and <a href=\"{{mail2}}\">{{dev2}}</a>. {{appname}} can be downloaded "
+#~ "from <a href=\"{{websitelink}}\">{{websitename}}</a>. {{appname}} is "
+#~ "licensed under the <a href=\"{{licenselink}}\">{{licensename}}</a>."
+#~ msgstr ""
+#~ "{{appname}} foi desenvolvido inicialmente por <a href="
+#~ "\"{{mail1}}\">{{dev1}}</a> e<a href=\"{{mail2}}\">{{dev2}}</a>. "
+#~ "{{appname}} pode ser baixado em <a href="
+#~ "\"{{websitelink}}\">{{websitename}}</a>. {{appname}} é licenciado sob a "
+#~ "<a href=\"{{licenselink}}\">{{licensename}}</a>."
 
 #~ msgid "Retrieving data to secure backup..."
 #~ msgstr "Recuperando dados para proteger o backup..."
@@ -2914,9 +2932,6 @@ msgstr "{{time}} (took {{duration}})"
 #~ msgid "Autogenerated passphrase"
 #~ msgstr "Senha gerada automaticamente"
 
-#~ msgid "Changelog"
-#~ msgstr "Changelog"
-
 #~ msgid "Continue without encryption"
 #~ msgstr "Continuar sem utilizar criptografia"
 
@@ -2952,9 +2967,6 @@ msgstr "{{time}} (took {{duration}})"
 
 #~ msgid "Passphrases are not matching"
 #~ msgstr "Senhas não correspondem"
-
-#~ msgid "Passwords do not match"
-#~ msgstr "Senhas não conferem"
 
 #~ msgid "Repeat Passphrase"
 #~ msgstr "Repetir frase de segurança"
