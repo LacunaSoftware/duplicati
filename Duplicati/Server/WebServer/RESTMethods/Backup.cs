@@ -192,6 +192,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             Program.WorkThread.AddTask(task);
 
             info.OutputOK(new { TaskID = task.TaskID });
+            Library.Logging.Log.WriteInformationMessage("Backup", "BackupPost", "Backup '" + backup.Name + "' - " + backup.TargetURL + " restored");
         }
 
         private void CreateReport(IBackup backup, RequestInfo info)
@@ -275,6 +276,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             Program.StatusEventNotifyer.SignalNewEvent();
 
             info.OutputOK(new {Status = "OK", ID = task.TaskID});
+            Library.Logging.Log.WriteInformationMessage("Backup", "BackupRepair", "Backup '" + backup.Name + "' - " + backup.TargetURL + " repaired");
         }
 
         private void RunBackup(IBackup backup, RequestInfo info)

@@ -36,7 +36,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             if (!System.IO.File.Exists(tf.Path))
             {
-                info.ReportClientError(LC.L(@"File is missing"), System.Net.HttpStatusCode.NotFound);
+                info.ReportClientError(LC.L(@"File is missing") + ": " + tf.Path, System.Net.HttpStatusCode.NotFound);
                 return;
             }
 

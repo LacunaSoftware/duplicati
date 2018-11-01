@@ -89,7 +89,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     {
                     }
 
-                    info.ReportServerError("File or folder not found", System.Net.HttpStatusCode.NotFound);
+                    info.ReportServerError($"File or folder '{path}' not found", System.Net.HttpStatusCode.NotFound);
                     return;
                 }
                 else

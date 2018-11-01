@@ -222,6 +222,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     }
 
                     info.OutputOK(new { status = "OK", ID = data.Backup.ID });
+                    Library.Logging.Log.WriteInformationMessage("Backup", "BackupPost", "Backup '" + data.Backup.Name + "' - " + data.Backup.TargetURL + " successfully created");
                 }
             }
             catch (Exception ex)
