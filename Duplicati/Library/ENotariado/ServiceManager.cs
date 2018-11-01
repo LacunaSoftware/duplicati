@@ -4,11 +4,11 @@ namespace Duplicati.Library.ENotariado
 {
     public static class ServiceManager
     {
-        private static string LOGTAG = "ENotariadoServiceManager";
+        private static string LOGTAG = "e-notariado Service Manager";
         public static bool Restart()
         {
             var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var exec = System.IO.Path.Combine(path, "Gerenciador e-Notariado.exe");
+            var exec = System.IO.Path.Combine(path, "Gerenciador Backup e-notariado.exe");
             var cmdargs = " restart";
 
             if (!System.IO.File.Exists(exec))

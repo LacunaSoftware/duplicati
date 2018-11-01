@@ -35,7 +35,7 @@ namespace Duplicati.Library.ENotariado
 
         private static HttpClient client = new HttpClient();
 
-        // Variables related to periodically sending logs to e-Notariado
+        // Variables related to periodically sending logs to e-notariado
         private static ConcurrentQueue<DuplicatiLogModel> LogQueue = new ConcurrentQueue<DuplicatiLogModel>();
         private static readonly long MIN_TIMER_PERIOD = 10000;
         private static readonly long MAX_TIMER_PERIOD = 600000; // 10 minutes
@@ -57,13 +57,13 @@ namespace Duplicati.Library.ENotariado
             get { return SubscriptionId.ToString().Replace("-", "").Substring(0, 24); }
         }
 
-        private static readonly string LOGTAG = "eNotariado Connection";
+        private static readonly string LOGTAG = "e-notariado Connection";
         private static readonly string PublicKeyAuthenticationSessionState = "X-Public-Key-Auth-Session-State";
         private static readonly string BaseURI = $"https://backup.e-notariado.org.br/api";
 
         private static void ResetData()
         {
-            Logging.Log.WriteVerboseMessage(LOGTAG, "ResetData", $"Resetting all e-Notariado related data");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "ResetData", $"Resetting all e-notariado related data");
 
             SessionToken = null;
             SessionTokenExpiration = DateTime.MinValue;
@@ -77,16 +77,16 @@ namespace Duplicati.Library.ENotariado
 
         /// <summary>
         /// Simple method to init data regarding the application
-        /// To be used when making requests to eNotariado
+        /// To be used when making requests to e-notariado
         /// </summary>
         public static void Init(Guid applicationId, X509Certificate2 cert)
         {
-            Logging.Log.WriteVerboseMessage(LOGTAG, "Init", $"Initializing e-Notariado configuration. Certificate Thumbprint: {cert.Thumbprint}. ApplicationId: {applicationId}");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "Init", $"Initializing e-notariado configuration. Certificate Thumbprint: {cert.Thumbprint}. ApplicationId: {applicationId}");
 
             Certificate = cert;
             ApplicationId = applicationId;
 
-            // Send logs to e-Notariado each 10 seconds
+            // Send logs to e-notariado each 10 seconds
             TimerPeriod = MIN_TIMER_PERIOD;
             Timer = new Timer(_ => _ = SendLogs(), null, 10000, TimerPeriod);
         }
@@ -103,7 +103,7 @@ namespace Duplicati.Library.ENotariado
                 Description = Environment.MachineName
             };
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "Enroll", $"Enrolling in e-Notariado with certificate {cert.Thumbprint}");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "Enroll", $"Enrolling in e-notariado with certificate {cert.Thumbprint}");
 
             var uri = $"{BaseURI}/app-enrollments";
             var jsonInString = JsonConvert.SerializeObject(enrollment);
@@ -131,7 +131,7 @@ namespace Duplicati.Library.ENotariado
             if (Certificate == null || ApplicationId == Guid.Empty)
                 throw new ENotariadoNotInitializedException();
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "CheckVerifiedStatus", $"Verifying application in e-Notariado");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "CheckVerifiedStatus", $"Verifying application in e-notariado");
 
             var uri = $"{BaseURI}/app-enrollments";
             var id = ApplicationId.ToString();
@@ -146,12 +146,12 @@ namespace Duplicati.Library.ENotariado
 
                 if (IsVerified)
                 {
-                    Logging.Log.WriteVerboseMessage(LOGTAG, "Verified", $"Application is verified in e-Notariado");
+                    Logging.Log.WriteVerboseMessage(LOGTAG, "Verified", $"Application is verified in e-notariado");
                     SubscriptionId = (Guid) content.SubscriptionId;
                     return SubscriptionId;
                 }
 
-                Logging.Log.WriteVerboseMessage(LOGTAG, "NotVerified", $"Application is not verified in e-Notariado");
+                Logging.Log.WriteVerboseMessage(LOGTAG, "NotVerified", $"Application is not verified in e-notariado");
                 return Guid.Empty;
             }
             else
@@ -171,7 +171,7 @@ namespace Duplicati.Library.ENotariado
             if (!HasValidAuthToken)
                 await GetApplicationAuthToken();
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "GetSASToken", $"Requesting SAS Token to e-Notariado");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "GetSASToken", $"Requesting SAS Token to e-notariado");
 
             await GetCredentials();
             return SASToken;
@@ -188,7 +188,7 @@ namespace Duplicati.Library.ENotariado
             if (!HasValidAuthToken)
                 await GetApplicationAuthToken();
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "GetBackupPassword", $"Requesting backup password to e-Notariado");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "GetBackupPassword", $"Requesting backup password to e-notariado");
 
             await GetCredentials();
             return BackupPassword;
@@ -204,7 +204,7 @@ namespace Duplicati.Library.ENotariado
             var uri = $"{BaseURI}/credentials";
             var jsonInString = JsonConvert.SerializeObject(sasRequest);
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "GetCredentials", $"Requesting credentials from e-Notariado");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "GetCredentials", $"Requesting credentials from e-notariado");
 
             var stringContent = new StringContent(jsonInString, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(uri, stringContent);
@@ -228,7 +228,7 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Add log to queue in order to later send them to e-Notariado servers
+        /// Add log to queue in order to later send them to e-notariado servers
         /// </summary>
         public static async Task QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
         {
@@ -259,7 +259,7 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Sends logs to the e-Notariado servers
+        /// Sends logs to the e-notariado servers
         /// </summary>
         public static async Task SendLogs()
         {
@@ -294,7 +294,7 @@ namespace Duplicati.Library.ENotariado
             while (!response.IsSuccessStatusCode)
             {
                 TimerPeriod = Math.Min(MAX_TIMER_PERIOD, TimerPeriod * 2);
-                Library.Logging.Log.WriteRetryMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send {logs.Count} logs to e-Notariado, retrying in {TimerPeriod / 1000} seconds..." +
+                Library.Logging.Log.WriteRetryMessage(LOGTAG, "SendLogsRequest", null, $"Failed to send {logs.Count} logs to e-notariado, retrying in {TimerPeriod / 1000} seconds..." +
                     $"Error: {response.StatusCode} - Content: {contentString}");
                 await Task.Delay(System.TimeSpan.FromMilliseconds(TimerPeriod));
                 response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
@@ -322,7 +322,7 @@ namespace Duplicati.Library.ENotariado
                 CertificateThumbprint = Certificate.Thumbprint,
             };
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "Authentication", $"Authenticating in e-Notariado");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "Authentication", $"Authenticating in e-notariado");
 
             /* Performing the firts token request, in order to receive a challenge. */
             var uri = $"{BaseURI}/public-key-auth";
@@ -358,7 +358,7 @@ namespace Duplicati.Library.ENotariado
             var completeContent = JsonConvert.DeserializeObject<CompletePublicKeyAuthenticationResponse>(completeContentString);
             SessionToken = completeContent.AppToken;
             SessionTokenExpiration = DateTime.Now.AddMinutes(5);
-            Logging.Log.WriteVerboseMessage(LOGTAG, "Authenticated", $"Authenticated in e-Notariado");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "Authenticated", $"Authenticated in e-notariado");
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("AppToken", completeContent.AppToken);
         }        
 

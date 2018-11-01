@@ -10,11 +10,11 @@ namespace Duplicati.WindowsService
 {
     public class ServiceControl : System.ServiceProcess.ServiceBase
     {
-        private const string LOG_SOURCE = "Backup e-Notariado";
+        private const string LOG_SOURCE = "Backup e-notariado";
         private const string LOG_NAME = "Application";
         public const string SERVICE_NAME = "BackupENotariado";
-        public const string DISPLAY_NAME = "Backup e-Notariado";
-        public const string DESCRIPTION = "Executa Backup e-Notariado como um serviço";
+        public const string DISPLAY_NAME = "Backup e-notariado";
+        public const string DESCRIPTION = "Executa Backup e-notariado como um serviço";
 
         private readonly System.Diagnostics.EventLog m_eventLog;
 

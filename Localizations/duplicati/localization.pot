@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-29 08:14-0300\n"
+"POT-Creation-Date: 2018-11-01 09:04-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -605,7 +605,7 @@ msgid "Dropbox"
 msgstr ""
 
 #: Library/Backend/ENotariado/Strings.cs:5
-msgid "e-Notariado"
+msgid "e-notariado"
 msgstr ""
 
 #: Library/Backend/ENotariado/Strings.cs:6
@@ -1982,19 +1982,19 @@ msgid "Response code: '{0}'. Content: '{1}'."
 msgstr ""
 
 #: Library/ENotariado/Exceptions.cs:16
-msgid "The application is not enrolled in e-Notariado"
+msgid "The application is not enrolled in e-notariado"
 msgstr ""
 
 #: Library/ENotariado/Exceptions.cs:27
-msgid "There was an error while enrolling in e-Notariado"
+msgid "There was an error while enrolling in e-notariado"
 msgstr ""
 
 #: Library/ENotariado/Exceptions.cs:38
-msgid "There was an error in the connection with e-Notariado"
+msgid "There was an error in the connection with e-notariado"
 msgstr ""
 
 #: Library/ENotariado/Exceptions.cs:51
-msgid "The application is not verified in e-Notariado"
+msgid "The application is not verified in e-notariado"
 msgstr ""
 
 #: Library/ENotariado/Exceptions.cs:62
@@ -4951,79 +4951,79 @@ msgstr ""
 msgid "Invalid or missing time"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:333
+#: Server/WebServer/RESTMethods/Backup.cs:335
 msgid "No target path supplied"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:335
+#: Server/WebServer/RESTMethods/Backup.cs:337
 msgid "Target path is relative, please supply a fully qualified path"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:339
+#: Server/WebServer/RESTMethods/Backup.cs:341
 msgid "A file already exists at the new location"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:357
-#: Server/WebServer/RESTMethods/Backup.cs:420
-#: Server/WebServer/RESTMethods/Backup.cs:518
-#: Server/WebServer/RESTMethods/Backup.cs:539
-#: Server/WebServer/RESTMethods/Backup.cs:578
+#: Server/WebServer/RESTMethods/Backup.cs:359
+#: Server/WebServer/RESTMethods/Backup.cs:422
+#: Server/WebServer/RESTMethods/Backup.cs:520
+#: Server/WebServer/RESTMethods/Backup.cs:541
+#: Server/WebServer/RESTMethods/Backup.cs:580
 msgid "Invalid or missing backup id"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:391
+#: Server/WebServer/RESTMethods/Backup.cs:393
 #, csharp-format
 msgid "Invalid component: {0}"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:487
+#: Server/WebServer/RESTMethods/Backup.cs:489
 #: Server/WebServer/RESTMethods/Task.cs:63
 msgid "Invalid request"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:499
+#: Server/WebServer/RESTMethods/Backup.cs:501
 msgid "Missing backup object"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:509
+#: Server/WebServer/RESTMethods/Backup.cs:511
 #: Server/WebServer/RESTMethods/Backups.cs:178
 msgid "Data object had no backup entry"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:545
+#: Server/WebServer/RESTMethods/Backup.cs:547
 #: Server/WebServer/RESTMethods/Backups.cs:210
 msgid "There already exists a backup with the name: "
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:567
-#: Server/WebServer/RESTMethods/Backups.cs:230
+#: Server/WebServer/RESTMethods/Backup.cs:569
+#: Server/WebServer/RESTMethods/Backups.cs:231
 #, csharp-format
 msgid "Unable to parse backup or schedule object: {0}"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:569
+#: Server/WebServer/RESTMethods/Backup.cs:571
 #, csharp-format
 msgid "Unable to save backup or schedule: {0}"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:590
+#: Server/WebServer/RESTMethods/Backup.cs:592
 msgid "Missing captcha"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:596
+#: Server/WebServer/RESTMethods/Backup.cs:598
 msgid "Invalid captcha"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backup.cs:676
+#: Server/WebServer/RESTMethods/Backup.cs:678
 msgid "Retrieves, updates or deletes an existing backup and schedule"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backups.cs:232
+#: Server/WebServer/RESTMethods/Backups.cs:233
 #, csharp-format
 msgid "Unable to save schedule or backup object: {0}"
 msgstr ""
 
-#: Server/WebServer/RESTMethods/Backups.cs:237
+#: Server/WebServer/RESTMethods/Backups.cs:238
 msgid "Return a list of current backups and their schedules"
 msgstr ""
 

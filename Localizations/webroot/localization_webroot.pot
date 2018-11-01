@@ -1250,7 +1250,7 @@ msgid "Load older data"
 msgstr ""
 
 #: templates/restorewizard.html:22
-msgid "Load one of the backups stored in your e-Notariado account"
+msgid "Load one of the backups stored in your e-notariado account"
 msgstr ""
 
 #: templates/about.html:37
@@ -1787,7 +1787,7 @@ msgid "Restore from backup configuration"
 msgstr ""
 
 #: templates/restorewizard.html:21
-msgid "Restore from e-Notariado ..."
+msgid "Restore from e-notariado ..."
 msgstr ""
 
 #: templates/restore.html:24
@@ -2587,7 +2587,7 @@ msgstr ""
 
 #: index.html:215
 #: templates/enotariado.html:2
-msgid "e-Notariado"
+msgid "e-notariado"
 msgstr ""
 
 #: templates/about.html:41

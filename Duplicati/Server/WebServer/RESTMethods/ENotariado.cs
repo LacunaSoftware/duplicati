@@ -32,9 +32,9 @@ namespace Duplicati.Server.WebServer.RESTMethods
         public void POST(string key, RequestInfo info)
         {
             var input = info.Request.Form;
-            var enrolledErrorMessage = new { Message = "Houve um erro na comunicação com o e-Notariado. Tente novamente mais tarde." };
-            var verifiedErrorMessage = new { Message = "O agente ainda não foi cadastrado no e-Notariado." };
-            var failedVerification   = new { Message = "A aplicação ainda não foi cadastrada no Portal Backup e-Notariado." };
+            var enrolledErrorMessage = new { Message = "Houve um erro na comunicação com o e-notariado. Tente novamente mais tarde." };
+            var verifiedErrorMessage = new { Message = "O agente ainda não foi cadastrado no e-notariado." };
+            var failedVerification   = new { Message = "A aplicação ainda não foi cadastrada no Portal Backup e-notariado." };
             switch ((key ?? "").ToLowerInvariant())
             {
                 case "verify":
@@ -62,7 +62,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             }
         }
 
-        public string Description { get { return "Operações relacionadas a e-Notariado"; } }
+        public string Description { get { return "Operações relacionadas ao e-notariado"; } }
 
         public IEnumerable<KeyValuePair<string, Type>> Types
         {

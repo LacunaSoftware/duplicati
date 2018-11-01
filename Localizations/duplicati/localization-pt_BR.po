@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-29 08:14-0300\n"
-"PO-Revision-Date: 2018-10-29 09:22-0300\n"
+"POT-Creation-Date: 2018-11-01 09:04-0300\n"
+"PO-Revision-Date: 2018-11-01 09:05-0300\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -704,8 +704,8 @@ msgid "Dropbox"
 msgstr "Dropbox"
 
 #: Library/Backend/ENotariado/Strings.cs:5
-msgid "e-Notariado"
-msgstr "e-Notariado"
+msgid "e-notariado"
+msgstr "e-notariado"
 
 #: Library/Backend/ENotariado/Strings.cs:6
 msgid "The name of the backup was not recognized by the backend"
@@ -2359,20 +2359,20 @@ msgid "Response code: '{0}'. Content: '{1}'."
 msgstr "Código de resposta: '{0}'. Conteudo: '{1}'."
 
 #: Library/ENotariado/Exceptions.cs:16
-msgid "The application is not enrolled in e-Notariado"
-msgstr "A aplicação não está cadastrada no e-Notariado"
+msgid "The application is not enrolled in e-notariado"
+msgstr "A aplicação não está cadastrada no e-notariado"
 
 #: Library/ENotariado/Exceptions.cs:27
-msgid "There was an error while enrolling in e-Notariado"
-msgstr "Houve um erro ao se cadastrar no e-Notariado"
+msgid "There was an error while enrolling in e-notariado"
+msgstr "Houve um erro ao se cadastrar no e-notariado"
 
 #: Library/ENotariado/Exceptions.cs:38
-msgid "There was an error in the connection with e-Notariado"
-msgstr "Houve um erro de conexão com o e-Notariado"
+msgid "There was an error in the connection with e-notariado"
+msgstr "Houve um erro de conexão com o e-notariado"
 
 #: Library/ENotariado/Exceptions.cs:51
-msgid "The application is not verified in e-Notariado"
-msgstr "A aplicação não está verificada no e-Notariado"
+msgid "The application is not verified in e-notariado"
+msgstr "A aplicação não está verificada no e-notariado"
 
 #: Library/ENotariado/Exceptions.cs:62
 #, csharp-format
@@ -6001,81 +6001,81 @@ msgstr "Atualização encontrada"
 msgid "Invalid or missing time"
 msgstr "Tempo inválido ou ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:333
+#: Server/WebServer/RESTMethods/Backup.cs:335
 msgid "No target path supplied"
 msgstr "Nenhum caminho de destino fornecido"
 
-#: Server/WebServer/RESTMethods/Backup.cs:335
+#: Server/WebServer/RESTMethods/Backup.cs:337
 msgid "Target path is relative, please supply a fully qualified path"
 msgstr ""
 "O caminho de destino é relativo, por favor forneça um caminho totalmente "
 "qualificado"
 
-#: Server/WebServer/RESTMethods/Backup.cs:339
+#: Server/WebServer/RESTMethods/Backup.cs:341
 msgid "A file already exists at the new location"
 msgstr "Um arquivo já existe no novo local"
 
-#: Server/WebServer/RESTMethods/Backup.cs:357
-#: Server/WebServer/RESTMethods/Backup.cs:420
-#: Server/WebServer/RESTMethods/Backup.cs:518
-#: Server/WebServer/RESTMethods/Backup.cs:539
-#: Server/WebServer/RESTMethods/Backup.cs:578
+#: Server/WebServer/RESTMethods/Backup.cs:359
+#: Server/WebServer/RESTMethods/Backup.cs:422
+#: Server/WebServer/RESTMethods/Backup.cs:520
+#: Server/WebServer/RESTMethods/Backup.cs:541
+#: Server/WebServer/RESTMethods/Backup.cs:580
 msgid "Invalid or missing backup id"
 msgstr "ID de backup inválido ou ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:391
+#: Server/WebServer/RESTMethods/Backup.cs:393
 #, csharp-format
 msgid "Invalid component: {0}"
 msgstr "Componente inválido: {0}"
 
-#: Server/WebServer/RESTMethods/Backup.cs:487
+#: Server/WebServer/RESTMethods/Backup.cs:489
 #: Server/WebServer/RESTMethods/Task.cs:63
 msgid "Invalid request"
 msgstr "Solicitação inválida"
 
-#: Server/WebServer/RESTMethods/Backup.cs:499
+#: Server/WebServer/RESTMethods/Backup.cs:501
 msgid "Missing backup object"
 msgstr "Objeto de backup ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:509
+#: Server/WebServer/RESTMethods/Backup.cs:511
 #: Server/WebServer/RESTMethods/Backups.cs:178
 msgid "Data object had no backup entry"
 msgstr "Objeto de dados não tinha entrada de backup"
 
-#: Server/WebServer/RESTMethods/Backup.cs:545
+#: Server/WebServer/RESTMethods/Backup.cs:547
 #: Server/WebServer/RESTMethods/Backups.cs:210
 msgid "There already exists a backup with the name: "
 msgstr "Já existe um backup com o nome: "
 
-#: Server/WebServer/RESTMethods/Backup.cs:567
-#: Server/WebServer/RESTMethods/Backups.cs:230
+#: Server/WebServer/RESTMethods/Backup.cs:569
+#: Server/WebServer/RESTMethods/Backups.cs:231
 #, csharp-format
 msgid "Unable to parse backup or schedule object: {0}"
 msgstr "Não é possível analisar o objeto de backup ou cronograma: {0}"
 
-#: Server/WebServer/RESTMethods/Backup.cs:569
+#: Server/WebServer/RESTMethods/Backup.cs:571
 #, csharp-format
 msgid "Unable to save backup or schedule: {0}"
 msgstr "Não foi possível salvar o backup ou agendamento: {0}"
 
-#: Server/WebServer/RESTMethods/Backup.cs:590
+#: Server/WebServer/RESTMethods/Backup.cs:592
 msgid "Missing captcha"
 msgstr "Captcha ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:596
+#: Server/WebServer/RESTMethods/Backup.cs:598
 msgid "Invalid captcha"
 msgstr "Captcha inválido"
 
-#: Server/WebServer/RESTMethods/Backup.cs:676
+#: Server/WebServer/RESTMethods/Backup.cs:678
 msgid "Retrieves, updates or deletes an existing backup and schedule"
 msgstr "Recupera, atualiza ou deleta um backup e cronograma existentes"
 
-#: Server/WebServer/RESTMethods/Backups.cs:232
+#: Server/WebServer/RESTMethods/Backups.cs:233
 #, csharp-format
 msgid "Unable to save schedule or backup object: {0}"
 msgstr "Não é possível salvar o cronograma ou o objeto de backup: {0}"
 
-#: Server/WebServer/RESTMethods/Backups.cs:237
+#: Server/WebServer/RESTMethods/Backups.cs:238
 msgid "Return a list of current backups and their schedules"
 msgstr "Retorna uma lista de backups atuais e seus cronogramas"
 

@@ -13,7 +13,7 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class ENotariadoNotInitializedException : Exception
     {
-        public static readonly string ErrorMessage = LC.L(@"The application is not enrolled in e-Notariado");
+        public static readonly string ErrorMessage = LC.L(@"The application is not enrolled in e-notariado");
         public ENotariadoNotInitializedException() : base(ErrorMessage)
         {
         }
@@ -24,7 +24,7 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class FailedEnrollmentException : Exception
     {
-        public static readonly string ErrorMessage = LC.L(@"There was an error while enrolling in e-Notariado");
+        public static readonly string ErrorMessage = LC.L(@"There was an error while enrolling in e-notariado");
         public FailedEnrollmentException() : base(ErrorMessage)
         {
         }
@@ -35,7 +35,7 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class FailedRequestException : Exception
     {
-        public static readonly string ErrorMessage = LC.L(@"There was an error in the connection with e-Notariado");
+        public static readonly string ErrorMessage = LC.L(@"There was an error in the connection with e-notariado");
         public string Details;
         
         public FailedRequestException(string message) : base(ErrorMessage + " - " + message)
@@ -48,7 +48,7 @@ namespace Duplicati.Library.ENotariado
     /// </summary>
     public class ENotariadoNotVerifiedException : Exception
     {
-        public static readonly string ErrorMessage = LC.L(@"The application is not verified in e-Notariado");
+        public static readonly string ErrorMessage = LC.L(@"The application is not verified in e-notariado");
         public ENotariadoNotVerifiedException() : base(ErrorMessage)
         {
         }

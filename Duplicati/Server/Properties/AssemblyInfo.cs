@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Servidor Backup e-Notariado")]
+[assembly: AssemblyTitle("Servidor Backup e-notariado")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Duplicati Team")]
-[assembly: AssemblyProduct("Servidor Backup e-Notariado")]
+[assembly: AssemblyProduct("Servidor Backup e-notariado")]
 [assembly: AssemblyCopyright("LGPL, Copyright © Duplicati Team 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

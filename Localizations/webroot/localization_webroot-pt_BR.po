@@ -1298,8 +1298,8 @@ msgid "Load older data"
 msgstr "Abrir dados antigos"
 
 #: templates/restorewizard.html:22
-msgid "Load one of the backups stored in your e-Notariado account"
-msgstr "Restaure um dos backups armazenados na sua conta do e-Notariado"
+msgid "Load one of the backups stored in your e-notariado account"
+msgstr "Restaure um dos backups armazenados na sua conta do e-notariado"
 
 #: templates/about.html:37 templates/about.html:43 templates/captcha.html:14
 #: templates/log.html:15 templates/log.html:22 templates/log.html:45
@@ -1831,8 +1831,8 @@ msgid "Restore from backup configuration"
 msgstr "Restaurar a partir da configuração de backup"
 
 #: templates/restorewizard.html:21
-msgid "Restore from e-Notariado ..."
-msgstr "Restaurar do e-Notariado ..."
+msgid "Restore from e-notariado ..."
+msgstr "Restaurar do e-notariado ..."
 
 #: templates/restore.html:24 templates/restore.html:39
 #: templates/restore.html:76
@@ -2706,8 +2706,8 @@ msgid "custom"
 msgstr "personalizado"
 
 #: index.html:215 templates/enotariado.html:2
-msgid "e-Notariado"
-msgstr "e-Notariado"
+msgid "e-notariado"
+msgstr "e-notariado"
 
 #: templates/about.html:41
 msgid "is using the following third party libraries:"
@@ -2753,6 +2753,9 @@ msgstr "{{number}} Minutos"
 #: templates/home.html:58
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#~ msgid "e-Notariado"
+#~ msgstr "e-Notariado"
 
 #~ msgid "Check for updates now"
 #~ msgstr "Buscar atualizações"
@@ -3040,9 +3043,6 @@ msgstr "{{time}} (took {{duration}})"
 
 #~ msgid "Your passphrase is easy to guess. Consider changing passphrase."
 #~ msgstr "Sua senha é fácil de adivinhar. Considere alterá-la."
-
-#~ msgid "e-notariado"
-#~ msgstr "e-Notariado"
 
 #, fuzzy
 #~| msgid ""

@@ -7,13 +7,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.duplicati.Duplicati</string>
+	<string>br.org.e-notariado.backup</string>
 	<key>CFBundleDisplayName</key>
-	<string>Backup e-Notariado</string>
+	<string>Backup e-notariado</string>
 	<key>CFBundleName</key>
-	<string>Backup e-Notariado</string>
+	<string>Backup e-notariado</string>
 	<key>CFBundleExecutable</key>
-	<string>Backup e-Notariado</string>
+	<string>Backup e-notariado</string>
 	<key>CFBundleIconFile</key>
 	<string>Duplicati.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>

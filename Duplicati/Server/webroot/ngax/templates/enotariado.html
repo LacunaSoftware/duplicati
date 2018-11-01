@@ -1,8 +1,8 @@
 <div class="settings" ng-controller="SystemSettingsController">
-    <h1 translate>e-Notariado</h1>
+    <h1 translate>e-notariado</h1>
 
     <form class="styled">
-        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled">A aplicação falhou em se comunicar com os servidores do e-Notariado, tente novamente mais tarde.</h4>
+        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled">A aplicação falhou em se comunicar com os servidores do e-notariado, tente novamente mais tarde.</h4>
         <div ng-hide="!eNotariado.isEnrolled || eNotariado.isVerified">
             <h4 class="ui-state-error-text">A aplicação não está cadastrada no Portal E-Notariado Backup.</h4>
             <p>Leia a seção "Como cadastro a aplicação?" abaixo e siga os passos descritos</p>
@@ -23,7 +23,7 @@
             <i ng-show="enrollSettings" class="fa fa-arrow-up"></i>
         </div>
         <div ng-show="enrollSettings" class="input checkbox">
-            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Reiniciar identificação com e-Notariado'}}" ng-click="eNotariadoReset()" />
+            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Reiniciar identificação com e-notariado'}}" ng-click="eNotariadoReset()" />
         </div>
 
         <div>
@@ -31,7 +31,7 @@
             <h3>Como cadastro a aplicação?</h3>
             <div class="sublabel">
                 É necessário um cadastro manual da aplicação nesta máquina para verificar que a mesma
-                está autorizada a usar o serviço Backup e-Notariado. Para cadastrar sua aplicação, execute os seguintes passos:
+                está autorizada a usar o serviço Backup e-notariado. Para cadastrar sua aplicação, execute os seguintes passos:
 
                 <ul style="list-style: disc inside">
                     <li>Copie o código acima, você pode selecionar todo o texto e copiar ou simplesmente clicar no ícone a direita</li>
@@ -43,13 +43,13 @@
                 </ul>
             </div>
 
-            <h3>O que fazer quando a aplicação não mostra a mensagem que está configurada corretamente e falha em se comunicar com o e-Notariado?</h3>
+            <h3>O que fazer quando a aplicação não mostra a mensagem que está configurada corretamente e falha em se comunicar com o e-notariado?</h3>
             <div class="sublabel">
-                A aplicação se comunica automaticamente com os servidores do e-Notariado ao ser instalada.
+                A aplicação se comunica automaticamente com os servidores do e-notariado ao ser instalada.
                 Caso acima não mostre a mensagem "A aplicação está configurada corretamente" e uma mensagem
                 de erro sobre falha de comunicação apareça, houve algum problema nessa comunicação e será
                 necessário refazê-la manualmente. Para isso clique em:<br><br> "Opção Avançada" >
-                "Reiniciar identificação com e-Notariado"
+                "Reiniciar identificação com e-notariado"
             </div>
         </div>
     </form>
