@@ -65,7 +65,7 @@
                 FirstFailureActionType='restart'
                 SecondFailureActionType='restart'
                 ThirdFailureActionType='restart'
-                RestartServiceDelayInSeconds='60'
+                RestartServiceDelayInSeconds='1'
                 ResetPeriodInDays='1'/>
             </ServiceInstall>
             <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="BackupENotariado" Wait="yes" />

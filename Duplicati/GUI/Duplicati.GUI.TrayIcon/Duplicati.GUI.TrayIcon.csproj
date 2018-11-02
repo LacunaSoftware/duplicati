@@ -248,10 +248,6 @@
       <Project>{4A010589-76E6-4F05-A5C4-4598D5DF11F8}</Project>
       <Name>Duplicati.CommandLine.RecoveryTool</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WindowsServiceManager\WindowsServiceManager.csproj">
-      <Project>{27d5e8f0-a3fd-47fd-9b9d-1ac4931dc3db}</Project>
-      <Name>WindowsServiceManager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WindowsService\WindowsService.csproj">
       <Project>{bef7af9a-3978-4f90-8592-198bf6ea6c6b}</Project>
       <Name>WindowsService</Name>
