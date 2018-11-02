@@ -1,4 +1,4 @@
-backupApp.controller('HomeController', function ($scope, $location, ServerStatus, BackupList, AppService, DialogService, gettextCatalog) {
+backupApp.controller('HomeController', function ($scope, $location, ServerStatus, BackupList, AppService, AppUtils, DialogService, gettextCatalog) {
     $scope.backups = BackupList.watch($scope);
 
     $scope.doRun = function(id) {
@@ -57,25 +57,6 @@ backupApp.controller('HomeController', function ($scope, $location, ServerStatus
         AppService.post('/backup/' + id + '/createreport');
     };
 
-    $scope.formatDuration = function(duration) {
-        // parse days if timespan is over 24 hours long
-        var days = 0;
-        if (duration != null && duration.indexOf(".") < 7) {
-            days = duration.substring(0, duration.indexOf("."));
-            duration = duration.substring(duration.indexOf(".")+1, duration.length);
-        }
-
-        // strip miliseconds
-        if (duration != null && duration.indexOf(".") > 0)
-            duration = duration.substring(0, duration.indexOf("."));
-
-        // prefix the days if applicable
-        if (days != 0)
-            return days + ":" + duration;
-        else
-            return duration;
-    };
-
     $scope.BackendProgressPercentage = function() {
         if ($scope.state && $scope.state.lastPgEvent && $scope.state.lastPgEvent.BackendFileProgress && $scope.state.lastPgEvent.BackendFileSize) {
             var fileSize = $scope.state.lastPgEvent.BackendFileSize;
@@ -91,4 +72,6 @@ backupApp.controller('HomeController', function ($scope, $location, ServerStatus
         }
         return 0;
     }
+
+    $scope.formatDuration = AppUtils.formatDuration;
 });
