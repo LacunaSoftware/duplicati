@@ -14,7 +14,7 @@
         </div>
 
         <div>&nbsp;</div>
-        <div>A versão atual do módulo agente é Backup e-notariado {{version}}</div>
+        <div>A versão atual do módulo agente é Backup e-notariado {{sysinfo.ServerVersionName || 'unknown'}}</div>
 
         <div ng-show="state.updatedVersion != null &amp;&amp; !state.updateReady &amp;&amp; state.updaterState == 'Waiting'">
             Uma atualização para <a href ng-click="doShowUpdateChangelog()">{{state.updatedVersion}}</a> está disponível, <a href ng-click="doStartUpdateDownload()">faça o download agora</a>
