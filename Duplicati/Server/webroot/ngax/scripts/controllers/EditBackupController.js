@@ -159,6 +159,11 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
         if (!AppUtils.parse_extra_options(scope.ExtendedOptions, opts))
             return false;
 
+        // defaults new backups to have a blocksize of 1MB
+        if ((opts['--blocksize'] || '').length == 0) {
+            opts['--blocksize'] = '1MB';
+        }
+
         for (var n in $scope.servermodulesettings)
             opts['--' + n] = $scope.servermodulesettings[n];
 
