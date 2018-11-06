@@ -92,7 +92,7 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Enrolls in the eNotariado server with a predefined certificate
+        /// Enrolls in the e-notariado server with a predefined certificate
         /// </summary>
         public static async Task<Guid> Enroll(X509Certificate2 cert)
         {
@@ -124,7 +124,7 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Asks the eNotariado server if this application's enrollment has already been verified
+        /// Asks the e-notariado server if this application's enrollment has already been verified
         /// </summary>
         public static async Task<Guid> CheckVerifiedStatus()
         {
@@ -161,7 +161,7 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Asks the eNotariado server for a SAS token to access Azure
+        /// Asks the e-notariado server for a SAS token to access Azure
         /// </summary>
         public static async Task<string> GetSASToken()
         {
@@ -178,7 +178,7 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Asks the eNotariado server for the password to encrypt the backups
+        /// Asks the e-notariado server for the password to encrypt the backups
         /// </summary>
         public static async Task<string> GetBackupPassword()
         {
@@ -306,7 +306,7 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Authentication flow in eNotariado servers
+        /// Authentication flow in e-notariado servers
         /// </summary>
         private static async Task GetApplicationAuthToken()
         {

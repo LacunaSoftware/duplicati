@@ -9,7 +9,7 @@ namespace Duplicati.Library.ENotariado
 {
     /// <summary>
     /// Exception thrown when the data (certificate thumbprint and
-    /// application id) about eNotariado has not been initialized yet.
+    /// application id) about e-notariado has not been initialized yet.
     /// </summary>
     public class ENotariadoNotInitializedException : Exception
     {
@@ -20,7 +20,7 @@ namespace Duplicati.Library.ENotariado
     }
 
     /// <summary>
-    /// Exception thrown when the enrollment to eNotariado servers fails
+    /// Exception thrown when the enrollment to e-notariado servers fails
     /// </summary>
     public class FailedEnrollmentException : Exception
     {
@@ -31,7 +31,7 @@ namespace Duplicati.Library.ENotariado
     }
 
     /// <summary>
-    /// Exception thrown when a request to eNotariado servers fail
+    /// Exception thrown when a request to e-notariado servers fail
     /// </summary>
     public class FailedRequestException : Exception
     {

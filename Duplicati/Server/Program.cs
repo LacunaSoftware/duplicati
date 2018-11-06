@@ -731,7 +731,7 @@ namespace Duplicati.Server
         }
 
         /// <summary>
-        /// Initializes settings regarding eNotariado
+        /// Initializes settings regarding e-notariado
         /// </summary>
         public static async Task<ENotariadoStatus> InitializeENotariado()
         {
@@ -824,7 +824,7 @@ namespace Duplicati.Server
         }
         
         /// <summary>
-        /// Resets settings regarding eNotariado
+        /// Resets settings regarding e-notariado
         /// </summary>
         public static async Task<ENotariadoStatus> ResetENotariado()
         {
