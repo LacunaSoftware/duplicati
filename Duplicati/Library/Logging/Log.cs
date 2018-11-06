@@ -47,6 +47,10 @@ namespace Duplicati.Library.Logging
         /// <summary>
         /// The message is informative but does not indicate problems
         /// </summary>
+        /// TODO: This is used only to report backup/restore times
+        /// Change later to a proper solution
+        Backup,
+        Restore,
         Information,
         /// <summary>
         /// The message is from dry-run output
@@ -287,6 +291,32 @@ namespace Duplicati.Library.Logging
         public static void WriteWarningMessage(string tag, string id, Exception ex, string message, params object[] arguments)
         {
             WriteMessage(LogMessageType.Warning, tag, id, ex, message, arguments);
+        }
+
+        /// <summary>
+        /// Writes a backup message to the current log destination
+        /// </summary>
+        /// <param name="message">The message to write</param>
+        /// <param name="tag">The tag-type for this message</param>
+        /// <param name="id">The message id</param>
+        /// <param name="ex">The exception to attach</param>
+        /// <param name="arguments">The message format arguments</param>
+        public static void WriteBackupMessage(string tag, string id, string message, params object[] arguments)
+        {
+            WriteMessage(LogMessageType.Backup, tag, id, null, message, arguments);
+        }
+
+        /// <summary>
+        /// Writes a restore message to the current log destination
+        /// </summary>
+        /// <param name="message">The message to write</param>
+        /// <param name="tag">The tag-type for this message</param>
+        /// <param name="id">The message id</param>
+        /// <param name="ex">The exception to attach</param>
+        /// <param name="arguments">The message format arguments</param>
+        public static void WriteRestoreMessage(string tag, string id, string message, params object[] arguments)
+        {
+            WriteMessage(LogMessageType.Restore, tag, id, null, message, arguments);
         }
 
         /// <summary>

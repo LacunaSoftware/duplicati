@@ -107,7 +107,10 @@ namespace Duplicati.Library.Main
 
         public Duplicati.Library.Interface.IBackupResults Backup(string[] inputsources, IFilter filter = null)
         {
+            Logging.Log.WriteBackupMessage("Backup", "BACKUP_START", "Backup started");
+
             return RunAction(new BackupResults(), ref inputsources, ref filter, (result) => {
+
                 using (var h = new Operation.BackupHandler(m_backend, m_options, result))
                     h.Run(ExpandInputSources(inputsources, filter), filter);
             });
@@ -115,6 +118,8 @@ namespace Duplicati.Library.Main
 
         public Library.Interface.IRestoreResults Restore(string[] paths, Library.Utility.IFilter filter = null)
         {
+            Logging.Log.WriteRestoreMessage("Restore", "RESTORE_START", "Restore started");
+
             return RunAction(new RestoreResults(), ref paths, ref filter, (result) => {
                 new Operation.RestoreHandler(m_backend, m_options, result).Run(paths, filter);
             });
