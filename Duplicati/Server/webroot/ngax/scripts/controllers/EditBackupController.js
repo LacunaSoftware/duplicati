@@ -443,7 +443,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
         $scope.servermodulesettings = {};
         AppUtils.extractServerModuleOptions($scope.ExtendedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedLocalCommands');
 
-        $scope.showAdvanced = $scope.ExtendedOptions.length > 0;
+        $scope.showAdvanced = false;
 
         var now = new Date();
         if ($scope.Schedule != null) {
