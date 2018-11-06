@@ -1,3 +1,16 @@
+2018-11-06 - 1.0.6_stable_2018-11-06
+==========
+- Altera título do ícone de bandeja para 'Backup e-notariado'
+- Altera cor padrão do ícone de bandeja de preto para verde claro
+- Corrige erros em traduções e sentenças com caracteres especiais
+- Caso o Módulo Agente seja configurado para tornar possível o acesso remoto, usuários remotos não podem mais alterar configurações sobre acesso a interface de usuário, como senha e endereços permitidos, por exemplo, nem atualizar o programa. Tais operações só podem ser executadas na máquina em que o Módulo Agente está instalado.
+- Torna possível atualizar a versão do Módulo Agente sem que seja necessário reiniciar a máquina
+- Ao alterar ou adicionar uma senha de acesso à interface, será necessário inserí-la duas vezes de modo a confirmá-la
+- Adiciona e melhora logs para facilitar o suporte no Módulo de Gerenciamento
+- Permite configurar opções avançadas nos backups
+- A aplicação não abre mais o navegador automaticamente exceto após instalação
+- Altera tamanho padrão dos blocos usados no processamento
+
 2018-10-25 - 1.0.5_stable_2018-10-25
 ==========
 - Limita a quantidade de logs armazenados no Módulo Gerenciador
