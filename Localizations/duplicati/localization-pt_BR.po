@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-01 09:04-0300\n"
-"PO-Revision-Date: 2018-11-01 09:05-0300\n"
+"POT-Creation-Date: 2018-11-07 19:36-0200\n"
+"PO-Revision-Date: 2018-11-07 19:37-0200\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -713,11 +713,11 @@ msgstr "O nome do backup não foi reconhecido pelo backend"
 
 #: Library/Backend/ENotariado/Strings.cs:7
 msgid ""
-"This backend can read and write data to Azure blob storage using the "
-"eNotariado system.  Allowed formats are: \"enotariado://containername\""
+"This backend can read and write data to Azure blob storage using the e-"
+"notariado system.  Allowed formats are: \"enotariado://containername\""
 msgstr ""
 "Este backend pode ler e gravar dados em blobs de armazenamento do Azure. Os "
-"formatos permitidos são: \"enotariado://bucketname\""
+"formatos permitidos são: \"enotariado://nomedocontainer\""
 
 #: Library/Backend/File/Strings.cs:4
 #, csharp-format
@@ -2574,12 +2574,12 @@ msgstr ""
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr "A listagem indica que o arquivo {0} foi excluído corretamente"
 
-#: Library/Main/Controller.cs:332
+#: Library/Main/Controller.cs:337
 #, csharp-format
 msgid "No email specified, please use --{0}"
 msgstr "Nenhum e-mail especificado, por favor use --{0}"
 
-#: Library/Main/Controller.cs:434
+#: Library/Main/Controller.cs:439
 msgid "Operation aborted by request"
 msgstr "A operação foi abortada por solicitação"
 
@@ -2808,14 +2808,14 @@ msgstr "Iria carregar o arquivo de verificação: {0}, tamanho: {1}"
 #: Library/Main/Operation/FilelistProcessor.cs:242
 #, csharp-format
 msgid "Backend quota has been exceeded: Using {0} of {1} ({2} available)"
-msgstr "Cota do e-Notariado foi excedida: Usando {0} de {1}({2} disponível)"
+msgstr "Cota do e-notariado foi excedida: Usando {0} de {1}({2} disponível)"
 
 #: Library/Main/Operation/FilelistProcessor.cs:251
 #, csharp-format
 msgid ""
 "Backend quota is close to being exceeded: Using {0} of {1} ({2} available)"
 msgstr ""
-"Cota do e-Notariado está perto de ser excedida: Usando {0} de {1}({2} "
+"Cota do e-notariado está perto de ser excedida: Usando {0} de {1}({2} "
 "disponível)"
 
 #: Library/Main/Operation/FilelistProcessor.cs:271
@@ -6128,7 +6128,7 @@ msgstr "Nenhuma chave de tarefa encontrada"
 #: Server/WebServer/RESTMethods/ENotariado.cs:60
 #: Server/WebServer/RESTMethods/ServerState.cs:81
 #: Server/WebServer/RESTMethods/SystemInfo.cs:59
-#: Server/WebServer/RESTMethods/Updates.cs:66
+#: Server/WebServer/RESTMethods/Updates.cs:57
 msgid "No such action"
 msgstr "Ação inexistente"
 
@@ -6215,6 +6215,18 @@ msgstr "Não é possível analisar o objeto de configurações: {0}"
 #: Server/WebServer/RESTMethods/UISettings.cs:65
 msgid "Unable to parse settings object"
 msgstr "Não é possível analisar o objeto de configurações"
+
+#~ msgid "Open"
+#~ msgstr "Abrir"
+
+#~ msgid "Pause"
+#~ msgstr "Pausar"
+
+#~ msgid "Quit"
+#~ msgstr "Sair"
+
+#~ msgid "Resume"
+#~ msgstr "Resumir"
 
 #~ msgid "The application is not enrolled. An unexpected error happened"
 #~ msgstr "A aplicação não está cadastrada. Houve um erro inesperado"

@@ -141,12 +141,12 @@ namespace Duplicati.GUI.TrayIcon
 
         protected IEnumerable<IMenuItem> BuildMenu() 
         {
-            var tmp = CreateMenuItem("Open", MenuIcons.Status, OnStatusClicked, null);
+            var tmp = CreateMenuItem("Abrir", MenuIcons.Status, OnStatusClicked, null);
             tmp.Default = true;
             return new IMenuItem[] {
                 tmp,
-                m_pauseMenu = CreateMenuItem("Pause", MenuIcons.Pause, OnPauseClicked, null ),
-                CreateMenuItem("Quit", MenuIcons.Quit, OnQuitClicked, null),
+                m_pauseMenu = CreateMenuItem("Pausar", MenuIcons.Pause, OnPauseClicked, null ),
+                CreateMenuItem("Sair", MenuIcons.Quit, OnQuitClicked, null),
             };
         }
         
@@ -208,13 +208,13 @@ namespace Duplicati.GUI.TrayIcon
                 if (status.ProgramState == LiveControlState.Running)
                 {
                     m_pauseMenu.Icon = MenuIcons.Pause;
-                    m_pauseMenu.Text = "Pause";
+                    m_pauseMenu.Text = "Pausar";
                     m_stateIsPaused = false;
                 }
                 else
                 {
                     m_pauseMenu.Icon = MenuIcons.Resume;
-                    m_pauseMenu.Text = "Resume";
+                    m_pauseMenu.Text = "Resumir";
                     m_stateIsPaused = true;
                 }
             });

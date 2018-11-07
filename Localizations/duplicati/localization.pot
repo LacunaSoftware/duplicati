@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-01 09:04-0300\n"
+"POT-Creation-Date: 2018-11-07 19:36-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -614,8 +614,8 @@ msgstr ""
 
 #: Library/Backend/ENotariado/Strings.cs:7
 msgid ""
-"This backend can read and write data to Azure blob storage using the "
-"eNotariado system.  Allowed formats are: \"enotariado://containername\""
+"This backend can read and write data to Azure blob storage using the e-"
+"notariado system.  Allowed formats are: \"enotariado://containername\""
 msgstr ""
 
 #: Library/Backend/File/Strings.cs:4
@@ -2177,12 +2177,12 @@ msgstr ""
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr ""
 
-#: Library/Main/Controller.cs:332
+#: Library/Main/Controller.cs:337
 #, csharp-format
 msgid "No email specified, please use --{0}"
 msgstr ""
 
-#: Library/Main/Controller.cs:434
+#: Library/Main/Controller.cs:439
 msgid "Operation aborted by request"
 msgstr ""
 
@@ -5076,7 +5076,7 @@ msgstr ""
 #: Server/WebServer/RESTMethods/ENotariado.cs:60
 #: Server/WebServer/RESTMethods/ServerState.cs:81
 #: Server/WebServer/RESTMethods/SystemInfo.cs:59
-#: Server/WebServer/RESTMethods/Updates.cs:66
+#: Server/WebServer/RESTMethods/Updates.cs:57
 msgid "No such action"
 msgstr ""
 
