@@ -38,7 +38,7 @@ namespace Duplicati.Library.Main.Operation
         {
             var tmp = VolumeBase.ParseFilename(filename);
             if (tmp == null)
-                throw new UserInformationException(string.Format("Unable to parse filename to valid entry: {0}", filename), "FailedToParseRemoteName");
+                throw new UserInformationException(Strings.RestoreHandler.FailedToParseRemoteName(filename), "FailedToParseRemoteName");
 
             return tmp.CompressionModule;
         }
@@ -46,7 +46,7 @@ namespace Duplicati.Library.Main.Operation
         public static RecreateDatabaseHandler.NumberedFilterFilelistDelegate FilterNumberedFilelist(DateTime time, long[] versions, bool singleTimeMatch = false)
         {
             if (time.Kind == DateTimeKind.Unspecified)
-                throw new Exception("Unspecified datetime instance, must be either local or UTC");
+                throw new Exception(Strings.RestoreHandler.UnspecifiedDateTimeInstance);
 
             // Make sure the resolution is the same (i.e. no milliseconds)
             if (time.Ticks > 0)
@@ -164,7 +164,7 @@ namespace Duplicati.Library.Main.Operation
                             var folderpath = m_systemIO.PathGetDirectoryName(targetpath);
                             if (!options.Dryrun && !m_systemIO.DirectoryExists(folderpath))
                             {
-                                Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, "Creating missing folder {0} for  file {1}", folderpath, targetpath);
+                                Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, Strings.RestoreHandler.CreatingMissingFolder(folderpath, targetpath));
                                 m_systemIO.DirectoryCreate(folderpath);
                             }
                             
@@ -185,7 +185,7 @@ namespace Duplicati.Library.Main.Operation
                                             if (targetblock.Key == key)
                                                 valid = true;
                                             else
-                                                Logging.Log.WriteWarningMessage(LOGTAG, "InvalidBlock", null, "Invalid block detected for {0}, expected hash: {1}, actual hash: {2}", targetpath, targetblock.Key, key);
+                                                Logging.Log.WriteWarningMessage(LOGTAG, "InvalidBlock", null, Strings.RestoreHandler.InvalidBlockDetected(targetpath, targetblock.Key, key));
                                         }
 
                                         if (valid)
@@ -196,7 +196,7 @@ namespace Duplicati.Library.Main.Operation
                                     } 
                                     else
                                     {
-                                        Logging.Log.WriteWarningMessage(LOGTAG, "WrongBlockSize", null, "Block with hash {0} should have size {1} but has size {2}", targetblock.Key, targetblock.Size, size);
+                                        Logging.Log.WriteWarningMessage(LOGTAG, "WrongBlockSize", null, Strings.RestoreHandler.WrongBlockSize(targetblock.Key, targetblock.Size, size));
                                     }
                                 }
                             
@@ -205,7 +205,7 @@ namespace Duplicati.Library.Main.Operation
                         }
                         catch (Exception ex)
                         {
-                            Logging.Log.WriteWarningMessage(LOGTAG, "PatchFailed", ex, "Failed to patch file: \"{0}\", message: {1}, message: {1}", targetpath, ex.Message);
+                            Logging.Log.WriteWarningMessage(LOGTAG, "PatchFailed", ex, Strings.RestoreHandler.FailedToPatchFile(targetpath, ex.Message));
                             if (options.UnittestMode)
                                 throw;
                         }
@@ -242,7 +242,7 @@ namespace Duplicati.Library.Main.Operation
                         }
                         catch (Exception ex)
                         {
-                            Logging.Log.WriteWarningMessage(LOGTAG, "MetatdataRecordFailed", ex, "Failed to record metadata for file: \"{0}\", message: {1}", targetpath, ex.Message);
+                            Logging.Log.WriteWarningMessage(LOGTAG, "MetadataRecordFailed", ex, Strings.RestoreHandler.MetadataRecordFailed(targetpath, ex.Message));
                             if (options.UnittestMode)
                                 throw;
                         }
@@ -271,7 +271,7 @@ namespace Duplicati.Library.Main.Operation
                         var folderpath = Duplicati.Library.Utility.Utility.GetParent(targetpath, false);
                         if (!options.Dryrun && !m_systemIO.DirectoryExists(folderpath))
                         {
-                            Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, "Creating missing folder {0} for target {1}", folderpath, targetpath);
+                            Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, Strings.RestoreHandler.CreatingMissingFolder(folderpath, targetpath));
                             m_systemIO.DirectoryCreate(folderpath);
                         }
 
@@ -279,7 +279,7 @@ namespace Duplicati.Library.Main.Operation
                     }
                     catch (Exception ex)
                     {
-                        Logging.Log.WriteWarningMessage(LOGTAG, "MetadataWriteFailed", ex, "Failed to apply metadata to file: \"{0}\", message: {1}", targetpath, ex.Message);
+                        Logging.Log.WriteWarningMessage(LOGTAG, "MetadataWriteFailed", ex, Strings.RestoreHandler.MetadataRecordFailed(targetpath, ex.Message));
                         if (options.UnittestMode)
                             throw;
                     }
@@ -389,7 +389,7 @@ namespace Duplicati.Library.Main.Operation
                     catch (Exception ex)
                     {
                         brokenFiles.Add(blockvolume.Name);
-                        Logging.Log.WriteErrorMessage(LOGTAG, "PatchingFailed", ex, "Failed to patch with remote file: \"{0}\", message: {1}", blockvolume.Name, ex.Message);
+                        Logging.Log.WriteErrorMessage(LOGTAG, "PatchingFailed", ex, Strings.RestoreHandler.FailedToPatchRemoteFile(blockvolume.Name, ex.Message));
                         if (ex is System.Threading.ThreadAbortException)
                             throw;
                     }
@@ -444,7 +444,7 @@ namespace Duplicati.Library.Main.Operation
                                 }
     
                                 if (key != file.Hash)
-                                    throw new Exception(string.Format("Failed to restore file: \"{0}\". File hash is {1}, expected hash is {2}", file.Path, key, file.Hash));
+                                    throw new Exception(Strings.RestoreHandler.FailedToRestoreFile(file.Path, key, file.Hash));
                                 result.FilesRestored++;
                                 result.SizeOfRestoredFiles += size;
                             }
@@ -463,7 +463,7 @@ namespace Duplicati.Library.Main.Operation
                 else if (fileErrors > 0)
                     Logging.Log.WriteInformationMessage(LOGTAG, "RestoreFailures", "Failed to restore {0} files", fileErrors);
                 else if (result.FilesRestored == 0)
-                    Logging.Log.WriteWarningMessage(LOGTAG, "NoFilesRestored", null, "Restore completed without errors but no files were restored");
+                    Logging.Log.WriteWarningMessage(LOGTAG, "NoFilesRestored", null, Strings.RestoreHandler.NoFilesRestored);
 
                 // Drop the temp tables
                 database.DropRestoreTable();
@@ -548,7 +548,7 @@ namespace Duplicati.Library.Main.Operation
                             var folderpath = m_systemIO.PathGetDirectoryName(targetpath);
                             if (!options.Dryrun && !m_systemIO.DirectoryExists(folderpath))
                             {
-                                Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, "Creating missing folder {0} for  file {1}", folderpath, targetpath);
+                                Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, Strings.RestoreHandler.CreatingMissingFolder(folderpath, targetpath));
                                 m_systemIO.DirectoryCreate(folderpath);
                             }
                         
@@ -591,7 +591,7 @@ namespace Duplicati.Library.Main.Operation
                                 }
                                 catch (Exception ex)
                                 {
-                                    Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, "Failed to patch file: \"{0}\" with data from local file \"{1}\", message: {2}", targetpath, sourcepath, ex.Message);
+                                    Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, Strings.RestoreHandler.FailedToPatchWithLocalFile(targetpath, sourcepath, ex.Message));
                                     if (ex is System.Threading.ThreadAbortException)
                                         throw;
                                 }
@@ -612,7 +612,7 @@ namespace Duplicati.Library.Main.Operation
                     }
                     catch (Exception ex)
                     {
-                        Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, "Failed to patch file: \"{0}\" with local data, message: {1}", targetpath, ex.Message);
+                        Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, Strings.RestoreHandler.FailedToPatchWithLocalData(targetpath, ex.Message));
                         if (ex is System.Threading.ThreadAbortException)
                             throw;
                         if (options.UnittestMode)
@@ -652,7 +652,7 @@ namespace Duplicati.Library.Main.Operation
                         var folderpath = m_systemIO.PathGetDirectoryName(targetpath);
                         if (!options.Dryrun && !m_systemIO.DirectoryExists(folderpath))
                         {
-                            Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, "Creating missing folder {0} for  file {1}", folderpath, targetpath);
+                            Logging.Log.WriteWarningMessage(LOGTAG, "CreateMissingFolder", null, Strings.RestoreHandler.CreatingMissingFolder(folderpath, targetpath));
                             m_systemIO.DirectoryCreate(folderpath);
                         }
                     
@@ -708,7 +708,7 @@ namespace Duplicati.Library.Main.Operation
                                     }
                                     catch (Exception ex)
                                     {
-                                        Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, "Failed to patch file: \"{0}\" with data from local file \"{1}\", message: {2}", targetpath, source.Path, ex.Message);
+                                        Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, Strings.RestoreHandler.FailedToPatchWithLocalFile(targetpath, sourcepath, ex.Message));
                                         if (ex is System.Threading.ThreadAbortException)
                                             throw;
                                     }
@@ -720,7 +720,7 @@ namespace Duplicati.Library.Main.Operation
                     }
                     catch (Exception ex)
                     {
-                        Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, "Failed to patch file: \"{0}\" with local data, message: {1}", targetpath, ex.Message);
+                        Logging.Log.WriteWarningMessage(LOGTAG, "PatchingFileLocalFailed", ex, Strings.RestoreHandler.FailedToPatchWithLocalData(targetpath, ex.Message));
                         if (options.UnittestMode)
                             throw;
                     }
@@ -810,7 +810,7 @@ namespace Duplicati.Library.Main.Operation
                 }
                 catch (Exception ex)
                 {
-                    Logging.Log.WriteWarningMessage(LOGTAG, "FolderCreateFailed", ex, "Failed to create folder: \"{0}\", message: {1}", folder, ex.Message);
+                    Logging.Log.WriteWarningMessage(LOGTAG, "FolderCreateFailed", ex, Strings.RestoreHandler.FailedToCreateFolder(folder, ex.Message));
                     if (options.UnittestMode)
                         throw;
                 }
@@ -957,7 +957,7 @@ namespace Duplicati.Library.Main.Operation
                         }
                         catch (Exception ex)
                         {
-                            Logging.Log.WriteWarningMessage(LOGTAG, "TargetFileReadError", ex, "Failed to read target file: \"{0}\", message: {1}", targetpath, ex.Message);
+                            Logging.Log.WriteWarningMessage(LOGTAG, "TargetFileReadError", ex, Strings.RestoreHandler.FailedToReadTargetFile(targetpath, ex.Message));
                             if (ex is System.Threading.ThreadAbortException)
                                 throw;
                             if (options.UnittestMode)
@@ -1004,7 +1004,7 @@ namespace Duplicati.Library.Main.Operation
                             }
                             catch(Exception ex)
                             {
-                                Logging.Log.WriteWarningMessage(LOGTAG, "FailedToReadRestoreTarget", ex, "Failed to read candidate restore target {0}", tr);
+                                Logging.Log.WriteWarningMessage(LOGTAG, "FailedToReadRestoreTarget", ex, Strings.RestoreHandler.FailedToReadRestoreTarget(tr));
                                 if (options.UnittestMode)
                                     throw;
                             }

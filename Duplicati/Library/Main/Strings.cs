@@ -284,5 +284,24 @@ namespace Duplicati.Library.Main.Strings
         public static string PassphraseChangeUnsupported { get { return LC.L(@"The passphrase cannot be changed for an existing backup"); } }
         public static string SnapshotFailedError(string message) { return LC.L(@"Failed to create a snapshot: {0}", message); }
     }
+    internal static class RestoreHandler
+    {
+        public static string FailedToParseRemoteName(string filename) { return LC.L(@"Unable to parse filename to valid entry: {0}", filename); }
+        public static string UnspecifiedDateTimeInstance { get { return LC.L(@"Unspecified datetime instance, must be either local or UTC"); } }
+        public static string CreatingMissingFolder(string folderpath, string targetpath) { return LC.L(@"Creating missing folder {0} for file {1}", folderpath, targetpath); }
+        public static string InvalidBlockDetected(string path, string expected, string actual) { return LC.L(@"Invalid block detected for {0}, expected hash: {1}, actual hash: {2}", path, expected, actual); }
+        public static string WrongBlockSize(string hash, long size1, long size2) { return LC.L(@"Block with hash {0} should have size {1} but has size {2}", hash, size1, size2); }
+        public static string FailedToPatchFile(string path, string message) { return LC.L(@"Failed to patch file: ""{0}"", message: {1}", path, message); }
+        public static string FailedToPatchRemoteFile(string path, string message) { return LC.L(@"Failed to patch with remote file: ""{0}"", message: {1}", path, message); }
+        public static string FailedToPatchWithLocalFile(string path, string local, string message) { return LC.L(@"Failed to patch file: ""{0}"" with data from local file ""{1}"", message: {2}", path, local, message); }
+        public static string FailedToPatchWithLocalData(string path, string message) { return LC.L(@"Failed to patch file: ""{0}"" with local data, message: {1}", path, message); }
+        public static string FailedToRestoreFile(string path, string actualHash, string expectedHash) { return LC.L(@"Failed to restore file: ""{0}"". File hash is {1}, expected hash is {2}", path, actualHash, expectedHash); }
+        public static string FailedToCreateFolder(string path, string message) { return LC.L(@"Failed to create folder ""{0}"", message: {1}", path, message); }
+        public static string FailedToReadTargetFile(string path, string message) { return LC.L(@"Failed to read target file ""{0}"", message: {1}", path, message); }
+        public static string FailedToReadRestoreTarget(string tr) { return LC.L(@"Failed to read candidate restore target {0}", tr); }
+        public static string MetadataRecordFailed(string path, string message) { return LC.L(@"Failed to record metadata for file: ""{0}"", message: {1}", path, message); }
+        public static string NoFilesRestored { get { return LC.L(@"Restore completed without errors but no files were restored"); } }
+
+    }
 
 }
