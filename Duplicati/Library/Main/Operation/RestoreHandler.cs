@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Duplicati.Library.Interface;
+using Duplicati.Library.Localization.Short;
 using Duplicati.Library.Main.Database;
 using Duplicati.Library.Main.Volumes;
 
@@ -468,6 +469,8 @@ namespace Duplicati.Library.Main.Operation
                     Logging.Log.WriteInformationMessage(LOGTAG, "RestoreFailures", "Failed to restore {0} files, additionally the following files failed to download, which may be the cause:{1}{2}", fileErrors, Environment.NewLine, string.Join(Environment.NewLine, brokenFiles));
                 else if (fileErrors > 0)
                     Logging.Log.WriteInformationMessage(LOGTAG, "RestoreFailures", "Failed to restore {0} files", fileErrors);
+                else if (result.FilesRestored == 0)
+                    Logging.Log.WriteWarningMessage(LOGTAG, "NoFilesRestored", null, LC.L(@"Restore completed without errors but no files were restored"));
 
                 // Drop the temp tables
                 database.DropRestoreTable();
