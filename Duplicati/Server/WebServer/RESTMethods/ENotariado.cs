@@ -23,6 +23,47 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     info.BodyWriter.OutputOK(new { Password = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult() });
                     return;
 
+                case "app-enrollment":
+                    var query = info.Request.QueryString;
+                    var force = false;
+                    var body1x1 = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=");
+                    var body2x2 = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAVSURBVBhXY/z//z8DAwMTEDMwMAAAJAYDAbrboo8AAAAASUVORK5CYII=");
+                    byte[] body = null;
+
+                    if (!query.Contains("id") || !query.Contains("ticket"))
+                    {
+                        info.ReportClientError("Missing Application ID or Access Ticket");
+                        return;
+                    }
+
+                    var id = query["id"].Value;
+                    var ticket = query["ticket"].Value;
+                    if (query.Contains("force"))
+                        force = Library.Utility.Utility.ParseBool(query["force"].Value, false);
+
+                    // if re-enroll is forced or
+                    // if ENotariadoIsVerified == false, it means we are not enrolled or enrolled but not verified
+                    //   either way, reset and start again
+                    if (force || !Program.ENotariadoIsVerified)
+                    {
+                        Program.ResetENotariado();
+                        body = body1x1;
+                    }
+                    else
+                    {
+                        // already enrolled
+                        body = body2x2;
+                    }
+
+                    info.Response.ContentType = "image/png";
+                    info.Response.Body.Write(body, 0, body.Count());
+                    info.Response.Status = System.Net.HttpStatusCode.OK;
+                    info.Response.Send();
+
+                    // will only make changes when ENotariadoIsEnrolled == false
+                    _ = Program.InitializeENotariado(id, ticket);
+                    return;
+
                 default:
                     info.ReportClientError(LC.L(@"No such action"), System.Net.HttpStatusCode.NotFound);
                     return;
@@ -32,9 +73,8 @@ namespace Duplicati.Server.WebServer.RESTMethods
         public void POST(string key, RequestInfo info)
         {
             var input = info.Request.Form;
-            var enrolledErrorMessage = new { Message = "Houve um erro na comunicação com o e-notariado. Tente novamente mais tarde." };
-            var verifiedErrorMessage = new { Message = "O agente ainda não foi cadastrado no e-notariado." };
-            var failedVerification   = new { Message = "A aplicação ainda não foi cadastrada no Portal Backup e-notariado." };
+            var enrolledErrorMessage = new { Message = "A aplicação não está cadastrada no Módulo Gerenciador do Backup e-notariado." };
+            var failedVerification   = new { Message = "A aplicação não foi aprovada no Módulo Gerenciador do Backup e-notariado." };
             switch ((key ?? "").ToLowerInvariant())
             {
                 case "verify":
@@ -47,13 +87,8 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     return;
 
                 case "reset":
-                    var result = Program.ResetENotariado().GetAwaiter().GetResult();
-                    if (result == (ENotariadoStatus.Verified | ENotariadoStatus.Enrolled))
-                        info.OutputOK();
-                    else if (result == (ENotariadoStatus.Enrolled))
-                        info.OutputError(item: verifiedErrorMessage);
-                    else if (result == (ENotariadoStatus.None))
-                        info.OutputError(item: enrolledErrorMessage);
+                    Program.ResetENotariado();
+                    info.OutputOK();
                     return;
 
                 default:

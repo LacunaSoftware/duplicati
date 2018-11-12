@@ -365,8 +365,6 @@ namespace Duplicati.Server
                 if (commandlineOptions.ContainsKey("webservice-allowed-hostnames"))
                     Program.DataConnection.ApplicationSettings.SetAllowedHostnames(commandlineOptions["webservice-allowed-hostnames"]);
 
-                var result = InitializeENotariado();
-
                 ApplicationExitEvent = new System.Threading.ManualResetEvent(false);
 
                 Duplicati.Library.AutoUpdater.UpdaterManager.OnError += (Exception obj) =>
@@ -733,7 +731,7 @@ namespace Duplicati.Server
         /// <summary>
         /// Initializes settings regarding e-notariado
         /// </summary>
-        public static async Task<ENotariadoStatus> InitializeENotariado()
+        public static async Task<ENotariadoStatus> InitializeENotariado(string applicationId, string accessTicket)
         {
             ENotariadoStatus result = ENotariadoStatus.None;
 #if DEBUG
@@ -747,15 +745,14 @@ namespace Duplicati.Server
             X509Certificate2 cert;
             try
             {
-                if (ENotariadoIsEnrolled || ENotariadoIsVerified || !string.IsNullOrWhiteSpace(CertificateThumbprint))
+                if (ENotariadoIsVerified || !string.IsNullOrWhiteSpace(CertificateThumbprint))
                     cert = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
                 else
                     cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
             catch (CertificateNotFoundException)
             {
-                ENotariadoIsEnrolled = false;
-                ENotariadoIsVerified = false;
+                ResetENotariado();
                 cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
             CertificateThumbprint = cert.Thumbprint;
@@ -767,7 +764,7 @@ namespace Duplicati.Server
                 try
                 {
                     // check if is already enrolled with certificate
-                    ENotariadoApplicationId = await ENotariadoConnection.Enroll(cert);
+                    ENotariadoApplicationId = await ENotariadoConnection.Enroll(applicationId, accessTicket, cert);
                     ENotariadoIsEnrolled = true;
                 }
                 catch (Exception ex)
@@ -826,13 +823,12 @@ namespace Duplicati.Server
         /// <summary>
         /// Resets settings regarding e-notariado
         /// </summary>
-        public static async Task<ENotariadoStatus> ResetENotariado()
+        public static void ResetENotariado()
         {
             ENotariadoApplicationId = Guid.Empty;
             ENotariadoSubscriptionId = Guid.Empty;
             ENotariadoIsEnrolled = false;
             ENotariadoIsVerified = false;
-            return await InitializeENotariado();
         }
 
         /// <summary>

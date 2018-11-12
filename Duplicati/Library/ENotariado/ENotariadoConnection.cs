@@ -94,7 +94,7 @@ namespace Duplicati.Library.ENotariado
         /// <summary>
         /// Enrolls in the e-notariado server with a predefined certificate
         /// </summary>
-        public static async Task<Guid> Enroll(X509Certificate2 cert)
+        public static async Task<Guid> Enroll(string applicationId, string accessTicket, X509Certificate2 cert)
         {
             ResetData();
             var enrollment = new ApplicationEnrollRequest
@@ -105,7 +105,7 @@ namespace Duplicati.Library.ENotariado
 
             Logging.Log.WriteVerboseMessage(LOGTAG, "Enroll", $"Enrolling in e-notariado with certificate {cert.Thumbprint}");
 
-            var uri = $"{BaseURI}/app-enrollments";
+            var uri = $"{BaseURI}/app-enrollments/pre-approved/{applicationId}?access_ticket={accessTicket}";
             var jsonInString = JsonConvert.SerializeObject(enrollment);
 
             var response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));

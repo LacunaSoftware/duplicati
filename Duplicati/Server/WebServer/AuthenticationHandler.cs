@@ -37,6 +37,7 @@ namespace Duplicati.Server.WebServer
         public const string LOGIN_SCRIPT_URI = "/login.cgi";
         public const string LOGOUT_SCRIPT_URI = "/logout.cgi";
         public const string CAPTCHA_IMAGE_URI = RESTHandler.API_URI_PATH + "/captcha/";
+        public const string APP_ENROLLMENT_IMAGE_URI = RESTHandler.API_URI_PATH + "/enotariado/app-enrollment";
 
         private const int XSRF_TIMEOUT_MINUTES = 10;
         private const int AUTH_TIMEOUT_MINUTES = 10;
@@ -272,7 +273,9 @@ namespace Duplicati.Server.WebServer
             ;
 
             // Override to allow the CAPTCHA call to go through
-            if (request.Uri.AbsolutePath.StartsWith(CAPTCHA_IMAGE_URI, StringComparison.OrdinalIgnoreCase) && request.Method == "GET")
+            if ((request.Uri.AbsolutePath.StartsWith(CAPTCHA_IMAGE_URI, StringComparison.OrdinalIgnoreCase) ||
+                 request.Uri.AbsolutePath.StartsWith(APP_ENROLLMENT_IMAGE_URI, StringComparison.OrdinalIgnoreCase))
+                    && request.Method == "GET")
                 limitedAccess = false;
 
             if (limitedAccess)
