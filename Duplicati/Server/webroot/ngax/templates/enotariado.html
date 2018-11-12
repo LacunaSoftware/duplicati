@@ -2,17 +2,9 @@
     <h1 translate>e-notariado</h1>
 
     <form class="styled">
-        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled">A aplicação falhou em se comunicar com os servidores do e-notariado, tente novamente mais tarde.</h4>
+        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled">A aplicação não está cadastrada no Módulo Gerenciador do Backup e-notariado.</h4>
         <div ng-hide="!eNotariado.isEnrolled || eNotariado.isVerified">
-            <h4 class="ui-state-error-text">A aplicação não está cadastrada no Portal E-Notariado Backup.</h4>
-            <p>Leia a seção "Como cadastro a aplicação?" abaixo e siga os passos descritos</p>
-            <p>Para copiar o código abaixo, clique no ícone a direita da caixa de texto.</p>
-            
-            <div class="input text">
-                <label for="certThumbprint" translate>Application Code</label>
-                <input style="font-weight: bold" type="text" id="certThumbprint" ng-model="eNotariado.applicationId"/>
-                <i id="copyToClip" href ng-click="copyToClipboard()" class="fa fa-copy" style="margin: 10px 10px 10px 10px; color: #009bb3"></i>
-            </div>
+            <h4 class="ui-state-error-text">A aplicação ainda não foi aprovada no Módulo Gerenciador do Backup e-notariado.</h4>
         </div>
 
         <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled">A aplicação está configurada corretamente</h4>
@@ -23,7 +15,7 @@
             <i ng-show="enrollSettings" class="fa fa-arrow-up"></i>
         </div>
         <div ng-show="enrollSettings" class="input checkbox">
-            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Reiniciar identificação com e-notariado'}}" ng-click="eNotariadoReset()" />
+            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Reiniciar cadastro com e-notariado'}}" ng-click="eNotariadoReset()" />
         </div>
 
         <div>

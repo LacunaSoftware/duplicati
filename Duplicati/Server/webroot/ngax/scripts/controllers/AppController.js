@@ -76,8 +76,8 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         if (!eNotariado) return;
         if (!eNotariado.isEnrolled || !eNotariado.isVerified) {
             const message = eNotariado.isEnrolled ?
-                'A aplicação não está cadastrada no Portal do Backup e-notariado. Aperte OK e siga os passos descritos em "Como cadastro a aplicação?"' :
-                'A aplicação falhou em se comunicar com os servidores do e-notariado, tente novamente mais tarde.';
+                'A aplicação ainda não foi aprovada no Módulo Gerenciador do Backup e-notariado.' :
+                'A aplicação não está cadastrada no Módulo Gerenciador do Backup e-notariado.';
             
             DialogService.dialog(
                 'e-notariado',
