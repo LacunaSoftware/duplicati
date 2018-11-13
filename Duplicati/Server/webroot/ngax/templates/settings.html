@@ -12,9 +12,6 @@
             <label for="confirm-password" translate>Confirm password</label><br>
             <input type="password" id="confirm-password" name="confirm-password" ng-model="confirmPassword" autocomplete="new-password" />
         </div>
-        <div class="input mixed multiple">
-            <p ng-show="passwordError" class="ui-state-error-text">{{passwordErrorMessage}}</p>
-        </div>
         <div class="input checkbox">
             <input type="checkbox" class="checkbox" id="remote" name="remote" ng-model="allowRemoteAccess" />
             <label for="remote" translate>Allow remote access (requires restart)</label>     

@@ -4,8 +4,6 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     $scope.SystemInfo = SystemInfo.watch($scope);    
     $scope.theme = $scope.$parent.$parent.saved_theme;
     $scope.enrollSettings = false;
-    $scope.passwordError = false;
-    $scope.passwordErrorMessage = '';
     if (($scope.theme || '').trim().length == 0)
         $scope.theme = 'default';
 
@@ -158,8 +156,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
 
         if ($scope.requireRemotePassword && ($scope.remotePassword != $scope.rawdata['placeholder-password'])) {
             if ($scope.remotePassword != $scope.confirmPassword) {
-                $scope.passwordError = true;
-                $scope.passwordErrorMessage = gettextCatalog.getString('The passwords do not match');
+                AppUtils.notifyInputError(gettextCatalog.getString('The passwords do not match'));
                 return;
             }
             patchdata['#-server-passphrase-salt'] =  CryptoJS.lib.WordArray.random(256/8).toString(CryptoJS.enc.Base64);
