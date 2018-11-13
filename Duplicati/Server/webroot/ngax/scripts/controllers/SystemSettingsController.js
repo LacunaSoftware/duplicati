@@ -105,15 +105,15 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     }
 
     $scope.eNotariadoReset = function() {
-        dlg = DialogService.dialog('Conectando...', 'Iniciando conexão com e-notariado ...', [], null, function() {       
+        dlg = DialogService.dialog('Conectando...', 'Redefinindo dados de cadastro com o e-notariado ...', [], null, function() {       
             AppService.post('/enotariado/reset').then(
                 function() {
                     dlg.dismiss();
-                    dlg = DialogService.dialog('Sucesso', 'Conexão feita com sucesso!');
+                    dlg = DialogService.dialog('Sucesso', 'Dados redefinidos, a aplicação está pronta para ser reiniciada!');
                     dlg.ondismiss = getSettings
                 }, (resp) => {
                     if (dlg != null) dlg.dismiss();
-                    AppUtils.connectionError(resp, undefined, 'Falha na conexão com e-notariado');
+                    AppUtils.connectionError(resp, undefined, 'Falha na conexão');
                     getSettings();
                 }
             );
