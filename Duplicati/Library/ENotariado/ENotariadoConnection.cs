@@ -61,7 +61,7 @@ namespace Duplicati.Library.ENotariado
         private static readonly string PublicKeyAuthenticationSessionState = "X-Public-Key-Auth-Session-State";
         private static readonly string BaseURI = $"https://backup.e-notariado.org.br/api";
 
-        private static void ResetData()
+        public static void ResetData()
         {
             Logging.Log.WriteVerboseMessage(LOGTAG, "ResetData", $"Resetting all e-notariado related data");
 
