@@ -825,6 +825,7 @@ namespace Duplicati.Server
         /// </summary>
         public static void ResetENotariado()
         {
+            ENotariadoConnection.ResetData();
             ENotariadoApplicationId = Guid.Empty;
             ENotariadoSubscriptionId = Guid.Empty;
             ENotariadoIsEnrolled = false;
