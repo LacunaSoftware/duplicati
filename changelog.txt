@@ -1,3 +1,9 @@
+2018-11-14 - 1.1.0_stable_2018-11-14
+==========
+- Melhora o fluxo de cadastro do Módulo Agente com o Módulo Gerenciador
+- Atualiza todos os ícones de aplicação pertencentes ao Módulo Agente
+- Corrige erro inserido na versão 1.0.6 onde editar um backup pré-existente o colocava em um estado cujos backups não eram possíveis de ser executados
+
 2018-11-06 - 1.0.6_stable_2018-11-06
 ==========
 - Altera título do ícone de bandeja para 'Backup e-notariado'
