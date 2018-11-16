@@ -25,34 +25,46 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
                 case "app-enrollment":
                     var query = info.Request.QueryString;
+                    var check = query.Contains("check");
                     var force = false;
                     var body1x1 = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAMSURBVBhXY/j//z8ABf4C/qc1gYQAAAAASUVORK5CYII=");
                     var body2x2 = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAVSURBVBhXY/z//z8DAwMTEDMwMAAAJAYDAbrboo8AAAAASUVORK5CYII=");
                     byte[] body = null;
 
-                    if (!query.Contains("id") || !query.Contains("ticket"))
+                    if (check)
                     {
-                        info.ReportClientError("Missing Application ID or Access Ticket");
-                        return;
-                    }
-
-                    var id = query["id"].Value;
-                    var ticket = query["ticket"].Value;
-                    if (query.Contains("force"))
-                        force = Library.Utility.Utility.ParseBool(query["force"].Value, false);
-
-                    // if re-enroll is forced or
-                    // if ENotariadoIsVerified == false, it means we are not enrolled or enrolled but not verified
-                    //   either way, reset and start again
-                    if (force || !Program.ENotariadoIsVerified)
-                    {
-                        Program.ResetENotariado();
                         body = body1x1;
                     }
                     else
                     {
-                        // already enrolled
-                        body = body2x2;
+                        if (!query.Contains("id") || !query.Contains("ticket"))
+                        {
+                            info.ReportClientError("Missing Application ID or Access Ticket");
+                            return;
+                        }
+
+                        var id = query["id"].Value;
+                        var ticket = query["ticket"].Value;
+                        if (query.Contains("force"))
+                            force = Library.Utility.Utility.ParseBool(query["force"].Value, false);
+
+                    
+
+                        // if re-enroll is forced or
+                        // if ENotariadoIsVerified == false, it means we are not enrolled or enrolled but not verified
+                        //   either way, reset and start again
+                        if (force || !Program.ENotariadoIsVerified)
+                        {
+                            Program.ResetENotariado();
+                            body = body1x1;
+                            // will only make changes when ENotariadoIsEnrolled == false
+                            _ = Program.EnrollENotariado(id, ticket);
+                        }
+                        else
+                        {
+                            // already enrolled
+                            body = body2x2;
+                        }
                     }
 
                     info.Response.ContentType = "image/png";
@@ -60,8 +72,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     info.Response.Status = System.Net.HttpStatusCode.OK;
                     info.Response.Send();
 
-                    // will only make changes when ENotariadoIsEnrolled == false
-                    _ = Program.EnrollENotariado(id, ticket);
                     return;
 
                 default:

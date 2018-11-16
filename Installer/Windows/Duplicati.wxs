@@ -49,7 +49,6 @@
         <Directory Id="INSTALLLOCATION" Name="Backup e-Notariado">
           <!-- Installs the service -->
           <Component Id="WindowsService" Guid="{a4912fdc-ca72-4046-8baf-8e1d0e82b6ef}">
-            <File Id="Duplicati.WindowsService.exe2" KeyPath="yes" Source="$(var.HarvestPath)\Duplicati.WindowsService.exe" />
             <ServiceInstall
               Id="ServiceInstaller"
               Type="ownProcess"
