@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Duplicati.Server
@@ -129,6 +130,11 @@ namespace Duplicati.Server
         /// Certificate used for authentication in e-notariado
         /// </summary>
         public static X509Certificate2 ENotariadoCertificate;
+
+        /// <summary>
+        /// Certificate used for authentication in e-notariado
+        /// </summary>
+        public static Timer ENotariadoVerificationTimer;
 
         /// <summary>
         /// The log redirect handler
@@ -765,6 +771,7 @@ namespace Duplicati.Server
 
             ENotariadoConnection.Init(ENotariadoApplicationId, ENotariadoCertificate, ENotariadoIsVerified, ENotariadoSubscriptionId);
 
+            ENotariadoVerificationTimer = new Timer(async _ => await VerifyENotariado(), null, 5000, 1000);
         }
 
         /// <summary>
@@ -831,9 +838,9 @@ namespace Duplicati.Server
             }
 
             if (ENotariadoIsVerified)
-                return true;
+                ENotariadoVerificationTimer.Change(Timeout.Infinite, Timeout.Infinite);
 
-            return false;
+            return ENotariadoIsVerified;
         }
         
         /// <summary>
@@ -846,6 +853,7 @@ namespace Duplicati.Server
             ENotariadoSubscriptionId = Guid.Empty;
             ENotariadoIsEnrolled = false;
             ENotariadoIsVerified = false;
+            ENotariadoVerificationTimer.Change(2000, 1000);
         }
 
         /// <summary>
