@@ -853,7 +853,8 @@ namespace Duplicati.Server
             ENotariadoSubscriptionId = Guid.Empty;
             ENotariadoIsEnrolled = false;
             ENotariadoIsVerified = false;
-            ENotariadoVerificationTimer.Change(2000, 1000);
+            if (ENotariadoVerificationTimer != null)
+               ENotariadoVerificationTimer.Change(2000, 1000);
         }
 
         /// <summary>
