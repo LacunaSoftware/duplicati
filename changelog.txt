@@ -1,3 +1,7 @@
+2018-11-16 - 1.1.1_stable_2018-11-16
+==========
+- Corrige erro onde a aplicação mostrava um erro no cadastro mesmo quando já estava corretamente cadastrada
+
 2018-11-14 - 1.1.0_stable_2018-11-14
 ==========
 - Melhora o fluxo de cadastro do Módulo Agente com o Módulo Gerenciador
