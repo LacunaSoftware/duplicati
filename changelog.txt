@@ -1,3 +1,7 @@
+2018-11-16 - 1.1.2_stable_2018-11-16
+==========
+- Corrige um pequeno erro que mostrava, após um cadastro bem-sucedido, um aviso incorreto no Módulo Agente
+
 2018-11-16 - 1.1.1_stable_2018-11-16
 ==========
 - Corrige erro onde a aplicação mostrava um erro no cadastro mesmo quando já estava corretamente cadastrada
