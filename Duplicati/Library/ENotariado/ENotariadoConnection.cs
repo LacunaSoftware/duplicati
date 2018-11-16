@@ -79,12 +79,14 @@ namespace Duplicati.Library.ENotariado
         /// Simple method to init data regarding the application
         /// To be used when making requests to e-notariado
         /// </summary>
-        public static void Init(Guid applicationId, X509Certificate2 cert)
+        public static void Init(Guid applicationId, X509Certificate2 cert, bool isVerified = false, Guid subscriptionId = new Guid())
         {
             Logging.Log.WriteVerboseMessage(LOGTAG, "Init", $"Initializing e-notariado configuration. Certificate Thumbprint: {cert.Thumbprint}. ApplicationId: {applicationId}");
 
             Certificate = cert;
             ApplicationId = applicationId;
+            SubscriptionId = subscriptionId;
+            IsVerified = isVerified;
 
             // Send logs to e-notariado each 10 seconds
             TimerPeriod = MIN_TIMER_PERIOD;

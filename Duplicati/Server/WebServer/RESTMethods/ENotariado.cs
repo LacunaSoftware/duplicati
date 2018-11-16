@@ -61,7 +61,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     info.Response.Send();
 
                     // will only make changes when ENotariadoIsEnrolled == false
-                    _ = Program.InitializeENotariado(id, ticket);
+                    _ = Program.EnrollENotariado(id, ticket);
                     return;
 
                 default:

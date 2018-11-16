@@ -126,6 +126,11 @@ namespace Duplicati.Server
         public static long LastNotificationUpdateID = 0;
 
         /// <summary>
+        /// Certificate used for authentication in e-notariado
+        /// </summary>
+        public static X509Certificate2 ENotariadoCertificate;
+
+        /// <summary>
         /// The log redirect handler
         /// </summary>
         public static LogWriteHandler LogHandler = new LogWriteHandler();
@@ -486,6 +491,7 @@ namespace Duplicati.Server
                     Program.PingPongThread.Start();
                 }
 
+                InitializeENotariado();
                 ServerStartedEvent.Set();
                 ApplicationExitEvent.WaitOne();
             }
@@ -728,35 +734,45 @@ namespace Duplicati.Server
             StatusEventNotifyer.SignalNewEvent();
         }
 
-        /// <summary>
-        /// Initializes settings regarding e-notariado
-        /// </summary>
-        public static async Task<ENotariadoStatus> InitializeENotariado(string applicationId, string accessTicket)
+        public static void InitializeENotariado()
         {
-            ENotariadoStatus result = ENotariadoStatus.None;
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
             var keyStoreLocation = StoreLocation.LocalMachine;
 #endif
-
             // Checks if certificate already exists and is in local storage,
             // then retrieves or creates a new one
-            X509Certificate2 cert;
             try
             {
                 if (ENotariadoIsVerified || !string.IsNullOrWhiteSpace(CertificateThumbprint))
-                    cert = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
+                    ENotariadoCertificate = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
                 else
-                    cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+                    throw new CertificateNotFoundException(CertificateThumbprint);
             }
             catch (CertificateNotFoundException)
             {
                 ResetENotariado();
-                cert = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+                ENotariadoCertificate = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
-            CertificateThumbprint = cert.Thumbprint;
+            CertificateThumbprint = ENotariadoCertificate.Thumbprint;
 
+            if (ENotariadoApplicationId == Guid.Empty || ENotariadoSubscriptionId == Guid.Empty ||
+                !ENotariadoIsVerified || !ENotariadoIsEnrolled || string.IsNullOrWhiteSpace(CertificateThumbprint))
+            {
+                ResetENotariado();
+            }
+
+            ENotariadoConnection.Init(ENotariadoApplicationId, ENotariadoCertificate, ENotariadoIsVerified, ENotariadoSubscriptionId);
+
+        }
+
+        /// <summary>
+        /// Initializes settings regarding e-notariado
+        /// </summary>
+        public static async Task<ENotariadoStatus> EnrollENotariado(string applicationId, string accessTicket)
+        {
+            ENotariadoStatus result = ENotariadoStatus.None;
             // If the application haven't tried to enroll yet or we don't have an ID
             // we should enroll
             if (!ENotariadoIsEnrolled || ENotariadoApplicationId == Guid.Empty)
@@ -764,7 +780,7 @@ namespace Duplicati.Server
                 try
                 {
                     // check if is already enrolled with certificate
-                    ENotariadoApplicationId = await ENotariadoConnection.Enroll(applicationId, accessTicket, cert);
+                    ENotariadoApplicationId = await ENotariadoConnection.Enroll(applicationId, accessTicket, ENotariadoCertificate);
                     ENotariadoIsEnrolled = true;
                 }
                 catch (Exception ex)
@@ -776,7 +792,7 @@ namespace Duplicati.Server
 
             // Initializes ENotariadoConnection with appropriate data
             if (ENotariadoIsEnrolled)
-                ENotariadoConnection.Init(ENotariadoApplicationId, cert);
+                ENotariadoConnection.Init(ENotariadoApplicationId, ENotariadoCertificate);
             
             await VerifyENotariado();
             
