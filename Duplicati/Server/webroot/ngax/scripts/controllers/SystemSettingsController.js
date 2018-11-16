@@ -87,23 +87,6 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
     }
     getSettings();
 
-    const verifyInterval = setInterval(function() {
-        if ($scope.eNotariado && $scope.eNotariado.isVerified) {
-            clearInterval(verifyInterval);
-            return;
-        }
-
-        eNotariadoVerify(getSettings);
-    }, 2000);
-
-    $scope.$on('$destroy', function () {
-        clearInterval(verifyInterval);        
-    });
-
-    function eNotariadoVerify(success, failure) { 
-        AppService.post('/enotariado/verify').then(success, failure);
-    }
-
     $scope.eNotariadoReset = function() {
         dlg = DialogService.dialog('Conectando...', 'Redefinindo dados de cadastro com o e-notariado ...', [], null, function() {       
             AppService.post('/enotariado/reset').then(
