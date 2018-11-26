@@ -5,6 +5,10 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
     $scope.ServerStatus = ServerStatus;
     $scope.serverstate = ServerStatus.watch($scope);
     $scope.EncryptionPassphrase = $scope.BackupENotariadoPassword;
+    $scope.CurrentStep = 0;
+    $scope.connecting = false;
+    $scope.logs = ['Recuperando dados de segurança para restauração...'];
+    $scope.backups = [];
 
     var dlg;
     
@@ -14,6 +18,8 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
                 function(resp) {
                     $scope.EncryptionPassphrase = resp.data.Password;
                     $scope.logs.push('Dados de segurança para restauração recuperados com sucesso.');
+                    $scope.CurrentStep = 1;
+                    $scope.doConnect();
                 }, (resp) => {
                     $scope.logs.push('Dados de segurança para restauração não foram recuperados. Atualize a página ou tente novamente mais tarde.');
                 }
@@ -21,13 +27,11 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         }
         else {
             $scope.logs.push('Dados de segurança para restauração recuperados com sucesso.');
+            $scope.CurrentStep = 1;
+            $scope.doConnect();
         }
     }
 
-    $scope.CurrentStep = 0;
-    $scope.connecting = false;
-    $scope.logs = ['Recuperando dados de segurança para restauração...'];
-    $scope.backups = [];
 
     $scope.nextPage = function() {
         $scope.CurrentStep = Math.min(1, $scope.CurrentStep + 1);
@@ -40,13 +44,14 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
     $scope.doConnect = function() {
         $scope.CurrentStep = 1;
         $scope.connecting = true;
-        $scope.logs.push(gettextCatalog.getString('Getting list of backups stored remotely ...'));
+        $scope.logs.push('Recuperando lista de backups armazenados remotamente ...');
 
         AppService.get('/enotariado/backup-list', {'headers': {'Content-Type': 'application/json'}}).then(
             function(resp) {
                 
                 $scope.backups = resp.data;
-                $scope.logs.push(AppUtils.format(gettextCatalog.getString('Retrieved information about {0} backups ...'), resp.data.length));
+                $scope.connecting = false;
+                $scope.logs.push(AppUtils.format('Informações recuperadas de {0} backups.', resp.data.length));
             }, function(resp) {
                 $scope.connecting = false;
                 AppUtils.connectionError(resp);
@@ -59,6 +64,7 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         var targetURL = `enotariado://${backupInfo.ContainerName}?name=${backupInfo.BackupName}`;
         var opts = {};
         var obj = {'Backup': {'TargetURL': targetURL } };
+        $scope.connecting = true;
 
         if (($scope.EncryptionPassphrase || '') == '')
             opts['--no-encryption'] = 'true';
@@ -79,6 +85,7 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         AppService.post('/backups?temporary=true', obj, {'headers': {'Content-Type': 'application/json'}}).then(
             function(resp) {
 
+                $scope.connecting = false;
                 $scope.logs.push(gettextCatalog.getString('Listing backup dates ...'));
                 $scope.BackupID = resp.data.ID;
                 $scope.fetchBackupTimes();

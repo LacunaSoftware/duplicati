@@ -29,6 +29,12 @@
                     <div>
                         <p ng-repeat="line in logs track by $index">{{line}}</p>
                     </div>
+                    <!-- loading animation -->
+                    <div ng-show="connecting" class="lds-parent">
+                        <div class="lds-default">
+                            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                        </div>
+                    </div>
 
                     <!-- <div class="expandable">
                         <a href ng-click="showAdvanced = !showAdvanced">
@@ -58,6 +64,12 @@
                             {{'Server is currently paused,' | translate}} <a style="cursor: pointer" ng-click="ServerStatus.resume()" translate>resume now</a>
                         </div>
                     </div>
+                    </div>
+                    <!-- loading animation -->
+                    <div ng-show="connecting" class="lds-parent">
+                        <div class="lds-default">
+                            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                        </div>
                     </div>
                     <div ng-show="backups.length > 0" class="input mixed multiple">
                         <label for="backups" translate>Select backup: </label>
