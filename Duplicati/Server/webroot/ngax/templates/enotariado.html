@@ -11,8 +11,7 @@
         
         <div style="cursor: pointer" class="sublabel" ng-click="enrollSettings = !enrollSettings">
             <span>Opção avançada</span>&nbsp; 
-            <i ng-show="!enrollSettings" class="fa fa-arrow-down"></i>
-            <i ng-show="enrollSettings" class="fa fa-arrow-up"></i>
+            <i class="fa fa-angle-{{enrollSettings ? 'up' : 'down'}}"></i>
         </div>
         <div ng-show="enrollSettings" class="input checkbox">
             <input type="button" id="eNotariadoReset" class="button submit" value="{{'Reiniciar cadastro com e-notariado'}}" ng-click="eNotariadoReset()" />
