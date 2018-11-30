@@ -21,6 +21,8 @@ using Duplicati.Library.Interface;
 using Duplicati.Library.ENotariado;
 using Duplicati.Library.Localization.Short;
 
+using Duplicati.Library.Common;
+
 namespace Duplicati.Server.WebServer.RESTMethods
 {
     public class SystemInfo : IRESTMethodGET, IRESTMethodPOST, IRESTMethodDocumented
@@ -76,7 +78,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 BaseVersionName = Duplicati.Library.AutoUpdater.UpdaterManager.BaseVersion.Displayname,
                 DefaultUpdateChannel = Duplicati.Library.AutoUpdater.AutoUpdateSettings.DefaultUpdateChannel,
                 ServerTime = DateTime.Now,
-                OSType = Library.Utility.Utility.IsClientLinux ? (Library.Utility.Utility.IsClientOSX ? "OSX" : "Linux") : "Windows",
+                OSType = Platform.IsClientPosix ? (Platform.IsClientOSX ? "OSX" : "Linux") : "Windows",
                 DirectorySeparator = System.IO.Path.DirectorySeparatorChar,
                 PathSeparator = System.IO.Path.PathSeparator,
                 CaseSensitiveFilesystem = Duplicati.Library.Utility.Utility.IsFSCaseSensitive,

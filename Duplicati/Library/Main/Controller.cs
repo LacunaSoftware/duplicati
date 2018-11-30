@@ -1,4 +1,4 @@
-#region Disclaimer / License
+﻿#region Disclaimer / License
 // Copyright (C) 2015, The Duplicati Team
 // http://www.duplicati.com, info@duplicati.com
 //
@@ -24,6 +24,9 @@ using System;
 using System.Collections.Generic;
 using Duplicati.Library.Utility;
 using Duplicati.Library.Localization.Short;
+
+using Duplicati.Library.Common.IO;
+using Duplicati.Library.Common;
 
 namespace Duplicati.Library.Main
 {
@@ -822,7 +825,7 @@ namespace Duplicati.Library.Main
             {
                 List<string> expandedSources = new List<string>();
 
-                if (Library.Utility.Utility.IsClientWindows && (inputsource.StartsWith("*:", StringComparison.Ordinal) || inputsource.StartsWith("?:", StringComparison.Ordinal)))
+                if (Platform.IsClientWindows && (inputsource.StartsWith("*:", StringComparison.Ordinal) || inputsource.StartsWith("?:", StringComparison.Ordinal)))
                 {
                     // *: drive paths are only supported on Windows clients
                     // Lazily load the drive info
@@ -837,7 +840,7 @@ namespace Duplicati.Library.Main
                         expandedSources.Add(expandedSource);
                     }
                 }
-                else if (Library.Utility.Utility.IsClientWindows && inputsource.StartsWith(@"\\?\Volume{", StringComparison.OrdinalIgnoreCase))
+                else if (Platform.IsClientWindows && inputsource.StartsWith(@"\\?\Volume{", StringComparison.OrdinalIgnoreCase))
                 {
                     // In order to specify a drive by it's volume name, adopt the volume guid path syntax:
                     //   \\?\Volume{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}
@@ -895,7 +898,7 @@ namespace Duplicati.Library.Main
                         foundAnyPaths = true;
 
                         if (!fi.Exists)
-                            source = Library.Utility.Utility.AppendDirSeparator(source);
+                            source = Util.AppendDirSeparator(source);
 
                         sources.Add(source);
                     }
@@ -938,7 +941,7 @@ namespace Duplicati.Library.Main
             //Sanity check for multiple inclusions of the same folder
             for (int i = 0; i < sources.Count; i++)
                 for (int j = 0; j < sources.Count; j++)
-                    if (i != j && sources[i].StartsWith(sources[j], Library.Utility.Utility.ClientFilenameStringComparison) && sources[i].EndsWith(System.IO.Path.DirectorySeparatorChar.ToString(), Library.Utility.Utility.ClientFilenameStringComparison))
+                    if (i != j && sources[i].StartsWith(sources[j], Library.Utility.Utility.ClientFilenameStringComparison) && sources[i].EndsWith(Util.DirectorySeparatorString, Library.Utility.Utility.ClientFilenameStringComparison))
                     {
                         if (filter != null)
                         {

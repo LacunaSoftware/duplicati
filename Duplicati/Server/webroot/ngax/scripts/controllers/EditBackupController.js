@@ -16,8 +16,8 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
     $scope.ExcludeLargeFiles = false;
 
     $scope.fileAttributes = [
-        {'name': gettextCatalog.getString('Hidden files'), 'value': 'hidden'}, 
-        {'name': gettextCatalog.getString('System files'), 'value': 'system'}, 
+        {'name': gettextCatalog.getString('Hidden files'), 'value': 'hidden'},
+        {'name': gettextCatalog.getString('System files'), 'value': 'system'},
         {'name': gettextCatalog.getString('Temporary files'), 'value': 'temporary'}
     ];
 
@@ -205,16 +205,16 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
                 }
             });
         }
-        
+
         if ($scope.KeepType == 'time') {
             resetAllRetentionOptionsExcept('keep-time');
-        
+
         } else if ($scope.KeepType == 'versions') {
             resetAllRetentionOptionsExcept('keep-versions');
-        
+
         } else if ($scope.KeepType == 'smart' || $scope.KeepType == 'custom') {
             resetAllRetentionOptionsExcept('retention-policy');
-        
+
         } else {
             resetAllRetentionOptionsExcept(); // keep none
         }
@@ -233,7 +233,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
             return;
         }
 
-        if ($scope.KeepType == 'custom' && (opts['retention-policy'] || '').indexOf(':') <= 0) 
+        if ($scope.KeepType == 'custom' && (opts['retention-policy'] || '').indexOf(':') <= 0)
         {
             DialogService.dialog(gettextCatalog.getString('Invalid retention time'), gettextCatalog.getString('You must enter a valid rentention policy string'));
             $scope.CurrentStep = 4;
@@ -290,7 +290,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
             function postDb() {
                 AppService.post('/backups', result, {'headers': {'Content-Type': 'application/json'}}).then(function() {
                     $location.path('/');
-                }, AppUtils.connectionError);                                
+                }, AppUtils.connectionError);
             };
 
             function checkForExistingDb(continuation) {
@@ -386,9 +386,9 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
         var dispattr = [];
         var dispmap = {};
 
-        for (var i = exclattr.length - 1; i >= 0; i--) {            
+        for (var i = exclattr.length - 1; i >= 0; i--) {
             var cmp = (exclattr[i] || '').trim().toLowerCase();
-            
+
             // Remove empty entries
             if (cmp.length == 0) {
                 exclattr.splice(i, 1);
@@ -403,7 +403,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
                         dispmap[cmp] = true;
                     }
                     exclattr.splice(i, 1);
-                    break;                    
+                    break;
                 }
             }
         }
@@ -439,7 +439,7 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
             delete extopts[delopts[n]];
 
         $scope.ExtendedOptions = AppUtils.serializeAdvancedOptionsToArray(extopts);
-        
+
         $scope.servermodulesettings = {};
         AppUtils.extractServerModuleOptions($scope.ExtendedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedLocalCommands');
 
@@ -502,10 +502,10 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
         if (ix > 0)
             backmodule = backmodule.substr(0, ix);
 
-        $scope.ExtendedOptionList = AppUtils.buildOptionList($scope.SystemInfo, encmodule, compmodule, backmodule);        
+        $scope.ExtendedOptionList = AppUtils.buildOptionList($scope.SystemInfo, encmodule, compmodule, backmodule);
         setupServerModules();
-        
-        AppUtils.extractServerModuleOptions($scope.ExtendedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedLocalCommands');        
+
+        AppUtils.extractServerModuleOptions($scope.ExtendedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedLocalCommands');
     };
 
     function checkAllowedDaysConfig()
