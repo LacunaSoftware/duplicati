@@ -13,6 +13,11 @@ call "%VS140COMNTOOLS%vsvars32.bat"
 
 "C:\Program Files\7-Zip\7z.exe" x -oDuplicati %1
 
+copy Microsoft_VC141_CRT_x64.msm "Duplicati/Microsoft_VC141_CRT_x64.msm"
+copy Microsoft_VC141_CRT_x86.msm "Duplicati/Microsoft_VC141_CRT_x86.msm"
+copy Microsoft_VC141_MFC_x64.msm "Duplicati/Microsoft_VC141_MFC_x64.msm"
+copy Microsoft_VC141_MFC_x86.msm "Duplicati/Microsoft_VC141_MFC_x86.msm"
+
 rmdir /s /q obj
 rmdir /s /q bin
 

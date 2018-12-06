@@ -12,12 +12,16 @@
   <?define SoftwareKeyX86 = "Software\Wow6432Node" ?>
   <?define ProgramFilesFolder = "ProgramFiles64Folder" ?>
   <?define ProgramFilesFolderX86 = "ProgramFilesFolder" ?>
+  <?define VCRedistCRT = "Microsoft_VC141_CRT_x64.msm" ?>
+  <?define VCRedistMFC = "Microsoft_VC141_MFC_x64.msm" ?>
   <?else?>
   <?define SystemFolder = "SystemFolder" ?>
   <?define SystemFolderX86 = "SystemFolder" ?>
   <?define SoftwareKey = "Software" ?>
   <?define SoftwareKeyX86 = "Software" ?>
   <?define ProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?define VCRedistCRT = "Microsoft_VC141_CRT_x86.msm" ?>
+  <?define VCRedistMFC = "Microsoft_VC141_MFC_x86.msm" ?>
   <?endif?>
 
   <?define DisplayName = "Backup e-Notariado" ?>
@@ -42,6 +46,8 @@
 
 
     <Directory Id="TARGETDIR" Name="SourceDir">
+      <Merge Id="VCRedist1" SourceFile="$(var.HarvestPath)\$(var.VCRedistCRT)" DiskId="1" Language="0"/>
+      <Merge Id="VCRedist2" SourceFile="$(var.HarvestPath)\$(var.VCRedistMFC)" DiskId="1" Language="0"/>
       <Directory Id="ProgramMenuFolder" Name="Programs"/>
       <Directory Id="DesktopFolder" Name="Desktop"/>
 
@@ -89,6 +95,13 @@
 
       <Feature Id="ENBProgramMenuShortCutFeature" Title="Atalho no Menu de Programas" Level="1" Description ="Instala um atalho para o Backup e-Notariado no menu de programas" Absent="allow" AllowAdvertise="no" TypicalDefault="install" InstallDefault="local">
         <ComponentRef Id="ENBProgramMenuShortcutComponent"/>
+      </Feature>
+      
+      <Feature Id="VCRedist1" Title="Visual C++ 2017 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+        <MergeRef Id="VCRedist1"/>
+      </Feature>
+      <Feature Id="VCRedist2" Title="Visual C++ 2017 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+        <MergeRef Id="VCRedist2"/>
       </Feature>
       
       <ComponentGroupRef Id="DUPLICATIBIN" />
