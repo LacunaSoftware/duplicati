@@ -4,34 +4,10 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
     $scope.AppUtils = AppUtils;
     $scope.ServerStatus = ServerStatus;
     $scope.serverstate = ServerStatus.watch($scope);
-    $scope.EncryptionPassphrase = $scope.BackupENotariadoPassword;
     $scope.CurrentStep = 0;
     $scope.connecting = false;
-    $scope.logs = ['Recuperando dados de segurança para restauração...'];
+    $scope.logs = [];
     $scope.backups = [];
-
-    var dlg;
-    
-    function getPassphrase() {    
-        if ($scope.EncryptionPassphrase === undefined) {
-            AppService.get('/enotariado/backup-password').then(
-                function(resp) {
-                    $scope.EncryptionPassphrase = resp.data.Password;
-                    $scope.logs.push('Dados de segurança para restauração recuperados com sucesso.');
-                    $scope.CurrentStep = 1;
-                    $scope.doConnect();
-                }, (resp) => {
-                    $scope.logs.push('Dados de segurança para restauração não foram recuperados. Atualize a página ou tente novamente mais tarde.');
-                }
-            );
-        }
-        else {
-            $scope.logs.push('Dados de segurança para restauração recuperados com sucesso.');
-            $scope.CurrentStep = 1;
-            $scope.doConnect();
-        }
-    }
-
 
     $scope.nextPage = function() {
         $scope.CurrentStep = Math.min(1, $scope.CurrentStep + 1);
@@ -41,14 +17,13 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         $scope.CurrentStep = Math.max(0, $scope.CurrentStep - 1);
     };
 
-    $scope.doConnect = function() {
-        $scope.CurrentStep = 1;
+    const doConnect = function() {
         $scope.connecting = true;
         $scope.logs.push('Recuperando lista de backups armazenados remotamente ...');
 
         AppService.get('/enotariado/backup-list', {'headers': {'Content-Type': 'application/json'}}).then(
             function(resp) {
-                
+                $scope.CurrentStep = 1;                
                 $scope.backups = resp.data;
                 $scope.connecting = false;
                 $scope.logs.push(AppUtils.format('Informações recuperadas de {0} backups.', resp.data.length));
@@ -65,11 +40,6 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         var opts = {};
         var obj = {'Backup': {'TargetURL': targetURL } };
         $scope.connecting = true;
-
-        if (($scope.EncryptionPassphrase || '') == '')
-            opts['--no-encryption'] = 'true';
-        else
-            opts['passphrase'] = $scope.EncryptionPassphrase;
 
         if (!AppUtils.parse_extra_options($scope.ExtendedOptions, opts))
             return false;
@@ -122,5 +92,5 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
         );
     };
 
-    getPassphrase();
+    doConnect();
 });

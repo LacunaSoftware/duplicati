@@ -19,10 +19,6 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     info.BodyWriter.OutputOK(ENotariadoConnection.GetStoredBackupNames());
                     return;
 
-                case "backup-password":
-                    info.BodyWriter.OutputOK(new { Password = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult() });
-                    return;
-
                 case "app-enrollment":
                     var query = info.Request.QueryString;
                     var check = query.Contains("check");

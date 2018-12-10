@@ -337,21 +337,8 @@ backupApp.controller('EditBackupController', function ($rootScope, $scope, $rout
         $scope.Schedule = angular.copy(data.Schedule);
 
         $scope.Options = {
-            'encryption-module': 'aes',
-            'passphrase': $scope.BackupENotariadoPassword
+            'encryption-module': 'aes'
         };
-        
-        if ($scope.eNotariado && $scope.eNotariado.isVerified && $scope.BackupENotariadoPassword === undefined) {
-            AppService.get('/enotariado/backup-password').then(
-                function(resp) {
-                    $scope.Options['passphrase'] = resp.data.Password;
-                    $scope.BackupENotariadoPassword = resp.data.Password;
-                }, (resp) => {
-                    if (dlg != null) dlg.dismiss();
-                    AppUtils.connectionError(resp, undefined, gettextCatalog.getString('Failure to retrieve security data'));
-                }
-            );
-        }
 
         var extopts = {};
 
