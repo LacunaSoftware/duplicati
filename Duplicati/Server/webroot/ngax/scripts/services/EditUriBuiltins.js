@@ -556,7 +556,7 @@ backupApp.service('EditUriBuiltins', function(AppService, AppUtils, SystemInfo, 
         scope.Folder = scope.Path;
         
 
-        return `enotariado://${uuid}?name=${encodeURIComponent(backup.Name)}`;
+        return 'enotariado://' + uuid + '?name=' + encodeURIComponent(backup.Name);
     };
 
     EditUriBackendConfig.builders['msgroup'] = function (scope) {

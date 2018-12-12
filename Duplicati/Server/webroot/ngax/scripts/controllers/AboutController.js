@@ -56,8 +56,8 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
             DialogService.dialog(gettextCatalog.getString('Warning'), gettextCatalog.getString('Ao continuar o Módulo Agente será reiniciado e quaisquer operações ocorrendo atualmente serão perdidas, continuar?'), [gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function(ix) {
                 if (ix == 1) {
                     AppService.post('/updates/activate').then(function() {
-                        var interval = setInterval(() => {
-                            SystemInfo.loadSystemInfo(true, () => {});
+                        var interval = setInterval(function() {
+                            SystemInfo.loadSystemInfo(true, function() {});
                             if (oldVersion != $scope.sysinfo.ServerVersion) {
                                 window.location.reload();
                                 clearInterval(interval);
@@ -73,7 +73,7 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
     };
 
     $scope.doCheckForUpdates = function() {
-        AppService.post('/updates/check').then(() => {}, 
+        AppService.post('/updates/check').then(function() {}, 
             AppUtils.connectionError("Falha ao conferir atualizações: "));
 
     };

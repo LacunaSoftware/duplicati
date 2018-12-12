@@ -36,7 +36,7 @@ backupApp.controller('RestoreDirectController', function ($rootScope, $scope, $l
 
     $scope.restore = function() {
         var backupInfo = JSON.parse($scope.selectedBackup);
-        var targetURL = `enotariado://${backupInfo.ContainerName}?name=${backupInfo.BackupName}`;
+        var targetURL = 'enotariado://' + backupInfo.ContainerName + '?name=' + backupInfo.BackupName;
         var opts = {};
         var obj = {'Backup': {'TargetURL': targetURL } };
         $scope.connecting = true;

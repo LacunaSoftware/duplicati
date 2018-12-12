@@ -20,15 +20,16 @@ backupApp.controller('BackupLogController', function($scope, $routeParams, AppUt
     $scope.Page = 'general';  
 
     $scope.LoadMoreGeneralData = function() { 
+        console.log(LogService);
         LogService.LoadMoreData('/backup/' + $scope.BackupID + '/log', $scope.GeneralData, 'ID', PAGE_SIZE)
             .then(function(result) {
                 if (!result)
                     return;
 
-                const { current, complete } = result;
-                $scope.GeneralDataComplete = complete;
+                var current = result.current;
+                $scope.GeneralDataComplete = result.complete;
                 $scope.Backup = BackupList.lookup[$scope.BackupID];
-                for (let i in current) {
+                for (var i in current) {
                     try { 
                         current[i].Result = JSON.parse(current[i].Message);
                         current[i].Formatted = JSON.stringify(current[i].Result, null, 2);
@@ -45,9 +46,8 @@ backupApp.controller('BackupLogController', function($scope, $routeParams, AppUt
                 if (!result)
                     return;
                 
-                const { current, complete } = result;
-                $scope.RemoteData = current;
-                $scope.RemoteDataComplete = complete;
+                $scope.RemoteData = result.current;
+                $scope.RemoteDataComplete = result.complete;
                 $scope.Backup = BackupList.lookup[$scope.BackupID];
                 $scope.$digest();
             }); 

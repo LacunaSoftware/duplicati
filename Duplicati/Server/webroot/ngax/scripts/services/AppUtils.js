@@ -16,14 +16,14 @@ backupApp.service('AppUtils', function($rootScope, $timeout, $cookies, DialogSer
     setMomentLocale();
     $rootScope.$on('ui_language_changed', setMomentLocale);
 
-    this.formatSizes = ['TB', 'GB', 'MB', 'KB'];
-    this.formatSizeString = (val) => {
+    this.formatSizeString = function(val) {
+        var formatSizes = ['TB', 'GB', 'MB', 'KB'];
         val = parseInt(val || 0);
-        var max = this.formatSizes.length;
-        for(var i = 0; i < this.formatSizes.length; i++) {
+        var max = formatSizes.length;
+        for(var i = 0; i < formatSizes.length; i++) {
             var m = Math.pow(1024, max - i);
             if (val > m) {
-                return (val / m).toFixed(2) + ' ' + this.formatSizes[i];
+                return (val / m).toFixed(2) + ' ' + formatSizes[i];
             }
         }
 
@@ -339,7 +339,11 @@ backupApp.service('AppUtils', function($rootScope, $timeout, $cookies, DialogSer
         return false;
     };
 
-    this.connectionError = function(txt, msg, title = gettextCatalog.getString('Error')) {
+    this.connectionError = function(txt, msg, title) {
+        if (title === undefined) {
+            title = gettextCatalog.getString('Error');
+        }
+
         if (typeof(txt) == typeof('')) {
             if (msg == null)
                 return function(msg) {

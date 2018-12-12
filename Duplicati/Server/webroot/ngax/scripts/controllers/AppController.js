@@ -83,7 +83,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
                 'e-notariado',
                 message,                
                 [gettextCatalog.getString('OK')],
-                () => $location.path('/enotariado')
+                function() { $location.path('/enotariado'); }
             );
         }
     }
