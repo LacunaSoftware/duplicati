@@ -50,7 +50,7 @@ backupApp.service('AppService', function($http, $cookies, $q, $cookies, DialogSe
         }, function errorCallback(response) {
             if (response.status == 401){
                 DialogService.dismissAll();
-                DialogService.accept(gettextCatalog.getString('Acesso não autorizado. É necessário digitar a senha novamente'), function () {
+                DialogService.accept('Acesso não autorizado. É necessário digitar a senha novamente', function () {
                     window.location = appConfig.login_url;
                 });
                 return;
