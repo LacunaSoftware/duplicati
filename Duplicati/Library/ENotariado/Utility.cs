@@ -13,4 +13,11 @@ namespace Duplicati.Library.ENotariado
         Enrolled = 0x1,
         Verified = 0x2
     }
+
+    public class ENotariadoInformation
+    {
+        public Guid ApplicationId;
+        public Guid SubscriptionId;
+        public string CertThumbprint;
+    }
 }
