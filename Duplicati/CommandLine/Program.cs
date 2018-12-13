@@ -1,4 +1,4 @@
-#region Disclaimer / License
+﻿#region Disclaimer / License
 // Copyright (C) 2015, The Duplicati Team
 // http://www.duplicati.com, info@duplicati.com
 //
@@ -24,6 +24,11 @@ using System.Linq;
 using Duplicati.Library.Localization.Short;
 using Duplicati.Library.Utility;
 using System.IO;
+using Duplicati.Library.Common;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using System.Security.Cryptography.X509Certificates;
+using System.Net;
 
 namespace Duplicati.CommandLine
 {
@@ -45,12 +50,15 @@ namespace Duplicati.CommandLine
 
         public static int RealMain(string[] args)
         {
+            // Enable TLS 1.2 support (necessary for communicating with instances hosted on Azure App Services)
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+
             FROM_COMMANDLINE = true;
             try
             {
                 //If we are on Windows, append the bundled "win-tools" programs to the search path
                 //We add it last, to allow the user to override with other versions
-                if (Library.Utility.Utility.IsClientWindows)
+                if (Platform.IsClientWindows)
                 {
                     string wintools = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "win-tools");
                     Environment.SetEnvironmentVariable("PATH",
@@ -141,7 +149,6 @@ namespace Duplicati.CommandLine
 
         private static int ParseCommandLine(TextWriter outwriter, Action<Library.Main.Controller> setup, ref bool verboseErrors, string[] args) {
             List<string> cargs = new List<string>(args);
-
             var tmpparsed = Library.Utility.FilterCollector.ExtractOptions(cargs);
             var options = tmpparsed.Item1;
             var filter = tmpparsed.Item2;
@@ -190,6 +197,23 @@ namespace Duplicati.CommandLine
             if (!options.ContainsKey("auth-username"))
                 if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("AUTH_USERNAME")))
                     options["auth-username"] = System.Environment.GetEnvironmentVariable("AUTH_USERNAME");
+
+            if (!options.ContainsKey("enotariado-auth-file"))
+            {
+                outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
+                return 200;
+            }
+            try
+            {
+                ParseEnotariadoOptions(options["enotariado-auth-file"]);
+            }
+            catch (Exception e)
+            {
+                // if this catch block is modified, make sure to modify ParseEnotariadoOptions
+                // to have consistent behavior
+                outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
+                return 200;
+            }
 
             var showDeletionErrors = verboseErrors;
             Duplicati.Library.Utility.TempFile.RemoveOldApplicationTempFiles((path, ex) =>
@@ -344,27 +368,27 @@ namespace Duplicati.CommandLine
                     filter = newfilter;
 
                 if (!string.IsNullOrWhiteSpace(prependfilter))
-                    filter = Library.Utility.FilterExpression.Combine(Library.Utility.FilterExpression.Deserialize(prependfilter.Split(new string[] {System.IO.Path.PathSeparator.ToString()}, StringSplitOptions.RemoveEmptyEntries)), filter);
+                    filter = Library.Utility.FilterExpression.Combine(Library.Utility.FilterExpression.Deserialize(prependfilter.Split(new string[] { System.IO.Path.PathSeparator.ToString() }, StringSplitOptions.RemoveEmptyEntries)), filter);
 
                 if (!string.IsNullOrWhiteSpace(appendfilter))
-                    filter = Library.Utility.FilterExpression.Combine(filter, Library.Utility.FilterExpression.Deserialize(appendfilter.Split(new string[] {System.IO.Path.PathSeparator.ToString()}, StringSplitOptions.RemoveEmptyEntries)));
+                    filter = Library.Utility.FilterExpression.Combine(filter, Library.Utility.FilterExpression.Deserialize(appendfilter.Split(new string[] { System.IO.Path.PathSeparator.ToString() }, StringSplitOptions.RemoveEmptyEntries)));
 
                 if (!string.IsNullOrWhiteSpace(replacefilter))
-                    filter = Library.Utility.FilterExpression.Deserialize(replacefilter.Split(new string[] {System.IO.Path.PathSeparator.ToString()}, StringSplitOptions.RemoveEmptyEntries));
+                    filter = Library.Utility.FilterExpression.Deserialize(replacefilter.Split(new string[] { System.IO.Path.PathSeparator.ToString() }, StringSplitOptions.RemoveEmptyEntries));
 
                 foreach (KeyValuePair<String, String> keyvalue in opt)
                     options[keyvalue.Key] = keyvalue.Value;
 
                 if (!string.IsNullOrEmpty(newtarget))
-                   {
-                       if (cargs.Count <= 1)
-                           cargs.Add(newtarget);
-                       else
-                           cargs[1] = newtarget;
-                   }
+                {
+                    if (cargs.Count <= 1)
+                        cargs.Add(newtarget);
+                    else
+                        cargs[1] = newtarget;
+                }
 
                 if (cargs.Count >= 1 && cargs[0].Equals("backup", StringComparison.OrdinalIgnoreCase))
-                       cargs.AddRange(newsource);
+                    cargs.AddRange(newsource);
                 else if (newsource.Count > 0)
                     Library.Logging.Log.WriteVerboseMessage(LOGTAG, "NotUsingBackupSources", Strings.Program.SkippingSourceArgumentsOnNonBackupOperation);
 
@@ -375,6 +399,28 @@ namespace Duplicati.CommandLine
                 outwriter.WriteLine(Strings.Program.FailedToParseParametersFileError(filename, e.Message));
                 return false;
             }
+        }
+
+        private static void ParseEnotariadoOptions(string filename)
+        {
+            var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(filename);
+            var enotariadoInfo = JsonConvert.DeserializeObject<Duplicati.Library.ENotariado.ENotariadoInformation>(jsonContent);
+            X509Certificate2 certificate;
+
+#if DEBUG
+            var keyStoreLocation = StoreLocation.CurrentUser;
+#else
+            var keyStoreLocation = StoreLocation.LocalMachine;
+#endif
+            // Checks if certificate already exists and is in local storage,
+            // then retrieves it or throws exception
+            if (!string.IsNullOrWhiteSpace(enotariadoInfo.CertThumbprint))
+                certificate = Duplicati.Library.ENotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
+            else
+                throw new Duplicati.Library.ENotariado.CertificateNotFoundException(enotariadoInfo.CertThumbprint);
+
+            Duplicati.Library.ENotariado.ENotariadoConnection.Init(enotariadoInfo.ApplicationId, certificate, true, enotariadoInfo.SubscriptionId);
+
         }
     }
 }

@@ -57,7 +57,7 @@ backupApp.config(['$routeProvider',
                 templateUrl: 'templates/delete.html?v=1.0.0'
             }).
             when('/log/:backupid', {
-                templateUrl: 'templates/log.html?v=1.0.0'
+                templateUrl: 'templates/backuplog.html?v=1.0.0'
             }).
             when('/log', {
                 templateUrl: 'templates/log.html?v=1.0.0'

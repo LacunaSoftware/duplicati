@@ -19,7 +19,7 @@
         </div>
     </div>
     <!-- .steps -->
-    
+
     <ol class="steps-legend">
         <li ng-class="{active: CurrentStep == 0}" class="step1" ng-click="CurrentStep = 0" translate>General</li>
         <!-- <li ng-class="{active: CurrentStep == 1}" class="step2" ng-click="CurrentStep = 1" translate>Destination</li> -->
@@ -165,7 +165,7 @@
                                         <select parse-filter-content ng-model="Backup.Filters[$index]" ng-options="item.value as item.name for item in AppUtils.filterGroups">
                                         </select>
                                     </div>
-                                    
+
                                     <a class="button" href title="{{'Remove' | translate}}" ng-click="Backup.Filters.splice($index, 1)">X</a>
                                 </li>
 
@@ -254,7 +254,7 @@
                             ng-click="toggleAllowedDays(day.value)"
                           />
                           <label for="dayofweek_{{day.value}}">{{day.name}}</label>
-                        </div>                
+                        </div>
                     </div>
                 </div>
 
@@ -309,7 +309,7 @@
                     <div class="retention-options" ng-show="KeepType == 'versions'">
                         <input type="number" ng-model="Options['keep-versions']"  min="1" />
                     </div>
-                    <div class="hint" ng-show="KeepType == 'versions'" translate>Once there are more backups than the specified number, the oldest backups are deleted.</div> 
+                    <div class="hint" ng-show="KeepType == 'versions'" translate>Once there are more backups than the specified number, the oldest backups are deleted.</div>
 
                     <div class="retention-options" ng-show="KeepType == 'time'">
                         <input type="text" class="number" parse-size-number ng-model="Options['keep-time']" />
@@ -330,7 +330,7 @@
 
                 <div ng-repeat="module in ServerModules">
                     <h2 title="{{module.Description}}">{{module.DisplayName}}</h2>
-                    
+
                     <div class="input" ng-repeat="opt in module.SupportedLocalCommands">
                         <label for="{{module.Key}}-{{opt.Name}}" title="{{opt.LongDescription}}">{{opt.ShortDescription}}</label>
                         <input type="text" title="{{opt.LongDescription}}" name="{{module.Key}}-{{opt.Name}}" id="{{module.Key}}-{{opt.Name}}" ng-model="servermodulesettings[opt.Name]" />

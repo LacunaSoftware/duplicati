@@ -94,7 +94,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
                     dlg.dismiss();
                     dlg = DialogService.dialog('Sucesso', 'Dados redefinidos, a aplicação está pronta para ser reiniciada!');
                     dlg.ondismiss = getSettings
-                }, (resp) => {
+                }, function(resp) {
                     if (dlg != null) dlg.dismiss();
                     AppUtils.connectionError(resp, undefined, 'Falha na conexão');
                     getSettings();

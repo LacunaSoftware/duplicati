@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-07 19:36-0200\n"
-"PO-Revision-Date: 2018-11-07 19:37-0200\n"
+"POT-Creation-Date: 2018-12-12 10:12-0200\n"
+"PO-Revision-Date: 2018-12-12 10:24-0200\n"
 "Last-Translator: Tomas Waldow <tomas@waldow.ws>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/duplicati/"
 "teams/67655/pt_BR/)\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.1.1\n"
 
-#: CommandLine/Program.cs:289
+#: CommandLine/Program.cs:290
 msgid "Toggle automatic updates"
 msgstr "Habilitar atualizações automáticas"
 
-#: CommandLine/Program.cs:289
+#: CommandLine/Program.cs:290
 msgid ""
 "Set this option if you prefer to have the commandline version automatically "
 "update"
@@ -398,7 +398,7 @@ msgstr ""
 #: Library/Backend/GoogleServices/Strings.cs:26
 #: Library/Backend/GoogleServices/Strings.cs:43
 #: Library/Backend/HubiC/Strings.cs:24 Library/Backend/OAuthHelper/Strings.cs:9
-#: Library/Backend/OneDrive/Strings.cs:11
+#: Library/Backend/OneDrive/Strings.cs:6
 msgid "The authorization code"
 msgstr "O código de autorização"
 
@@ -407,7 +407,7 @@ msgstr "O código de autorização"
 #: Library/Backend/GoogleServices/Strings.cs:27
 #: Library/Backend/GoogleServices/Strings.cs:44
 #: Library/Backend/HubiC/Strings.cs:25 Library/Backend/OAuthHelper/Strings.cs:10
-#: Library/Backend/OneDrive/Strings.cs:12
+#: Library/Backend/OneDrive/Strings.cs:7
 #, csharp-format
 msgid "The authorization token retrieved from {0}"
 msgstr "O token de autorização recuperado de {0}"
@@ -1087,7 +1087,7 @@ msgstr ""
 "Falha ao autorizar usando o serviço do OAuth: {0}. se o problema persistir, "
 "tente gerar um novo token de authid de: {1}"
 
-#: Library/Backend/OAuthHelper/Strings.cs:8 Library/Backend/OneDrive/Strings.cs:7
+#: Library/Backend/OAuthHelper/Strings.cs:8
 #, csharp-format
 msgid "Unexpected error code: {0} - {1}"
 msgstr "Código de erro inesperado: {0} - {1}"
@@ -1098,52 +1098,16 @@ msgstr ""
 "O serviço OAuth atualmente está sobrecarregado, tente novamente em algumas "
 "horas"
 
-#: Library/Backend/OneDrive/Strings.cs:5
-#, csharp-format
-msgid ""
-"Failed to authorize using the WLID service: {0}. If the problem persists, try "
-"generating a new authid token from: {1}"
-msgstr ""
-"Falha ao autorizar usando o serviço WLID: {0}. se o problema persistir, tente "
-"gerar um novo authid token de: {1}"
-
-#: Library/Backend/OneDrive/Strings.cs:6
-msgid "Autocreated folder"
-msgstr "Pasta criada automaticamente"
-
 #: Library/Backend/OneDrive/Strings.cs:8
-#, csharp-format
-msgid "Missing the folder: {0}"
-msgstr "Faltando a pasta: {0}"
-
-#: Library/Backend/OneDrive/Strings.cs:9 Library/Compression/Strings.cs:13
-#, csharp-format
-msgid "File not found: {0}"
-msgstr "Arquivo não encontrado: {0}"
-
-#: Library/Backend/OneDrive/Strings.cs:10
-msgid "Microsoft OneDrive"
-msgstr "Microsoft OneDrive"
-
-#: Library/Backend/OneDrive/Strings.cs:13
-#, csharp-format
-msgid ""
-"Stores files on Microsoft OneDrive. Usage of this backend requires that you "
-"agree to the terms in {0} ({1}) and {2} ({3})"
-msgstr ""
-"Armazena arquivos no Microsoft OneDrive. Uso deste backend requer que você "
-"concorde com os termos em {0} ({1}) e {2} ({3})"
-
-#: Library/Backend/OneDrive/Strings.cs:20
 #, csharp-format
 msgid "No Auth-ID was provided - you can get one from {0}"
 msgstr "Nenhum ID de autenticação foi fornecido - você pode obter um de {0}"
 
-#: Library/Backend/OneDrive/Strings.cs:21
+#: Library/Backend/OneDrive/Strings.cs:9
 msgid "Fragment size for large uploads"
 msgstr "Tamanho do fragmento para grandes envios"
 
-#: Library/Backend/OneDrive/Strings.cs:22
+#: Library/Backend/OneDrive/Strings.cs:10
 msgid ""
 "Size of individual fragments which are uploaded separately for large files. It "
 "is recommended to be between 5-10 MiB (though a smaller value may work better "
@@ -1154,11 +1118,11 @@ msgstr ""
 "funcionar melhor em uma conexão mais lenta ou menos confiável) e ser um "
 "múltiplo de 320 KiB."
 
-#: Library/Backend/OneDrive/Strings.cs:23
+#: Library/Backend/OneDrive/Strings.cs:11
 msgid "Number of retries for each fragment"
 msgstr "Número de novas tentativas para cada fragmento"
 
-#: Library/Backend/OneDrive/Strings.cs:24
+#: Library/Backend/OneDrive/Strings.cs:12
 msgid ""
 "Number of retry attempts made for each fragment before failing the overall "
 "file upload"
@@ -1166,11 +1130,11 @@ msgstr ""
 "Número de tentativas feitas para cada fragmento antes que o upload geral do "
 "arquivo falhe"
 
-#: Library/Backend/OneDrive/Strings.cs:25
+#: Library/Backend/OneDrive/Strings.cs:13
 msgid "Millisecond delay between fragment errors"
 msgstr "Atraso de milissegundos entre erros de fragmento"
 
-#: Library/Backend/OneDrive/Strings.cs:26
+#: Library/Backend/OneDrive/Strings.cs:14
 msgid ""
 "Amount of time (in milliseconds) to wait between failures when uploading "
 "fragments"
@@ -1178,11 +1142,11 @@ msgstr ""
 "Tempo (em milissegundos) a aguardar entre falhas ao fazer o upload de "
 "fragmentos"
 
-#: Library/Backend/OneDrive/Strings.cs:31
+#: Library/Backend/OneDrive/Strings.cs:19
 msgid "Microsoft OneDrive v2"
 msgstr "Microsoft OneDrive v2"
 
-#: Library/Backend/OneDrive/Strings.cs:32
+#: Library/Backend/OneDrive/Strings.cs:20
 #, csharp-format
 msgid ""
 "Stores files in Microsoft OneDrive or Microsoft OneDrive for Business via the "
@@ -1193,11 +1157,11 @@ msgstr ""
 "por meio da API do Microsoft Graph. O uso deste backend requer que você "
 "concorde com os termos em {0} ({1}) e {2} ({3})"
 
-#: Library/Backend/OneDrive/Strings.cs:33
+#: Library/Backend/OneDrive/Strings.cs:21
 msgid "Optional ID of the drive"
 msgstr "ID opcional da unidade"
 
-#: Library/Backend/OneDrive/Strings.cs:34
+#: Library/Backend/OneDrive/Strings.cs:22
 #, csharp-format
 msgid ""
 "ID of the drive to store data in. If no drive is specified, the default "
@@ -1207,11 +1171,11 @@ msgstr ""
 "unidade padrão do OneDrive ou do OneDrive for Business será usada por meio de "
 "'{0}'."
 
-#: Library/Backend/OneDrive/Strings.cs:39
+#: Library/Backend/OneDrive/Strings.cs:27
 msgid "Microsoft SharePoint v2"
 msgstr "Microsoft SharePoint v2"
 
-#: Library/Backend/OneDrive/Strings.cs:40
+#: Library/Backend/OneDrive/Strings.cs:28
 #, csharp-format
 msgid ""
 "Stores files in a Microsoft SharePoint site via the Microsoft Graph API. Usage "
@@ -1221,28 +1185,28 @@ msgstr ""
 "Microsoft Graph. O uso deste backend requer que você concorde com os termos em "
 "{0} ({1}) e {2} ({3})"
 
-#: Library/Backend/OneDrive/Strings.cs:41
+#: Library/Backend/OneDrive/Strings.cs:29
 msgid "ID of the site"
 msgstr "ID do site"
 
-#: Library/Backend/OneDrive/Strings.cs:42
+#: Library/Backend/OneDrive/Strings.cs:30
 msgid "ID of the site to store data in"
 msgstr "ID do site para armazenar dados em"
 
-#: Library/Backend/OneDrive/Strings.cs:43
+#: Library/Backend/OneDrive/Strings.cs:31
 msgid "No site ID was provided"
 msgstr "Nenhum ID do site foi fornecido"
 
-#: Library/Backend/OneDrive/Strings.cs:44
+#: Library/Backend/OneDrive/Strings.cs:32
 #, csharp-format
 msgid "Conflicting site IDs used: given {0} but found {1}"
 msgstr "IDs de sites conflitantes usados: dados {0} mas encontrados {1}"
 
-#: Library/Backend/OneDrive/Strings.cs:49
+#: Library/Backend/OneDrive/Strings.cs:37
 msgid "Microsoft Office 365 Group"
 msgstr "Grupo do Microsoft Office 365"
 
-#: Library/Backend/OneDrive/Strings.cs:50
+#: Library/Backend/OneDrive/Strings.cs:38
 #, csharp-format
 msgid ""
 "Stores files in a Microsoft Office 365 Group via the Microsoft Graph API. "
@@ -1260,37 +1224,37 @@ msgstr ""
 "explicitamente o ID do site do SharePoint por meio de --site-id). O uso deste "
 "backend requer que você concorde com os termos em {0} ({1}) e {2} ({3})"
 
-#: Library/Backend/OneDrive/Strings.cs:51
+#: Library/Backend/OneDrive/Strings.cs:39
 msgid "ID of the group"
 msgstr "ID do grupo"
 
-#: Library/Backend/OneDrive/Strings.cs:52
+#: Library/Backend/OneDrive/Strings.cs:40
 msgid "ID of the group to store data in"
 msgstr "ID do grupo para armazenar dados em"
 
-#: Library/Backend/OneDrive/Strings.cs:53
+#: Library/Backend/OneDrive/Strings.cs:41
 msgid "Email address of the group"
 msgstr "Endereço de email do grupo"
 
-#: Library/Backend/OneDrive/Strings.cs:54
+#: Library/Backend/OneDrive/Strings.cs:42
 msgid "Email address of the group to store data in"
 msgstr "Endereço de email do grupo para armazenar dados em"
 
-#: Library/Backend/OneDrive/Strings.cs:55
+#: Library/Backend/OneDrive/Strings.cs:43
 msgid "No group ID or group email address was provided"
 msgstr "Nenhum ID de grupo ou endereço de email do grupo foi fornecido"
 
-#: Library/Backend/OneDrive/Strings.cs:56
+#: Library/Backend/OneDrive/Strings.cs:44
 #, csharp-format
 msgid "No groups were found with the given email address: {0}"
 msgstr "Nenhum grupo foi encontrado com o endereço de e-mail fornecido: {0}"
 
-#: Library/Backend/OneDrive/Strings.cs:57
+#: Library/Backend/OneDrive/Strings.cs:45
 #, csharp-format
 msgid "Multiple groups were found with the given email address: {0}"
 msgstr "Vários grupos foram encontrados com o endereço de e-mail fornecido: {0}"
 
-#: Library/Backend/OneDrive/Strings.cs:58
+#: Library/Backend/OneDrive/Strings.cs:46
 #, csharp-format
 msgid "Conflicting group IDs used: given {0} but found {1}"
 msgstr "IDs de grupo conflitantes usados: dado {0} mas encontrado {1}"
@@ -2125,6 +2089,11 @@ msgstr ""
 msgid "Zip compression"
 msgstr "Compressão Zip"
 
+#: Library/Compression/Strings.cs:13
+#, csharp-format
+msgid "File not found: {0}"
+msgstr "Arquivo não encontrado: {0}"
+
 #: Library/Compression/Strings.cs:16
 msgid "Archive not opened for writing"
 msgstr "Arquivo não aberto para escrita"
@@ -2280,8 +2249,9 @@ msgid "Extra GPG commandline options for encryption"
 msgstr "Opções de linha de comando GPG adicionais para criptografia"
 
 #: Library/Encryption/Strings.cs:22
-#, csharp-format
-msgid "Failed to execute GPG at \"\"{0}\" {1}\": {2}"
+#, fuzzy, csharp-format
+#| msgid "Failed to execute GPG at \"\"{0}\" {1}\": {2}"
+msgid "Failed to execute GPG with \"{0} {1}\": {2}"
 msgstr "Falha na execução GPG em \"\"{0}\" {1}\": {2}"
 
 #: Library/Encryption/Strings.cs:23
@@ -2349,11 +2319,11 @@ msgstr "Falha ao invocar GnuPG, o programa não descarregará a saída"
 msgid "Failure while invoking GnuPG, program won't terminate"
 msgstr "Falha ao invocar o GnuPG, o programa não terminará"
 
-#: Library/ENotariado/ENotariadoConnection.cs:122
-#: Library/ENotariado/ENotariadoConnection.cs:159
-#: Library/ENotariado/ENotariadoConnection.cs:226
-#: Library/ENotariado/ENotariadoConnection.cs:335
-#: Library/ENotariado/ENotariadoConnection.cs:353
+#: Library/ENotariado/ENotariadoConnection.cs:124
+#: Library/ENotariado/ENotariadoConnection.cs:161
+#: Library/ENotariado/ENotariadoConnection.cs:228
+#: Library/ENotariado/ENotariadoConnection.cs:337
+#: Library/ENotariado/ENotariadoConnection.cs:355
 #, csharp-format
 msgid "Response code: '{0}'. Content: '{1}'."
 msgstr "Código de resposta: '{0}'. Conteudo: '{1}'."
@@ -2574,12 +2544,12 @@ msgstr ""
 msgid "Listing indicates file {0} is deleted correctly"
 msgstr "A listagem indica que o arquivo {0} foi excluído corretamente"
 
-#: Library/Main/Controller.cs:337
+#: Library/Main/Controller.cs:340
 #, csharp-format
 msgid "No email specified, please use --{0}"
 msgstr "Nenhum e-mail especificado, por favor use --{0}"
 
-#: Library/Main/Controller.cs:439
+#: Library/Main/Controller.cs:442
 msgid "Operation aborted by request"
 msgstr "A operação foi abortada por solicitação"
 
@@ -2660,34 +2630,18 @@ msgstr ""
 "Hashes de lista de blocos foram reparadas, porém o banco de dados foi "
 "corrompido depois, mudanças revertidas"
 
-#: Library/Main/DatabaseLocator.cs:130
+#: Library/Main/DatabaseLocator.cs:132
 #, csharp-format
 msgid "Multiple sources found for: {0}"
 msgstr "Várias fontes encontradas para: {0}"
 
-#: Library/Main/DatabaseLocator.cs:168
+#: Library/Main/DatabaseLocator.cs:170
 msgid "Unable to find a unique name for the database, please use --dbpath"
 msgstr ""
 "Não foi possível achar um nome único para o banco de dados, por favor use --"
 "dbpath"
 
-#: Library/Main/Operation/BackupHandler.cs:381
-#, csharp-format
-msgid ""
-"The backup contains files that belong to another operating system. Proceeding "
-"with a backup would cause the database to contain paths from two different "
-"operation systems, which is not supported. To proceed without losing remote "
-"data, delete all filesets and make sure the --{0} option is set, then run the "
-"backup again to re-use the existing data on the remote store."
-msgstr ""
-"O backup contém arquivos que pertencem à outro sistema operacional. Prosseguir "
-"com um backup iria fazer com que o banco de dados contenha caminhos de dois "
-"sistemas operacionais diferentes, o que não é possível. Para prosseguir sem "
-"perder dados remotos, remova todos os arquivos e garanta que a opção --{0} "
-"esteja definida, execute o backup novamente para reutilizer os dados "
-"existentes no armazenamento remoto."
-
-#: Library/Main/Operation/BackupHandler.cs:384
+#: Library/Main/Operation/BackupHandler.cs:387
 #: Library/Main/Operation/RepairHandler.cs:114
 msgid ""
 "The database was only partially recreated. This database may be incomplete and "
@@ -2698,7 +2652,7 @@ msgstr ""
 "estar incomplete e o processo de reparação não tem permissão de alterar "
 "arquivos remotos pois isto pode resultar em perda de dados."
 
-#: Library/Main/Operation/BackupHandler.cs:387
+#: Library/Main/Operation/BackupHandler.cs:390
 msgid ""
 "The database was attempted repaired, but the repair did not complete. This "
 "database may be incomplete and the backup process cannot continue. You may "
@@ -2709,7 +2663,7 @@ msgstr ""
 "não pode continuar. Você pode remover o banco de dados local e tentar recriá-"
 "lo."
 
-#: Library/Main/Operation/BackupHandler.cs:453
+#: Library/Main/Operation/BackupHandler.cs:456
 #, csharp-format
 msgid ""
 "The previous backup has time {0}, but this backup has time {1}. Something is "
@@ -2718,7 +2672,7 @@ msgstr ""
 "O backup anterior foi feito em {0} e este backup {1}. Há algo de errado com o "
 "relógio."
 
-#: Library/Main/Operation/BackupHandler.cs:471
+#: Library/Main/Operation/BackupHandler.cs:474
 msgid "Unable to generate a unique fileset name"
 msgstr "Não foi possível gerar um nome único para o conjunto de arquivos"
 
@@ -2923,6 +2877,11 @@ msgstr ""
 #, csharp-format
 msgid "Repair not possible, missing {0} blocks.\\n"
 msgstr "Reparação impossível, {0} blocos faltando.\\n"
+
+#: Library/Main/Operation/RestoreHandler.cs:472
+msgid "Restore completed without errors but no files were restored"
+msgstr ""
+"Restauração finalizada sem erros porém nenhum arquivo foi de fato restaurado"
 
 #: Library/Main/Strings.cs:8
 #, csharp-format
@@ -4786,11 +4745,17 @@ msgid "Accept any server certificate"
 msgstr "Aceita vários servidores de certificados"
 
 #: Library/Modules/Builtin/Strings.cs:24
+#, fuzzy
+#| msgid ""
+#| "If your server certificate is reported as invalid (eg. with self-signed "
+#| "certificates), you can supply the certificate hash to approve it anyway. "
+#| "The hash value must be entered in hex format without spaces. You can enter "
+#| "multiple hashes separated by commas."
 msgid ""
 "If your server certificate is reported as invalid (eg. with self-signed "
-"certificates), you can supply the certificate hash to approve it anyway. The "
-"hash value must be entered in hex format without spaces. You can enter "
-"multiple hashes separated by commas."
+"certificates), you can supply the certificate hash (SHA256) to approve it "
+"anyway. The hash value must be entered in hex format without spaces or colons. "
+"You can enter multiple hashes separated by commas."
 msgstr ""
 "Se o seu certificado de servidor for reportado como inválido (por exemplo, com "
 "certificados auto-assinados), você pode fornecer o hash do certificado para "
@@ -5567,28 +5532,28 @@ msgstr ""
 "Erro: {1}\n"
 "Base de dados NÃO foi atualizada."
 
-#: Library/Utility/FilterGroups.cs:182
+#: Library/Utility/FilterGroups.cs:185
 #, csharp-format
 msgid "{0}: Selects no filters."
 msgstr "{0}: não seleciona filtros."
 
-#: Library/Utility/FilterGroups.cs:183
+#: Library/Utility/FilterGroups.cs:186
 #, csharp-format
 msgid "{0}: A set of default exclude filters, currently evaluates to: {1}."
 msgstr ""
 "{0}: Um conjunto de filtros de exclusão padrão, atualmente avaliado como: {1}."
 
-#: Library/Utility/FilterGroups.cs:184
+#: Library/Utility/FilterGroups.cs:187
 #, csharp-format
 msgid "{0}: A set of default include filters, currently evaluates to: {1}."
 msgstr "{0}: Um conjunto de filtros de inclusão padrão avalia atualmente: {1}."
 
-#: Library/Utility/FilterGroups.cs:195
+#: Library/Utility/FilterGroups.cs:198
 #, csharp-format
 msgid " Aliases: {0}"
 msgstr " Aliases: {0}"
 
-#: Library/Utility/FilterGroups.cs:208
+#: Library/Utility/FilterGroups.cs:211
 #, csharp-format
 msgid ""
 "{0}: Files that are owned by the system or not suited to be backed up. This "
@@ -5599,7 +5564,7 @@ msgstr ""
 "inclui todos os arquivos protegidos relatados pelo sistema operacional. A "
 "maioria dos usuários deve pelo menos aplicar esses filtros."
 
-#: Library/Utility/FilterGroups.cs:210
+#: Library/Utility/FilterGroups.cs:213
 #, csharp-format
 msgid ""
 "{0}: Files that belong to the operating system. These files are restored when "
@@ -5608,14 +5573,14 @@ msgstr ""
 "{0}: Arquivos que pertencem ao sistema operacional. Esses arquivos são "
 "restaurados quando o sistema operacional é reinstalado."
 
-#: Library/Utility/FilterGroups.cs:212
+#: Library/Utility/FilterGroups.cs:215
 #, csharp-format
 msgid "{0}: Files and folders that are known to be storage of temporary data."
 msgstr ""
 "{0}: Arquivos e pastas que são conhecidos como armazenamento de dados "
 "temporários."
 
-#: Library/Utility/FilterGroups.cs:214
+#: Library/Utility/FilterGroups.cs:217
 #, csharp-format
 msgid ""
 "{0}: Files and folders that are known cache locations for the operating system "
@@ -5624,7 +5589,7 @@ msgstr ""
 "{0}: arquivos e pastas que são locais de cache conhecidos para o sistema "
 "operacional e vários aplicativos"
 
-#: Library/Utility/FilterGroups.cs:216
+#: Library/Utility/FilterGroups.cs:219
 #, csharp-format
 msgid "{0}: Installed programs and their libraries, but not their settings."
 msgstr ""
@@ -5748,48 +5713,48 @@ msgstr ""
 "A cadeia {0} não representa um nome de grupo de filtros conhecido. Os valores "
 "válidos são: {1}"
 
-#: Server/Runner.cs:565
+#: Server/Runner.cs:564
 msgid "Bugreport ready"
 msgstr "Relatório de falhas pronto"
 
-#: Server/Runner.cs:566
+#: Server/Runner.cs:565
 msgid "Bugreport is ready for download"
 msgstr "O relatório de falhas está pronto para download"
 
-#: Server/Runner.cs:618
+#: Server/Runner.cs:617
 #, csharp-format
 msgid "Failed while executing \"{0}\" with id: {1}"
 msgstr "Erro durante a execução de \"{0}\" com id: {1}"
 
-#: Server/Runner.cs:687 Server/Runner.cs:793
+#: Server/Runner.cs:686 Server/Runner.cs:792
 msgid "Error"
 msgstr "Erro"
 
-#: Server/Runner.cs:687 Server/Runner.cs:793
+#: Server/Runner.cs:686 Server/Runner.cs:792
 #, csharp-format
 msgid "Error while running {0}"
 msgstr "Erro ao executar {0}"
 
-#: Server/Runner.cs:755 Server/Runner.cs:791
+#: Server/Runner.cs:754 Server/Runner.cs:790
 msgid "Warning"
 msgstr "Aviso"
 
-#: Server/Runner.cs:755 Server/Runner.cs:791
+#: Server/Runner.cs:754 Server/Runner.cs:790
 #, csharp-format
 msgid "Warning while running {0}"
 msgstr "Aviso ao executar {0}"
 
-#: Server/Runner.cs:757
+#: Server/Runner.cs:756
 #, csharp-format
 msgid "Errors affected {0} file(s)"
 msgstr "Erros afetaram {0} arquivo(s)"
 
-#: Server/Runner.cs:759 Server/Runner.cs:797
+#: Server/Runner.cs:758 Server/Runner.cs:796
 #, csharp-format
 msgid "Got {0} error(s)"
 msgstr "Houveram {0} erro(s)"
 
-#: Server/Runner.cs:760 Server/Runner.cs:796
+#: Server/Runner.cs:759 Server/Runner.cs:795
 #, csharp-format
 msgid "Got {0} warning(s)"
 msgstr "Houveram {0} avisos(s)"
@@ -5997,85 +5962,85 @@ msgstr "Impossível abrir um socket para comunicação, tentar portas: {0}"
 msgid "Found update"
 msgstr "Atualização encontrada"
 
-#: Server/WebServer/RESTMethods/Backup.cs:51
+#: Server/WebServer/RESTMethods/Backup.cs:52
 msgid "Invalid or missing time"
 msgstr "Tempo inválido ou ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:335
+#: Server/WebServer/RESTMethods/Backup.cs:347
 msgid "No target path supplied"
 msgstr "Nenhum caminho de destino fornecido"
 
-#: Server/WebServer/RESTMethods/Backup.cs:337
+#: Server/WebServer/RESTMethods/Backup.cs:349
 msgid "Target path is relative, please supply a fully qualified path"
 msgstr ""
 "O caminho de destino é relativo, por favor forneça um caminho totalmente "
 "qualificado"
 
-#: Server/WebServer/RESTMethods/Backup.cs:341
+#: Server/WebServer/RESTMethods/Backup.cs:353
 msgid "A file already exists at the new location"
 msgstr "Um arquivo já existe no novo local"
 
-#: Server/WebServer/RESTMethods/Backup.cs:359
-#: Server/WebServer/RESTMethods/Backup.cs:422
-#: Server/WebServer/RESTMethods/Backup.cs:520
-#: Server/WebServer/RESTMethods/Backup.cs:541
-#: Server/WebServer/RESTMethods/Backup.cs:580
+#: Server/WebServer/RESTMethods/Backup.cs:371
+#: Server/WebServer/RESTMethods/Backup.cs:434
+#: Server/WebServer/RESTMethods/Backup.cs:532
+#: Server/WebServer/RESTMethods/Backup.cs:553
+#: Server/WebServer/RESTMethods/Backup.cs:592
 msgid "Invalid or missing backup id"
 msgstr "ID de backup inválido ou ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:393
+#: Server/WebServer/RESTMethods/Backup.cs:405
 #, csharp-format
 msgid "Invalid component: {0}"
 msgstr "Componente inválido: {0}"
 
-#: Server/WebServer/RESTMethods/Backup.cs:489
+#: Server/WebServer/RESTMethods/Backup.cs:501
 #: Server/WebServer/RESTMethods/Task.cs:63
 msgid "Invalid request"
 msgstr "Solicitação inválida"
 
-#: Server/WebServer/RESTMethods/Backup.cs:501
+#: Server/WebServer/RESTMethods/Backup.cs:513
 msgid "Missing backup object"
 msgstr "Objeto de backup ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:511
-#: Server/WebServer/RESTMethods/Backups.cs:178
+#: Server/WebServer/RESTMethods/Backup.cs:523
+#: Server/WebServer/RESTMethods/Backups.cs:181
 msgid "Data object had no backup entry"
 msgstr "Objeto de dados não tinha entrada de backup"
 
-#: Server/WebServer/RESTMethods/Backup.cs:547
-#: Server/WebServer/RESTMethods/Backups.cs:210
+#: Server/WebServer/RESTMethods/Backup.cs:559
+#: Server/WebServer/RESTMethods/Backups.cs:234
 msgid "There already exists a backup with the name: "
 msgstr "Já existe um backup com o nome: "
 
-#: Server/WebServer/RESTMethods/Backup.cs:569
-#: Server/WebServer/RESTMethods/Backups.cs:231
+#: Server/WebServer/RESTMethods/Backup.cs:581
+#: Server/WebServer/RESTMethods/Backups.cs:255
 #, csharp-format
 msgid "Unable to parse backup or schedule object: {0}"
 msgstr "Não é possível analisar o objeto de backup ou cronograma: {0}"
 
-#: Server/WebServer/RESTMethods/Backup.cs:571
+#: Server/WebServer/RESTMethods/Backup.cs:583
 #, csharp-format
 msgid "Unable to save backup or schedule: {0}"
 msgstr "Não foi possível salvar o backup ou agendamento: {0}"
 
-#: Server/WebServer/RESTMethods/Backup.cs:592
+#: Server/WebServer/RESTMethods/Backup.cs:604
 msgid "Missing captcha"
 msgstr "Captcha ausente"
 
-#: Server/WebServer/RESTMethods/Backup.cs:598
+#: Server/WebServer/RESTMethods/Backup.cs:610
 msgid "Invalid captcha"
 msgstr "Captcha inválido"
 
-#: Server/WebServer/RESTMethods/Backup.cs:678
+#: Server/WebServer/RESTMethods/Backup.cs:690
 msgid "Retrieves, updates or deletes an existing backup and schedule"
 msgstr "Recupera, atualiza ou deleta um backup e cronograma existentes"
 
-#: Server/WebServer/RESTMethods/Backups.cs:233
+#: Server/WebServer/RESTMethods/Backups.cs:257
 #, csharp-format
 msgid "Unable to save schedule or backup object: {0}"
 msgstr "Não é possível salvar o cronograma ou o objeto de backup: {0}"
 
-#: Server/WebServer/RESTMethods/Backups.cs:238
+#: Server/WebServer/RESTMethods/Backups.cs:262
 msgid "Return a list of current backups and their schedules"
 msgstr "Retorna uma lista de backups atuais e seus cronogramas"
 
@@ -6124,23 +6089,23 @@ msgstr "Somente commandos de \"abortar\" são permitidos"
 msgid "No task key found"
 msgstr "Nenhuma chave de tarefa encontrada"
 
-#: Server/WebServer/RESTMethods/ENotariado.cs:27
-#: Server/WebServer/RESTMethods/ENotariado.cs:60
+#: Server/WebServer/RESTMethods/ENotariado.cs:74
+#: Server/WebServer/RESTMethods/ENotariado.cs:101
 #: Server/WebServer/RESTMethods/ServerState.cs:81
-#: Server/WebServer/RESTMethods/SystemInfo.cs:59
+#: Server/WebServer/RESTMethods/SystemInfo.cs:61
 #: Server/WebServer/RESTMethods/Updates.cs:57
 msgid "No such action"
 msgstr "Ação inexistente"
 
-#: Server/WebServer/RESTMethods/Filesystem.cs:43
+#: Server/WebServer/RESTMethods/Filesystem.cs:46
 msgid "No path parameter was found"
 msgstr "Parâmetro de caminho não encontrado"
 
-#: Server/WebServer/RESTMethods/Filesystem.cs:72
+#: Server/WebServer/RESTMethods/Filesystem.cs:75
 msgid "The path parameter must start with a forward-slash"
 msgstr "O parâmetro de caminho deve começar com uma barra para frente"
 
-#: Server/WebServer/RESTMethods/Filesystem.cs:148
+#: Server/WebServer/RESTMethods/Filesystem.cs:151
 msgid "Failed to process the path: "
 msgstr "Falha ao processor o caminho: "
 
@@ -6215,6 +6180,44 @@ msgstr "Não é possível analisar o objeto de configurações: {0}"
 #: Server/WebServer/RESTMethods/UISettings.cs:65
 msgid "Unable to parse settings object"
 msgstr "Não é possível analisar o objeto de configurações"
+
+#~ msgid ""
+#~ "Failed to authorize using the WLID service: {0}. If the problem persists, "
+#~ "try generating a new authid token from: {1}"
+#~ msgstr ""
+#~ "Falha ao autorizar usando o serviço WLID: {0}. se o problema persistir, "
+#~ "tente gerar um novo authid token de: {1}"
+
+#~ msgid "Autocreated folder"
+#~ msgstr "Pasta criada automaticamente"
+
+#~ msgid "Missing the folder: {0}"
+#~ msgstr "Faltando a pasta: {0}"
+
+#~ msgid "Microsoft OneDrive"
+#~ msgstr "Microsoft OneDrive"
+
+#~ msgid ""
+#~ "Stores files on Microsoft OneDrive. Usage of this backend requires that you "
+#~ "agree to the terms in {0} ({1}) and {2} ({3})"
+#~ msgstr ""
+#~ "Armazena arquivos no Microsoft OneDrive. Uso deste backend requer que você "
+#~ "concorde com os termos em {0} ({1}) e {2} ({3})"
+
+#~ msgid ""
+#~ "The backup contains files that belong to another operating system. "
+#~ "Proceeding with a backup would cause the database to contain paths from two "
+#~ "different operation systems, which is not supported. To proceed without "
+#~ "losing remote data, delete all filesets and make sure the --{0} option is "
+#~ "set, then run the backup again to re-use the existing data on the remote "
+#~ "store."
+#~ msgstr ""
+#~ "O backup contém arquivos que pertencem à outro sistema operacional. "
+#~ "Prosseguir com um backup iria fazer com que o banco de dados contenha "
+#~ "caminhos de dois sistemas operacionais diferentes, o que não é possível. "
+#~ "Para prosseguir sem perder dados remotos, remova todos os arquivos e "
+#~ "garanta que a opção --{0} esteja definida, execute o backup novamente para "
+#~ "reutilizer os dados existentes no armazenamento remoto."
 
 #~ msgid "Open"
 #~ msgstr "Abrir"

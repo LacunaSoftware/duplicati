@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
 using Duplicati.Library.Localization.Short;
+using Duplicati.Library.ENotariado;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -27,6 +28,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
     {
         public class AddOrUpdateBackupData
         {
+            public Boolean IsUnencryptedOrPassphraseStored { get; set;}
             public Database.Schedule Schedule { get; set;}
             public Database.Backup Backup { get; set;}
         }
@@ -37,7 +39,8 @@ namespace Duplicati.Server.WebServer.RESTMethods
             var backups = Program.DataConnection.Backups;
 
             var all = from n in backups
-                select new AddOrUpdateBackupData() {
+                select new AddOrUpdateBackupData {
+                IsUnencryptedOrPassphraseStored = Program.DataConnection.IsUnencryptedOrPassphraseStored(long.Parse(n.ID)),
                 Backup = (Database.Backup)n,
                 Schedule = 
                     (from x in schedules
@@ -180,6 +183,27 @@ namespace Duplicati.Server.WebServer.RESTMethods
                 }
 
                 data.Backup.ID = null;
+
+                // Injecting ENotariadoConnection.BackupPassword into every new backup
+                // Much better than retrieving the password on the client and injecting there
+                var passphraseSetting = new Serialization.Implementations.Setting()
+                {
+                    Name = "passphrase",
+                    Value = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult()
+                };
+                if (data.Backup.Settings != null && data.Backup.Settings.Length > 0)
+                {
+                    var tempArray = data.Backup.Settings;
+                    Array.Resize(ref tempArray, tempArray.Length + 1);
+                    tempArray[tempArray.Length - 1] = passphraseSetting;
+                    data.Backup.Settings = tempArray;
+                }
+                else
+                {
+                    data.Backup.Settings = new Duplicati.Server.Serialization.Interface.ISetting[1];
+                    data.Backup.Settings[0] = passphraseSetting;
+                }
+                // End of injecting backup password into backup
 
                 if (Duplicati.Library.Utility.Utility.ParseBool(info.Request.Form["temporary"].Value, false))
                 {

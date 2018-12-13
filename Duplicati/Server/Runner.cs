@@ -184,18 +184,21 @@ namespace Duplicati.Server
                 filters);
         }
 
-        public static IRunnerData CreateRestoreTask(Duplicati.Server.Serialization.Interface.IBackup backup, string[] filters, DateTime time, string restoreTarget, bool overwrite, bool restore_permissions, bool skip_metadata)
+        public static IRunnerData CreateRestoreTask(Duplicati.Server.Serialization.Interface.IBackup backup, string[] filters, 
+                                                    DateTime time, string restoreTarget, bool overwrite, bool restore_permissions, 
+                                                    bool skip_metadata, string passphrase)
         {
-            var dict = new Dictionary<string, string>();
-            dict["time"] = Duplicati.Library.Utility.Utility.SerializeDateTime(time.ToUniversalTime());
+            var dict = new Dictionary<string, string>
+            {
+                ["time"] = Library.Utility.Utility.SerializeDateTime(time.ToUniversalTime()),
+                ["overwrite"] = overwrite? Boolean.TrueString : Boolean.FalseString,
+                ["restore-permissions"] = restore_permissions ? Boolean.TrueString : Boolean.FalseString,
+                ["skip-metadata"] = skip_metadata ? Boolean.TrueString : Boolean.FalseString,
+                ["passphrase"] = passphrase,
+                ["allow-passphrase-change"] = Boolean.TrueString
+            };
             if (!string.IsNullOrWhiteSpace(restoreTarget))
                 dict["restore-path"] = SpecialFolders.ExpandEnvironmentVariables(restoreTarget);
-            if (overwrite)
-                dict["overwrite"] = "true";
-            if (restore_permissions)
-                dict["restore-permissions"] = "true";
-            if (skip_metadata)
-                dict["skip-metadata"] = "true";
 
             return CreateTask(
                 DuplicatiOperation.Restore,
@@ -307,26 +310,22 @@ namespace Duplicati.Server
                     }
                 }
             }
+
+            public void SetBackendProgress(Library.Main.IBackendProgress progress)
+            {
+                lock (m_lock)
+                    m_backendProgress = progress;
+            }
+
+            public void SetOperationProgress(Library.Main.IOperationProgress progress)
+            {
+                lock (m_lock)
+                    m_operationProgress = progress;
+            }
+
             public void WriteMessage(Library.Logging.LogEntry entry)
             {
                 // Do nothing.  Implementation needed for ILogDestination interface.
-            }
-
-            public Duplicati.Library.Main.IBackendProgress BackendProgress
-            {
-                set
-                {
-                    lock(m_lock)
-                        m_backendProgress = value;
-                }
-            }
-            public Duplicati.Library.Main.IOperationProgress OperationProgress
-            {
-                set
-                {
-                    lock(m_lock)
-                        m_operationProgress = value;
-                }
             }
             #endregion
         }
@@ -426,7 +425,7 @@ namespace Duplicati.Server
                 try
                 {
                     var sink = new MessageSink(data.TaskID, null);
-                    Program.GenerateProgressState = () => sink.Copy();
+                    Program.GenerateProgressState = sink.Copy;
                     Program.StatusEventNotifyer.SignalNewEvent();
 
                     ((CustomRunnerTask)data).Run(sink);
@@ -592,7 +591,7 @@ namespace Duplicati.Server
                                 if (Library.Utility.Utility.ParseBoolOption(data.ExtraOptions, "delete-local-db"))
                                 {
                                     string dbpath;
-                                    options.TryGetValue("db-path", out dbpath);
+                                    options.TryGetValue("dbpath", out dbpath);
 
                                     if (!string.IsNullOrWhiteSpace(dbpath) && System.IO.File.Exists(dbpath))
                                         System.IO.File.Delete(dbpath);
@@ -802,7 +801,7 @@ namespace Duplicati.Server
                     message,
                     null,
                     backup.ID,
-                    null,
+                    "backup:show-log",
                     null,
                     null,
                     "backup:show-log",

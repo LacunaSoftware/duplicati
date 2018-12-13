@@ -83,7 +83,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
                 'e-notariado',
                 message,                
                 [gettextCatalog.getString('OK')],
-                () => $location.path('/enotariado')
+                function() { $location.path('/enotariado'); }
             );
         }
     }
@@ -209,10 +209,4 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         }
 
     }, AppUtils.connectionError);
-
-    AppService.get('/enotariado/backup-password').then(
-        function(resp) {
-            $scope.BackupENotariadoPassword = resp.data.Password;
-        }, () => {}
-    );
 });
