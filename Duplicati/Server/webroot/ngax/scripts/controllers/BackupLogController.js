@@ -20,7 +20,6 @@ backupApp.controller('BackupLogController', function($scope, $routeParams, AppUt
     $scope.Page = 'general';  
 
     $scope.LoadMoreGeneralData = function() { 
-        console.log(LogService);
         LogService.LoadMoreData('/backup/' + $scope.BackupID + '/log', $scope.GeneralData, 'ID', PAGE_SIZE)
             .then(function(result) {
                 if (!result)
