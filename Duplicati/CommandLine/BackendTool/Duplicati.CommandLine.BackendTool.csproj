@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <Prefer32Bit>False</Prefer32Bit>
     <RootNamespace>Duplicati.CommandLine.BackendTool</RootNamespace>
-    <AssemblyName>Duplicati.CommandLine.BackendTool</AssemblyName>
+    <AssemblyName>Backup.Enotariado.CommandLine.BackendTool</AssemblyName>
     <AssemblyOriginatorKeyFile>..\Duplicati.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />

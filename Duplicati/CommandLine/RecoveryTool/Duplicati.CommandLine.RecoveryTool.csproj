@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <Prefer32Bit>False</Prefer32Bit>
     <RootNamespace>Duplicati.CommandLine.RecoveryTool</RootNamespace>
-    <AssemblyName>Duplicati.CommandLine.RecoveryTool</AssemblyName>
+    <AssemblyName>Backup.Enotariado.CommandLine.RecoveryTool</AssemblyName>
     <AssemblyOriginatorKeyFile>Duplicati.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseMSBuildEngine>false</UseMSBuildEngine>
@@ -87,7 +87,7 @@
       <Project>{10D2D1B7-C664-41D8-9B3A-00040C3D421B}</Project>
       <Name>Duplicati.Library.Main</Name>
     </ProjectReference>
-  <ProjectReference Include="..\..\Library\Common\Duplicati.Library.Common.csproj">
+    <ProjectReference Include="..\..\Library\Common\Duplicati.Library.Common.csproj">
       <Project>{D63E53E4-A458-4C2F-914D-92F715F58ACF}</Project>
       <Name>Duplicati.Library.Common</Name>
     </ProjectReference>
