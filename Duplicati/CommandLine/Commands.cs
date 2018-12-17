@@ -20,6 +20,11 @@ using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using Duplicati.Library.Common.IO;
+using System.Security.Cryptography.X509Certificates;
+using Duplicati.Library.ENotariado;
+using Newtonsoft.Json.Linq;
+using ENotariado.Backup.Api.ApplicationEnrollment;
+using Newtonsoft.Json;
 
 namespace Duplicati.CommandLine
 {
@@ -1079,6 +1084,41 @@ namespace Duplicati.CommandLine
             }
 
             return 0;
+        }
+
+        public static int ExportNewCertificate(TextWriter outwriter, Action<Duplicati.Library.Main.Controller> setup, List<string> args, Dictionary<string, string> options, Library.Utility.IFilter filter)
+        {
+            string outputFile = null;
+            options.TryGetValue("output-file", out outputFile);
+            if (string.IsNullOrEmpty(outputFile))
+            {
+                outputFile = "enrollment-info.json";
+            }
+
+#if DEBUG
+            var keyStoreLocation = StoreLocation.CurrentUser;
+#else
+            var keyStoreLocation = StoreLocation.LocalMachine;
+#endif
+
+            var certificate = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+            
+            // ApplicationEnrollRequest is the same object used by the server to enroll
+            // the machine  
+            var enrollment = new ApplicationEnrollRequest
+            {
+                Certificate = certificate.RawData,
+                Description = Environment.MachineName
+            };
+
+            using (StreamWriter file = File.CreateText(outputFile))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, enrollment);
+            }
+
+            return 0;
+
         }
 
         public static int Vacuum(

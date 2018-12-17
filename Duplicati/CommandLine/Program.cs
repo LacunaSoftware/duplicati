@@ -97,7 +97,7 @@ namespace Duplicati.CommandLine
                 knownCommands["purge"] = Commands.PurgeFiles;
                 knownCommands["list-broken-files"] = Commands.ListBrokenFiles;
                 knownCommands["purge-broken-files"] = Commands.PurgeBrokenFiles;
-
+                knownCommands["export-new-certificate"] = Commands.ExportNewCertificate;
                 knownCommands["compact"] = Commands.Compact;
                 knownCommands["create-report"] = Commands.CreateBugReport;
                 knownCommands["compare"] = Commands.ListChanges;
@@ -198,23 +198,6 @@ namespace Duplicati.CommandLine
                 if (!string.IsNullOrEmpty(System.Environment.GetEnvironmentVariable("AUTH_USERNAME")))
                     options["auth-username"] = System.Environment.GetEnvironmentVariable("AUTH_USERNAME");
 
-            if (!options.ContainsKey("enotariado-auth-file"))
-            {
-                outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
-                return 200;
-            }
-            try
-            {
-                ParseEnotariadoOptions(options["enotariado-auth-file"]);
-            }
-            catch (Exception e)
-            {
-                // if this catch block is modified, make sure to modify ParseEnotariadoOptions
-                // to have consistent behavior
-                outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
-                return 200;
-            }
-
             var showDeletionErrors = verboseErrors;
             Duplicati.Library.Utility.TempFile.RemoveOldApplicationTempFiles((path, ex) =>
             {
@@ -224,6 +207,25 @@ namespace Duplicati.CommandLine
 
             string command = cargs[0];
             cargs.RemoveAt(0);
+
+            if (command != "export-new-certificate") {
+                if (!options.ContainsKey("enotariado-auth-file"))
+                {
+                    outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
+                    return 200;
+                }
+                try
+                {
+                    ParseEnotariadoOptions(options["enotariado-auth-file"]);
+                }
+                catch (Exception e)
+                {
+                    // if this catch block is modified, make sure to modify ParseEnotariadoOptions
+                    // to have consistent behavior
+                    outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
+                    return 200;
+                }
+            }
 
             if (verboseErrors)
             {
