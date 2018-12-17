@@ -6,10 +6,10 @@
 # need for translation as many options are described in the UI as well and 
 # they are translated there.
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe
-> Backup.Enotariado.CommandLine.exe help
+> duplicati.commandline.exe
+> duplicati.commandline.exe help
 
-See Backup.Enotariado.CommandLine.exe help <topic> for more information.
+See duplicati.commandline.exe help <topic> for more information.
   General: example, changelog
   Commands: backup, find, restore, delete, compact, test, compare, purge, vacuum
   Repair: repair, affected, list-broken-files, purge-broken-files
@@ -24,7 +24,7 @@ http://www.duplicati.com/              Version: %VERSION%
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help changelog
+> duplicati.commandline.exe help changelog
 
 Show the last changes to Duplicati
 ==================================
@@ -33,8 +33,8 @@ Show the last changes to Duplicati
   %MONO%"%APP_PATH%" changelog
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help system-info
-> Backup.Enotariado.CommandLine.exe help systeminfo
+> duplicati.commandline.exe help system-info
+> duplicati.commandline.exe help systeminfo
 
 Show system information as seen by Duplicati
 ============================================
@@ -43,8 +43,8 @@ Show system information as seen by Duplicati
   %MONO%"%APP_PATH%" system-info
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help example
-> Backup.Enotariado.CommandLine.exe help examples
+> duplicati.commandline.exe help example
+> duplicati.commandline.exe help examples
 
 Make an encrypted backup
 ========================
@@ -66,7 +66,7 @@ Restore a specific file
     
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help backup
+> duplicati.commandline.exe help backup
   
 Usage: backup <storage-URL> "<source-path>" [<options>]
 
@@ -94,8 +94,8 @@ Usage: backup <storage-URL> "<source-path>" [<options>]
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help find
-> Backup.Enotariado.CommandLine.exe help list
+> duplicati.commandline.exe help find
+> duplicati.commandline.exe help list
 
 Usage: find <storage-URL> ["<filename>"] [<options>]
 
@@ -114,7 +114,7 @@ Usage: find <storage-URL> ["<filename>"] [<options>]
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help restore
+> duplicati.commandline.exe help restore
 
 Usage: restore <storage-URL> ["<filename>"] [<options>]
   
@@ -132,7 +132,7 @@ Usage: restore <storage-URL> ["<filename>"] [<options>]
 
     
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help delete
+> duplicati.commandline.exe help delete
 
 Usage: delete <storage-URL> [<options>]
   
@@ -152,7 +152,7 @@ Usage: delete <storage-URL> [<options>]
   
   
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help compact
+> duplicati.commandline.exe help compact
 
 Usage: compact <storage-URL> [<options>]
   
@@ -169,7 +169,7 @@ Usage: compact <storage-URL> [<options>]
 
   
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help compare
+> duplicati.commandline.exe help compare
 
 Usage: compare <storage-URL> [<base-version>] [<compare-to>] [<options>]
 
@@ -185,7 +185,7 @@ Usage: compare <storage-URL> [<base-version>] [<compare-to>] [<options>]
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help create-report
+> duplicati.commandline.exe help create-report
 
 Usage: create-report <storage-URL> <output-file> [<options>]
 
@@ -195,7 +195,7 @@ Usage: create-report <storage-URL> <output-file> [<options>]
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help repair
+> duplicati.commandline.exe help repair
 
 Usage: repair <storage-URL> [<options>]
   
@@ -204,7 +204,7 @@ Usage: repair <storage-URL> [<options>]
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help purge
+> duplicati.commandline.exe help purge
 
 Usage: purge <storage-URL> <filenames> [<options>]
   
@@ -223,10 +223,10 @@ Usage: purge <storage-URL> <filenames> [<options>]
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help broken
-> Backup.Enotariado.CommandLine.exe help broken-files
-> Backup.Enotariado.CommandLine.exe help list-broken-files
-> Backup.Enotariado.CommandLine.exe help purge-broken-files
+> duplicati.commandline.exe help broken
+> duplicati.commandline.exe help broken-files
+> duplicati.commandline.exe help list-broken-files
+> duplicati.commandline.exe help purge-broken-files
 
 Usage: list-broken-files <storage-URL> [<options>]
   
@@ -241,8 +241,8 @@ Usage: purge-broken-files <storage-URL> [<options>]
     
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help test
-> Backup.Enotariado.CommandLine.exe help verify
+> duplicati.commandline.exe help test
+> duplicati.commandline.exe help verify
 
 Usage: test <storage-URL> <samples> [<options>]
   
@@ -259,30 +259,30 @@ Usage: test <storage-URL> <samples> [<options>]
 
   
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help test-filters
-> Backup.Enotariado.CommandLine.exe help test-filter
+> duplicati.commandline.exe help test-filters
+> duplicati.commandline.exe help test-filter
 
 Usage: test-filters <source-path> [<options>]
   
   Scans the source files and tests against the filters specified, the console output shows which files and folders are examined and the result.
     
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help affected
+> duplicati.commandline.exe help affected
 
 Usage: affected <storage-URL> <remote-filename> [<remote-filenames>] [<options>]
   
   Returns a report explaining what backup sets and files are affected by a remote file. You can use this option to see what source files are affected if one or more remote files are damaged or deleted. Notes that this command requires a local database to be present, if the database is not found automatically, you can set --dbpath to point to the database to use.
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help vacuum
+> duplicati.commandline.exe help vacuum
 
 Usage: vacuum <storage-URL> [<options>]
 
   Rebuilds the local database, repacking it into a minimal amount of disk space. 
   
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help debug
-> Backup.Enotariado.CommandLine.exe help logging
+> duplicati.commandline.exe help debug
+> duplicati.commandline.exe help logging
 
 Duplicati provides information for debugging and logging purposes. By default, all debugging and logging is turned off.
 
@@ -299,8 +299,8 @@ Duplicati provides information for debugging and logging purposes. By default, a
 
     
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help encryption
-> Backup.Enotariado.CommandLine.exe help compression
+> duplicati.commandline.exe help encryption
+> duplicati.commandline.exe help compression
 
 Duplicati offers various options for the used compression and encryption modules.
 
@@ -316,7 +316,7 @@ Duplicati offers various options for the used compression and encryption modules
 %OPTION:no-encryption%
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help gpg
+> duplicati.commandline.exe help gpg
 
 Duplicati is shipped with an interface to GNU Privacy Guard. It requires that the gpg executable is available on the system. On Windows it is assumed that this is in the default installation folder under program files, under Linux and OSX it is assumed that the program is available via the PATH environment variable. It is possible to supply the path to GPG using the --gpg-program-path switch.
 
@@ -325,7 +325,7 @@ Options:
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help file
+> duplicati.commandline.exe help file
 
 Duplicati can use the local file system to store backups. The following target URL formats can be used:
 
@@ -340,8 +340,8 @@ Options:
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help tahoe
-> Backup.Enotariado.CommandLine.exe help tahoelafs
+> duplicati.commandline.exe help tahoe
+> duplicati.commandline.exe help tahoelafs
 
 Duplicati can use the TahoeLAFS to store backups. The following target URL format is used:
   tahoe://hostname:port/uri/$DIRCAP
@@ -350,7 +350,7 @@ Options:
 %MODULEOPTIONS%
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help ftp
+> duplicati.commandline.exe help ftp
 
 Duplicati can use FTP servers to store backups. The following target URL formats can be used:
   ftp://hostname/folder
@@ -360,7 +360,7 @@ Options:
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help ssh
+> duplicati.commandline.exe help ssh
 
 Duplicati can use SSH servers to store backups. The following target URL formats can be used:
   ssh://hostname/folder
@@ -370,7 +370,7 @@ Options:
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help webdav
+> duplicati.commandline.exe help webdav
 
 Duplicati can use WebDAV servers to store backups. The following target URL formats can be used:
   webdav://hostname/folder"
@@ -380,7 +380,7 @@ Options:
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help s3
+> duplicati.commandline.exe help s3
 
 Duplicati can use S3-compatible servers to store backups. The following target URL format is used:
   s3://bucketname/prefix
@@ -390,7 +390,7 @@ Options:
 
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help onedrive
+> duplicati.commandline.exe help onedrive
 
 Duplicati can use Microsoft Onedrive to store backups. The following target URL format is used:
   onedrive://folder/subfolder
@@ -399,8 +399,8 @@ Options:
 %MODULEOPTIONS%
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help date
-> Backup.Enotariado.CommandLine.exe help time
+> duplicati.commandline.exe help date
+> duplicati.commandline.exe help time
 
 Duplicati supports absolute and relative dates and times:
 
@@ -413,7 +413,7 @@ Duplicati supports absolute and relative dates and times:
   Y, M, D, W, h, m, s --> Relative date and time: year, month, day, week, hour, minute, second. Example: 2M10D5h is now + 2 months + 10 days + 5 hours.
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help size
+> duplicati.commandline.exe help size
 
 Whenever a size is required, you can use any of the following suffixes:
 
@@ -425,8 +425,8 @@ Whenever a size is required, you can use any of the following suffixes:
 For speed limits, use the same format. If you enter 1MB this will be 1MB/sec.
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help filter
-> Backup.Enotariado.CommandLine.exe help filters
+> duplicati.commandline.exe help filter
+> duplicati.commandline.exe help filters
 
 Duplicati can apply globbing and regex filter rules to backup and restore specific files only. Globbing filters can be used in file names. To specify a regex filter put the filter in [brackets]. 
   Globbing: *.txt
@@ -445,17 +445,17 @@ Inside scripts and the commandline --parameters-file, where multiple filters are
   +*.txt%PATH_SEPARATOR%-[.*\.xyz]%PATH_SEPARATOR%+*
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help filter-group
-> Backup.Enotariado.CommandLine.exe help filter-groups
+> duplicati.commandline.exe help filter-group
+> duplicati.commandline.exe help filter-groups
 
 Duplicati has several built-in groups of filters, which include commonly excluded files and folders for different operating systems. These sets can be specified via the --include/--exclude parameter by putting their name in {curly brackets}.
 
 %FILTER_GROUPS_LONG%
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help mail
-> Backup.Enotariado.CommandLine.exe help email
-> Backup.Enotariado.CommandLine.exe help send-mail
+> duplicati.commandline.exe help mail
+> duplicati.commandline.exe help email
+> duplicati.commandline.exe help send-mail
 
 Duplicati can send email notifications after each operation. Use the send-mail command to test this:
   
@@ -495,19 +495,19 @@ Duplicati can send email notifications after each operation. Use the send-mail c
       The path to the local folders involved (i.e. the folders being backed up)
       
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help advanced
-> Backup.Enotariado.CommandLine.exe help option
-> Backup.Enotariado.CommandLine.exe help options
+> duplicati.commandline.exe help advanced
+> duplicati.commandline.exe help option
+> duplicati.commandline.exe help options
 
 Duplicati offers more options than listed in the other topics. Those additional options should only be used with care. For normal operation none of them should ever be required. Here is a complete list of options supported by Duplicati:
 
 %MAINOPTIONS%
 
 # =============================================================================
-> Backup.Enotariado.CommandLine.exe help returncodes
-> Backup.Enotariado.CommandLine.exe help exitcodes
-> Backup.Enotariado.CommandLine.exe help statuscodes
-> Backup.Enotariado.CommandLine.exe help errorlevel
+> duplicati.commandline.exe help returncodes
+> duplicati.commandline.exe help exitcodes
+> duplicati.commandline.exe help statuscodes
+> duplicati.commandline.exe help errorlevel
 
 Duplicati reports the following return/exit codes:
   0 - Success

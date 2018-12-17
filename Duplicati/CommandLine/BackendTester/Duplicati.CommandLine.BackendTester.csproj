@@ -8,7 +8,7 @@
     <Prefer32Bit>False</Prefer32Bit>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Duplicati.CommandLine.BackendTester</RootNamespace>
-    <AssemblyName>Backup.Enotariado.CommandLine.BackendTester</AssemblyName>
+    <AssemblyName>Duplicati.CommandLine.BackendTester</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
