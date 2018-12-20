@@ -16,12 +16,16 @@ namespace Duplicati.Library.ENotariado
         private const string SignatureAlgorithmOid = "1.2.840.113549.1.1.11"; // SHA-256 with RSA
         private const string SignatureAlgorithmName = "SHA256";
         private const int KeySize = 4096;
+        private static readonly bool isMono = Type.GetType("Mono.Runtime") != null;
 
         /// <summary>
         /// Creates a self-signed X509 certificate and stores it in the specified StoreLocation
         /// </summary>
         public static X509Certificate2 CreateSelfSignedCertificate(StoreLocation keyStoreLocation, string commonName = "localhost", bool allowExport = false)
         {
+            if (isMono)
+                allowExport = true;
+
             var keyName = Guid.NewGuid().ToString();
             var key = CreateKey(keyStoreLocation, keyName, allowExport);
             var cert = IssueSelfSignedCertificate(key, commonName);
