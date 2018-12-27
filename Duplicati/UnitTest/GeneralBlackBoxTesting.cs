@@ -25,12 +25,11 @@ namespace Duplicati.UnitTest
 {
     public class GeneralBlackBoxTesting
     {
-        private static readonly string SOURCE_FOLDERS =
-            Path.Combine(
-                string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("UNITTEST_BASEFOLDER"))
+        private static readonly string SOURCE_FOLDERS_ROOT = string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("UNITTEST_BASEFOLDER"))
                 ? Path.Combine(Library.Utility.Utility.HOME_PATH, "duplicati_testdata")
-                : Environment.GetEnvironmentVariable("UNITTEST_BASEFOLDER")
-            , "DSMCBE");
+                : Environment.GetEnvironmentVariable("UNITTEST_BASEFOLDER");
+
+        private static readonly string SOURCE_FOLDERS = Path.Combine(SOURCE_FOLDERS_ROOT, "DSMCBE");
 
         protected IEnumerable<string> TestFolders
         {
@@ -44,6 +43,27 @@ namespace Duplicati.UnitTest
                     orderby int.Parse(m.Groups["number"].Value)
                     select n;
             }
+        }
+
+        [OneTimeSetUp]
+        public void PrepareSourceData()
+        {
+            if (Directory.Exists(SOURCE_FOLDERS))
+                return;
+
+            BasicSetupHelper.ProgressWriteLine($"Source folder \"{SOURCE_FOLDERS}\" does not exist");
+            using (var client = new System.Net.WebClient())
+            {
+                var zipPath = Path.Combine(SOURCE_FOLDERS_ROOT, "DSMCBE.zip");
+                BasicSetupHelper.ProgressWriteLine($"Downloading DSMCBE.zip to \"{zipPath}\"");
+                client.DownloadFile("https://s3.amazonaws.com/duplicati-test-file-hosting/DSMCBE.zip", zipPath);
+                BasicSetupHelper.ProgressWriteLine($"Extracting \"{zipPath}\" to \"{SOURCE_FOLDERS_ROOT}\"");
+                System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, SOURCE_FOLDERS_ROOT);
+                BasicSetupHelper.ProgressWriteLine($"Deleting \"{zipPath}\"");
+                System.IO.File.Delete(zipPath);
+                BasicSetupHelper.ProgressWriteLine($"PrepareSourceData done");
+            }
+            
         }
 
         protected Dictionary<string, string> TestOptions
@@ -62,6 +82,7 @@ namespace Duplicati.UnitTest
                 return x == "x" ? null : x;
             }
         }
+
         [Test]
         [Category("SVNData")]
         public void TestWithSVNShort()
