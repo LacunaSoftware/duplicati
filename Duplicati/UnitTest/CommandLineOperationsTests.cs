@@ -48,6 +48,22 @@ namespace Duplicati.UnitTest
         public override void PrepareSourceData()
         {
             base.PrepareSourceData();
+            if (Directory.Exists(SOURCEFOLDER))
+                return;
+
+            BasicSetupHelper.ProgressWriteLine($"Source folder \"{SOURCEFOLDER}\" does not exist");
+            using (var client = new System.Net.WebClient())
+            {
+                var zipPath = Path.Combine(BASEFOLDER, "data.zip");
+                BasicSetupHelper.ProgressWriteLine($"Downloading data.zip to \"{zipPath}\"");
+                client.DownloadFile("https://s3.amazonaws.com/duplicati-test-file-hosting/data.zip", zipPath);
+                BasicSetupHelper.ProgressWriteLine($"Extracting \"{zipPath}\" to \"{BASEFOLDER}\"");
+                System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, BASEFOLDER);
+                BasicSetupHelper.ProgressWriteLine($"Deleting \"{zipPath}\"");
+                System.IO.File.Delete(zipPath);
+                BasicSetupHelper.ProgressWriteLine($"PrepareSourceData done");
+            }
+
         }
 
         [Test]
@@ -55,8 +71,6 @@ namespace Duplicati.UnitTest
         [Category("BulkNormal")]
         public void RunCommands()
         {
-            if (Directory.Exists(DATAFOLDER))
-                PrepareSourceData();
             DoRunCommands(TARGETFOLDER);
         }
 
@@ -65,8 +79,6 @@ namespace Duplicati.UnitTest
         [Category("BulkNoSize")]
         public void RunCommandsWithoutSize()
         {
-            if (Directory.Exists(DATAFOLDER))
-                PrepareSourceData();
             DoRunCommands(new SizeOmittingBackend().ProtocolKey + "://" + TARGETFOLDER);
         }
 

@@ -208,7 +208,7 @@ namespace Duplicati.CommandLine
             string command = cargs[0];
             cargs.RemoveAt(0);
 
-            if (command != "export-new-certificate") {
+            if (command != "export-new-certificate" && cargs.Count > 0 && cargs[0].Contains("enotariado://")) {
                 if (!options.ContainsKey("enotariado-auth-file"))
                 {
                     outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
