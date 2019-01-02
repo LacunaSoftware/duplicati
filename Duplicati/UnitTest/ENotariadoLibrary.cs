@@ -41,28 +41,34 @@ namespace Duplicati.UnitTest
             byte[] randomBytes = new byte[50];
             Random rnd = new Random();
 
-            // Creating certificate
+            ProgressWriteLine("Issuing self-signed certificate");
             var cert = Library.ENotariado.CryptoUtils.CreateSelfSignedCertificate(storeLocation);
 
-            // Retrieving certificate
+            ProgressWriteLine("Retrieving self-signed certificate from store location");
             var cert2 = Library.ENotariado.CryptoUtils.GetCertificate(storeLocation, cert.Thumbprint);
 
-            // Testing that both are the same
+            ProgressWriteLine("Asserting both certificates are equal");
             Assert.AreEqual(cert, cert2);
 
-            // Testing that both can sign and verify random bytes
+            ProgressWriteLine("Generating random bytes and putting them into an array");
             rnd.NextBytes(randomBytes);
-            var signedData1 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(randomBytes, cert);
-            var signedData2 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(randomBytes, cert2);
 
-            var verify1 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(randomBytes, signedData1, cert);
-            var verify2 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(randomBytes, signedData2, cert2);
+            ProgressWriteLine("Signing byte array with both certificates");
+            var signature1 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(randomBytes, cert);
+            var signature2 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(randomBytes, cert2);
 
-            Assert.AreEqual(signedData1, signedData2);
+            ProgressWriteLine("Asserting both signatures are equal");
+            Assert.AreEqual(signature1, signature2);
+
+            ProgressWriteLine("Verifying signature with both certificates");
+            var verify1 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(randomBytes, signature1, cert);
+            var verify2 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(randomBytes, signature2, cert2);
+
+            ProgressWriteLine("Asserting both signatures are verified");
             Assert.True(verify1);
             Assert.True(verify2);
 
-            // Deleting certificate
+            ProgressWriteLine("Removing certificate from store");
             X509Store store = new X509Store(StoreName.My, storeLocation);
             store.Open(OpenFlags.ReadWrite);
             try
