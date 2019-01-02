@@ -28,10 +28,8 @@ namespace Duplicati.UnitTest
         private static X509Certificate2 Certificate;
 
         [OneTimeSetUp]
-        public override void PrepareSourceData()
+        public void Setup()
         {
-            base.PrepareSourceData();
-
             ProgressWriteLine("Issuing self-signed certificate");
             Certificate = Library.ENotariado.CryptoUtils.CreateSelfSignedCertificate(TestStoreLocation);
         }
