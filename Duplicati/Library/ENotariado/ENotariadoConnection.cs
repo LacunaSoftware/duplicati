@@ -81,6 +81,7 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static void Init(Guid applicationId, X509Certificate2 cert, bool isVerified = false, Guid subscriptionId = new Guid() /* new Guid() creates Guid.Empty */)
         {
+            ResetData();
             Logging.Log.WriteVerboseMessage(LOGTAG, "Init", $"Initializing e-notariado configuration. Certificate Thumbprint: {cert.Thumbprint}. ApplicationId: {applicationId}");
 
             Certificate = cert;
