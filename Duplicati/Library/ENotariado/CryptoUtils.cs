@@ -62,9 +62,17 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static byte[] SignDataWithCertificate(byte[] data, X509Certificate2 cert)
         {
-            return ((RSACryptoServiceProvider) cert.PrivateKey).SignData(data, SignatureAlgorithmName);
+            return ((RSACryptoServiceProvider)cert.PrivateKey).SignData(data, SignatureAlgorithmName);
         }
-        
+
+        /// <summary>
+        /// Signs byte array using the provided certificate's private key.
+        /// </summary>
+        public static bool VerifyDataWithCertificate(byte[] data, byte[] signature, X509Certificate2 cert)
+        {
+            return ((RSACryptoServiceProvider)cert.PublicKey.Key).VerifyData(data, SignatureAlgorithmName, signature);
+        }
+
         private static RSACryptoServiceProvider CreateKey(StoreLocation keyStoreLocation, string keyName, bool allowExport)
         {
 
