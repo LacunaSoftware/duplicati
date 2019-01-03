@@ -70,15 +70,15 @@ namespace Duplicati.UnitTest
             rnd.NextBytes(randomBytes);
 
             ProgressWriteLine("Signing byte array with both certificates");
-            var signature1 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(randomBytes, Certificate);
-            var signature2 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(randomBytes, retrievedCertificate);
+            var signature1 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(Certificate, randomBytes);
+            var signature2 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(retrievedCertificate, randomBytes);
 
             ProgressWriteLine("Asserting both signatures are equal");
             Assert.AreEqual(signature1, signature2);
 
             ProgressWriteLine("Verifying signature with both certificates");
-            var verify1 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(randomBytes, signature1, Certificate);
-            var verify2 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(randomBytes, signature2, retrievedCertificate);
+            var verify1 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(Certificate, randomBytes, signature1);
+            var verify2 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(retrievedCertificate, randomBytes, signature2);
 
             ProgressWriteLine("Asserting both signatures are verified");
             Assert.IsTrue(verify1);

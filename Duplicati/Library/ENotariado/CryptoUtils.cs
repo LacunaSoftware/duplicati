@@ -16,6 +16,8 @@ namespace Duplicati.Library.ENotariado
         private const string SignatureAlgorithmOid = "1.2.840.113549.1.1.11"; // SHA-256 with RSA
         private const string SignatureAlgorithmName = "SHA256";
         private const int KeySize = 4096;
+
+        // Checks whether the program is running inside mono
         private static readonly bool isMono = Type.GetType("Mono.Runtime") != null;
 
         /// <summary>
@@ -23,6 +25,11 @@ namespace Duplicati.Library.ENotariado
         /// </summary>
         public static X509Certificate2 CreateSelfSignedCertificate(StoreLocation keyStoreLocation, string commonName = "localhost", bool allowExport = false)
         {
+            // If the program is being executed under mono, setting CspProviderFlags.UseNonExportableKey
+            // in the key used for the certificate will cause an exception when trying to export the
+            // public parameters of the key, this does not happen when normally executing under Windows.
+            // The expceted behavior is to allow exporting of public params and disallow exporting of private
+            // params.
             if (isMono)
                 allowExport = true;
 
@@ -32,47 +39,10 @@ namespace Duplicati.Library.ENotariado
             var certWithKey = ImportCertificate(cert, key, keyStoreLocation);
             return certWithKey;
         }
-        
-        /// <summary>
-        /// Gets certificate with specified certThumbprint from the specified StoreLocation
-        /// </summary>
-        public static X509Certificate2 GetCertificate(StoreLocation keyStoreLocation, string certThumbprint)
-        {
-            X509Certificate2 cert;
-            X509Store store = new X509Store(StoreName.My, keyStoreLocation);
-            store.Open(OpenFlags.ReadOnly);
-            try
-            {
-                var certCollection = store.Certificates.Find(X509FindType.FindByThumbprint, certThumbprint, false);
-                if (certCollection.Count == 0)
-                {
-                    throw new CertificateNotFoundException(certThumbprint);
-                }
-                cert = certCollection[0];
-            }
-            finally
-            {
-                store.Close();
-            }
-            return cert;
-        }
 
         /// <summary>
-        /// Signs byte array using the provided certificate's private key.
+        /// Creates an asymmetric key with the appropriate parameters
         /// </summary>
-        public static byte[] SignDataWithCertificate(byte[] data, X509Certificate2 cert)
-        {
-            return ((RSACryptoServiceProvider)cert.PrivateKey).SignData(data, SignatureAlgorithmName);
-        }
-
-        /// <summary>
-        /// Signs byte array using the provided certificate's private key.
-        /// </summary>
-        public static bool VerifyDataWithCertificate(byte[] data, byte[] signature, X509Certificate2 cert)
-        {
-            return ((RSACryptoServiceProvider)cert.PublicKey.Key).VerifyData(data, SignatureAlgorithmName, signature);
-        }
-
         private static RSACryptoServiceProvider CreateKey(StoreLocation keyStoreLocation, string keyName, bool allowExport)
         {
 
@@ -113,6 +83,9 @@ namespace Duplicati.Library.ENotariado
             return rsa;
         }
 
+        /// <summary>
+        /// Self-explanatory method name
+        /// </summary>
         private static X509Certificate2 IssueSelfSignedCertificate(RSACryptoServiceProvider rsa, string commonName)
         {
 
@@ -141,10 +114,13 @@ namespace Duplicati.Library.ENotariado
             return cert;
         }
 
+        /// <summary>
+        /// Associate the key with the certificate.
+        /// </summary>
         private static X509Certificate2 ImportCertificate(X509Certificate2 cert, RSA rsa, StoreLocation keyStoreLocation)
         {
 
-            // Associate the key with the certificate. On .NET Frameworks starting on 4.7.2, as well as on .NET Standard/Core,
+            // On .NET Frameworks starting on 4.7.2, as well as on .NET Standard/Core,
             // this should be done with the CopyWithPrivateKey() extension method. On .NET Frameworks 4.6-4.7.1, however,
             // that method is not available, so we must perform the operation with the old syntax. Note that the old syntax
             // itself cannot be used indistinctly because on .NET Core it throws a PlatformNotSupportedException.
@@ -167,6 +143,46 @@ namespace Duplicati.Library.ENotariado
             }
 
             return certWithKey;
+        }
+
+        /// <summary>
+        /// Gets certificate with specified certThumbprint from the specified StoreLocation
+        /// </summary>
+        public static X509Certificate2 GetCertificate(StoreLocation keyStoreLocation, string certThumbprint)
+        {
+            X509Certificate2 cert;
+            X509Store store = new X509Store(StoreName.My, keyStoreLocation);
+            store.Open(OpenFlags.ReadOnly);
+            try
+            {
+                var certCollection = store.Certificates.Find(X509FindType.FindByThumbprint, certThumbprint, false);
+                if (certCollection.Count == 0)
+                {
+                    throw new CertificateNotFoundException(certThumbprint);
+                }
+                cert = certCollection[0];
+            }
+            finally
+            {
+                store.Close();
+            }
+            return cert;
+        }
+
+        /// <summary>
+        /// Signs byte array using the provided certificate's private key.
+        /// </summary>
+        public static byte[] SignDataWithCertificate(X509Certificate2 cert, byte[] data)
+        {
+            return ((RSACryptoServiceProvider)cert.PrivateKey).SignData(data, SignatureAlgorithmName);
+        }
+
+        /// <summary>
+        /// Verifies that the provided signature is a valid hash of the data byte array using the provided certificate.
+        /// </summary>
+        public static bool VerifyDataWithCertificate(X509Certificate2 cert, byte[] data, byte[] signature)
+        {
+            return ((RSACryptoServiceProvider)cert.PublicKey.Key).VerifyData(data, SignatureAlgorithmName, signature);
         }
     }
 }
