@@ -12,7 +12,7 @@ namespace Duplicati.CommandLine.Strings {
         public static string SupportedCompressionModulesHeader { get { return LC.L(@"Supported compression modules:"); } }
         public static string SupportedEncryptionModulesHeader { get { return LC.L(@"Supported encryption modules:"); } }
 
-        public static string EnotariadoOptionError { get { return "O arquivo de configurações do e-notariado está faltando ou é inválido. Por favor confira o valor da opção --enotariado-auth-file.";  } }
+        public static string EnotariadoOptionError { get { return "O arquivo de configurações do e-notariado está faltando ou é inválido. Por favor recadastre a aplicação com o comando \"enroll-enotariado\".";  } }
         public static string SupportedOptionsHeader { get { return LC.L(@"Supported options:"); } }
         public static string ModuleIsLoadedAutomatically { get { return LC.L(@"Module is loaded automatically, use --disable-module to prevent this"); } }
         public static string ModuleIsNotLoadedAutomatically { get { return LC.L(@"Module is not loaded automatically, use --enable-module to load it"); } }
