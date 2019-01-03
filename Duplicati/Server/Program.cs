@@ -743,6 +743,9 @@ namespace Duplicati.Server
             StatusEventNotifyer.SignalNewEvent();
         }
 
+        /// <summary>
+        /// Initializes the e-notariado module
+        /// </summary>
         public static void InitializeENotariado()
         {
 #if DEBUG
@@ -766,13 +769,17 @@ namespace Duplicati.Server
             }
             CertificateThumbprint = ENotariadoCertificate.Thumbprint;
 
+            // If the application is not fully enrolled on startup, reset everything and start from scratch, waiting
+            // for a new manual enroll
             if (ENotariadoApplicationId == Guid.Empty || ENotariadoSubscriptionId == Guid.Empty ||
                 !ENotariadoIsVerified || !ENotariadoIsEnrolled || string.IsNullOrWhiteSpace(CertificateThumbprint))
             {
                 ResetENotariado();
             }
-
-            ENotariadoConnection.Init(ENotariadoApplicationId, ENotariadoCertificate, ENotariadoIsVerified, ENotariadoSubscriptionId);
+            else
+            {
+                ENotariadoConnection.Init(ENotariadoApplicationId, ENotariadoCertificate, ENotariadoIsVerified, ENotariadoSubscriptionId);
+            }
 
             ENotariadoVerificationTimer = new Timer(async _ => await VerifyENotariado(), null, 5000, 1000);
         }
@@ -790,7 +797,7 @@ namespace Duplicati.Server
                 try
                 {
                     // check if is already enrolled with certificate
-                    ENotariadoApplicationId = await ENotariadoConnection.Enroll(applicationId, accessTicket, ENotariadoCertificate);
+                    ENotariadoApplicationId = await ENotariadoConnection.Enrollment(ENotariadoCertificate, applicationId, accessTicket);
                     ENotariadoIsEnrolled = true;
                 }
                 catch (Exception ex)

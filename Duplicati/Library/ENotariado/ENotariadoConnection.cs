@@ -178,22 +178,18 @@ namespace Duplicati.Library.ENotariado
         }
 
         /// <summary>
-        /// Enrolls in the e-notariado server with predefined applicationId, accessTicked and certificate
+        /// Enrolls in the e-notariado server with predefined certificate. If application id and accessTicket are provided,
+        /// it just confirms a pre-approved enrollment
         /// </summary>
+        /// <param name="cert">Certificate used in enrollment and future authentications</param>
         /// <param name="applicationId">Application Id received from e-notariado in the pre-approve phase</param>
         /// <param name="accessTicket">Access ticket received from e-notariado in the pre-approve phase</param>
-        /// <param name="cert">Certificate to finish enrollment</param>
         /// <returns>
         /// A task that represents the asynchronous operation.
-        /// The task result contains the GUID of the application
+        /// The task result contains the Application Id after enrollment
         /// </returns>
-        public static async Task<Guid> Enroll(string applicationId, string accessTicket, X509Certificate2 cert)
+        public static async Task<Guid> Enrollment(X509Certificate2 cert, string applicationId = null, string accessTicket = null)
         {
-            /// At this point, the application is already pre-enrolled in e-notariado after responding to an API
-            /// request with a small image. WHen the e-notariado receives the image, it pre-enrolls the application
-            /// and calls the API again with defined applicationId and accessTicket, used then here to confirm the
-            /// enrollment
-            
             ResetData();
             var enrollment = new ApplicationEnrollRequest
             {
@@ -201,9 +197,22 @@ namespace Duplicati.Library.ENotariado
                 Description = Environment.MachineName
             };
 
-            Logging.Log.WriteVerboseMessage(LOGTAG, "Enroll", $"Enrolling in e-notariado with certificate {cert.Thumbprint}");
+            Logging.Log.WriteVerboseMessage(LOGTAG, "Enrollment", $"Enrolling in e-notariado with certificate {cert.Thumbprint}");
 
-            var uri = $"{BaseURI}/app-enrollments/pre-approved/{applicationId}?access_ticket={accessTicket}";
+            string uri;
+            if (applicationId == null && accessTicket == null)
+            {
+                uri = $"{BaseURI}/app-enrollments";
+            }
+            else
+            {
+                /// At this point, the application is already pre-enrolled in e-notariado after responding to an API
+                /// request with a small image. WHen the e-notariado receives the image, it pre-enrolls the application
+                /// and calls the API again with defined applicationId and accessTicket, used then here to confirm the
+                /// enrollment
+                uri = $"{BaseURI}/app-enrollments/pre-approved/{applicationId}?access_ticket={accessTicket}";
+            }
+
             var jsonInString = JsonConvert.SerializeObject(enrollment);
 
             var response = await client.PostAsync(uri, new StringContent(jsonInString, Encoding.UTF8, "application/json"));
