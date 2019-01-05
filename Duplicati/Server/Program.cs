@@ -10,6 +10,8 @@ using Duplicati.Library.Common.IO;
 
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Duplicati.Server
 {
@@ -133,11 +135,6 @@ namespace Duplicati.Server
         /// Certificate used for authentication in e-notariado
         /// </summary>
         public static X509Certificate2 ENotariadoCertificate;
-
-        /// <summary>
-        /// Certificate used for authentication in e-notariado
-        /// </summary>
-        public static Timer ENotariadoVerificationTimer;
 
         /// <summary>
         /// The log redirect handler
@@ -743,31 +740,74 @@ namespace Duplicati.Server
             StatusEventNotifyer.SignalNewEvent();
         }
 
-        /// <summary>
-        /// Initializes the e-notariado module
-        /// </summary>
-        public static void InitializeENotariado()
+        public static void LoadEnotariadoConfigFile()
         {
+            var path = ENotariadoConnection.CONFIG_PATH;
+            Console.WriteLine(path);
+            ENotariadoInformation enotariadoInfo = new ENotariadoInformation();
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
             var keyStoreLocation = StoreLocation.LocalMachine;
 #endif
-            // Checks if certificate already exists and is in local storage,
-            // then retrieves or creates a new one
+
+            if (!File.Exists(path))
+                return;
+
+            var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(path);
+            enotariadoInfo = JsonConvert.DeserializeObject<ENotariadoInformation>(jsonContent);
+
             try
             {
-                if (ENotariadoIsVerified || !string.IsNullOrWhiteSpace(CertificateThumbprint))
-                    ENotariadoCertificate = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
-                else
-                    throw new CertificateNotFoundException(CertificateThumbprint);
+                ENotariadoCertificate = CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
+                ENotariadoApplicationId = enotariadoInfo.ApplicationId;
+                ENotariadoSubscriptionId = enotariadoInfo.SubscriptionId;
+                if (enotariadoInfo.ApplicationId == Guid.Empty || enotariadoInfo.SubscriptionId == Guid.Empty)
+                    throw new FailedEnrollmentException();
+
+                ENotariadoIsVerified = true;
+                ENotariadoIsEnrolled = true;
             }
-            catch (CertificateNotFoundException)
+            catch (Exception ex) when (ex is FailedEnrollmentException || ex is CertificateNotFoundException)
             {
                 ResetENotariado();
-                ENotariadoCertificate = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             }
-            CertificateThumbprint = ENotariadoCertificate.Thumbprint;
+        }
+
+        public static void SaveEnotariadoConfigFile()
+        {
+            var enotariadoInfo = new ENotariadoInformation()
+            {
+                ApplicationId = ENotariadoApplicationId,
+                SubscriptionId = ENotariadoSubscriptionId,
+                CertThumbprint = ENotariadoCertificate.Thumbprint,
+            };
+
+            using (StreamWriter file = File.CreateText(ENotariadoConnection.CONFIG_PATH))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, enotariadoInfo);
+            }
+        }
+
+        /// <summary>
+        /// Initializes the e-notariado module
+        /// </summary>
+        public static void InitializeENotariado()
+        {
+            LoadEnotariadoConfigFile();
+
+            // Cover edge case where there is old info on database but file is not found.
+            // Therefore we need to load the certificate here
+            if (ENotariadoCertificate == null && !string.IsNullOrWhiteSpace(CertificateThumbprint))
+            {
+#if DEBUG
+                var keyStoreLocation = StoreLocation.CurrentUser;
+#else
+                var keyStoreLocation = StoreLocation.LocalMachine;
+#endif
+                ENotariadoCertificate = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
+            }
 
             // If the application is not fully enrolled on startup, reset everything and start from scratch, waiting
             // for a new manual enroll
@@ -779,9 +819,8 @@ namespace Duplicati.Server
             else
             {
                 ENotariadoConnection.Init(ENotariadoApplicationId, ENotariadoCertificate, ENotariadoIsVerified, ENotariadoSubscriptionId);
+                SaveEnotariadoConfigFile();
             }
-
-            ENotariadoVerificationTimer = new Timer(async _ => await VerifyENotariado(), null, 5000, 1000);
         }
 
         /// <summary>
@@ -803,7 +842,8 @@ namespace Duplicati.Server
                 catch (Exception ex)
                 {
                     Library.Logging.Log.WriteErrorMessage("eNotariado", "ApplicationEnrollmentFailed", ex, "Application enrollment failed.");
-                    ENotariadoApplicationId = Guid.Empty;
+                    ResetENotariado();
+                    return result;
                 }
             }
 
@@ -838,7 +878,8 @@ namespace Duplicati.Server
                 catch (Exception ex)
                 {
                     Library.Logging.Log.WriteErrorMessage("eNotariado", "ApplicationVerification", ex, "Application verification failed.");
-                    ENotariadoIsVerified = false;
+                    ResetENotariado();
+                    return false;
                 }
             }
             else // is enrolled and verified
@@ -846,9 +887,6 @@ namespace Duplicati.Server
                 ENotariadoConnection.IsVerified = ENotariadoIsVerified;
                 ENotariadoConnection.SubscriptionId = ENotariadoSubscriptionId;
             }
-
-            if (ENotariadoIsVerified)
-                ENotariadoVerificationTimer.Change(Timeout.Infinite, Timeout.Infinite);
 
             return ENotariadoIsVerified;
         }
@@ -863,8 +901,9 @@ namespace Duplicati.Server
             ENotariadoSubscriptionId = Guid.Empty;
             ENotariadoIsEnrolled = false;
             ENotariadoIsVerified = false;
-            if (ENotariadoVerificationTimer != null)
-               ENotariadoVerificationTimer.Change(2000, 1000);
+            ENotariadoCertificate = null;
+            if (System.IO.File.Exists(ENotariadoConnection.CONFIG_PATH))
+                System.IO.File.Delete(ENotariadoConnection.CONFIG_PATH);
         }
 
         /// <summary>

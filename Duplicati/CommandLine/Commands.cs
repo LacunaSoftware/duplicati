@@ -1088,8 +1088,8 @@ namespace Duplicati.CommandLine
 
         public static int EnrollEnotariado(TextWriter outwriter, Action<Duplicati.Library.Main.Controller> setup, List<string> args, Dictionary<string, string> options, Library.Utility.IFilter filter)
         {
-            var path = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Program.ENOTARIADO_CONFIG_FILENAME);
-            Library.ENotariado.ENotariadoInformation enotariadoInfo = new Library.ENotariado.ENotariadoInformation();
+            var path = ENotariadoConnection.CONFIG_PATH;
+            ENotariadoInformation enotariadoInfo = new Library.ENotariado.ENotariadoInformation();
             X509Certificate2 certificate;
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;

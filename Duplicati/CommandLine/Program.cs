@@ -35,7 +35,6 @@ namespace Duplicati.CommandLine
     public class Program
     {
         private static readonly string LOGTAG = Library.Logging.Log.LogTagFromType<Program>();
-        public static string ENOTARIADO_CONFIG_FILENAME = "enotariado.json";
         public static bool FROM_COMMANDLINE = false;
 
         /// <summary>
@@ -397,7 +396,7 @@ namespace Duplicati.CommandLine
 
         private static bool LoadEnotariado(TextWriter outwriter)
         {
-            var path = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ENOTARIADO_CONFIG_FILENAME);
+            var path = Library.ENotariado.ENotariadoConnection.CONFIG_PATH;
             Library.ENotariado.ENotariadoInformation enotariadoInfo = new Library.ENotariado.ENotariadoInformation();
             X509Certificate2 certificate;
 #if DEBUG

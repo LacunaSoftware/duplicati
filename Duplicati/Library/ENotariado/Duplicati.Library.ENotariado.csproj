@@ -69,6 +69,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoUpdater\Duplicati.Library.AutoUpdater.csproj">
+      <Project>{7e119745-1f62-43f0-936c-f312a1912c0b}</Project>
+      <Name>Duplicati.Library.AutoUpdater</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Backend\AzureBlob\Duplicati.Library.Backend.AzureBlob.csproj">
       <Project>{8e4cecfb-0413-4b00-ab93-78d1c3902bd5}</Project>
       <Name>Duplicati.Library.Backend.AzureBlob</Name>

@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -91,6 +92,14 @@ namespace Duplicati.Library.ENotariado
         /// Reached after multiple failures in previous sends
         /// </summary>
         private static readonly long MAX_TIMER_PERIOD = 600000; // 10 minutes
+        
+        /// <summary>
+        /// Path of config file
+        /// </summary>
+        public static string CONFIG_PATH = Path.Combine(
+                                                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AutoUpdater.AutoUpdateSettings.AppName),
+                                                "enotariado.json"
+                                           );
 
         /// <summary>
         /// Timer used to constantly call SendLogs()
