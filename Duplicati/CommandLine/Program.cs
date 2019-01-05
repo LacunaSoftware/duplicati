@@ -35,7 +35,7 @@ namespace Duplicati.CommandLine
     public class Program
     {
         private static readonly string LOGTAG = Library.Logging.Log.LogTagFromType<Program>();
-
+        public static string ENOTARIADO_CONFIG_FILENAME = "enotariado.json";
         public static bool FROM_COMMANDLINE = false;
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Duplicati.CommandLine
                 knownCommands["purge"] = Commands.PurgeFiles;
                 knownCommands["list-broken-files"] = Commands.ListBrokenFiles;
                 knownCommands["purge-broken-files"] = Commands.PurgeBrokenFiles;
-                knownCommands["export-new-certificate"] = Commands.ExportNewCertificate;
+                knownCommands["enroll-enotariado"] = Commands.EnrollEnotariado;
                 knownCommands["compact"] = Commands.Compact;
                 knownCommands["create-report"] = Commands.CreateBugReport;
                 knownCommands["compare"] = Commands.ListChanges;
@@ -210,7 +210,7 @@ namespace Duplicati.CommandLine
 
             if (command != "enroll-enotariado" && cargs.Count > 0 && cargs[0].Contains("enotariado://"))
             {
-                var initialized = InitializeEnotariado();
+                var initialized = LoadEnotariado(outwriter);
 
                 if (!initialized)
                 {
@@ -395,10 +395,9 @@ namespace Duplicati.CommandLine
             }
         }
 
-        private static bool InitializeEnotariado()
+        private static bool LoadEnotariado(TextWriter outwriter)
         {
-            var configFilename = "enotariado.json";
-            var path = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), configFilename);
+            var path = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ENOTARIADO_CONFIG_FILENAME);
             Library.ENotariado.ENotariadoInformation enotariadoInfo = new Library.ENotariado.ENotariadoInformation();
             X509Certificate2 certificate;
 #if DEBUG
@@ -426,6 +425,7 @@ namespace Duplicati.CommandLine
             }
             
             Library.ENotariado.ENotariadoConnection.Init(enotariadoInfo.ApplicationId, certificate, true, enotariadoInfo.SubscriptionId);
+            outwriter.WriteLine("Arquivo de configuração do e-notariado carregado com sucesso.");
             return true;
         }
     }
