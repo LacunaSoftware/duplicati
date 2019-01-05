@@ -1118,7 +1118,12 @@ namespace Duplicati.CommandLine
             outwriter.WriteLine("Checking if application has been verified...");
             do
             {
+                System.Threading.Thread.Sleep(5000);
                 enotariadoInfo.SubscriptionId = ENotariadoConnection.CheckVerifiedStatus().GetAwaiter().GetResult();
+                if (enotariadoInfo.SubscriptionId == Guid.Empty)
+                {
+                    outwriter.WriteLine("Application has not been verified yet. Retrying in 5 seconds...");
+                }
             } while (enotariadoInfo.SubscriptionId == Guid.Empty);
 
             outwriter.WriteLine("Application verified. Proceeding to store information into configuration file");
