@@ -7,8 +7,8 @@
     <ProjectGuid>{32B7900A-B22C-448D-8BD4-6C2825719926}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Duplicati.Library.ENotariado</RootNamespace>
-    <AssemblyName>Duplicati.Library.ENotariado</AssemblyName>
+    <RootNamespace>Duplicati.Library.Enotariado</RootNamespace>
+    <AssemblyName>Duplicati.Library.Enotariado</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoUtils.cs" />
-    <Compile Include="ENotariadoConnection.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

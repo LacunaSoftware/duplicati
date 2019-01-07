@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Duplicati.Library.ENotariado
+namespace Duplicati.Library.Enotariado
 {
     /// <summary>
     /// Exception thrown when the data (certificate thumbprint and
     /// application id) about e-notariado has not been initialized yet.
     /// </summary>
-    public class ENotariadoNotInitializedException : Exception
+    public class NotInitializedException : Exception
     {
         public static readonly string ErrorMessage = LC.L(@"The application is not enrolled in e-notariado");
-        public ENotariadoNotInitializedException() : base(ErrorMessage)
+        public NotInitializedException() : base(ErrorMessage)
         {
         }
     }
@@ -46,10 +46,10 @@ namespace Duplicati.Library.ENotariado
     /// <summary>
     /// Exception thrown when a certificate find operation fails
     /// </summary>
-    public class ENotariadoNotVerifiedException : Exception
+    public class NotVerifiedException : Exception
     {
         public static readonly string ErrorMessage = LC.L(@"The application is not verified in e-notariado");
-        public ENotariadoNotVerifiedException() : base(ErrorMessage)
+        public NotVerifiedException() : base(ErrorMessage)
         {
         }
     }

@@ -1,4 +1,4 @@
-﻿using Duplicati.Library.ENotariado;
+﻿using Duplicati.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -169,14 +169,14 @@ namespace Duplicati.Server
 
         public static bool EnotariadoIsEnrolled
         {
-            get { return DataConnection.ApplicationSettings.ENotariadoIsEnrolled; }
-            set { DataConnection.ApplicationSettings.ENotariadoIsEnrolled = value; }
+            get { return DataConnection.ApplicationSettings.EnotariadoIsEnrolled; }
+            set { DataConnection.ApplicationSettings.EnotariadoIsEnrolled = value; }
         }
 
         public static bool EnotariadoIsVerified
         {
-            get { return DataConnection.ApplicationSettings.ENotariadoIsVerified; }
-            set { DataConnection.ApplicationSettings.ENotariadoIsVerified = value; }
+            get { return DataConnection.ApplicationSettings.EnotariadoIsVerified; }
+            set { DataConnection.ApplicationSettings.EnotariadoIsVerified = value; }
         }
 
         public static string CertificateThumbprint
@@ -187,14 +187,14 @@ namespace Duplicati.Server
 
         public static Guid EnotariadoApplicationId
         {
-            get { return DataConnection.ApplicationSettings.ENotariadoApplicationId; }
-            set { DataConnection.ApplicationSettings.ENotariadoApplicationId = value; }
+            get { return DataConnection.ApplicationSettings.EnotariadoApplicationId; }
+            set { DataConnection.ApplicationSettings.EnotariadoApplicationId = value; }
         }
 
         public static Guid EnotariadoSubscriptionId
         {
-            get { return DataConnection.ApplicationSettings.ENotariadoSubscriptionId; }
-            set { DataConnection.ApplicationSettings.ENotariadoSubscriptionId = value; }
+            get { return DataConnection.ApplicationSettings.EnotariadoSubscriptionId; }
+            set { DataConnection.ApplicationSettings.EnotariadoSubscriptionId = value; }
         }
 
         public static string StartedBy
@@ -754,8 +754,8 @@ namespace Duplicati.Server
         /// </returns>
         public static bool LoadEnotariadoConfigFile()
         {
-            var path = ENotariadoConnection.CONFIG_PATH;
-            ENotariadoInformation enotariadoInfo = new ENotariadoInformation();
+            var path = Library.Enotariado.Main.CONFIG_PATH;
+            Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
@@ -766,13 +766,13 @@ namespace Duplicati.Server
                 return false;
 
             var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(path);
-            enotariadoInfo = JsonConvert.DeserializeObject<ENotariadoInformation>(jsonContent);
+            enotariadoInfo = JsonConvert.DeserializeObject<Library.Enotariado.ConfigInformation>(jsonContent);
 
             try
             {
-                var certificate = CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
+                var certificate = Library.Enotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
                 if (enotariadoInfo.ApplicationId == Guid.Empty || enotariadoInfo.SubscriptionId == Guid.Empty)
-                    throw new FailedEnrollmentException();
+                    throw new Library.Enotariado.FailedEnrollmentException();
 
                 EnotariadoApplicationId = enotariadoInfo.ApplicationId;
                 EnotariadoSubscriptionId = enotariadoInfo.SubscriptionId;
@@ -781,7 +781,7 @@ namespace Duplicati.Server
                 EnotariadoIsEnrolled = true;
                 return true;
             }
-            catch (Exception ex) when (ex is FailedEnrollmentException || ex is CertificateNotFoundException)
+            catch (Exception ex) when (ex is Library.Enotariado.FailedEnrollmentException || ex is Library.Enotariado.CertificateNotFoundException)
             {
                 File.Delete(path);
                 return false;
@@ -793,14 +793,14 @@ namespace Duplicati.Server
         /// </summary>
         public static void SaveEnotariadoConfigFile()
         {
-            var enotariadoInfo = new ENotariadoInformation()
+            var enotariadoInfo = new Library.Enotariado.ConfigInformation()
             {
                 ApplicationId = EnotariadoApplicationId,
                 SubscriptionId = EnotariadoSubscriptionId,
                 CertThumbprint = EnotariadoCertificate.Thumbprint,
             };
 
-            using (StreamWriter file = File.CreateText(ENotariadoConnection.CONFIG_PATH))
+            using (StreamWriter file = File.CreateText(Library.Enotariado.Main.CONFIG_PATH))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, enotariadoInfo);
@@ -810,7 +810,7 @@ namespace Duplicati.Server
         /// <summary>
         /// Initializes the e-notariado module by loading the JSON config file or using the values stored
         /// in the local database as a fallback. If any of the values are invalid, everything is reset.
-        /// ENotariadoConnection.Init and SaveEnotariadoConfigFile are called otherwise.
+        /// Enotariado.Init and SaveEnotariadoConfigFile are called otherwise.
         /// </summary>
         public static void InitializeEnotariado()
         {
@@ -826,9 +826,9 @@ namespace Duplicati.Server
 #endif
                 try
                 {
-                    EnotariadoCertificate = CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
+                    EnotariadoCertificate = Library.Enotariado.CryptoUtils.GetCertificate(keyStoreLocation, CertificateThumbprint);
                 }
-                catch (CertificateNotFoundException)
+                catch (Library.Enotariado.CertificateNotFoundException)
                 {
                     EnotariadoCertificate = null;
                 }
@@ -843,7 +843,7 @@ namespace Duplicati.Server
             }
             else
             {
-                ENotariadoConnection.Init(EnotariadoApplicationId, EnotariadoCertificate, EnotariadoIsVerified, EnotariadoSubscriptionId);
+                Library.Enotariado.Main.Init(EnotariadoApplicationId, EnotariadoCertificate, EnotariadoIsVerified, EnotariadoSubscriptionId);
                 SaveEnotariadoConfigFile();
             }
         }
@@ -851,7 +851,7 @@ namespace Duplicati.Server
         /// <summary>
         /// Calls e-notariado API to complete the pre-approved enrollment, since this call comes from the portal itself (by calling an API that
         /// calls this function). If succeeded, it initializes the timer to verify the full completeness of the enroll and initializes the
-        /// ENotariadoConnection module with ApplicationId and Certificate only.
+        /// Enotariado module with ApplicationId and Certificate only.
         /// 
         /// In case it fails, all data is reset.
         /// </summary>
@@ -860,16 +860,16 @@ namespace Duplicati.Server
             try
             {
                 // check if is already enrolled with certificate
-                EnotariadoApplicationId = await ENotariadoConnection.Enrollment(EnotariadoCertificate, applicationId, accessTicket);
+                EnotariadoApplicationId = await Library.Enotariado.Main.Enrollment(EnotariadoCertificate, applicationId, accessTicket);
                 EnotariadoVerificationTimer = new Timer(async _ => await VerifyEnotariadoEnrollment(), null, 5000, 500);
                 EnotariadoIsEnrolled = true;
 
-                // Initializes ENotariadoConnection with appropriate data
-                ENotariadoConnection.Init(EnotariadoApplicationId, EnotariadoCertificate);
+                // Initializes Enotariado with appropriate data
+                Library.Enotariado.Main.Init(EnotariadoApplicationId, EnotariadoCertificate);
             }
             catch (Exception ex)
             {
-                Library.Logging.Log.WriteErrorMessage("eNotariado", "ApplicationEnrollmentFailed", ex, "Application enrollment failed.");
+                Library.Logging.Log.WriteErrorMessage("enotariado", "ApplicationEnrollmentFailed", ex, "Application enrollment failed.");
                 ResetEnotariadoConfig();
             }
         }
@@ -890,18 +890,18 @@ namespace Duplicati.Server
             {
                 try
                 {
-                    EnotariadoSubscriptionId = await ENotariadoConnection.CheckVerifiedStatus();
+                    EnotariadoSubscriptionId = await Library.Enotariado.Main.CheckVerifiedStatus();
                     EnotariadoIsVerified = EnotariadoSubscriptionId != Guid.Empty;
                 }
                 catch (Exception ex)
                 {
-                    Library.Logging.Log.WriteErrorMessage("eNotariado", "ApplicationVerification", ex, "Application verification failed.");
+                    Library.Logging.Log.WriteErrorMessage("enotariado", "ApplicationVerification", ex, "Application verification failed.");
                 }
             }
             else // is enrolled and verified
             {
-                ENotariadoConnection.IsVerified = EnotariadoIsVerified;
-                ENotariadoConnection.SubscriptionId = EnotariadoSubscriptionId;
+                Library.Enotariado.Main.IsVerified = EnotariadoIsVerified;
+                Library.Enotariado.Main.SubscriptionId = EnotariadoSubscriptionId;
             }
 
             if (EnotariadoIsVerified)
@@ -912,19 +912,19 @@ namespace Duplicati.Server
         }
         
         /// <summary>
-        /// Resets settings regarding e-notariado. It resets all data inside ENotariadoConnection calling the ResetData method.
+        /// Resets settings regarding e-notariado. It resets all data inside Enotariado calling the Main.ResetData method.
         /// Sets EnotariadoApplicationId and EnotariadoSubscriptionId both to Guid.Empty, EnotariadoIsEnrolled and EnotariadoIsVerified
         /// both to false and deletes the e-notariado configuration file.
         /// </summary>
         public static void ResetEnotariadoConfig()
         {
-            ENotariadoConnection.ResetData();
+            Library.Enotariado.Main.ResetData();
             EnotariadoApplicationId = Guid.Empty;
             EnotariadoSubscriptionId = Guid.Empty;
             EnotariadoIsEnrolled = false;
             EnotariadoIsVerified = false;
-            if (System.IO.File.Exists(ENotariadoConnection.CONFIG_PATH))
-                System.IO.File.Delete(ENotariadoConnection.CONFIG_PATH);
+            if (System.IO.File.Exists(Library.Enotariado.Main.CONFIG_PATH))
+                System.IO.File.Delete(Library.Enotariado.Main.CONFIG_PATH);
         }
 
         /// <summary>

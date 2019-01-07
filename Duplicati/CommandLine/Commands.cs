@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.IO;
 using Duplicati.Library.Common.IO;
 using System.Security.Cryptography.X509Certificates;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 using Newtonsoft.Json.Linq;
 using ENotariado.Backup.Api.ApplicationEnrollment;
 using Newtonsoft.Json;
@@ -1088,8 +1088,8 @@ namespace Duplicati.CommandLine
 
         public static int EnrollEnotariado(TextWriter outwriter, Action<Duplicati.Library.Main.Controller> setup, List<string> args, Dictionary<string, string> options, Library.Utility.IFilter filter)
         {
-            var path = ENotariadoConnection.CONFIG_PATH;
-            ENotariadoInformation enotariadoInfo = new Library.ENotariado.ENotariadoInformation();
+            var path = Library.Enotariado.Main.CONFIG_PATH;
+            Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
             X509Certificate2 certificate;
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
@@ -1104,22 +1104,22 @@ namespace Duplicati.CommandLine
                 File.Delete(path);
             }
 
-            certificate = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+            certificate = Library.Enotariado.CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
             enotariadoInfo.CertThumbprint = certificate.Thumbprint;
             outwriter.WriteLine("Issued self-signed certificate with thumbprint {0}", enotariadoInfo.CertThumbprint);
 
             outwriter.WriteLine("Enrolling on e-notariado servers...");
-            enotariadoInfo.ApplicationId = ENotariadoConnection.Enrollment(certificate).GetAwaiter().GetResult();
+            enotariadoInfo.ApplicationId = Library.Enotariado.Main.Enrollment(certificate).GetAwaiter().GetResult();
             outwriter.WriteLine("Enrollment successfully made. Application Id:");
             outwriter.WriteLine("    {0}", enotariadoInfo.ApplicationId);
 
-            ENotariadoConnection.Init(enotariadoInfo.ApplicationId, certificate);
+            Library.Enotariado.Main.Init(enotariadoInfo.ApplicationId, certificate);
             
             outwriter.WriteLine("Checking if application has been verified...");
             do
             {
                 System.Threading.Thread.Sleep(5000);
-                enotariadoInfo.SubscriptionId = ENotariadoConnection.CheckVerifiedStatus().GetAwaiter().GetResult();
+                enotariadoInfo.SubscriptionId = Library.Enotariado.Main.CheckVerifiedStatus().GetAwaiter().GetResult();
                 if (enotariadoInfo.SubscriptionId == Guid.Empty)
                 {
                     outwriter.WriteLine("Application has not been verified yet. Retrying in 5 seconds...");

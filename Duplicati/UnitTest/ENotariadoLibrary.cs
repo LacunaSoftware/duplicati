@@ -22,7 +22,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Duplicati.UnitTest
 {
-    public class ENotariadoLibrary : BasicSetupHelper
+    public class Enotariado : BasicSetupHelper
     {
         private static StoreLocation TestStoreLocation = StoreLocation.CurrentUser;
         private static X509Certificate2 Certificate;
@@ -31,7 +31,7 @@ namespace Duplicati.UnitTest
         public void Setup()
         {
             ProgressWriteLine("Issuing self-signed certificate");
-            Certificate = Library.ENotariado.CryptoUtils.CreateSelfSignedCertificate(TestStoreLocation);
+            Certificate = Library.Enotariado.CryptoUtils.CreateSelfSignedCertificate(TestStoreLocation);
         }
 
         [OneTimeTearDown]
@@ -49,7 +49,7 @@ namespace Duplicati.UnitTest
                 store.Close();
             }
             ProgressWriteLine("Asserting certificate cannot be found on store anymore");
-            Assert.Throws<Library.ENotariado.CertificateNotFoundException>(() => { Library.ENotariado.CryptoUtils.GetCertificate(TestStoreLocation, Certificate.Thumbprint); });
+            Assert.Throws<Library.Enotariado.CertificateNotFoundException>(() => { Library.Enotariado.CryptoUtils.GetCertificate(TestStoreLocation, Certificate.Thumbprint); });
 
         }
 
@@ -61,7 +61,7 @@ namespace Duplicati.UnitTest
             Random rnd = new Random();
 
             ProgressWriteLine("Retrieving self-signed certificate from store location");
-            var retrievedCertificate = Library.ENotariado.CryptoUtils.GetCertificate(TestStoreLocation, Certificate.Thumbprint);
+            var retrievedCertificate = Library.Enotariado.CryptoUtils.GetCertificate(TestStoreLocation, Certificate.Thumbprint);
 
             ProgressWriteLine("Asserting both certificates are equal");
             Assert.AreEqual(Certificate, retrievedCertificate);
@@ -70,15 +70,15 @@ namespace Duplicati.UnitTest
             rnd.NextBytes(randomBytes);
 
             ProgressWriteLine("Signing byte array with both certificates");
-            var signature1 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(Certificate, randomBytes);
-            var signature2 = Library.ENotariado.CryptoUtils.SignDataWithCertificate(retrievedCertificate, randomBytes);
+            var signature1 = Library.Enotariado.CryptoUtils.SignDataWithCertificate(Certificate, randomBytes);
+            var signature2 = Library.Enotariado.CryptoUtils.SignDataWithCertificate(retrievedCertificate, randomBytes);
 
             ProgressWriteLine("Asserting both signatures are equal");
             Assert.AreEqual(signature1, signature2);
 
             ProgressWriteLine("Verifying signature with both certificates");
-            var verify1 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(Certificate, randomBytes, signature1);
-            var verify2 = Library.ENotariado.CryptoUtils.VerifyDataWithCertificate(retrievedCertificate, randomBytes, signature2);
+            var verify1 = Library.Enotariado.CryptoUtils.VerifyDataWithCertificate(Certificate, randomBytes, signature1);
+            var verify2 = Library.Enotariado.CryptoUtils.VerifyDataWithCertificate(retrievedCertificate, randomBytes, signature2);
 
             ProgressWriteLine("Asserting both signatures are verified");
             Assert.IsTrue(verify1);
@@ -89,34 +89,34 @@ namespace Duplicati.UnitTest
         [Category("Connection")]
         public void Connection()
         {
-            ProgressWriteLine("Resetting all properties from ENotariadoConnection");
-            Library.ENotariado.ENotariadoConnection.ResetData();
+            ProgressWriteLine("Resetting all properties from Main");
+            Library.Enotariado.Main.ResetData();
 
             ProgressWriteLine("Asserting IDs are equal to Guid.Empty");
-            Assert.AreEqual(Library.ENotariado.ENotariadoConnection.ApplicationId, Guid.Empty);
-            Assert.AreEqual(Library.ENotariado.ENotariadoConnection.SubscriptionId, Guid.Empty);
+            Assert.AreEqual(Library.Enotariado.Main.ApplicationId, Guid.Empty);
+            Assert.AreEqual(Library.Enotariado.Main.SubscriptionId, Guid.Empty);
 
             ProgressWriteLine("Asserting AzureAccountName equals to 24x 0");
-            Assert.AreEqual(Library.ENotariado.ENotariadoConnection.AzureAccountName, "000000000000000000000000");
+            Assert.AreEqual(Library.Enotariado.Main.AzureAccountName, "000000000000000000000000");
 
             ProgressWriteLine("Asserting IsVerified is False");
-            Assert.IsFalse(Library.ENotariado.ENotariadoConnection.IsVerified);
+            Assert.IsFalse(Library.Enotariado.Main.IsVerified);
 
             var applicationId = Guid.NewGuid();
             var subscriptionId = Guid.NewGuid();
 
-            ProgressWriteLine("Initializing ENotariadoConnection with random GUIDs");
-            Library.ENotariado.ENotariadoConnection.Init(applicationId, Certificate, true, subscriptionId);
+            ProgressWriteLine("Initializing Main with random GUIDs");
+            Library.Enotariado.Main.Init(applicationId, Certificate, true, subscriptionId);
             
             ProgressWriteLine("Asserting IDs are equal to the ones generated");
-            Assert.AreEqual(Library.ENotariado.ENotariadoConnection.ApplicationId, applicationId);
-            Assert.AreEqual(Library.ENotariado.ENotariadoConnection.SubscriptionId, subscriptionId);
+            Assert.AreEqual(Library.Enotariado.Main.ApplicationId, applicationId);
+            Assert.AreEqual(Library.Enotariado.Main.SubscriptionId, subscriptionId);
 
             ProgressWriteLine("Asserting AzureAccountName equals to parsed subscription id");
-            Assert.AreEqual(Library.ENotariado.ENotariadoConnection.AzureAccountName, subscriptionId.ToString().Replace("-", "").Substring(0, 24));
+            Assert.AreEqual(Library.Enotariado.Main.AzureAccountName, subscriptionId.ToString().Replace("-", "").Substring(0, 24));
 
             ProgressWriteLine("Asserting IsVerified is True");
-            Assert.IsTrue(Library.ENotariado.ENotariadoConnection.IsVerified);
+            Assert.IsTrue(Library.Enotariado.Main.IsVerified);
         }
     }
 }

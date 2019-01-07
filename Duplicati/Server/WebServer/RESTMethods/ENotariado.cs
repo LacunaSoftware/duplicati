@@ -3,12 +3,12 @@ using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
-    public class ENotariado : IRESTMethodGET, IRESTMethodPOST, IRESTMethodDocumented
+    public class Enotariado : IRESTMethodGET, IRESTMethodPOST, IRESTMethodDocumented
     {
 
         public void GET(string key, RequestInfo info)
@@ -16,7 +16,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             switch ((key ?? "").ToLowerInvariant())
             {
                 case "backup-list":
-                    info.BodyWriter.OutputOK(ENotariadoConnection.GetStoredBackupNames());
+                    info.BodyWriter.OutputOK(Library.Enotariado.Main.GetStoredBackupNames());
                     return;
 
                 case "app-enrollment":

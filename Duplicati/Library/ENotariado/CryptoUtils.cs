@@ -7,7 +7,7 @@ using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Duplicati.Library.ENotariado
+namespace Duplicati.Library.Enotariado
 {
     public static class CryptoUtils
     {

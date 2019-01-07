@@ -19,7 +19,7 @@ using System;
 using System.Linq;
 using Duplicati.Library.Logging;
 using System.Collections.Generic;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 
 namespace Duplicati.Server
 {
@@ -139,7 +139,7 @@ namespace Duplicati.Server
                         var backup = Program.DataConnection.GetBackup(BackupID);
                         targetURL = backup.TargetURL;
                     }
-                    _ = ENotariadoConnection.QueueLog(ID, When, Message,
+                    _ = Library.Enotariado.Main.QueueLog(ID, When, Message,
                         Exception?.ToString(),
                         Type.ToString(), targetURL);
                 }

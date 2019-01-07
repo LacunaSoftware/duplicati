@@ -396,8 +396,8 @@ namespace Duplicati.CommandLine
 
         private static bool LoadEnotariado(TextWriter outwriter)
         {
-            var path = Library.ENotariado.ENotariadoConnection.CONFIG_PATH;
-            Library.ENotariado.ENotariadoInformation enotariadoInfo = new Library.ENotariado.ENotariadoInformation();
+            var path = Library.Enotariado.Main.CONFIG_PATH;
+            Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
             X509Certificate2 certificate;
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
@@ -409,21 +409,21 @@ namespace Duplicati.CommandLine
                 return false;
 
             var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(path);
-            enotariadoInfo = JsonConvert.DeserializeObject<Duplicati.Library.ENotariado.ENotariadoInformation>(jsonContent);
+            enotariadoInfo = JsonConvert.DeserializeObject<Duplicati.Library.Enotariado.ConfigInformation>(jsonContent);
 
             try
             {
-                certificate = Duplicati.Library.ENotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
+                certificate = Duplicati.Library.Enotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
                 if (enotariadoInfo.ApplicationId == Guid.Empty || enotariadoInfo.SubscriptionId == Guid.Empty)
-                    throw new Library.ENotariado.FailedEnrollmentException();
+                    throw new Library.Enotariado.FailedEnrollmentException();
             }
-            catch (Exception ex) when (ex is Library.ENotariado.FailedEnrollmentException || ex is Library.ENotariado.CertificateNotFoundException)
+            catch (Exception ex) when (ex is Library.Enotariado.FailedEnrollmentException || ex is Library.Enotariado.CertificateNotFoundException)
             {
                 File.Delete(path);
                 return false;
             }
             
-            Library.ENotariado.ENotariadoConnection.Init(enotariadoInfo.ApplicationId, certificate, true, enotariadoInfo.SubscriptionId);
+            Library.Enotariado.Main.Init(enotariadoInfo.ApplicationId, certificate, true, enotariadoInfo.SubscriptionId);
             outwriter.WriteLine("Arquivo de configuração do e-notariado carregado com sucesso.");
             return true;
         }

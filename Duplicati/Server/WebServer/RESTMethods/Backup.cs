@@ -21,7 +21,7 @@ using System.IO;
 using System.Linq;
 using Duplicati.Server.Serialization.Interface;
 using Duplicati.Library.Localization.Short;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -190,7 +190,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             string[] filters = parsePaths(input["paths"].Value ?? string.Empty);
 
-            var passphrase = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult();
+            var passphrase = Library.Enotariado.Main.GetBackupPassword().GetAwaiter().GetResult();
 
             var time = Duplicati.Library.Utility.Timeparser.ParseTimeInterval(input["time"].Value, DateTime.Now);
             var restoreTarget = input["restore-path"].Value;

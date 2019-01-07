@@ -55,7 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Tools", "Duplicat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Library.Backend.ENotariado", "Duplicati\Library\Backend\ENotariado\Duplicati.Library.Backend.ENotariado.csproj", "{2382D89F-18F9-46B1-BDB9-FE065DA5B1C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Library.ENotariado", "Duplicati\Library\ENotariado\Duplicati.Library.ENotariado.csproj", "{32B7900A-B22C-448D-8BD4-6C2825719926}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Library.Enotariado", "Duplicati\Library\ENotariado\Duplicati.Library.Enotariado.csproj", "{32B7900A-B22C-448D-8BD4-6C2825719926}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Library.Common", "Duplicati\Library\Common\Duplicati.Library.Common.csproj", "{D63E53E4-A458-4C2F-914D-92F715F58ACF}"
 EndProject

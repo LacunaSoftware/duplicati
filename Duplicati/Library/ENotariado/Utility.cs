@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Duplicati.Library.ENotariado
+namespace Duplicati.Library.Enotariado
 {
-    [Flags]
-    public enum ENotariadoStatus
-    {
-        None = 0x0,
-        Enrolled = 0x1,
-        Verified = 0x2
-    }
-
-    public class ENotariadoInformation
+    public class ConfigInformation
     {
         public Guid ApplicationId;
         public Guid SubscriptionId;

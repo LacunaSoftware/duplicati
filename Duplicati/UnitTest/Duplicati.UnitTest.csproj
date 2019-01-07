@@ -105,9 +105,9 @@
       <Project>{94484FDB-2EFA-4CF0-9BE6-A561157B4F87}</Project>
       <Name>Duplicati.Library.Encryption</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\ENotariado\Duplicati.Library.ENotariado.csproj">
+    <ProjectReference Include="..\Library\ENotariado\Duplicati.Library.Enotariado.csproj">
       <Project>{32b7900a-b22c-448d-8bd4-6c2825719926}</Project>
-      <Name>Duplicati.Library.ENotariado</Name>
+      <Name>Duplicati.Library.Enotariado</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library\Interface\Duplicati.Library.Interface.csproj">
       <Project>{C5899F45-B0FF-483C-9D38-24A9FCAAB237}</Project>

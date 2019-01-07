@@ -1,4 +1,4 @@
-﻿using Duplicati.Library.ENotariado;
+﻿using Duplicati.Library;
 using Duplicati.Library.Localization.Short;
 using Duplicati.Library.Utility;
 using ENotariado.Backup.Api.ApplicationEnrollment;
@@ -19,9 +19,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Duplicati.Library.ENotariado
+namespace Duplicati.Library.Enotariado
 {
-    public static class ENotariadoConnection
+    public static class Main
     {
         /// <summary>
         /// Session token used to authenticate any operations with e-notariado
@@ -250,7 +250,7 @@ namespace Duplicati.Library.ENotariado
         {
             // Checks whether the current configuration is valid
             if (Certificate == null || ApplicationId == Guid.Empty)
-                throw new ENotariadoNotInitializedException();
+                throw new NotInitializedException();
 
             Logging.Log.WriteVerboseMessage(LOGTAG, "CheckVerifiedStatus", $"Verifying application in e-notariado");
 
@@ -459,10 +459,10 @@ namespace Duplicati.Library.ENotariado
         private static async Task GetApplicationAuthToken()
         {
             if (Certificate == null || Guid.Empty == ApplicationId)
-                throw new ENotariadoNotInitializedException();
+                throw new NotInitializedException();
         
             if (!IsVerified)
-                throw new ENotariadoNotVerifiedException();
+                throw new NotVerifiedException();
 
             var start = new StartPublicKeyAuthenticationRequest
             {
