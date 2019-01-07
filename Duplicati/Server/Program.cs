@@ -740,10 +740,9 @@ namespace Duplicati.Server
             StatusEventNotifyer.SignalNewEvent();
         }
 
-        public static void LoadEnotariadoConfigFile()
+        public static bool LoadEnotariadoConfigFile()
         {
             var path = ENotariadoConnection.CONFIG_PATH;
-            Console.WriteLine(path);
             ENotariadoInformation enotariadoInfo = new ENotariadoInformation();
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
@@ -752,7 +751,7 @@ namespace Duplicati.Server
 #endif
 
             if (!File.Exists(path))
-                return;
+                return false;
 
             var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(path);
             enotariadoInfo = JsonConvert.DeserializeObject<ENotariadoInformation>(jsonContent);
@@ -760,17 +759,18 @@ namespace Duplicati.Server
             try
             {
                 ENotariadoCertificate = CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
-                ENotariadoApplicationId = enotariadoInfo.ApplicationId;
-                ENotariadoSubscriptionId = enotariadoInfo.SubscriptionId;
                 if (enotariadoInfo.ApplicationId == Guid.Empty || enotariadoInfo.SubscriptionId == Guid.Empty)
                     throw new FailedEnrollmentException();
 
+                ENotariadoApplicationId = enotariadoInfo.ApplicationId;
+                ENotariadoSubscriptionId = enotariadoInfo.SubscriptionId;
                 ENotariadoIsVerified = true;
                 ENotariadoIsEnrolled = true;
+                return true;
             }
             catch (Exception ex) when (ex is FailedEnrollmentException || ex is CertificateNotFoundException)
             {
-                ResetENotariado();
+                return false;
             }
         }
 
@@ -795,11 +795,10 @@ namespace Duplicati.Server
         /// </summary>
         public static void InitializeENotariado()
         {
-            LoadEnotariadoConfigFile();
+            var result = LoadEnotariadoConfigFile();
 
-            // Cover edge case where there is old info on database but file is not found.
-            // Therefore we need to load the certificate here
-            if (ENotariadoCertificate == null && !string.IsNullOrWhiteSpace(CertificateThumbprint))
+            // Failure to load data from config file, gather information from local database
+            if (!result && !string.IsNullOrWhiteSpace(CertificateThumbprint))
             {
 #if DEBUG
                 var keyStoreLocation = StoreLocation.CurrentUser;
