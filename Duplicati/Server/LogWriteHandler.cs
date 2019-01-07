@@ -139,7 +139,7 @@ namespace Duplicati.Server
                         var backup = Program.DataConnection.GetBackup(BackupID);
                         targetURL = backup.TargetURL;
                     }
-                    _ = Library.Enotariado.Main.QueueLog(ID, When, Message,
+                    Library.Enotariado.Main.QueueLog(ID, When, Message,
                         Exception?.ToString(),
                         Type.ToString(), targetURL);
                 }

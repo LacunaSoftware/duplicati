@@ -376,10 +376,10 @@ namespace Duplicati.Library.Enotariado
         /// <param name="logType">The level of the log message</param>
         /// <param name="backupTargetURL">The target URL of the backup that is related to this log message, if it exists</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        public static async Task QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
+        public static void QueueLog(long logId, DateTime ts, string message, string exception, string logType, string backupTargetURL)
         {
             // Avoids caller waiting for queue to be unlocked
-            await Task.Run(() =>
+            Task.Run(() =>
             {
                 var logRequest = new DuplicatiLogModel
                 {
@@ -399,7 +399,6 @@ namespace Duplicati.Library.Enotariado
                     if (!string.IsNullOrWhiteSpace(backupUri.Host))
                         logRequest.BackupId = Guid.Parse(backupUri.Host.ToLowerInvariant());
                 }
-
                 LogQueue.Enqueue(logRequest);
             });
         }
