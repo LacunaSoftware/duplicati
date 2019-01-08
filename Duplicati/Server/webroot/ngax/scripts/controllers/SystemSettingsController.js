@@ -49,14 +49,6 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
         $rootScope.$broadcast('ui_language_changed');
     };
 
-    function handleError(data) {
-        if (dlg != null)
-            dlg.dismiss();
-        
-        AppUtils.connectionError(data);
-        getSettings();
-    }
-
     function getSettings() {
         AppService.get('/serversettings').then(function(data) {
             data.data['placeholder-password'] = AppUtils.parseBoolString(data.data['has-password-protection']) ? Math.random().toString(36) : '';
@@ -75,19 +67,18 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
             $scope.remoteHostnames = data.data['allowed-hostnames'];
             $scope.advancedOptions = AppUtils.serializeAdvancedOptionsToArray(data.data);
             $scope.servermodulesettings = {};
-            if (!$scope.eNotariado) $scope.eNotariado = {};
-            $scope.eNotariado.isEnrolled = (data.data['enotariado-is-enrolled'].toLowerCase() === 'true');
-            $scope.eNotariado.isVerified = (data.data['enotariado-is-verified'].toLowerCase() === 'true');
-            $scope.eNotariado.applicationId = data.data['enotariado-application-id'];
-            $scope.eNotariado.certThumbprint = data.data['enotariado-cert-thumbprint'];
-
+            $scope.enotariado = {
+                isEnrolled: AppUtils.parseBoolString(data.data['enotariado-is-enrolled']),
+                isVerified: AppUtils.parseBoolString(data.data['enotariado-is-verified']),
+            };
+   
             AppUtils.extractServerModuleOptions($scope.advancedOptions, $scope.ServerModules, $scope.servermodulesettings, 'SupportedGlobalCommands');
             
         }, AppUtils.connectionError);
     }
     getSettings();
 
-    $scope.eNotariadoReset = function() {
+    $scope.enotariadoReset = function() {
         dlg = DialogService.dialog('Conectando...', 'Redefinindo dados de cadastro com o e-notariado ...', [], null, function() {       
             AppService.post('/enotariado/reset').then(
                 function() {
@@ -103,28 +94,7 @@ backupApp.controller('SystemSettingsController', function($rootScope, $scope, $l
         });
     }
 
-    $scope.copyToClipboard = function() {
-        const textArea = document.createElement("textarea");
-        const sliced = $scope.eNotariado.applicationId;
-        textArea.value = sliced;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        try {
-            const success = document.body.removeChild(textArea);
-            if (success) {
-                DialogService.dialog(gettextCatalog.getString('Success'), AppUtils.format(gettextCatalog.getString('Copied {0} to clipboard'), sliced));
-            } else {
-                throw Exception;
-            }
-        } catch (err) {
-            DialogService.dialog(gettextCatalog.getString('Fail'), AppUtils.format(gettextCatalog.getString('Could not copy {0} to clipboard'), sliced));
-
-        }
-    }
-
     $scope.save = function() {
-
         if ($scope.requireRemotePassword && $scope.remotePassword.trim().length == 0)
             return AppUtils.notifyInputError('Cannot use empty password');
 

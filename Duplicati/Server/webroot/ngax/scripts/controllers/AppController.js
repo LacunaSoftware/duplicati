@@ -72,10 +72,10 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         );
     };
 
-    const eNotariadoCheck = function (eNotariado) {
-        if (!eNotariado) return;
-        if (!eNotariado.isEnrolled || !eNotariado.isVerified) {
-            const message = eNotariado.isEnrolled ?
+    const enotariadoCheck = function (enotariado) {
+        if (!enotariado) return;
+        if (!enotariado.isEnrolled || !enotariado.isVerified) {
+            const message = enotariado.isEnrolled ?
                 'A aplicação ainda não foi aprovada no Módulo Gerenciador do Backup e-notariado.' :
                 'A aplicação não está cadastrada no Módulo Gerenciador do Backup e-notariado.';
             
@@ -109,7 +109,7 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
         else
             $scope.current_page = '';
 
-        if ($scope.current_page !== 'enotariado') eNotariadoCheck($scope.eNotariado);
+        if ($scope.current_page !== 'enotariado') enotariadoCheck($scope.enotariado);
     };
 
     $scope.$on('serverstatechanged', function() {
@@ -179,14 +179,11 @@ backupApp.controller('AppController', function($scope, $cookies, $location, AppS
     });
 
     AppService.get('/serversettings').then(function(data) {
-        $scope.eNotariado = {
+        $scope.enotariado = {
             isEnrolled: (data.data['enotariado-is-enrolled'].toLowerCase() === 'true'),
             isVerified: (data.data['enotariado-is-verified'].toLowerCase() === 'true'),
-            applicationId: data.data['enotariado-application-id'],
-            subscriptionId: data.data['enotariado-subscription-id'],
-            certThumbprint: data.data['enotariado-cert-thumbprint']
         };
-        eNotariadoCheck($scope.eNotariado);
+        enotariadoCheck($scope.enotariado);
 
         var ut = data.data['max-upload-speed'];
         var dt = data.data['max-download-speed'];
