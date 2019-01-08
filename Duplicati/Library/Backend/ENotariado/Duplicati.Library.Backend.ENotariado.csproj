@@ -7,8 +7,8 @@
     <ProjectGuid>{2382D89F-18F9-46B1-BDB9-FE065DA5B1C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Duplicati.Library.Backend.ENotariado</RootNamespace>
-    <AssemblyName>Duplicati.Library.Backend.ENotariado</AssemblyName>
+    <RootNamespace>Duplicati.Library.Backend.Enotariado</RootNamespace>
+    <AssemblyName>Duplicati.Library.Backend.Enotariado</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ENotariadoBackend.cs" />
+    <Compile Include="EnotariadoBackend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings.cs" />
   </ItemGroup>
