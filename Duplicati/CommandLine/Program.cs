@@ -35,7 +35,6 @@ namespace Duplicati.CommandLine
     public class Program
     {
         private static readonly string LOGTAG = Library.Logging.Log.LogTagFromType<Program>();
-
         public static bool FROM_COMMANDLINE = false;
 
         /// <summary>
@@ -97,7 +96,7 @@ namespace Duplicati.CommandLine
                 knownCommands["purge"] = Commands.PurgeFiles;
                 knownCommands["list-broken-files"] = Commands.ListBrokenFiles;
                 knownCommands["purge-broken-files"] = Commands.PurgeBrokenFiles;
-                knownCommands["export-new-certificate"] = Commands.ExportNewCertificate;
+                knownCommands["enroll-enotariado"] = Commands.EnrollEnotariado;
                 knownCommands["compact"] = Commands.Compact;
                 knownCommands["create-report"] = Commands.CreateBugReport;
                 knownCommands["compare"] = Commands.ListChanges;
@@ -208,20 +207,12 @@ namespace Duplicati.CommandLine
             string command = cargs[0];
             cargs.RemoveAt(0);
 
-            if (command != "export-new-certificate") {
-                if (!options.ContainsKey("enotariado-auth-file"))
+            if (command != "enroll-enotariado" && cargs.Count > 0 && cargs[0].Contains("enotariado://"))
+            {
+                var initialized = LoadEnotariado(outwriter);
+
+                if (!initialized)
                 {
-                    outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
-                    return 200;
-                }
-                try
-                {
-                    ParseEnotariadoOptions(options["enotariado-auth-file"]);
-                }
-                catch (Exception e)
-                {
-                    // if this catch block is modified, make sure to modify ParseEnotariadoOptions
-                    // to have consistent behavior
                     outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
                     return 200;
                 }
@@ -403,26 +394,38 @@ namespace Duplicati.CommandLine
             }
         }
 
-        private static void ParseEnotariadoOptions(string filename)
+        private static bool LoadEnotariado(TextWriter outwriter)
         {
-            var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(filename);
-            var enotariadoInfo = JsonConvert.DeserializeObject<Duplicati.Library.ENotariado.ENotariadoInformation>(jsonContent);
+            var path = Library.Enotariado.Main.CONFIG_PATH;
+            Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
             X509Certificate2 certificate;
-
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
             var keyStoreLocation = StoreLocation.LocalMachine;
 #endif
-            // Checks if certificate already exists and is in local storage,
-            // then retrieves it or throws exception
-            if (!string.IsNullOrWhiteSpace(enotariadoInfo.CertThumbprint))
-                certificate = Duplicati.Library.ENotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
-            else
-                throw new Duplicati.Library.ENotariado.CertificateNotFoundException(enotariadoInfo.CertThumbprint);
 
-            Duplicati.Library.ENotariado.ENotariadoConnection.Init(enotariadoInfo.ApplicationId, certificate, true, enotariadoInfo.SubscriptionId);
+            if (!File.Exists(path))
+                return false;
 
+            var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(path);
+            enotariadoInfo = JsonConvert.DeserializeObject<Duplicati.Library.Enotariado.ConfigInformation>(jsonContent);
+
+            try
+            {
+                certificate = Duplicati.Library.Enotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
+                if (enotariadoInfo.ApplicationId == Guid.Empty || enotariadoInfo.SubscriptionId == Guid.Empty)
+                    throw new Library.Enotariado.FailedEnrollmentException();
+            }
+            catch (Exception ex) when (ex is Library.Enotariado.FailedEnrollmentException || ex is Library.Enotariado.CertificateNotFoundException)
+            {
+                File.Delete(path);
+                return false;
+            }
+            
+            Library.Enotariado.Main.Init(enotariadoInfo.ApplicationId, certificate, true, enotariadoInfo.SubscriptionId);
+            outwriter.WriteLine("Arquivo de configuração do e-notariado carregado com sucesso.");
+            return true;
         }
     }
 }

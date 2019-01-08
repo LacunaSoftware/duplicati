@@ -39,7 +39,7 @@ namespace Duplicati.UnitTest
         /// <summary>
         /// The folder that contains data to be backed up
         /// </summary>
-        protected readonly string DATAFOLDER = Path.Combine(BASEFOLDER, "backup-data");
+        protected readonly string DATAFOLDER = Path.Combine(BASEFOLDER, "bdata");
 
         /// <summary>
         /// The folder where data is restored into

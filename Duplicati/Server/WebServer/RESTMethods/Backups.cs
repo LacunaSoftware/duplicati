@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
 using Duplicati.Library.Localization.Short;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -184,12 +184,12 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
                 data.Backup.ID = null;
 
-                // Injecting ENotariadoConnection.BackupPassword into every new backup
+                // Injecting Enotariado.Main.BackupPassword into every new backup
                 // Much better than retrieving the password on the client and injecting there
                 var passphraseSetting = new Serialization.Implementations.Setting()
                 {
                     Name = "passphrase",
-                    Value = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult()
+                    Value = Library.Enotariado.Main.GetBackupPassword().GetAwaiter().GetResult()
                 };
                 if (data.Backup.Settings != null && data.Backup.Settings.Length > 0)
                 {

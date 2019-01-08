@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.IO;
 using Duplicati.Library.Common.IO;
 using System.Security.Cryptography.X509Certificates;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 using Newtonsoft.Json.Linq;
 using ENotariado.Backup.Api.ApplicationEnrollment;
 using Newtonsoft.Json;
@@ -1086,36 +1086,55 @@ namespace Duplicati.CommandLine
             return 0;
         }
 
-        public static int ExportNewCertificate(TextWriter outwriter, Action<Duplicati.Library.Main.Controller> setup, List<string> args, Dictionary<string, string> options, Library.Utility.IFilter filter)
+        public static int EnrollEnotariado(TextWriter outwriter, Action<Duplicati.Library.Main.Controller> setup, List<string> args, Dictionary<string, string> options, Library.Utility.IFilter filter)
         {
-            string outputFile = null;
-            options.TryGetValue("output-file", out outputFile);
-            if (string.IsNullOrEmpty(outputFile))
-            {
-                outputFile = "enrollment-info.json";
-            }
-
+            var path = Library.Enotariado.Main.CONFIG_PATH;
+            Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
+            X509Certificate2 certificate;
 #if DEBUG
             var keyStoreLocation = StoreLocation.CurrentUser;
 #else
             var keyStoreLocation = StoreLocation.LocalMachine;
 #endif
 
-            var certificate = CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
-            
-            // ApplicationEnrollRequest is the same object used by the server to enroll
-            // the machine  
-            var enrollment = new ApplicationEnrollRequest
+            outwriter.WriteLine("Checking if an e-notariado configuration file already exists...");
+            if (File.Exists(path))
             {
-                Certificate = certificate.RawData,
-                Description = Environment.MachineName
-            };
+                outwriter.WriteLine("Deleting current e-notariado configuration file");
+                File.Delete(path);
+            }
 
-            using (StreamWriter file = File.CreateText(outputFile))
+            certificate = Library.Enotariado.CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+            enotariadoInfo.CertThumbprint = certificate.Thumbprint;
+            outwriter.WriteLine("Issued self-signed certificate with thumbprint {0}", enotariadoInfo.CertThumbprint);
+
+            outwriter.WriteLine("Enrolling on e-notariado servers...");
+            enotariadoInfo.ApplicationId = Library.Enotariado.Main.Enrollment(certificate).GetAwaiter().GetResult();
+            outwriter.WriteLine("Enrollment successfully made. Application Id:");
+            outwriter.WriteLine("    {0}", enotariadoInfo.ApplicationId);
+
+            Library.Enotariado.Main.Init(enotariadoInfo.ApplicationId, certificate);
+            
+            outwriter.WriteLine("Checking if application has been verified...");
+            do
+            {
+                System.Threading.Thread.Sleep(5000);
+                enotariadoInfo.SubscriptionId = Library.Enotariado.Main.CheckVerifiedStatus().GetAwaiter().GetResult();
+                if (enotariadoInfo.SubscriptionId == Guid.Empty)
+                {
+                    outwriter.WriteLine("Application has not been verified yet. Retrying in 5 seconds...");
+                }
+            } while (enotariadoInfo.SubscriptionId == Guid.Empty);
+
+            outwriter.WriteLine("Application verified. Proceeding to store information into configuration file");
+
+
+            using (StreamWriter file = File.CreateText(path))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, enrollment);
+                serializer.Serialize(file, enotariadoInfo);
             }
+            outwriter.WriteLine("Configuration saved in {0}", path);
 
             return 0;
 

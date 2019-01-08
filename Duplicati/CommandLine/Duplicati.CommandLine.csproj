@@ -74,13 +74,21 @@
       <Project>{8E4CECFB-0413-4B00-AB93-78D1C3902BD5}</Project>
       <Name>Duplicati.Library.Backend.AzureBlob</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library\Backend\ENotariado\Duplicati.Library.Backend.ENotariado.csproj">
+      <Project>{2382d89f-18f9-46b1-bdb9-fe065da5b1c6}</Project>
+      <Name>Duplicati.Library.Backend.ENotariado</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\Backend\File\Duplicati.Library.Backend.File.csproj">
+      <Project>{fc9b7611-836f-4127-8b44-a7c31f506807}</Project>
+      <Name>Duplicati.Library.Backend.File</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\Compression\Duplicati.Library.Compression.csproj">
       <Project>{19ECCE09-B5EB-406C-8C57-BAC66997D469}</Project>
       <Name>Duplicati.Library.Compression</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\ENotariado\Duplicati.Library.ENotariado.csproj">
+    <ProjectReference Include="..\Library\ENotariado\Duplicati.Library.Enotariado.csproj">
       <Project>{32b7900a-b22c-448d-8bd4-6c2825719926}</Project>
-      <Name>Duplicati.Library.ENotariado</Name>
+      <Name>Duplicati.Library.Enotariado</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library\Utility\Duplicati.Library.Utility.csproj">
       <Project>{DE3E5D4C-51AB-4E5E-BEE8-E636CEBFBA65}</Project>

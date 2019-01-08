@@ -84,7 +84,7 @@
     <Compile Include="Database\Schedule.cs" />
     <Compile Include="SpecialFolders.cs" />
     <Compile Include="WebServer\AuthenticationHandler.cs" />
-    <Compile Include="WebServer\RESTMethods\ENotariado.cs" />
+    <Compile Include="WebServer\RESTMethods\Enotariado.cs" />
     <Compile Include="WebServer\RESTMethods\MSSQL.cs" />
     <Compile Include="WebServer\RESTMethods\HyperV.cs" />
     <Compile Include="WebServer\Server.cs" />
@@ -160,6 +160,10 @@
       <Project>{2382d89f-18f9-46b1-bdb9-fe065da5b1c6}</Project>
       <Name>Duplicati.Library.Backend.ENotariado</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library\Backend\File\Duplicati.Library.Backend.File.csproj">
+      <Project>{fc9b7611-836f-4127-8b44-a7c31f506807}</Project>
+      <Name>Duplicati.Library.Backend.File</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\Backend\OAuthHelper\Duplicati.Library.OAuthHelper.csproj">
       <Project>{d4c37c33-5e73-4b56-b2c3-dc4a6baa36bb}</Project>
       <Name>Duplicati.Library.OAuthHelper</Name>
@@ -176,9 +180,9 @@
       <Project>{94484FDB-2EFA-4CF0-9BE6-A561157B4F87}</Project>
       <Name>Duplicati.Library.Encryption</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\ENotariado\Duplicati.Library.ENotariado.csproj">
+    <ProjectReference Include="..\Library\ENotariado\Duplicati.Library.Enotariado.csproj">
       <Project>{32B7900A-B22C-448D-8BD4-6C2825719926}</Project>
-      <Name>Duplicati.Library.ENotariado</Name>
+      <Name>Duplicati.Library.Enotariado</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library\Interface\Duplicati.Library.Interface.csproj">
       <Project>{C5899F45-B0FF-483C-9D38-24A9FCAAB237}</Project>

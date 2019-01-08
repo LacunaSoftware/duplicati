@@ -23,6 +23,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Duplicati.Library.Common.IO;
 using Duplicati.Library.Common;
+using System.Globalization;
 
 namespace Duplicati.Library.Utility
 {
@@ -197,7 +198,6 @@ namespace Duplicati.Library.Utility
                 rootpath = Util.AppendDirSeparator(rootpath);
                 try
                 {
-
                     var attr = attributeReader?.Invoke(rootpath) ?? FileAttributes.Directory;
                     if (callback(rootpath, rootpath, attr))
                         lst.Push(rootpath);
@@ -214,7 +214,7 @@ namespace Duplicati.Library.Utility
 
                 while (lst.Count > 0)
                 {
-                    var f = Util.AppendDirSeparator(lst.Pop());
+                    var f = lst.Pop();
 
                     yield return f;
 
@@ -617,7 +617,7 @@ namespace Duplicati.Library.Utility
             if (string.IsNullOrEmpty(value) || value.Trim().Length == 0)
                 return System.Threading.ThreadPriority.Normal;
 
-            switch (value.ToLower().Trim())
+            switch (value.ToLower(CultureInfo.InvariantCulture).Trim())
             {
                 case "+2":
                 case "high":
@@ -656,7 +656,7 @@ namespace Duplicati.Library.Utility
                 return defaultFunc();
             }
 
-            switch (value.Trim().ToLower())
+            switch (value.Trim().ToLower(CultureInfo.InvariantCulture))
             {
                 case "1":
                 case "on":

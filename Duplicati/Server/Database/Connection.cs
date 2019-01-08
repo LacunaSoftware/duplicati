@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Duplicati.Server.Serialization.Interface;
 using System.Text;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 
 namespace Duplicati.Server.Database
 {
@@ -66,7 +66,7 @@ namespace Duplicati.Server.Database
                 var backup = Program.DataConnection.GetBackup(backupid);
                 targetURL = backup.TargetURL;
             }
-            _ = ENotariadoConnection.QueueLog(id, timestamp, message, exception, "Error", targetURL);
+            Library.Enotariado.Main.QueueLog(id, timestamp, message, exception, "Error", targetURL);
         }
         
         internal void ExecuteWithCommand(Action<System.Data.IDbCommand> f)
@@ -402,7 +402,7 @@ namespace Duplicati.Server.Database
             var disabled_encryption = false;
             var passphrase = string.Empty;
             var encryptionModule = string.Empty;
-            var correctPassphrase = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult();
+            var correctPassphrase = Library.Enotariado.Main.GetBackupPassword().GetAwaiter().GetResult();
             var gpgAsymmetricEncryption = false;
             if (item.Settings != null)
             {

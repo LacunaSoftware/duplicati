@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,6 +10,8 @@
     <AssemblyName>Duplicati.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseMSBuildEngine>false</UseMSBuildEngine>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,8 +36,10 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ENotariadoLibrary.cs" />
     <Compile Include="SVNCheckoutsTest.cs" />
     <Compile Include="GeneralBlackBoxTesting.cs" />
     <Compile Include="CommandLineOperationsTests.cs" />
@@ -51,7 +56,6 @@
     <Compile Include="FilterTest.cs" />
     <Compile Include="ResultFormatSerializerProviderTest.cs" />
     <Compile Include="UriUtilityTests.cs" />
-    <Compile Include="WebApiTests.cs" />
     <Compile Include="RunScriptTests.cs" />
     <Compile Include="IOTests.cs" />
   </ItemGroup>
@@ -81,6 +85,14 @@
       <Project>{8E4CECFB-0413-4B00-AB93-78D1C3902BD5}</Project>
       <Name>Duplicati.Library.Backend.AzureBlob</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Library\Backend\ENotariado\Duplicati.Library.Backend.ENotariado.csproj">
+      <Project>{2382d89f-18f9-46b1-bdb9-fe065da5b1c6}</Project>
+      <Name>Duplicati.Library.Backend.ENotariado</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\Backend\File\Duplicati.Library.Backend.File.csproj">
+      <Project>{fc9b7611-836f-4127-8b44-a7c31f506807}</Project>
+      <Name>Duplicati.Library.Backend.File</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Library\Compression\Duplicati.Library.Compression.csproj">
       <Project>{19ECCE09-B5EB-406C-8C57-BAC66997D469}</Project>
       <Name>Duplicati.Library.Compression</Name>
@@ -92,6 +104,10 @@
     <ProjectReference Include="..\Library\Encryption\Duplicati.Library.Encryption.csproj">
       <Project>{94484FDB-2EFA-4CF0-9BE6-A561157B4F87}</Project>
       <Name>Duplicati.Library.Encryption</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\ENotariado\Duplicati.Library.Enotariado.csproj">
+      <Project>{32b7900a-b22c-448d-8bd4-6c2825719926}</Project>
+      <Name>Duplicati.Library.Enotariado</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library\Interface\Duplicati.Library.Interface.csproj">
       <Project>{C5899F45-B0FF-483C-9D38-24A9FCAAB237}</Project>
@@ -141,10 +157,6 @@
       <Project>{33FD1D24-C28F-4C71-933F-98F1586EA76C}</Project>
       <Name>Duplicati.Server.Serialization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library\Backend\GoogleServices\Duplicati.Library.Backend.GoogleServices.csproj">
-      <Project>{5489181D-950C-44AF-873C-45EB0A3B6BD2}</Project>
-      <Name>Duplicati.Library.Backend.GoogleServices</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Library\Common\Duplicati.Library.Common.csproj">
       <Project>{D63E53E4-A458-4C2F-914D-92F715F58ACF}</Project>
       <Name>Duplicati.Library.Common</Name>
@@ -154,4 +166,10 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\NUnit3TestAdapter.3.12.0\build\net35\NUnit3TestAdapter.props'))" />
+  </Target>
 </Project>

@@ -3,12 +3,12 @@ using System.Linq;
 using System.Collections.Generic;
 using Duplicati.Server.Serialization;
 using System.IO;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 using Duplicati.Library.Localization.Short;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
-    public class ENotariado : IRESTMethodGET, IRESTMethodPOST, IRESTMethodDocumented
+    public class Enotariado : IRESTMethodGET, IRESTMethodPOST, IRESTMethodDocumented
     {
 
         public void GET(string key, RequestInfo info)
@@ -16,7 +16,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
             switch ((key ?? "").ToLowerInvariant())
             {
                 case "backup-list":
-                    info.BodyWriter.OutputOK(ENotariadoConnection.GetStoredBackupNames());
+                    info.BodyWriter.OutputOK(Library.Enotariado.Main.GetStoredBackupNames());
                     return;
 
                 case "app-enrollment":
@@ -47,14 +47,13 @@ namespace Duplicati.Server.WebServer.RESTMethods
                     
 
                         // if re-enroll is forced or
-                        // if ENotariadoIsVerified == false, it means we are not enrolled or enrolled but not verified
+                        // if EnotariadoIsVerified == false, it means we are not enrolled or enrolled but not verified
                         //   either way, reset and start again
-                        if (force || !Program.ENotariadoIsVerified)
+                        if (force || !Program.EnotariadoIsVerified)
                         {
-                            Program.ResetENotariado();
+                            Program.ResetEnotariadoConfig();
                             body = body1x1;
-                            // will only make changes when ENotariadoIsEnrolled == false
-                            _ = Program.EnrollENotariado(id, ticket);
+                            _ = Program.FinishPreApprovedEnrollmentEnotariado(id, ticket);
                         }
                         else
                         {
@@ -84,16 +83,14 @@ namespace Duplicati.Server.WebServer.RESTMethods
             switch ((key ?? "").ToLowerInvariant())
             {
                 case "verify":
-                    var resultVerify = Program.VerifyENotariado().GetAwaiter().GetResult();
-
-                    if (resultVerify)
+                    if (Program.EnotariadoIsVerified)
                         info.OutputOK();
                     else
                         info.OutputError(item: failedVerification);
                     return;
 
                 case "reset":
-                    Program.ResetENotariado();
+                    Program.ResetEnotariadoConfig();
                     info.OutputOK();
                     return;
 

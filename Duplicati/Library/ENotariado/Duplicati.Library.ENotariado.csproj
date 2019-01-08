@@ -7,8 +7,8 @@
     <ProjectGuid>{32B7900A-B22C-448D-8BD4-6C2825719926}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Duplicati.Library.ENotariado</RootNamespace>
-    <AssemblyName>Duplicati.Library.ENotariado</AssemblyName>
+    <RootNamespace>Duplicati.Library.Enotariado</RootNamespace>
+    <AssemblyName>Duplicati.Library.Enotariado</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptoUtils.cs" />
-    <Compile Include="ENotariadoConnection.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +69,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoUpdater\Duplicati.Library.AutoUpdater.csproj">
+      <Project>{7e119745-1f62-43f0-936c-f312a1912c0b}</Project>
+      <Name>Duplicati.Library.AutoUpdater</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Backend\AzureBlob\Duplicati.Library.Backend.AzureBlob.csproj">
       <Project>{8e4cecfb-0413-4b00-ab93-78d1c3902bd5}</Project>
       <Name>Duplicati.Library.Backend.AzureBlob</Name>

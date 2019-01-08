@@ -3,34 +3,33 @@ using System.Collections.Generic;
 using System.IO;
 using Duplicati.Library.Backend.AzureBlob;
 using Duplicati.Library.Interface;
-using Duplicati.Library.ENotariado;
 using System.Web;
 
-namespace Duplicati.Library.Backend.ENotariado
+namespace Duplicati.Library.Backend.Enotariado
 {
-    public class ENotariadoBackend : IStreamingBackend
+    public class EnotariadoBackend : IStreamingBackend
     {
         private readonly AzureBlobWrapper _azureBlob;
 
-        public ENotariadoBackend()
+        public EnotariadoBackend()
         {
         }
 
-        public ENotariadoBackend(string url, Dictionary<string, string> options)
+        public EnotariadoBackend(string url, Dictionary<string, string> options)
         {
             var uri = new Utility.Uri(url);
             uri.RequireHost();
             string backupName = null;
 
-            var accountName = ENotariadoConnection.AzureAccountName;
-            var sasToken = ENotariadoConnection.GetSASToken().GetAwaiter().GetResult();
+            var accountName = Library.Enotariado.Main.AzureAccountName;
+            var sasToken = Library.Enotariado.Main.GetSASToken().GetAwaiter().GetResult();
             var containerName = uri.Host.ToLowerInvariant();
 
             if (options.ContainsKey("name"))
                 backupName = options["name"];
             if (string.IsNullOrWhiteSpace(backupName))
             {
-                throw new UserInformationException(Strings.ENotariadoBackend.NoBackupName, "NoBackupName");
+                throw new UserInformationException(Strings.EnotariadoBackend.NoBackupName, "NoBackupName");
             }
 
             _azureBlob = new AzureBlobWrapper(accountName, sasToken, containerName, backupName);
@@ -38,7 +37,7 @@ namespace Duplicati.Library.Backend.ENotariado
 
         public string DisplayName
         {
-            get { return Strings.ENotariadoBackend.DisplayName; }
+            get { return Strings.EnotariadoBackend.DisplayName; }
         }
 
         public string ProtocolKey
@@ -106,7 +105,7 @@ namespace Duplicati.Library.Backend.ENotariado
         {
             get
             {
-                return Strings.ENotariadoBackend.Description_v2;
+                return Strings.EnotariadoBackend.Description_v2;
             }
         }
 

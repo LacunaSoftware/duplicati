@@ -1,6 +1,6 @@
 using Duplicati.Library.Localization.Short;
-namespace Duplicati.Library.Backend.ENotariado.Strings {
-    internal static class ENotariadoBackend
+namespace Duplicati.Library.Backend.Enotariado.Strings {
+    internal static class EnotariadoBackend
     {
         public static string DisplayName { get { return LC.L(@"e-notariado"); } }
         public static string NoBackupName { get { return LC.L(@"The name of the backup was not recognized by the backend"); } }

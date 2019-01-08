@@ -17,8 +17,6 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Duplicati.Library.Interface;
-using Duplicati.Library.ENotariado;
 using Duplicati.Library.Localization.Short;
 
 using Duplicati.Library.Common;

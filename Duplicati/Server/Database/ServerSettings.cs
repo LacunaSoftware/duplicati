@@ -204,7 +204,7 @@ namespace Duplicati.Server.Database
             }
         }
 
-        public bool ENotariadoIsEnrolled
+        public bool EnotariadoIsEnrolled
         {
             get
             {
@@ -218,7 +218,7 @@ namespace Duplicati.Server.Database
             }
         }
 
-        public bool ENotariadoIsVerified
+        public bool EnotariadoIsVerified
         {
             get
             {
@@ -246,7 +246,7 @@ namespace Duplicati.Server.Database
             }
         }
 
-        public Guid ENotariadoApplicationId
+        public Guid EnotariadoApplicationId
         {
             get
             {
@@ -263,7 +263,7 @@ namespace Duplicati.Server.Database
             }
         }
 
-        public Guid ENotariadoSubscriptionId
+        public Guid EnotariadoSubscriptionId
         {
             get
             {

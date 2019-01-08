@@ -2,19 +2,19 @@
     <h1 translate>e-notariado</h1>
 
     <form class="styled">
-        <h4 class="ui-state-error-text" ng-hide="eNotariado.isEnrolled">A aplicação não está cadastrada no Módulo Gerenciador do Backup e-notariado.</h4>
-        <div ng-hide="!eNotariado.isEnrolled || eNotariado.isVerified">
+        <h4 class="ui-state-error-text" ng-show="!enotariado.isEnrolled">A aplicação não está cadastrada no Módulo Gerenciador do Backup e-notariado.</h4>
+        <div ng-show="enotariado.isEnrolled && !enotariado.isVerified">
             <h4 class="ui-state-error-text">A aplicação ainda não foi aprovada no Módulo Gerenciador do Backup e-notariado.</h4>
         </div>
 
-        <h4 ng-show="eNotariado.isVerified && eNotariado.isEnrolled">A aplicação está configurada corretamente</h4>
+        <h4 ng-show="enotariado.isVerified && enotariado.isEnrolled">A aplicação está configurada corretamente</h4>
         
         <div style="cursor: pointer" class="sublabel" ng-click="enrollSettings = !enrollSettings">
             <span>Opção avançada</span>&nbsp; 
             <i class="fa fa-angle-{{enrollSettings ? 'up' : 'down'}}"></i>
         </div>
         <div ng-show="enrollSettings" class="input checkbox">
-            <input type="button" id="eNotariadoReset" class="button submit" value="{{'Reiniciar cadastro com e-notariado'}}" ng-click="eNotariadoReset()" />
+            <input type="button" id="enotariadoReset" class="button submit" value="{{'Reiniciar cadastro com e-notariado'}}" ng-click="enotariadoReset()" />
         </div>
 
         <div>

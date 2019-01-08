@@ -101,6 +101,7 @@ fi
 RELEASE_CHANGEINFO_NEWS=$(cat "${RELEASE_CHANGELOG_NEWS_FILE}")
 
 git stash save "${GIT_STASH_NAME}"
+git pull
 
 if [ ! "x${RELEASE_CHANGEINFO_NEWS}" == "x" ]; then
 

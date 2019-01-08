@@ -21,7 +21,7 @@ using System.IO;
 using System.Linq;
 using Duplicati.Server.Serialization.Interface;
 using Duplicati.Library.Localization.Short;
-using Duplicati.Library.ENotariado;
+using Duplicati.Library;
 
 namespace Duplicati.Server.WebServer.RESTMethods
 {
@@ -190,7 +190,7 @@ namespace Duplicati.Server.WebServer.RESTMethods
 
             string[] filters = parsePaths(input["paths"].Value ?? string.Empty);
 
-            var passphrase = ENotariadoConnection.GetBackupPassword().GetAwaiter().GetResult();
+            var passphrase = Library.Enotariado.Main.GetBackupPassword().GetAwaiter().GetResult();
 
             var time = Duplicati.Library.Utility.Timeparser.ParseTimeInterval(input["time"].Value, DateTime.Now);
             var restoreTarget = input["restore-path"].Value;
@@ -634,23 +634,17 @@ namespace Duplicati.Server.WebServer.RESTMethods
                         bool hasPaused = Program.LiveControl.State == LiveControls.LiveControlState.Paused;
                         Program.LiveControl.Pause();
 
-                        try
-                        {
-                            for(int i = 0; i < 10; i++)
-                                if (Program.WorkThread.Active)
-                                {
-                                    var t = Program.WorkThread.CurrentTask;
-                                    if (backup.Equals(t == null ? null : t.Backup))
-                                        System.Threading.Thread.Sleep(1000);
-                                    else
-                                        break;
-                                }
+                        for(int i = 0; i < 10; i++)
+                            if (Program.WorkThread.Active)
+                            {
+                                var t = Program.WorkThread.CurrentTask;
+                                if (backup.Equals(t == null ? null : t.Backup))
+                                    System.Threading.Thread.Sleep(1000);
                                 else
                                     break;
-                        }
-                        finally
-                        {
-                        }
+                            }
+                            else
+                                break;
 
                         if (Program.WorkThread.Active)
                         {
