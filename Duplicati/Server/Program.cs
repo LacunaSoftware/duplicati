@@ -1,6 +1,7 @@
 ﻿using Duplicati.Library;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
@@ -29,12 +30,12 @@ namespace Duplicati.Server
         /// <summary>
         /// The name of the environment variable that holds the path to the data folder used by Duplicati
         /// </summary>
-        public static readonly string DATAFOLDER_ENV_NAME = Duplicati.Library.AutoUpdater.AutoUpdateSettings.AppName.ToUpper() + "_HOME";
+        public static readonly string DATAFOLDER_ENV_NAME = Duplicati.Library.AutoUpdater.AutoUpdateSettings.AppName.ToUpper(CultureInfo.InvariantCulture) + "_HOME";
 
         /// <summary>
         /// The environment variable that holdes the database key used to encrypt the SQLite database
         /// </summary>
-        public static readonly string DB_KEY_ENV_NAME = Duplicati.Library.AutoUpdater.AutoUpdateSettings.AppName.ToUpper() + "_DB_KEY";
+        public static readonly string DB_KEY_ENV_NAME = Duplicati.Library.AutoUpdater.AutoUpdateSettings.AppName.ToUpper(CultureInfo.InvariantCulture) + "_DB_KEY";
 
         /// <summary>
         /// Gets the folder where Duplicati data is stored
@@ -303,7 +304,7 @@ namespace Duplicati.Server
             try
             {
                 // Setup the log redirect
-                var logscope = Library.Logging.Log.StartScope(Program.LogHandler, null);
+                Library.Logging.Log.StartScope(Program.LogHandler, null);
 
                 if (commandlineOptions.ContainsKey("log-file"))
                 {
@@ -514,8 +515,8 @@ namespace Duplicati.Server
                     Console.WriteLine(Strings.Program.SeriousError(mex.ToString()));
                     return 100;
                 }
-                else
-                    throw mex;
+
+                throw;
             }
             catch (Exception ex)
             {
