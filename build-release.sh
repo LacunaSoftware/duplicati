@@ -31,6 +31,7 @@ echo -n "Enter FTPS password: "
 read -s FTPS_PASSWORD
 echo
 
+GITHUB_TOKEN_FILE="${HOME}/.config/signkeys/Duplicati/github-token"
 XBUILD=/usr/bin/msbuild
 NUGET=/usr/bin/nuget
 MONO=/usr/bin/mono
@@ -304,14 +305,11 @@ RELEASE_MESSAGE=$(printf "Changes in this version:\n${RELEASE_CHANGEINFO_NEWS}")
 
 GITHUB_TOKEN=$(cat "${GITHUB_TOKEN_FILE}")
 
-if [ "x${GITHUB_TOKEN}" == "x" ]; then
-	echo "No GITHUB_TOKEN found in environment, you can manually upload the binaries"
-else
 	github-release release ${PRE_RELEASE_LABEL} \
 	    --tag "v${RELEASE_VERSION}-${RELEASE_NAME}"  \
 	    --name "v${RELEASE_VERSION}-${RELEASE_NAME}" \
 	    --repo "duplicati" \
-	    --user "duplicati" \
+	    --user "LacunaSoftware" \
 	    --security-token "${GITHUB_TOKEN}" \
 	    --description "${RELEASE_MESSAGE}" \
 
@@ -319,10 +317,12 @@ else
 	    --tag "v${RELEASE_VERSION}-${RELEASE_NAME}"  \
 	    --name "${RELEASE_FILE_NAME}.zip" \
 	    --repo "duplicati" \
-	    --user "duplicati" \
+	    --user "LacunaSoftware" \
 	    --security-token "${GITHUB_TOKEN}" \
 	    --file "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
 fi
+
+git push
 
 echo
 echo "Built ${RELEASE_TYPE} version: ${RELEASE_VERSION} - ${RELEASE_NAME}"
