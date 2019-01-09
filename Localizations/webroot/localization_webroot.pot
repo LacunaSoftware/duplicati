@@ -13,7 +13,7 @@ msgstr ""
 msgid "...loading..."
 msgstr ""
 
-#: scripts/controllers/AboutController.js:71
+#: scripts/controllers/AboutController.js:73
 msgid "A nova atualização não pode ser ativada enquanto houverem tarefas sendo executadas"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "AWS IAM Policy"
 msgstr ""
 
-#: index.html:220
+#: index.html:227
 msgid "About"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Add advanced option"
 msgstr ""
 
-#: index.html:205
+#: index.html:212
 msgid "Add backup"
 msgstr ""
 
@@ -329,7 +329,7 @@ msgstr ""
 #: scripts/services/EditUriBuiltins.js:877
 #: scripts/services/EditUriBuiltins.js:894
 #: templates/delete.html:52
-#: templates/export.html:30
+#: templates/export.html:34
 #: templates/restoredirect.html:56
 #: templates/settings.html:155
 #: templates/waitarea.html:19
@@ -367,8 +367,8 @@ msgstr ""
 msgid "Click the AuthID link to create an AuthID"
 msgstr ""
 
-#: index.html:142
-#: index.html:193
+#: index.html:149
+#: index.html:200
 msgid "Click to set throttle options"
 msgstr ""
 
@@ -385,7 +385,7 @@ msgstr ""
 msgid "Compacting remote data ..."
 msgstr ""
 
-#: templates/backup-result/box.html:31
+#: templates/backup-result/box.html:34
 msgid "Complete log"
 msgstr ""
 
@@ -423,6 +423,14 @@ msgstr ""
 msgid "Confirm delete"
 msgstr ""
 
+#: templates/export.html:30
+msgid "Confirm encryption passphrase"
+msgstr ""
+
+#: templates/export.html:29
+msgid "Confirm passphrase"
+msgstr ""
+
 #: templates/settings.html:12
 msgid "Confirm password"
 msgstr ""
@@ -431,11 +439,11 @@ msgstr ""
 msgid "Confirmation required"
 msgstr ""
 
-#: index.html:283
+#: index.html:290
 msgid "Connect now"
 msgstr ""
 
-#: index.html:279
+#: index.html:286
 msgid "Connecting to server ..."
 msgstr ""
 
@@ -443,11 +451,11 @@ msgstr ""
 msgid "Connecting to task ...."
 msgstr ""
 
-#: index.html:284
+#: index.html:291
 msgid "Connecting..."
 msgstr ""
 
-#: index.html:275
+#: index.html:282
 msgid "Connection lost"
 msgstr ""
 
@@ -469,10 +477,6 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:116
-msgid "Copied {0} to clipboard"
-msgstr ""
-
 #: scripts/controllers/DialogController.js:16
 msgid "Copied!"
 msgstr ""
@@ -489,12 +493,8 @@ msgstr ""
 msgid "Copy failed. Please manually copy the URL"
 msgstr ""
 
-#: scripts/services/AppUtils.js:643
+#: scripts/services/AppUtils.js:647
 msgid "Core options"
-msgstr ""
-
-#: scripts/controllers/SystemSettingsController.js:121
-msgid "Could not copy {0} to clipboard"
 msgstr ""
 
 #: scripts/controllers/StateController.js:34
@@ -699,7 +699,7 @@ msgstr ""
 msgid "Domain Name"
 msgstr ""
 
-#: templates/export.html:49
+#: templates/export.html:53
 msgid "Done"
 msgstr ""
 
@@ -847,9 +847,10 @@ msgstr ""
 msgid "Enter the full destination path, including the server name, but without https"
 msgstr ""
 
-#: scripts/controllers/AboutController.js:71
+#: scripts/controllers/AboutController.js:73
 #: scripts/controllers/CommandlineController.js:74
 #: scripts/controllers/ExportController.js:43
+#: scripts/controllers/ExportController.js:60
 #: scripts/controllers/RestoreController.js:137
 #: scripts/controllers/RestoreController.js:364
 #: scripts/controllers/RestoreController.js:397
@@ -861,7 +862,7 @@ msgstr ""
 #: scripts/directives/notificationArea.js:41
 #: scripts/directives/notificationArea.js:43
 #: scripts/services/AppUtils.js:301
-#: scripts/services/AppUtils.js:342
+#: scripts/services/AppUtils.js:344
 msgid "Error"
 msgstr ""
 
@@ -913,7 +914,7 @@ msgstr ""
 msgid "Existing file found"
 msgstr ""
 
-#: templates/export.html:31
+#: templates/export.html:35
 msgid "Export"
 msgstr ""
 
@@ -934,7 +935,7 @@ msgstr ""
 msgid "Export passwords"
 msgstr ""
 
-#: templates/export.html:35
+#: templates/export.html:39
 msgid "Exporting ..."
 msgstr ""
 
@@ -944,10 +945,6 @@ msgstr ""
 
 #: scripts/services/SystemInfo.js:52
 msgid "FTP (Alternative)"
-msgstr ""
-
-#: scripts/controllers/SystemSettingsController.js:121
-msgid "Fail"
 msgstr ""
 
 #: scripts/controllers/RestoreController.js:364
@@ -963,7 +960,7 @@ msgstr ""
 #: scripts/controllers/CommandlineController.js:74
 #: scripts/controllers/ExportController.js:43
 #: scripts/controllers/RestoreDirectController.js:90
-#: scripts/services/LogService.js:30
+#: scripts/services/LogService.js:31
 msgid "Failed to connect: {{message}}"
 msgstr ""
 
@@ -991,7 +988,7 @@ msgstr ""
 msgid "Failed to restore files: {{message}}"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:168
+#: scripts/controllers/SystemSettingsController.js:138
 msgid "Failed to save:"
 msgstr ""
 
@@ -1002,10 +999,6 @@ msgstr ""
 
 #: scripts/services/AppUtils.js:74
 msgid "File"
-msgstr ""
-
-#: templates/backup-result/top-right-box.html:1
-msgid "Files"
 msgstr ""
 
 #: templates/addoredit.html:203
@@ -1020,7 +1013,7 @@ msgstr ""
 msgid "Finished!"
 msgstr ""
 
-#: scripts/controllers/AppController.js:199
+#: scripts/controllers/AppController.js:196
 msgid "First run setup"
 msgstr ""
 
@@ -1093,7 +1086,7 @@ msgstr ""
 msgid "Hide hidden folders"
 msgstr ""
 
-#: index.html:202
+#: index.html:209
 #: scripts/services/AppUtils.js:62
 msgid "Home"
 msgstr ""
@@ -1142,7 +1135,7 @@ msgstr ""
 msgid "If the backup and the remote storage is out of sync, Duplicati will require that you perform a repair operation to synchronize the database. If the repair is unsuccesful, you can delete the local database and re-generate."
 msgstr ""
 
-#: templates/export.html:45
+#: templates/export.html:49
 #: templates/notificationarea.html:7
 msgid "If the file was not downloaded automatically"
 msgstr ""
@@ -1161,7 +1154,7 @@ msgstr ""
 msgid "If you want to use the backup later, you can export the configuration before deleting it"
 msgstr ""
 
-#: scripts/controllers/AppController.js:200
+#: scripts/controllers/AppController.js:197
 msgid ""
 "If your machine is in a multi-user environment (i.e. the machine has more than one account), you need to set a password to prevent other users from accessing data on your account.\n"
 "Do you want to set a password now?"
@@ -1371,7 +1364,7 @@ msgstr ""
 msgid "Log data from the server"
 msgstr ""
 
-#: index.html:223
+#: index.html:230
 msgid "Log out"
 msgstr ""
 
@@ -1400,7 +1393,7 @@ msgstr ""
 msgid "Max upload speed"
 msgstr ""
 
-#: index.html:138
+#: index.html:145
 #: templates/addoredit.html:135
 #: templates/addoredit.html:348
 #: templates/addoredit.html:61
@@ -1507,11 +1500,11 @@ msgstr ""
 msgid "Next scheduled run:"
 msgstr ""
 
-#: index.html:177
+#: index.html:184
 msgid "Next scheduled task:"
 msgstr ""
 
-#: index.html:174
+#: index.html:181
 msgid "Next task:"
 msgstr ""
 
@@ -1562,11 +1555,11 @@ msgstr ""
 msgid "No passphrase entered"
 msgstr ""
 
-#: index.html:179
+#: index.html:186
 msgid "No scheduled tasks"
 msgstr ""
 
-#: scripts/controllers/AppController.js:201
+#: scripts/controllers/AppController.js:198
 msgid "No, my machine has only a single account"
 msgstr ""
 
@@ -1854,7 +1847,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: index.html:208
+#: index.html:215
 #: templates/restore.html:142
 #: templates/restoredirect.html:57
 msgid "Restore"
@@ -1898,12 +1891,24 @@ msgstr ""
 msgid "Restore read/write permissions"
 msgstr ""
 
+#: templates/backup-result/restore-items.html:2
+msgid "Restored Files"
+msgstr ""
+
+#: templates/backup-result/restore-items.html:6
+msgid "Restored Folders"
+msgstr ""
+
+#: templates/backup-result/restore-items.html:10
+msgid "Restored Symlinks"
+msgstr ""
+
 #: scripts/controllers/RestoreController.js:357
 #: scripts/controllers/RestoreController.js:379
 msgid "Restoring files ..."
 msgstr ""
 
-#: index.html:211
+#: index.html:218
 msgid "Resume"
 msgstr ""
 
@@ -1936,7 +1941,7 @@ msgstr ""
 msgid "Running commandline entry"
 msgstr ""
 
-#: index.html:166
+#: index.html:173
 msgid "Running task:"
 msgstr ""
 
@@ -2044,7 +2049,7 @@ msgstr ""
 msgid "Server state properties"
 msgstr ""
 
-#: index.html:214
+#: index.html:221
 #: templates/settings.html:2
 msgid "Settings"
 msgstr ""
@@ -2090,6 +2095,10 @@ msgstr ""
 
 #: templates/addoredit.html:26
 msgid "Source Data"
+msgstr ""
+
+#: templates/backup-result/top-right-box.html:1
+msgid "Source Files"
 msgstr ""
 
 #: scripts/directives/sourceFolderPicker.js:387
@@ -2153,11 +2162,11 @@ msgstr ""
 msgid "Stop running task"
 msgstr ""
 
-#: index.html:162
+#: index.html:169
 msgid "Stopping after upload:"
 msgstr ""
 
-#: index.html:167
+#: index.html:174
 msgid "Stopping task:"
 msgstr ""
 
@@ -2177,7 +2186,6 @@ msgstr ""
 msgid "Stored"
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:116
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2285,7 +2293,7 @@ msgstr ""
 msgid "The configuration should be kept safe. Are you sure you want to save an unencrypted file containing your passwords?"
 msgstr ""
 
-#: index.html:276
+#: index.html:283
 msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 
@@ -2302,11 +2310,12 @@ msgid ""
 "Do you want to REPLACE your CURRENT host key \"{{prev}}\" with the REPORTED host key: {{key}}?"
 msgstr ""
 
-#: index.html:294
+#: index.html:308
 msgid "The page is not yet loaded, this can be caused by a defective install, a browser issue or a slow connection."
 msgstr ""
 
-#: scripts/controllers/SystemSettingsController.js:142
+#: scripts/controllers/ExportController.js:60
+#: scripts/controllers/SystemSettingsController.js:112
 msgid "The passwords do not match"
 msgstr ""
 
@@ -2352,6 +2361,10 @@ msgstr ""
 
 #: scripts/controllers/RestoreDirectController.js:87
 msgid "The target folder contains encrypted files, please supply the passphrase"
+msgstr ""
+
+#: index.html:297
+msgid "The update is being activated, it might take a minute ..."
 msgstr ""
 
 #: scripts/services/EditUriBuiltins.js:51
@@ -2444,6 +2457,10 @@ msgstr ""
 msgid "Update failed:"
 msgstr ""
 
+#: index.html:296
+msgid "Updating"
+msgstr ""
+
 #: scripts/controllers/LocalDatabaseController.js:88
 msgid "Updating with existing database"
 msgstr ""
@@ -2500,6 +2517,7 @@ msgid "Validating ..."
 msgstr ""
 
 #: templates/backup-result/phases/test.html:20
+#: templates/backup-result/test-items.html:2
 msgid "Verifications"
 msgstr ""
 
@@ -2585,7 +2603,7 @@ msgid "Years"
 msgstr ""
 
 #: scripts/controllers/AboutController.js:56
-#: scripts/controllers/AppController.js:201
+#: scripts/controllers/AppController.js:198
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
 #: scripts/controllers/EditBackupController.js:300
@@ -2738,7 +2756,7 @@ msgstr ""
 msgid "custom"
 msgstr ""
 
-#: index.html:217
+#: index.html:224
 #: templates/enotariado.html:2
 msgid "e-notariado"
 msgstr ""
@@ -2753,7 +2771,7 @@ msgstr ""
 msgid "resume now"
 msgstr ""
 
-#: templates/export.html:45
+#: templates/export.html:49
 #: templates/notificationarea.html:7
 msgid "right click and choose \"Save As ...\""
 msgstr ""

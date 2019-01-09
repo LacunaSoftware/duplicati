@@ -56,12 +56,14 @@ backupApp.controller('AboutController', function($scope, $location, BrandingServ
             DialogService.dialog(gettextCatalog.getString('Warning'), gettextCatalog.getString('Ao continuar o Módulo Agente será reiniciado e quaisquer operações ocorrendo atualmente serão perdidas, continuar?'), [gettextCatalog.getString('No'), gettextCatalog.getString('Yes')], function(ix) {
                 if (ix == 1) {
                     AppService.post('/updates/activate').then(function() {
+                        $scope.state.connectionState = 'updating';
                         var interval = setInterval(function() {
-                            SystemInfo.loadSystemInfo(true, function() {});
-                            if (oldVersion != $scope.sysinfo.ServerVersion) {
-                                window.location.reload();
-                                clearInterval(interval);
-                            }
+                            SystemInfo.loadSystemInfo(true, () => {}, () => {
+                                if (oldVersion != $scope.sysinfo.ServerVersion) {
+                                    window.location.reload();
+                                    clearInterval(interval);
+                                }
+                            });
                         }, 1000);
                     }, AppUtils.connectionError("Falha ao ativar a atualização: "));
                 }

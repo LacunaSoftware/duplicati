@@ -114,7 +114,7 @@ backupApp.service('SystemInfo', function($rootScope, $timeout, $cookies, AppServ
         $rootScope.$broadcast('systeminfochanged');
     };
 
-    function loadSystemInfo (reload, errorHandler) {
+    this.loadSystemInfo = function (reload, errorHandler, callback) {
         if (errorHandler === undefined) {
             errorHandler = AppUtils.connectionError;
         }
@@ -133,11 +133,14 @@ backupApp.service('SystemInfo', function($rootScope, $timeout, $cookies, AppServ
             reloadTexts();
             reloadBackendConfig();
             $rootScope.$broadcast('systeminfochanged');
+            if (callback && {}.toString.call(callback) === '[object Function]') {
+                callback();
+            }
         }, errorHandler)
     }
 
-    loadSystemInfo();
+    this.loadSystemInfo();
     $rootScope.$on('ui_language_changed', function() {
-        loadSystemInfo(true);
+        this.loadSystemInfo(true);
     });
 });
