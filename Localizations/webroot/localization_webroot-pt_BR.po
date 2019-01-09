@@ -31,7 +31,7 @@ msgstr "- selecione uma opção -"
 msgid "...loading..."
 msgstr "...carregando..."
 
-#: scripts/controllers/AboutController.js:71
+#: scripts/controllers/AboutController.js:73
 msgid ""
 "A nova atualização não pode ser ativada enquanto houverem tarefas sendo "
 "executadas"
@@ -57,7 +57,7 @@ msgstr "Chave de acesso do AWS"
 msgid "AWS IAM Policy"
 msgstr "Política de IAM do AWS"
 
-#: index.html:220
+#: index.html:227
 msgid "About"
 msgstr "Sobre"
 
@@ -101,7 +101,7 @@ msgstr "Adicione um caminho diretamente"
 msgid "Add advanced option"
 msgstr "Adicionar opção avançada"
 
-#: index.html:205
+#: index.html:212
 msgid "Add backup"
 msgstr "Adicionar backup"
 
@@ -366,7 +366,7 @@ msgstr "Arquivos de Cache"
 #: scripts/services/EditUriBuiltins.js:791
 #: scripts/services/EditUriBuiltins.js:877
 #: scripts/services/EditUriBuiltins.js:894 templates/delete.html:52
-#: templates/export.html:30 templates/restoredirect.html:56
+#: templates/export.html:34 templates/restoredirect.html:56
 #: templates/settings.html:155 templates/waitarea.html:19
 msgid "Cancel"
 msgstr "Cancelar"
@@ -400,7 +400,7 @@ msgstr "Para iniciar, escolha o tipo de armazenamento"
 msgid "Click the AuthID link to create an AuthID"
 msgstr "Clique no link AuthID para criar uma AuthID"
 
-#: index.html:142 index.html:193
+#: index.html:149 index.html:200
 msgid "Click to set throttle options"
 msgstr "Clique para definir opções de limite"
 
@@ -416,7 +416,7 @@ msgstr "Compactar agora"
 msgid "Compacting remote data ..."
 msgstr "Compactando dados remotos ..."
 
-#: templates/backup-result/box.html:31
+#: templates/backup-result/box.html:34
 msgid "Complete log"
 msgstr "Log Completo"
 
@@ -454,6 +454,14 @@ msgstr "Configurar novo backup"
 msgid "Confirm delete"
 msgstr "Confirmar remoção"
 
+#: templates/export.html:30
+msgid "Confirm encryption passphrase"
+msgstr "Confirmar senha de criptografia"
+
+#: templates/export.html:29
+msgid "Confirm passphrase"
+msgstr "Confirmar senha"
+
 #: templates/settings.html:12
 msgid "Confirm password"
 msgstr "Confirmar senha"
@@ -462,11 +470,11 @@ msgstr "Confirmar senha"
 msgid "Confirmation required"
 msgstr "Confirmação necessária"
 
-#: index.html:283
+#: index.html:290
 msgid "Connect now"
 msgstr "Conectar agora"
 
-#: index.html:279
+#: index.html:286
 msgid "Connecting to server ..."
 msgstr "Conectando ao servidor ..."
 
@@ -474,11 +482,11 @@ msgstr "Conectando ao servidor ..."
 msgid "Connecting to task ...."
 msgstr "Conectando-se à tarefa ..."
 
-#: index.html:284
+#: index.html:291
 msgid "Connecting..."
 msgstr "Conectando..."
 
-#: index.html:275
+#: index.html:282
 msgid "Connection lost"
 msgstr "Conexão perdida"
 
@@ -499,10 +507,6 @@ msgstr "Região do Container"
 msgid "Continue"
 msgstr "Continuar"
 
-#: scripts/controllers/SystemSettingsController.js:116
-msgid "Copied {0} to clipboard"
-msgstr "{0} foi copiado"
-
 #: scripts/controllers/DialogController.js:16
 msgid "Copied!"
 msgstr "Copiado!"
@@ -519,13 +523,9 @@ msgstr "Copiar URL do destino"
 msgid "Copy failed. Please manually copy the URL"
 msgstr "Falha na cópia. Copie a URL manualmente"
 
-#: scripts/services/AppUtils.js:643
+#: scripts/services/AppUtils.js:647
 msgid "Core options"
 msgstr "Opções básicas"
-
-#: scripts/controllers/SystemSettingsController.js:121
-msgid "Could not copy {0} to clipboard"
-msgstr "Não foi possível copier {0}"
 
 #: scripts/controllers/StateController.js:34
 msgid "Counting ({{files}} files found, {{size}})"
@@ -610,14 +610,6 @@ msgstr "Classe de armazenamento personalizada ({{class}})"
 #: templates/home.html:43
 msgid "Database ..."
 msgstr "Banco de dados ..."
-
-#: templates/backup-result/phases/repair.html:50
-msgid "Database Recreation Errors"
-msgstr "Erros na Recriação do Banco de Dados"
-
-#: templates/backup-result/phases/repair.html:43
-msgid "Database Recreation Warnings"
-msgstr "Avisos na Recriação do Banco de Dados"
 
 #: scripts/services/AppUtils.js:91 templates/addoredit.html:317
 msgid "Days"
@@ -731,7 +723,7 @@ msgstr "Deseja realmente remover a base local para: {{name}}"
 msgid "Domain Name"
 msgstr "Nome do domínio"
 
-#: templates/export.html:49
+#: templates/export.html:53
 msgid "Done"
 msgstr "Finalizado"
 
@@ -907,9 +899,10 @@ msgstr ""
 "Digite o caminho de destino completo, incluindo o nome do servidor, mas sem "
 "https"
 
-#: scripts/controllers/AboutController.js:71
+#: scripts/controllers/AboutController.js:73
 #: scripts/controllers/CommandlineController.js:74
 #: scripts/controllers/ExportController.js:43
+#: scripts/controllers/ExportController.js:60
 #: scripts/controllers/RestoreController.js:137
 #: scripts/controllers/RestoreController.js:364
 #: scripts/controllers/RestoreController.js:397
@@ -920,23 +913,13 @@ msgstr ""
 #: scripts/directives/backupEditUri.js:239
 #: scripts/directives/notificationArea.js:41
 #: scripts/directives/notificationArea.js:43 scripts/services/AppUtils.js:301
-#: scripts/services/AppUtils.js:342
+#: scripts/services/AppUtils.js:344
 msgid "Error"
 msgstr "Erro"
 
 #: scripts/services/ServerStatus.js:66
 msgid "Error!"
 msgstr "Erro!"
-
-#: templates/backup-result/box.html:26
-#: templates/backup-result/phases/compact.html:55
-#: templates/backup-result/phases/delete.html:57
-#: templates/backup-result/phases/purge.html:49
-#: templates/backup-result/phases/recreate-database.html:37
-#: templates/backup-result/phases/repair.html:36
-#: templates/backup-result/phases/test.html:40
-msgid "Errors"
-msgstr "Erros"
 
 #: templates/backup-result/top-right-box.html:3
 msgid "Examined"
@@ -982,7 +965,7 @@ msgstr "Excluir utilizando expressão regular"
 msgid "Existing file found"
 msgstr "Excluir arquivo encontrado"
 
-#: templates/export.html:31
+#: templates/export.html:35
 msgid "Export"
 msgstr "Exportar"
 
@@ -1002,7 +985,7 @@ msgstr "Exportar configuração"
 msgid "Export passwords"
 msgstr "Exportar senhas"
 
-#: templates/export.html:35
+#: templates/export.html:39
 msgid "Exporting ..."
 msgstr "Exportando ..."
 
@@ -1013,10 +996,6 @@ msgstr "Link externo"
 #: scripts/services/SystemInfo.js:52
 msgid "FTP (Alternative)"
 msgstr "FTP (alternativo)"
-
-#: scripts/controllers/SystemSettingsController.js:121
-msgid "Fail"
-msgstr "Falha"
 
 #: scripts/controllers/RestoreController.js:364
 msgid "Failed to build temporary database: {{message}}"
@@ -1031,7 +1010,7 @@ msgstr "Falha ao conectar:"
 #: scripts/controllers/CommandlineController.js:74
 #: scripts/controllers/ExportController.js:43
 #: scripts/controllers/RestoreDirectController.js:90
-#: scripts/services/LogService.js:30
+#: scripts/services/LogService.js:31
 msgid "Failed to connect: {{message}}"
 msgstr "Falha ao conectar: {{message}}"
 
@@ -1059,7 +1038,7 @@ msgstr "Falha ao ler os padrões do backup:"
 msgid "Failed to restore files: {{message}}"
 msgstr "Falha ao restaurar arquivos: {{message}}"
 
-#: scripts/controllers/SystemSettingsController.js:168
+#: scripts/controllers/SystemSettingsController.js:138
 msgid "Failed to save:"
 msgstr "Falha ao salvar:"
 
@@ -1071,10 +1050,6 @@ msgstr "Obtendo informação do caminho ..."
 #: scripts/services/AppUtils.js:74
 msgid "File"
 msgstr "Arquivo"
-
-#: templates/backup-result/top-right-box.html:1
-msgid "Files"
-msgstr "Arquivos"
 
 #: templates/addoredit.html:203
 msgid "Files larger than:"
@@ -1088,7 +1063,7 @@ msgstr "Filtros"
 msgid "Finished!"
 msgstr "Finalizado!"
 
-#: scripts/controllers/AppController.js:199
+#: scripts/controllers/AppController.js:196
 msgid "First run setup"
 msgstr "Configuração inicial"
 
@@ -1154,7 +1129,7 @@ msgstr "Arquivos ocultos"
 msgid "Hide hidden folders"
 msgstr "Ocultar diretórios ocultos"
 
-#: index.html:202 scripts/services/AppUtils.js:62
+#: index.html:209 scripts/services/AppUtils.js:62
 msgid "Home"
 msgstr "Home"
 
@@ -1212,7 +1187,7 @@ msgstr ""
 "precisará de uma operação de reparo para realizar o sincronismo.  Caso o "
 "reparo não seja possível, você pode remover a base local e regenerá-la."
 
-#: templates/export.html:45 templates/notificationarea.html:7
+#: templates/export.html:49 templates/notificationarea.html:7
 msgid "If the file was not downloaded automatically"
 msgstr "Se o arquivo não foi baixado automaticamente"
 
@@ -1237,7 +1212,7 @@ msgstr ""
 "Se você quiser usar o backup mais tarde, você pode exportar a configuração "
 "antes de excluí-la"
 
-#: scripts/controllers/AppController.js:200
+#: scripts/controllers/AppController.js:197
 msgid ""
 "If your machine is in a multi-user environment (i.e. the machine has more "
 "than one account), you need to set a password to prevent other users from "
@@ -1452,7 +1427,7 @@ msgstr "Grave log para <b> {{Backup.Backup.Name}} </b>"
 msgid "Log data from the server"
 msgstr "Registrar dados do servidor"
 
-#: index.html:223
+#: index.html:230
 msgid "Log out"
 msgstr "Sair"
 
@@ -1480,7 +1455,7 @@ msgstr "Velocidade de download máxima"
 msgid "Max upload speed"
 msgstr "Velocidade de upload máxima"
 
-#: index.html:138 templates/addoredit.html:135 templates/addoredit.html:348
+#: index.html:145 templates/addoredit.html:135 templates/addoredit.html:348
 #: templates/addoredit.html:61 templates/addoredit.html:93
 #: templates/edituri.html:34
 msgid "Menu"
@@ -1581,11 +1556,11 @@ msgstr "Próximo"
 msgid "Next scheduled run:"
 msgstr "Próxima execução agendada:"
 
-#: index.html:177
+#: index.html:184
 msgid "Next scheduled task:"
 msgstr "Próxima tarefa agendada:"
 
-#: index.html:174
+#: index.html:181
 msgid "Next task:"
 msgstr "Próxima tarefa:"
 
@@ -1642,11 +1617,11 @@ msgstr "Sem itens para restaurar. por favor selecione um ou mais itens"
 msgid "No passphrase entered"
 msgstr "Nenhuma senha inserida"
 
-#: index.html:179
+#: index.html:186
 msgid "No scheduled tasks"
 msgstr "Sem tarefas agendadas"
 
-#: scripts/controllers/AppController.js:201
+#: scripts/controllers/AppController.js:198
 msgid "No, my machine has only a single account"
 msgstr "Não, minha máquina possui apenas uma conta"
 
@@ -1938,7 +1913,7 @@ msgstr "Relatórios:"
 msgid "Reset"
 msgstr "Redefinir"
 
-#: index.html:208 templates/restore.html:142 templates/restoredirect.html:57
+#: index.html:215 templates/restore.html:142 templates/restoredirect.html:57
 msgid "Restore"
 msgstr "Restaurar"
 
@@ -1979,12 +1954,24 @@ msgstr "Restaurar opções"
 msgid "Restore read/write permissions"
 msgstr "Restaurar permissões leitura/escrita"
 
+#: templates/backup-result/restore-items.html:2
+msgid "Restored Files"
+msgstr "Arquivos Restaurados"
+
+#: templates/backup-result/restore-items.html:6
+msgid "Restored Folders"
+msgstr "Pastas Restauradas"
+
+#: templates/backup-result/restore-items.html:10
+msgid "Restored Symlinks"
+msgstr "Symlinks Restaurados"
+
 #: scripts/controllers/RestoreController.js:357
 #: scripts/controllers/RestoreController.js:379
 msgid "Restoring files ..."
 msgstr "Restaurando arquivos ..."
 
-#: index.html:211
+#: index.html:218
 msgid "Resume"
 msgstr "Continuar"
 
@@ -2016,7 +2003,7 @@ msgstr "Executando ..."
 msgid "Running commandline entry"
 msgstr "Executando entrada de linha de comando"
 
-#: index.html:166
+#: index.html:173
 msgid "Running task:"
 msgstr "Executando tarefa:"
 
@@ -2118,7 +2105,7 @@ msgstr "Servidor parado"
 msgid "Server state properties"
 msgstr "Propriedades do estado do servidor"
 
-#: index.html:214 templates/settings.html:2
+#: index.html:221 templates/settings.html:2
 msgid "Settings"
 msgstr "Configurações"
 
@@ -2166,6 +2153,10 @@ msgstr ""
 #: templates/addoredit.html:26
 msgid "Source Data"
 msgstr "Dados de origem"
+
+#: templates/backup-result/top-right-box.html:1
+msgid "Source Files"
+msgstr "Arquivos de Origem"
 
 #: scripts/directives/sourceFolderPicker.js:387 templates/addoredit.html:90
 msgid "Source data"
@@ -2227,11 +2218,11 @@ msgstr "Parar de executar o backup"
 msgid "Stop running task"
 msgstr "Parar de executar a tarefa"
 
-#: index.html:162
+#: index.html:169
 msgid "Stopping after upload:"
 msgstr "Parando após o envio:"
 
-#: index.html:167
+#: index.html:174
 msgid "Stopping task:"
 msgstr "Tarefa de parada:"
 
@@ -2251,7 +2242,6 @@ msgstr "Classe de armazenamento para criar um bucket"
 msgid "Stored"
 msgstr "Armazenado"
 
-#: scripts/controllers/SystemSettingsController.js:116
 #: scripts/directives/backupEditUri.js:51
 #: scripts/directives/backupEditUri.js:54
 msgid "Success"
@@ -2372,7 +2362,7 @@ msgstr ""
 "A configuração deve ser guardada de forma segura. Tem certeza que quer "
 "salvar um arquivo não-criptografado contendo suas senhas?"
 
-#: index.html:276
+#: index.html:283
 msgid "The connection to the server is lost, attempting again in {{time}} ..."
 msgstr ""
 "A conexão com o servidor foi perdida, tentando novamente em {{time}} ..."
@@ -2401,7 +2391,7 @@ msgstr ""
 "Deseja SUBSTITUIR a sua chave do host ATUAL \"{{prev}}\" com a chave do host "
 "REPORTADA: {{key}}?"
 
-#: index.html:294
+#: index.html:308
 msgid ""
 "The page is not yet loaded, this can be caused by a defective install, a "
 "browser issue or a slow connection."
@@ -2409,7 +2399,8 @@ msgstr ""
 "A página ainda não foi carregada, isto pode ser causado por uma instalação "
 "defeituosa, um problema com o navegador ou uma conexão lenta."
 
-#: scripts/controllers/SystemSettingsController.js:142
+#: scripts/controllers/ExportController.js:60
+#: scripts/controllers/SystemSettingsController.js:112
 msgid "The passwords do not match"
 msgstr "As senhas não são iguais"
 
@@ -2476,6 +2467,10 @@ msgstr ""
 msgid ""
 "The target folder contains encrypted files, please supply the passphrase"
 msgstr "A pasta de destino contém arquivos criptografados. Forneça a senha"
+
+#: index.html:297
+msgid "The update is being activated, it might take a minute ..."
+msgstr "A atualização está sendo ativada, pode levar alguns minutos..."
 
 #: scripts/services/EditUriBuiltins.js:51
 msgid ""
@@ -2604,6 +2599,10 @@ msgstr "Até retomar"
 msgid "Update failed:"
 msgstr "Atualização falhou:"
 
+#: index.html:296
+msgid "Updating"
+msgstr "Atualizando"
+
 #: scripts/controllers/LocalDatabaseController.js:88
 msgid "Updating with existing database"
 msgstr "Atualizando com o banco de dados existente"
@@ -2655,6 +2654,7 @@ msgid "Validating ..."
 msgstr "Validando ..."
 
 #: templates/backup-result/phases/test.html:20
+#: templates/backup-result/test-items.html:2
 msgid "Verifications"
 msgstr "Verificações"
 
@@ -2717,16 +2717,6 @@ msgstr "Aguardando pelo término do upload ..."
 msgid "Warning"
 msgstr "Aviso"
 
-#: templates/backup-result/box.html:19
-#: templates/backup-result/phases/compact.html:47
-#: templates/backup-result/phases/delete.html:49
-#: templates/backup-result/phases/purge.html:41
-#: templates/backup-result/phases/recreate-database.html:29
-#: templates/backup-result/phases/repair.html:29
-#: templates/backup-result/phases/test.html:33
-msgid "Warnings"
-msgstr "Avisos"
-
 #: scripts/services/AppUtils.js:106
 msgid "Wed"
 msgstr "Qua"
@@ -2748,7 +2738,7 @@ msgid "Years"
 msgstr "Anos"
 
 #: scripts/controllers/AboutController.js:56
-#: scripts/controllers/AppController.js:201
+#: scripts/controllers/AppController.js:198
 #: scripts/controllers/DeleteController.js:77
 #: scripts/controllers/EditBackupController.js:108
 #: scripts/controllers/EditBackupController.js:300
@@ -2913,7 +2903,7 @@ msgstr "byte/s"
 msgid "custom"
 msgstr "personalizado"
 
-#: index.html:217 templates/enotariado.html:2
+#: index.html:224 templates/enotariado.html:2
 msgid "e-notariado"
 msgstr "e-notariado"
 
@@ -2926,7 +2916,7 @@ msgstr "está usando as seguintes bibliotecas de terceiros:"
 msgid "resume now"
 msgstr "continuar agora"
 
-#: templates/export.html:45 templates/notificationarea.html:7
+#: templates/export.html:49 templates/notificationarea.html:7
 msgid "right click and choose \"Save As ...\""
 msgstr "clique com o botão direito e escolha &quot;Salvar como …&quot;"
 
@@ -2961,6 +2951,30 @@ msgstr "{{number}} Minutos"
 #: templates/home.html:58
 msgid "{{time}} (took {{duration}})"
 msgstr "{{time}} (took {{duration}})"
+
+#~ msgid "Copied {0} to clipboard"
+#~ msgstr "{0} foi copiado"
+
+#~ msgid "Could not copy {0} to clipboard"
+#~ msgstr "Não foi possível copier {0}"
+
+#~ msgid "Database Recreation Errors"
+#~ msgstr "Erros na Recriação do Banco de Dados"
+
+#~ msgid "Database Recreation Warnings"
+#~ msgstr "Avisos na Recriação do Banco de Dados"
+
+#~ msgid "Errors"
+#~ msgstr "Erros"
+
+#~ msgid "Fail"
+#~ msgstr "Falha"
+
+#~ msgid "Files"
+#~ msgstr "Arquivos"
+
+#~ msgid "Warnings"
+#~ msgstr "Avisos"
 
 #~ msgid ""
 #~ "Complete log\r\n"
