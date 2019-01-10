@@ -40,4 +40,8 @@
         </a>
         <div ng-show="log_expanded" id="result-log-{{$index}}" class="prewrapped-text exceptiontext">{{ item.Formatted }}</div>
     </div>
+
+    <!-- Activate detection of angular-gettext-cli to add these strings into the POT file -->
+    <span ng-hide="true" translate>Errors</span>
+    <span ng-hide="true" translate>Warnings</span>
 </div>

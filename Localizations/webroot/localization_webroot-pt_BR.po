@@ -921,6 +921,10 @@ msgstr "Erro"
 msgid "Error!"
 msgstr "Erro!"
 
+#: templates/backup-result/box.html:45
+msgid "Errors"
+msgstr "Erros"
+
 #: templates/backup-result/top-right-box.html:3
 msgid "Examined"
 msgstr "Examinados"
@@ -2391,7 +2395,7 @@ msgstr ""
 "Deseja SUBSTITUIR a sua chave do host ATUAL \"{{prev}}\" com a chave do host "
 "REPORTADA: {{key}}?"
 
-#: index.html:308
+#: index.html:315
 msgid ""
 "The page is not yet loaded, this can be caused by a defective install, a "
 "browser issue or a slow connection."
@@ -2468,7 +2472,7 @@ msgid ""
 "The target folder contains encrypted files, please supply the passphrase"
 msgstr "A pasta de destino contém arquivos criptografados. Forneça a senha"
 
-#: index.html:297
+#: index.html:298
 msgid "The update is being activated, it might take a minute ..."
 msgstr "A atualização está sendo ativada, pode levar alguns minutos..."
 
@@ -2717,6 +2721,10 @@ msgstr "Aguardando pelo término do upload ..."
 msgid "Warning"
 msgstr "Aviso"
 
+#: templates/backup-result/box.html:46
+msgid "Warnings"
+msgstr "Avisos"
+
 #: scripts/services/AppUtils.js:106
 msgid "Wed"
 msgstr "Qua"
@@ -2964,17 +2972,11 @@ msgstr "{{time}} (took {{duration}})"
 #~ msgid "Database Recreation Warnings"
 #~ msgstr "Avisos na Recriação do Banco de Dados"
 
-#~ msgid "Errors"
-#~ msgstr "Erros"
-
 #~ msgid "Fail"
 #~ msgstr "Falha"
 
 #~ msgid "Files"
 #~ msgstr "Arquivos"
-
-#~ msgid "Warnings"
-#~ msgstr "Avisos"
 
 #~ msgid ""
 #~ "Complete log\r\n"
