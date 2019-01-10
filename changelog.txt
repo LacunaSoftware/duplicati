@@ -1,3 +1,17 @@
+2019-01-10 - 1.2.0_stable_2019-01-10
+==========
+- Completo redesign da seção de logs de um backup. Agora se tornou bem mais fácil visualizar resultados e informações sobre a execução de um backup, restauração ou outras operações.
+- Adiciona dependência externa junto com o instalador
+- Adiciona suporte para realizar cadastro da máquina e operações de backup pela linha de comando
+- Melhora performance das opções padrão de exclusão de arquivos
+- Adiciona confirmação de senha de criptografia ao exportar a configuração de um backup
+
+Erros corrigidos:
+- Problemas de incompatibilidade com Internet Explorer e Microsoft Edge
+- Notificação não mostrava onde encontrar os avisos/problemas de um backup
+- Backup podia ser executado no dia incorreto em circunstâncias específicas
+- Vários outros erros menores e melhoras no código
+
 2018-11-16 - 1.1.4_stable_2018-11-16
 ==========
 - Pequenas mudanças internas
