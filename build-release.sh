@@ -320,7 +320,6 @@ GITHUB_TOKEN=$(cat "${GITHUB_TOKEN_FILE}")
 	    --user "LacunaSoftware" \
 	    --security-token "${GITHUB_TOKEN}" \
 	    --file "${UPDATE_TARGET}/${RELEASE_FILE_NAME}.zip"
-fi
 
 git push
 
