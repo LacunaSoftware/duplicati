@@ -1089,6 +1089,8 @@ namespace Duplicati.CommandLine
         public static int EnrollEnotariado(TextWriter outwriter, Action<Duplicati.Library.Main.Controller> setup, List<string> args, Dictionary<string, string> options, Library.Utility.IFilter filter)
         {
             var path = Library.Enotariado.Main.CONFIG_PATH;
+            if (options.ContainsKey("enotariado-config-path"))
+                path = options["enotariado-config-path"];
             Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
             X509Certificate2 certificate;
 #if DEBUG

@@ -209,7 +209,7 @@ namespace Duplicati.CommandLine
 
             if (command != "enroll-enotariado" && cargs.Count > 0 && cargs[0].Contains("enotariado://"))
             {
-                var initialized = LoadEnotariado(outwriter);
+                var initialized = LoadEnotariado(outwriter, options);
 
                 if (!initialized)
                 {
@@ -394,9 +394,11 @@ namespace Duplicati.CommandLine
             }
         }
 
-        private static bool LoadEnotariado(TextWriter outwriter)
+        private static bool LoadEnotariado(TextWriter outwriter, Dictionary<string, string> options)
         {
             var path = Library.Enotariado.Main.CONFIG_PATH;
+            if (options.ContainsKey("enotariado-config-path"))
+                path = options["enotariado-config-path"];
             Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
             X509Certificate2 certificate;
 #if DEBUG
