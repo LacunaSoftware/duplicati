@@ -2,7 +2,7 @@
 Notifications not yet acknowledged by the user
 */
 CREATE TABLE "Notification" (
-    "ID" INTEGER PRIMARY KEY,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
     "Type" TEXT NOT NULL,
     "Title" TEXT NOT NULL,
     "Message" TEXT NOT NULL, 

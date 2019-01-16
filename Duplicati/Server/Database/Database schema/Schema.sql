@@ -7,7 +7,7 @@
  * and the DBPath is the path to the local database
  */
 CREATE TABLE "Backup" (
-    "ID" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
     "Name" TEXT NOT NULL,
     "Description" TEXT NOT NULL DEFAULT '',
     "Tags" TEXT NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE "Backup" (
  * Rule is a special parsed field
  */
 CREATE TABLE "Schedule" (
-    "ID" INTEGER PRIMARY KEY,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
     "Tags" TEXT NOT NULL,
     "Time" INTEGER NOT NULL,
     "Repeat" TEXT NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE "ErrorLog" (
 Internal version tracking
 */
 CREATE TABLE "Version" (
-    "ID" INTEGER PRIMARY KEY,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
     "Version" INTEGER NOT NULL
 );
 
@@ -121,7 +121,7 @@ CREATE TABLE "Version" (
 Notifications not yet acknowledged by the user
 */
 CREATE TABLE "Notification" (
-    "ID" INTEGER PRIMARY KEY,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
     "Type" TEXT NOT NULL,
     "Title" TEXT NOT NULL,
     "Message" TEXT NOT NULL, 
@@ -147,7 +147,7 @@ CREATE TABLE "UIStorage" (
 Long-term temporary file records
 */
 CREATE TABLE "TempFile" (
-    "ID" INTEGER PRIMARY KEY,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
     "Origin" TEXT NOT NULL, 
     "Path" TEXT NOT NULL, 
     "Timestamp" INTEGER NOT NULL,

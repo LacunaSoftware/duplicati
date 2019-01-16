@@ -1,7 +1,7 @@
-ALTER TABLE "backup" RENAME TO "_backup_old";
+EXEC sp_rename "backup", "_backup_old";
 
 CREATE TABLE "Backup" (
-    "ID" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1,1),
     "Name" TEXT NOT NULL,
     "Tags" TEXT NOT NULL,
     "TargetURL" TEXT NOT NULL,

@@ -1,1 +1,1 @@
-﻿ALTER TABLE "Backup" ADD COLUMN "Description" TEXT NOT NULL DEFAULT '';
+﻿ALTER TABLE "Backup" ADD "Description" TEXT NOT NULL DEFAULT '';
