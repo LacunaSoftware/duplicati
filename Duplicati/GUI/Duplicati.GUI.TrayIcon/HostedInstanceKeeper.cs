@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +44,7 @@ namespace Duplicati.GUI.TrayIcon
             
             m_runner.Start();
 
-            if (!Duplicati.Server.Program.ServerStartedEvent.WaitOne(TimeSpan.FromSeconds(100), true))
+            if (!Duplicati.Server.Program.ServerStartedEvent.WaitOne(TimeSpan.FromSeconds(1000), true)) // TODO: GO BACK TO 100
             {
                 if (m_runnerException != null)
                     throw m_runnerException;
