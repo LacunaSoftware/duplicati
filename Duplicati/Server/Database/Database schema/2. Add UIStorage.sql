@@ -2,8 +2,8 @@
 Key/value storage for frontends
 */
 CREATE TABLE "UIStorage" (
-    "Scheme" TEXT NOT NULL, 
-    "Key" TEXT NOT NULL, 
+    "Scheme" NVARCHAR(450) NOT NULL, 
+    "Key" NVARCHAR(450) NOT NULL, 
     "Value" TEXT NOT NULL
 );
 

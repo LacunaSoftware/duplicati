@@ -21,6 +21,7 @@ using System.Linq;
 using Duplicati.Server.Serialization.Interface;
 using System.Text;
 using Duplicati.Library;
+using System.Diagnostics;
 
 namespace Duplicati.Server.Database
 {
@@ -37,7 +38,7 @@ namespace Duplicati.Server.Database
         {
             m_connection = connection;
             m_errorcmd = m_connection.CreateCommand();
-            m_errorcmd.CommandText = @"INSERT INTO ""ErrorLog"" (""BackupID"", ""Message"", ""Exception"", ""Timestamp"") VALUES (?,?,?,?)";
+            m_errorcmd.CommandText = @"INSERT INTO ""ErrorLog"" (""BackupID"", ""Message"", ""Exception"", ""Timestamp"") VALUES (@BackupID,@Message,@Exception,@Timestamp)";
             for(var i = 0; i < 4; i++)
                 m_errorcmd.Parameters.Add(m_errorcmd.CreateParameter());
             
@@ -53,9 +54,13 @@ namespace Duplicati.Server.Database
             var timestamp = DateTime.UtcNow;
             lock (m_lock)
             {
+                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[0]).ParameterName = "BackupID";
                 ((System.Data.IDbDataParameter)m_errorcmd.Parameters[0]).Value = id;
+                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[0]).ParameterName = "Message";
                 ((System.Data.IDbDataParameter)m_errorcmd.Parameters[1]).Value = message;
+                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[0]).ParameterName = "Exception";
                 ((System.Data.IDbDataParameter)m_errorcmd.Parameters[2]).Value = exception;
+                ((System.Data.IDbDataParameter)m_errorcmd.Parameters[0]).ParameterName = "Timestamp";
                 ((System.Data.IDbDataParameter)m_errorcmd.Parameters[3]).Value = NormalizeDateTimeToEpochSeconds(timestamp);
                 m_errorcmd.ExecuteNonQuery();
             }
@@ -138,7 +143,7 @@ namespace Duplicati.Server.Database
                         ConvertToString(rd, 0),
                         ConvertToString(rd, 1)
                     ),
-                    @"SELECT ""Name"", ""Value"" FROM ""Metadata"" WHERE ""BackupID"" = ? ", id)
+                    $"SELECT \"Name\", \"Value\" FROM \"Metadata\" WHERE \"BackupID\" = {id} ")
                     .ToDictionary((k) => k.Key, (k) => k.Value);
         }
         
@@ -149,9 +154,9 @@ namespace Duplicati.Server.Database
                 {
                     OverwriteAndUpdateDb(
                         tr,
-                        @"DELETE FROM ""Metadata"" WHERE ""BackupID"" = ?", new object[] { id },
+                        @"DELETE FROM ""Metadata"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values ?? new Dictionary<string, string>(),
-                        @"INSERT INTO ""Metadata"" (""BackupID"", ""Name"", ""Value"") VALUES (?, ?, ?)",
+                        @"INSERT INTO ""Metadata"" (""BackupID"", ""Name"", ""Value"") VALUES (@param1, @param2, @param3)",
                         (f) => new object[] { id, f.Key, f.Value }
                     );
                     
@@ -169,7 +174,7 @@ namespace Duplicati.Server.Database
                         Include = ConvertToBoolean(rd, 1),
                         Expression = ConvertToString(rd, 2) ?? ""
                     },
-                    @"SELECT ""Order"", ""Include"", ""Expression"" FROM ""Filter"" WHERE ""BackupID"" = ? ORDER BY ""Order"" ", id)
+                    @"SELECT ""Order"", ""Include"", ""Expression"" FROM ""Filter"" WHERE ""BackupID"" = @param1 ORDER BY ""Order"" ", id)
                     .ToArray();
         }
         
@@ -180,9 +185,9 @@ namespace Duplicati.Server.Database
                 {
                     OverwriteAndUpdateDb(
                         tr,
-                        @"DELETE FROM ""Filter"" WHERE ""BackupID"" = ?", new object[] { id },
+                        @"DELETE FROM ""Filter"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values,
-                        @"INSERT INTO ""Filter"" (""BackupID"", ""Order"", ""Include"", ""Expression"") VALUES (?, ?, ?, ?)",
+                        @"INSERT INTO ""Filter"" (""BackupID"", ""Order"", ""Include"", ""Expression"") VALUES (@param1, @param2, @param3, @param4)",
                         (f) => new object[] { id, f.Order, f.Include, f.Expression }
                     );
                     
@@ -201,7 +206,7 @@ namespace Duplicati.Server.Database
                         Value = ConvertToString(rd, 2) ?? ""
                         //TODO: Attach the argument information
                     },
-                    @"SELECT ""Filter"", ""Name"", ""Value"" FROM ""Option"" WHERE ""BackupID"" = ?", id)
+                    @"SELECT ""Filter"", ""Name"", ""Value"" FROM ""Option"" WHERE ""BackupID"" = @param1", id)
                     .ToArray();
         }
         
@@ -212,9 +217,9 @@ namespace Duplicati.Server.Database
                 {
                     OverwriteAndUpdateDb(
                         tr,
-                        @"DELETE FROM ""Option"" WHERE ""BackupID"" = ?", new object[] { id },
+                        @"DELETE FROM ""Option"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values,
-                        @"INSERT INTO ""Option"" (""BackupID"", ""Filter"", ""Name"", ""Value"") VALUES (?, ?, ?, ?)",
+                        @"INSERT INTO ""Option"" (""BackupID"", ""Filter"", ""Name"", ""Value"") VALUES (@param1, @param2, @param3, @param4)",
                         (f) => {
                             if (Duplicati.Server.WebServer.Server.PASSWORD_PLACEHOLDER.Equals(f.Value))
                                 throw new Exception("Attempted to save a property with the placeholder password");
@@ -232,7 +237,7 @@ namespace Duplicati.Server.Database
             lock(m_lock)
                 return ReadFromDb(
                     (rd) => ConvertToString(rd, 0),
-                    @"SELECT ""Path"" FROM ""Source"" WHERE ""BackupID"" = ?", id)
+                    @"SELECT ""Path"" FROM ""Source"" WHERE ""BackupID"" = @param1", id)
                     .ToArray();
         }
         
@@ -243,9 +248,9 @@ namespace Duplicati.Server.Database
                 {
                     OverwriteAndUpdateDb(
                         tr,
-                        @"DELETE FROM ""Source"" WHERE ""BackupID"" = ?", new object[] { id },
+                        @"DELETE FROM ""Source"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values,
-                        @"INSERT INTO ""Source"" (""BackupID"", ""Path"") VALUES (?, ?)",
+                        @"INSERT INTO ""Source"" (""BackupID"", ""Path"") VALUES (@param1, @param2)",
                         (f) => new object[] { id, f }
                     );            
                     
@@ -265,6 +270,8 @@ namespace Duplicati.Server.Database
             lock(m_lock)
                 using(var cmd = m_connection.CreateCommand())
                 {
+                    Debugger.Launch();
+                    Debugger.Break();
                     var sb = new StringBuilder();
                     
                     foreach(var t in tags)
@@ -305,7 +312,7 @@ namespace Duplicati.Server.Database
                         TargetURL = ConvertToString(rd, 4),
                         DBPath = ConvertToString(rd, 5),
                     },
-                    @"SELECT ""ID"", ""Name"", ""Description"", ""Tags"", ""TargetURL"", ""DBPath"" FROM ""Backup"" WHERE ID = ?", id)
+                    @"SELECT ""ID"", ""Name"", ""Description"", ""Tags"", ""TargetURL"", ""DBPath"" FROM ""Backup"" WHERE ID = @param1", id)
                     .FirstOrDefault();
                     
                 if (bk != null)
@@ -328,7 +335,7 @@ namespace Duplicati.Server.Database
                         LastRun = ConvertToDateTime(rd, 4),
                         Rule = ConvertToString(rd, 5),
                     },
-                    @"SELECT ""ID"", ""Tags"", ""Time"", ""Repeat"", ""LastRun"", ""Rule"" FROM ""Schedule"" WHERE ID = ?", id)
+                    @"SELECT ""ID"", ""Tags"", ""Time"", ""Repeat"", ""LastRun"", ""Rule"" FROM ""Schedule"" WHERE ID = @param1", id)
                     .FirstOrDefault();
 
                 return bk;
@@ -341,7 +348,7 @@ namespace Duplicati.Server.Database
             {
                 var usesEncryption = ReadFromDb(
                     (rd) => ConvertToBoolean(rd, 0),
-                    @"SELECT VALUE != """" FROM ""Option"" WHERE BackupID = ? AND NAME='encryption-module'", id)
+                    @"SELECT VALUE != """" FROM ""Option"" WHERE BackupID = @param1 AND NAME='encryption-module'", id)
                     .FirstOrDefault();
 
                 if (!usesEncryption)
@@ -351,7 +358,7 @@ namespace Duplicati.Server.Database
 
                 return ReadFromDb(
                     (rd) => ConvertToBoolean(rd, 0),
-                    @"SELECT VALUE != """" FROM ""Option"" WHERE BackupID = ? AND NAME='passphrase'", id)
+                    @"SELECT VALUE != """" FROM ""Option"" WHERE BackupID = @BackupID AND NAME='passphrase'", id)
                 .FirstOrDefault();
             }
         }
@@ -364,6 +371,8 @@ namespace Duplicati.Server.Database
             lock(m_lock)
                 using(var cmd = m_connection.CreateCommand())
                 {
+                    Debugger.Launch();
+                    Debugger.Break();
                     var sb = new StringBuilder();
                     
                     foreach(var t in tags)
@@ -498,10 +507,12 @@ namespace Duplicati.Server.Database
                 cmd.Transaction = tr;
                 cmd.Parameters.Add(cmd.CreateParameter());
                 ((System.Data.IDbDataParameter)cmd.Parameters[0]).Value = path;
+                ((System.Data.IDbDataParameter)cmd.Parameters[0]).ParameterName = "DBPath";
                 cmd.Parameters.Add(cmd.CreateParameter());
                 ((System.Data.IDbDataParameter)cmd.Parameters[1]).Value = item.ID;
+                ((System.Data.IDbDataParameter)cmd.Parameters[1]).ParameterName = "ID";
 
-                cmd.CommandText = @"UPDATE ""Backup"" SET ""DBPath""=? WHERE ""ID""=?";
+                cmd.CommandText = @"UPDATE ""Backup"" SET ""DBPath""=@DBPath WHERE ""ID""=@ID";
                 cmd.ExecuteNonQuery();
                 tr.Commit();
             }
@@ -543,8 +554,8 @@ namespace Duplicati.Server.Database
                         new object[] { long.Parse(item.ID ?? "-1") },
                         new IBackup[] { item },
                         update ?
-                            @"UPDATE ""Backup"" SET ""Name""=?, ""Description""=?, ""Tags""=?, ""TargetURL""=? WHERE ""ID""=?" :
-                            @"INSERT INTO ""Backup"" (""Name"", ""Description"", ""Tags"", ""TargetURL"", ""DBPath"") VALUES (?,?,?,?,?)",
+                            @"UPDATE ""Backup"" SET ""Name""=@param1, ""Description""=@param2, ""Tags""=@param3, ""TargetURL""=@param4 WHERE ""ID""=@param5" :
+                            @"INSERT INTO ""Backup"" (""Name"", ""Description"", ""Tags"", ""TargetURL"", ""DBPath"") VALUES (@param1,@param2,@param3,@param4,@param5)",
                         (n) => {
                         
                             if (n.TargetURL.IndexOf(Duplicati.Server.WebServer.Server.PASSWORD_PLACEHOLDER, StringComparison.Ordinal) >= 0)
@@ -565,7 +576,7 @@ namespace Duplicati.Server.Database
                         using(var cmd = m_connection.CreateCommand())
                         {
                             cmd.Transaction = tr;
-                            cmd.CommandText = @"SELECT last_insert_rowid();";
+                            cmd.CommandText = @"SELECT SCOPE_IDENTITY();";
                             item.ID = ExecuteScalarInt64(cmd).ToString();
                         }
                         
@@ -637,8 +648,8 @@ namespace Duplicati.Server.Database
                     new object[] { item.ID },
                     new ISchedule[] { item },
                     update ?
-                        @"UPDATE ""Schedule"" SET ""Tags""=?, ""Time""=?, ""Repeat""=?, ""LastRun""=?, ""Rule""=? WHERE ""ID""=?" :
-                        @"INSERT INTO ""Schedule"" (""Tags"", ""Time"", ""Repeat"", ""LastRun"", ""Rule"") VALUES (?,?,?,?,?)",
+                        @"UPDATE ""Schedule"" SET ""Tags""=@param1, ""Time""=@param2, ""Repeat""=@param3, ""LastRun""=@param4, ""Rule""=@param5 WHERE ""ID""=@param6" :
+                        @"INSERT INTO ""Schedule"" (""Tags"", ""Time"", ""Repeat"", ""LastRun"", ""Rule"") VALUES (@param1,@param2,@param3,@param4,@param5)",
                     (n) => new object[] {
                         string.Join(",", n.Tags),
                         NormalizeDateTimeToEpochSeconds(n.Time),
@@ -652,7 +663,7 @@ namespace Duplicati.Server.Database
                     using(var cmd = m_connection.CreateCommand())
                     {
                         cmd.Transaction = tr;
-                        cmd.CommandText = @"SELECT last_insert_rowid();";
+                        cmd.CommandText = @"SELECT SCOPE_IDENTITY();";
                         item.ID = ExecuteScalarInt64(cmd);
                     }
             }
@@ -845,20 +856,22 @@ namespace Duplicati.Server.Database
                 cmd.Transaction = tr;
                 cmd.Parameters.Add(cmd.CreateParameter());
                 ((System.Data.IDbDataParameter)cmd.Parameters[0]).Value = -1;
-                cmd.CommandText = @"DELETE FROM ""Option"" WHERE ""BackupID"" = ?";
+                ((System.Data.IDbDataParameter)cmd.Parameters[0]).ParameterName = "BackupID";
+                cmd.CommandText = @"DELETE FROM ""Option"" WHERE ""BackupID"" = @BackupID";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = @"DELETE FROM ""Metadata"" WHERE ""BackupID"" = ?";
+                cmd.CommandText = @"DELETE FROM ""Metadata"" WHERE ""BackupID"" = @BackupID";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = @"DELETE FROM ""Filter"" WHERE ""BackupID"" = ?";
+                cmd.CommandText = @"DELETE FROM ""Filter"" WHERE ""BackupID"" = @BackupID";
                 cmd.ExecuteNonQuery();
-                cmd.CommandText = @"DELETE FROM ""Source"" WHERE ""BackupID"" = ?";
+                cmd.CommandText = @"DELETE FROM ""Source"" WHERE ""BackupID"" = @BackupID";
                 cmd.ExecuteNonQuery();
 
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(cmd.CreateParameter());
 
                 ((System.Data.IDbDataParameter)cmd.Parameters[0]).Value = "ID=-1";
-                cmd.CommandText = @"DELETE FROM ""Schedule"" WHERE ""Tags"" = ?";
+                ((System.Data.IDbDataParameter)cmd.Parameters[0]).ParameterName = "Tags";
+                cmd.CommandText = @"DELETE FROM ""Schedule"" WHERE ""Tags"" = @Tags";
                 cmd.ExecuteNonQuery();
                 tr.Commit();
             }
@@ -883,7 +896,7 @@ namespace Duplicati.Server.Database
                         ConvertToString(rd, 0) ?? "",
                         ConvertToString(rd, 1) ?? ""
                     ),
-                    @"SELECT ""Key"", ""Value"" FROM ""UIStorage"" WHERE ""Scheme"" = ?", 
+                    @"SELECT ""Key"", ""Value"" FROM ""UIStorage"" WHERE ""Scheme"" = @param1", 
                     scheme)
                     .GroupBy(x => x.Key)
                     .ToDictionary(x => x.Key, x => x.Last().Value);
@@ -896,9 +909,9 @@ namespace Duplicati.Server.Database
                 {
                     OverwriteAndUpdateDb(
                         tr,
-                        @"DELETE FROM ""UIStorage"" WHERE ""Scheme"" = ?", new object[] { scheme },
+                        @"DELETE FROM ""UIStorage"" WHERE ""Scheme"" = @param1", new object[] { scheme },
                         values,
-                        @"INSERT INTO ""UIStorage"" (""Scheme"", ""Key"", ""Value"") VALUES (?, ?, ?)",
+                        @"INSERT INTO ""UIStorage"" (""Scheme"", ""Key"", ""Value"") VALUES (@param1, @param2, @param3)",
                         (f) => {
                             return new object[] { scheme, f.Key ?? "", f.Value ?? "" };
                         }
@@ -916,9 +929,9 @@ namespace Duplicati.Server.Database
                 {
                     OverwriteAndUpdateDb(
                         tr,
-                        @"DELETE FROM ""UIStorage"" WHERE ""Scheme"" = ? AND ""Key"" IN (?)", new object[] { scheme, values.Keys },
+                        @"DELETE FROM ""UIStorage"" WHERE ""Scheme"" = @param1 AND ""Key"" IN (@param2)", new object[] { scheme, values.Keys },
                         values.Where(x => x.Value != null),
-                        @"INSERT INTO ""UIStorage"" (""Scheme"", ""Key"", ""Value"") VALUES (?, ?, ?)",
+                        @"INSERT INTO ""UIStorage"" (""Scheme"", ""Key"", ""Value"") VALUES (@param1, @param2, @param3)",
                         (f) =>
                         {
                             return new object[] { scheme, f.Key ?? "", f.Value ?? "" };
@@ -976,9 +989,10 @@ namespace Duplicati.Server.Database
             using(var cmd = m_connection.CreateCommand())
             {
                 cmd.Transaction = tr;
-                cmd.CommandText = @"DELETE FROM ""ErrorLog"" WHERE ""Timestamp"" < ?";
+                cmd.CommandText = @"DELETE FROM ""ErrorLog"" WHERE ""Timestamp"" < @Timestamp";
                 cmd.Parameters.Add(cmd.CreateParameter());
                 ((System.Data.IDataParameter)cmd.Parameters[0]).Value = t;
+                ((System.Data.IDataParameter)cmd.Parameters[0]).ParameterName = "Timestamp";
                 cmd.ExecuteNonQuery();
 
                 tr.Commit();
@@ -1070,9 +1084,10 @@ namespace Duplicati.Server.Database
                 using(var cmd = m_connection.CreateCommand())
                 {
                     cmd.Transaction = transaction;
-                    cmd.CommandText = string.Format(@"DELETE FROM ""{0}"" WHERE ""{1}""=?", tablename, identifier);
+                    cmd.CommandText = string.Format(@"DELETE FROM ""{0}"" WHERE ""{1}""=@id", tablename, identifier);
                     var p = cmd.CreateParameter();
                     p.Value = id;
+                    p.ParameterName = "id";
                     cmd.Parameters.Add(p);
                     
                     var r = cmd.ExecuteNonQuery();
@@ -1159,24 +1174,25 @@ namespace Duplicati.Server.Database
 
             string sql;
 
+            var paramCount = 1;
             if (updateExisting)
             {
                 sql = string.Format(
-                    @"UPDATE ""{0}"" SET {1} WHERE ""ID""=?",
+                    @"UPDATE ""{0}"" SET {1} WHERE ""ID""={2}",
                     typeof(T).Name,
-                    string.Join(@", ", properties.Select(x => string.Format(@"""{0}""=?", x.Name)))
+                    string.Join(@", ", properties.Select(x => $"\"{x.Name}\"=@param{paramCount++}")),
+                    idfield
                 );
 
                 properties = properties.Union(new System.Reflection.PropertyInfo[] { idfield }).ToArray();
             }
             else
-            {
-    
+            {    
                 sql = string.Format(
                     @"INSERT INTO ""{0}"" (""{1}"") VALUES ({2})",
                     typeof(T).Name,
                     string.Join(@""", """, properties.Select(x => x.Name)),
-                    string.Join(@", ", properties.Select(x => "?"))
+                    string.Join(@", ", properties.Select(x => $"@param{paramCount++}"))
                 );
             }
 
@@ -1199,7 +1215,7 @@ namespace Duplicati.Server.Database
                 using(var cmd = m_connection.CreateCommand())
                 {
                     cmd.Transaction = transaction;
-                    cmd.CommandText = @"SELECT last_insert_rowid();";
+                    cmd.CommandText = @"SELECT SCOPE_IDENTITY();";
                     if (idfield.PropertyType == typeof(string))
                         idfield.SetValue(values.First(), ExecuteScalarString(cmd), null);
                     else
@@ -1213,12 +1229,17 @@ namespace Duplicati.Server.Database
             {
                 cmd.CommandText = sql;
                 if (args != null)
+                {
+                    var paramCount = 1;
                     foreach(var a in args)
                     {
                         var p = cmd.CreateParameter();
                         p.Value = a;
+                        p.ParameterName = $"param{paramCount}";
+                        paramCount++;
                         cmd.Parameters.Add(p);
                     }
+                }
                 
                 return Read(cmd, f).ToArray();
             }
@@ -1232,12 +1253,15 @@ namespace Duplicati.Server.Database
                 
                 if (!string.IsNullOrEmpty(deleteSql))
                 {
+                    var paramCount = 1;
                     cmd.CommandText = deleteSql;
                     if (deleteArgs != null)
                         foreach(var a in deleteArgs)
                         {
                             var p = cmd.CreateParameter();
                             p.Value = a;
+                            p.ParameterName = $"param{paramCount}";
+                            paramCount++;
                             cmd.Parameters.Add(p);
                         }
                 
@@ -1257,7 +1281,10 @@ namespace Duplicati.Server.Database
                         cmd.Parameters.Add(cmd.CreateParameter());
                     
                     for(var i = 0; i < r.Length; i++)
+                    {
                         ((System.Data.IDbDataParameter)cmd.Parameters[i]).Value = r[i];
+                        ((System.Data.IDbDataParameter)cmd.Parameters[i]).ParameterName = $"param{i + 1}";
+                    }
                             
                     cmd.ExecuteNonQuery();
                 }

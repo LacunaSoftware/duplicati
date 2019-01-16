@@ -8,9 +8,9 @@
  */
 CREATE TABLE "Backup" (
     "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
-    "Name" TEXT NOT NULL,
+    "Name" NVARCHAR(100) NOT NULL,
     "Description" TEXT NOT NULL DEFAULT '',
-    "Tags" TEXT NOT NULL,
+    "Tags" NVARCHAR(450) NOT NULL,
     "TargetURL" TEXT NOT NULL,
     "DBPath" TEXT NOT NULL
 );
@@ -28,7 +28,7 @@ CREATE TABLE "Backup" (
  */
 CREATE TABLE "Schedule" (
     "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
-    "Tags" TEXT NOT NULL,
+    "Tags" NVARCHAR(450) NOT NULL,
     "Time" INTEGER NOT NULL,
     "Repeat" TEXT NOT NULL,
     "LastRun" INTEGER NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE "Schedule" (
  */
 CREATE TABLE "Source" (
     "BackupID" INTEGER NOT NULL,
-    "Path" TEXT NOT NULL
+    "Path" NVARCHAR(450) NOT NULL
 );
 
 /*
@@ -69,7 +69,7 @@ CREATE TABLE "Filter" (
 CREATE TABLE "Option" (
     "BackupID" INTEGER NOT NULL,
     "Filter" TEXT NOT NULL,
-    "Name" TEXT NOT NULL,
+    "Name" NVARCHAR(450) NOT NULL,
     "Value" TEXT NOT NULL
 );
 
@@ -83,7 +83,7 @@ CREATE TABLE "Option" (
  */
 CREATE TABLE "Metadata" (
     "BackupID" INTEGER NOT NULL,
-    "Name" TEXT NOT NULL,
+    "Name" NVARCHAR(450) NOT NULL,
     "Value" TEXT NOT NULL
 );
 
@@ -138,8 +138,8 @@ CREATE TABLE "Notification" (
 Key/value storage for frontends
 */
 CREATE TABLE "UIStorage" (
-    "Scheme" TEXT NOT NULL, 
-    "Key" TEXT NOT NULL, 
+    "Scheme" NVARCHAR(450) NOT NULL, 
+    "Key" NVARCHAR(450) NOT NULL, 
     "Value" TEXT NOT NULL
 );
 
@@ -148,8 +148,8 @@ Long-term temporary file records
 */
 CREATE TABLE "TempFile" (
     "ID" INTEGER PRIMARY KEY IDENTITY(1, 1),
-    "Origin" TEXT NOT NULL, 
-    "Path" TEXT NOT NULL, 
+    "Origin" NVARCHAR(450) NOT NULL, 
+    "Path" NVARCHAR(450) NOT NULL, 
     "Timestamp" INTEGER NOT NULL,
     "Expires" INTEGER NOT NULL
 );
