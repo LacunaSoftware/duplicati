@@ -18,6 +18,7 @@
 // 
 #endregion
 using System;
+using System.Data.Common;
 using System.IO;
 using Duplicati.Library.Common;
 
@@ -35,6 +36,11 @@ namespace Duplicati.Library.SQLiteHelper
         /// </summary>
         private static Type m_type = null;
 
+        public static readonly string dbUsername = "duplicati";
+        public static readonly string dbPassword = "duplicati";
+        public static readonly string dataSource = ".";
+        public static readonly string dbBackupFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AutoUpdater.AutoUpdateSettings.AppName);
+
         /// <summary>
         /// Helper method with logic to handle opening a database in possibly encrypted format
         /// </summary>
@@ -42,56 +48,16 @@ namespace Duplicati.Library.SQLiteHelper
         /// <param name="databasePath">The location of Duplicati's database.</param>
         /// <param name="useDatabaseEncryption">Specify if database is encrypted</param>
         /// <param name="password">Encryption password</param>
-        public static void OpenDatabase(System.Data.IDbConnection con, string databasePath, bool useDatabaseEncryption, string password)
+        public static void OpenDatabase(System.Data.IDbConnection con, string databaseName)
         {
-            var setPwdMethod = con.GetType().GetMethod("SetPassword", new[] { typeof(string) });
-            string attemptedPassword;
-
-            if (!useDatabaseEncryption || string.IsNullOrEmpty(password))
-                attemptedPassword = null; //No encryption specified, attempt to open without
-            else
-                attemptedPassword = password; //Encryption specified, attempt to open with
-
-            if (setPwdMethod != null)
-                setPwdMethod.Invoke(con, new object[] { attemptedPassword });
-
             try
             {
-                //Attempt to open in preferred state
-                OpenSQLiteFile(con, databasePath);
+                OpenSQLiteFile(con, databaseName);
                 TestSQLiteFile(con);
             }
-            catch
+            catch (Exception ex)
             {
-                try
-                {
-                    //We can't try anything else without a password
-                    if (string.IsNullOrEmpty(password))
-                        throw;
-
-                    //Open failed, now try the reverse
-                    attemptedPassword = attemptedPassword == null ? password : null;
-
-                    con.Close();
-                    if (setPwdMethod != null)
-                        setPwdMethod.Invoke(con, new object[] { attemptedPassword });
-                    OpenSQLiteFile(con, databasePath);
-
-                    TestSQLiteFile(con);
-                }
-                catch
-                {
-                    try { con.Close(); }
-                    catch (Exception ex) { Logging.Log.WriteExplicitMessage(LOGTAG, "OpenDatabaseFailed", ex, "Failed to open the SQLite database: {0}", databasePath); }
-                }
-
-                //If the db is not open now, it won't open
-                if (con.State != System.Data.ConnectionState.Open)
-                    throw; //Report original error
-
-                //The open method succeeded with the non-default method, now change the password
-                var changePwdMethod = con.GetType().GetMethod("ChangePassword", new[] { typeof(string) });
-                changePwdMethod.Invoke(con, new object[] { useDatabaseEncryption ? password : null });
+                Logging.Log.WriteExplicitMessage(LOGTAG, "OpenDatabaseFailed", ex, "Failed to open the SQLite database: {0}", databaseName);
             }
         }
 
@@ -106,7 +72,7 @@ namespace Duplicati.Library.SQLiteHelper
 
             try
             {
-                con = (System.Data.IDbConnection)Activator.CreateInstance(Duplicati.Library.SQLiteHelper.SQLiteLoader.SQLiteConnectionType);
+                con = new System.Data.SqlClient.SqlConnection();
             }
             catch (Exception ex)
             {
@@ -260,20 +226,27 @@ namespace Duplicati.Library.SQLiteHelper
         /// </summary>
         /// <param name="con">The connection to use.</param>
         /// <param name="path">Path to the file to open, which may not exist.</param>
-        private static void OpenSQLiteFile(System.Data.IDbConnection con, string path)
+        private static void OpenSQLiteFile(System.Data.IDbConnection con, string databaseName)
         {
-            // Check if SQLite database exists before opening a connection to it.
-            // This information is used to 'fix' permissions on a newly created file.
-            var fileExists = false;
-            if (!Platform.IsClientWindows)
-                fileExists = File.Exists(path);
 
-            con.ConnectionString = "Data Source=" + path;
+            con.ConnectionString = $"Data Source={dataSource};User ID={dbUsername};Password={dbPassword};database=master";
             con.Open();
+            using (var command = con.CreateCommand())
+            {
+                bool exists;
+                command.CommandText = string.Format("select * from master.dbo.sysdatabases where name='{0}'", databaseName);
+                using (var reader = command.ExecuteReader())
+                {
+                    exists = ((DbDataReader)reader).HasRows;
+                }
 
-            // If we are non-Windows, make the file only accessible by the current user
-            if (!Platform.IsClientWindows && !fileExists)
-                SetUnixPermissionUserRWOnly(path);
+                if (!exists)
+                {
+                    command.CommandText = string.Format("CREATE DATABASE {0}", databaseName);
+                    command.ExecuteNonQuery();
+                }
+                con.ChangeDatabase(databaseName);
+            }
         }
 
         /// <summary>
@@ -302,7 +275,7 @@ namespace Duplicati.Library.SQLiteHelper
             // Do a dummy query to make sure we have a working db
             using (var cmd = con.CreateCommand())
             {
-                cmd.CommandText = "SELECT COUNT(*) FROM SQLITE_MASTER";
+                cmd.CommandText = "SELECT 1";
                 cmd.ExecuteScalar();
             }
         }

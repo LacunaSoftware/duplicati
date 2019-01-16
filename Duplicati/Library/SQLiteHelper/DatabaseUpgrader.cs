@@ -135,7 +135,7 @@ namespace Duplicati.Library.SQLiteHelper
             return retSql.ToString();
         }
 
-        public static void UpgradeDatabase(IDbConnection connection, string sourcefile, Type eltype)
+        public static void UpgradeDatabase(IDbConnection connection, string databaseName, Type eltype)
         {
             var asm = eltype.Assembly;
 
@@ -173,7 +173,7 @@ namespace Duplicati.Library.SQLiteHelper
                 }
             }
 
-            UpgradeDatabase(connection, sourcefile, schema, new List<string>(upgrades.Values));
+            UpgradeDatabase(connection, databaseName, schema, new List<string>(upgrades.Values));
         }
 
 
@@ -182,12 +182,13 @@ namespace Duplicati.Library.SQLiteHelper
         /// </summary>
         /// <param name="connection">The database connection to use</param>
         /// <param name="sourcefile">The file the database is placed in</param>
-        private static void UpgradeDatabase(IDbConnection connection, string sourcefile, string schema, IList<string> versions)
+        private static void UpgradeDatabase(IDbConnection connection, string databaseName, string schema, IList<string> versions)
         {
             if (connection.State != ConnectionState.Open)
             {
                 if (string.IsNullOrEmpty(connection.ConnectionString))
-                    connection.ConnectionString = "Data Source=" + sourcefile;
+                    connection.ConnectionString = $"Data Source={SQLiteLoader.dataSource};User ID={SQLiteLoader.dbUsername};" +
+                        $"Password={SQLiteLoader.dbPassword};database={databaseName}";
 
                 connection.Open();
             }
@@ -199,7 +200,7 @@ namespace Duplicati.Library.SQLiteHelper
                 try
                 {
                     //See if the version table is present,
-                    cmd.CommandText = "SELECT COUNT(*) FROM SQLITE_MASTER WHERE Name LIKE 'Version'";
+                    cmd.CommandText = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Version'";
 
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
 
@@ -223,15 +224,10 @@ namespace Duplicati.Library.SQLiteHelper
                 Dictionary<string, IComparable> preparserVars = null;
 
                 if (dbversion > versions.Count)
-                    throw new Duplicati.Library.Interface.UserInformationException(Strings.DatabaseUpgrader.InvalidVersionError(dbversion, versions.Count, System.IO.Path.GetDirectoryName(sourcefile)), "DatabaseVersionNotSupportedError");
+                    throw new Duplicati.Library.Interface.UserInformationException(Strings.DatabaseUpgrader.InvalidVersionError(dbversion, versions.Count, databaseName), "DatabaseVersionNotSupportedError");
                 else if (dbversion < versions.Count) // will need action, collect vars for preparser
                 {
                     preparserVars = new Dictionary<string, IComparable>(StringComparer.OrdinalIgnoreCase);
-                    cmd.CommandText = "SELECT sqlite_version()";
-                    System.Version sqliteversion;
-                    if (Version.TryParse(cmd.ExecuteScalar().ToString(), out sqliteversion))
-                        preparserVars["sqlite_version"] = sqliteversion;
-
                     preparserVars["db_version"] = dbversion;
                 }
 
@@ -241,7 +237,7 @@ namespace Duplicati.Library.SQLiteHelper
                 {
                     cmd.CommandText = PreparseSQL(schema, preparserVars);
                     cmd.ExecuteNonQuery();
-                    UpgradeDatabase(connection, sourcefile, schema, versions);
+                    UpgradeDatabase(connection, databaseName, schema, versions);
                     return;
                 }
                 else if (versions.Count > dbversion)
@@ -254,8 +250,8 @@ namespace Duplicati.Library.SQLiteHelper
                     for (var i = 0; i < 10; i++)
                     {
                         backupfile = System.IO.Path.Combine(
-                            System.IO.Path.GetDirectoryName(sourcefile),
-                            Strings.DatabaseUpgrader.BackupFilenamePrefix + " " + (DateTime.Now + TimeSpan.FromSeconds(i * 1.5)).ToString("yyyyMMddhhmmss", System.Globalization.CultureInfo.InvariantCulture) + ".sqlite");
+                            SQLiteLoader.dbBackupFolder,
+                            (DateTime.Now + TimeSpan.FromSeconds(i * 1.5)).ToString("yyyyMMddhhmmss", System.Globalization.CultureInfo.InvariantCulture) + "-MainDatabase.bak");
 
                         if (!System.IO.File.Exists(backupfile))
                             break;
@@ -267,7 +263,10 @@ namespace Duplicati.Library.SQLiteHelper
                             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(backupfile));
 
                         //Keep a backup
-                        System.IO.File.Copy(sourcefile, backupfile, false);
+                        cmd.CommandText = $"BACKUP DATABASE {databaseName}" +
+                                          $"  TO DISK = '{backupfile}'" +
+                                          $"     WITH FORMAT;";
+                        cmd.ExecuteNonQuery();
 
                         for (int i = dbversion; i < versions.Count; i++)
                         {
@@ -310,9 +309,17 @@ namespace Duplicati.Library.SQLiteHelper
                     }
                     catch (Exception ex)
                     {
-                        connection.Close();
                         //Restore the database
-                        System.IO.File.Copy(backupfile, sourcefile, true);
+                        cmd.CommandText = $"RESTORE DATABASE {databaseName}" +
+                                          $"  FROM DISK = '{backupfile}'" +
+                                          $"  WITH FILE = 6" +
+                                          $"    NO RECOVERY;" +
+                                          $"RESTORE DATABASE {databaseName}" +
+                                          $"  FROM DISK = '{backupfile}'" +
+                                          $"  WITH FILE = 9" +
+                                          $"    RECOVERY;";
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
                         throw new Exception(Strings.DatabaseUpgrader.UpgradeFailure(cmd.CommandText, ex.Message), ex);
                     }
                 }

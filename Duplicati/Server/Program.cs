@@ -1,4 +1,4 @@
-﻿using Duplicati.Library;
+using Duplicati.Library;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System.Diagnostics;
 
 namespace Duplicati.Server
 {
@@ -85,7 +86,7 @@ namespace Duplicati.Server
         /// <summary>
         /// The path to the file that contains the current database
         /// </summary>
-        public static string DatabasePath;
+        public static string DatabaseName;
 
         /// <summary>
         /// The controller interface for pause/resume and throttle options
@@ -654,21 +655,13 @@ namespace Duplicati.Server
 
             try
             {
-                DatabasePath = System.IO.Path.Combine(DataFolder, "Duplicati-server.sqlite");
 
-                if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(DatabasePath)))
-                    System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(DatabasePath));
-#if DEBUG
-                //Default is to not use encryption for debugging
-                var useDatabaseEncryption = commandlineOptions.ContainsKey("unencrypted-database") && !Library.Utility.Utility.ParseBool(commandlineOptions["unencrypted-database"], true);
-#else
-                var useDatabaseEncryption = !commandlineOptions.ContainsKey("unencrypted-database") || !Library.Utility.Utility.ParseBool(commandlineOptions["unencrypted-database"], true);
-#endif
-
+                Debugger.Launch();
+                Debugger.Break();
                 //Attempt to open the database, handling any encryption present
-                Duplicati.Library.SQLiteHelper.SQLiteLoader.OpenDatabase(con, DatabasePath, useDatabaseEncryption, dbPassword);
-
-                Duplicati.Library.SQLiteHelper.DatabaseUpgrader.UpgradeDatabase(con, DatabasePath, typeof(Database.Connection));
+                DatabaseName = "Duplicati_Main";
+                Duplicati.Library.SQLiteHelper.SQLiteLoader.OpenDatabase(con, DatabaseName);
+                Duplicati.Library.SQLiteHelper.DatabaseUpgrader.UpgradeDatabase(con, DatabaseName, typeof(Database.Connection));
             }
             catch (Exception ex)
             {
