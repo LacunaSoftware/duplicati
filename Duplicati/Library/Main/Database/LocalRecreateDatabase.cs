@@ -154,16 +154,16 @@ namespace Duplicati.Library.Main.Database
             m_insertBlockCommand = m_connection.CreateCommand();
             m_insertDuplicateBlockCommand = m_connection.CreateCommand();
                             
-            m_insertFileCommand.CommandText = @"INSERT INTO ""File"" (""Path"", ""BlocksetID"", ""MetadataID"") VALUES (?,?,?); SELECT last_insert_rowid();";
+            m_insertFileCommand.CommandText = @"INSERT INTO ""File"" (""Path"", ""BlocksetID"", ""MetadataID"") VALUES (?,?,?); SELECT SCOPE_IDENTITY();";
             m_insertFileCommand.AddParameters(3);
             
             m_insertFilesetEntryCommand.CommandText = @"INSERT INTO ""FilesetEntry"" (""FilesetID"", ""FileID"", ""Lastmodified"") VALUES (?,?,?)";
             m_insertFilesetEntryCommand.AddParameters(3);
 
-            m_insertMetadatasetCommand.CommandText = @"INSERT INTO ""Metadataset"" (""BlocksetID"") VALUES (?); SELECT last_insert_rowid();";
+            m_insertMetadatasetCommand.CommandText = @"INSERT INTO ""Metadataset"" (""BlocksetID"") VALUES (?); SELECT SCOPE_IDENTITY();";
             m_insertMetadatasetCommand.AddParameters(1);
             
-            m_insertBlocksetCommand.CommandText = @"INSERT INTO ""Blockset"" (""Length"", ""FullHash"") VALUES (?,?); SELECT last_insert_rowid();";
+            m_insertBlocksetCommand.CommandText = @"INSERT INTO ""Blockset"" (""Length"", ""FullHash"") VALUES (?,?); SELECT SCOPE_IDENTITY();";
             m_insertBlocksetCommand.AddParameters(2);
                             
             m_insertBlocklistHashCommand.CommandText = @"INSERT INTO ""BlocklistHash"" (""BlocksetID"", ""Index"", ""Hash"") VALUES (?,?,?)";
