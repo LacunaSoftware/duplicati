@@ -2,16 +2,16 @@
 DROP INDEX "BlocksetEntryIds_Forward";
 DROP INDEX "BlocksetEntryIds_Backwards";
 
-ALTER TABLE "BlocksetEntry"
-  RENAME TO "UPGRADE_BlocksetEntry";
+EXEC sp_rename "BlocksetEntry", "UPGRADE_BlocksetEntry";
 
 -- ["WITHOUT ROWID" works with SQLite v3.8.2 (eq System.Data.SQLite v1.0.90.0, rel 2013-12-23) and later]
+
 CREATE TABLE "BlocksetEntry" (
 	"BlocksetID" INTEGER NOT NULL,
 	"Index" INTEGER NOT NULL,
 	"BlockID" INTEGER NOT NULL,
 	CONSTRAINT "BlocksetEntry_PK_IdIndex" PRIMARY KEY ("BlocksetID", "Index")
-) {#if sqlite_version >= 3.8.2} WITHOUT ROWID {#endif};
+);
 
 INSERT INTO "BlocksetEntry" ("BlocksetID", "Index", "BlockID")
      SELECT "BlocksetID", "Index", "BlockID" 

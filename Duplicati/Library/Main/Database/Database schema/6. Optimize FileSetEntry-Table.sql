@@ -2,8 +2,7 @@
 
 DROP INDEX "FilesetentryIndex";
 
-ALTER TABLE "FilesetEntry"
-  RENAME TO "UPGRADE_FilesetEntry";
+EXEC sp_rename "FilesetEntry", "UPGRADE_FilesetEntry";
 
 -- ["WITHOUT ROWID" works with SQLite v3.8.2 (eq System.Data.SQLite v1.0.90.0, rel 2013-12-23) and later]
 CREATE TABLE "FilesetEntry" (
@@ -11,7 +10,7 @@ CREATE TABLE "FilesetEntry" (
 	"FileID" INTEGER NOT NULL,
 	"Lastmodified" INTEGER NOT NULL,
 	CONSTRAINT "FilesetEntry_PK_FilesetIdFileId" PRIMARY KEY ("FilesetID", "FileID")
-) {#if sqlite_version >= 3.8.2} WITHOUT ROWID {#endif};
+);
 
 INSERT INTO "FilesetEntry" ("FilesetID", "FileID", "Lastmodified")
      SELECT "FilesetID", "FileID", "Lastmodified" 
@@ -25,5 +24,3 @@ CREATE INDEX "FilesetentryFileIdIndex" on "FilesetEntry" ("FileID");
 UPDATE "Version" SET "Version" = 6;
 
 COMMIT;
-
-VACUUM;

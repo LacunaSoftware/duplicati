@@ -15,7 +15,7 @@ for later debug inspection, and can be
 used to map log messages to an operation
 */
 CREATE TABLE "Operation" (
-	"ID" INTEGER PRIMARY KEY,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
 	"Description" TEXT NOT NULL,
 	"Timestamp" INTEGER NOT NULL
 );
@@ -25,13 +25,13 @@ The remote volumes table keeps track
 of the state of all known volumes
 */
 CREATE TABLE "Remotevolume" (
-	"ID" INTEGER PRIMARY KEY,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
 	"OperationID" INTEGER NOT NULL,
-	"Name" TEXT NOT NULL,
+	"Name" NVARCHAR(450) NOT NULL,
 	"Type" TEXT NOT NULL,
 	"Size" INTEGER NULL,
 	"Hash" TEXT NULL,
-	"State" TEXT NOT NULL,
+	"State" NVARCHAR(450) NOT NULL,
 	"VerificationCount" INTEGER NOT NULL,
 	"DeleteGraceTime" INTEGER NOT NULL
 );
@@ -57,7 +57,7 @@ The fileset collects all files belonging to
 a particular backup, and thus a remote Fileset
 */
 CREATE TABLE "Fileset" (
-	"ID" INTEGER PRIMARY KEY,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
 	"OperationID" INTEGER NOT NULL,
 	"VolumeID" INTEGER NOT NULL,
 	"Timestamp" INTEGER NOT NULL
@@ -76,7 +76,7 @@ CREATE TABLE "FilesetEntry" (
 	"FileID" INTEGER NOT NULL,
 	"Lastmodified" INTEGER NOT NULL,
 	CONSTRAINT "FilesetEntry_PK_FilesetIdFileId" PRIMARY KEY ("FilesetID", "FileID")
-) {#if sqlite_version >= 3.8.2} WITHOUT ROWID {#endif};
+);
 
 /* Improved reverse lookup for joining Fileset and File table */
 CREATE INDEX "FilesetentryFileIdIndex" on "FilesetEntry" ("FileID");
@@ -89,8 +89,8 @@ for each path and each version
 of the data and metadata
 */
 CREATE TABLE "File" (
-	"ID" INTEGER PRIMARY KEY,
-	"Path" TEXT NOT NULL,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
+	"Path" NVARCHAR(450) NOT NULL,
 	"BlocksetID" INTEGER NOT NULL,
 	"MetadataID" INTEGER NOT NULL
 );
@@ -107,7 +107,7 @@ and ordered by the index
 CREATE TABLE "BlocklistHash" (
 	"BlocksetID" INTEGER NOT NULL,
 	"Index" INTEGER NOT NULL,
-	"Hash" TEXT NOT NULL
+	"Hash" NVARCHAR(450) NOT NULL
 );
 
 /* Faster database recreation */
@@ -122,9 +122,9 @@ The FullHash is the hash of the entire
 blob when reconstructed
 */
 CREATE TABLE "Blockset" (
-	"ID" INTEGER PRIMARY KEY,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
 	"Length" INTEGER NOT NULL,
-	"FullHash" TEXT NOT NULL
+	"FullHash" NVARCHAR(450) NOT NULL
 );
 
 CREATE UNIQUE INDEX "BlocksetFullHash" ON "Blockset" ("FullHash", "Length");
@@ -144,7 +144,7 @@ CREATE TABLE "BlocksetEntry" (
 	"Index" INTEGER NOT NULL,
 	"BlockID" INTEGER NOT NULL,
 	CONSTRAINT "BlocksetEntry_PK_IdIndex" PRIMARY KEY ("BlocksetID", "Index")
-) {#if sqlite_version >= 3.8.2} WITHOUT ROWID {#endif};
+);
 
 /* As this table is a cross table we need fast lookup */
 CREATE INDEX "BlocksetEntry_IndexIdsBackwards" ON "BlocksetEntry" ("BlockID");
@@ -155,8 +155,8 @@ The individual block hashes,
 mapped to the containing remote volume
 */
 CREATE TABLE "Block" (
-	"ID" INTEGER PRIMARY KEY,
-    "Hash" TEXT NOT NULL,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
+    "Hash" NVARCHAR(450) NOT NULL,
 	"Size" INTEGER NOT NULL,
 	"VolumeID" INTEGER NOT NULL
 );
@@ -173,8 +173,8 @@ mapped to the containing file,
 used for wasted space computations
 */
 CREATE TABLE "DeletedBlock" (
-	"ID" INTEGER PRIMARY KEY,
-    "Hash" TEXT NOT NULL,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
+    "Hash" NVARCHAR(450) NOT NULL,
 	"Size" INTEGER NOT NULL,
 	"VolumeID" INTEGER NOT NULL
 );
@@ -193,7 +193,7 @@ A metadata set, essentially a placeholder
 to easily extend metadatasets with new properties
 */
 CREATE TABLE "Metadataset" (
-	"ID" INTEGER PRIMARY KEY,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
 	"BlocksetID" INTEGER NOT NULL
 );
 
@@ -205,7 +205,7 @@ intended to be used when constructing
 an error report or when debugging
 */
 CREATE TABLE "RemoteOperation" (
-	"ID" INTEGER PRIMARY KEY,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
 	"OperationID" INTEGER NOT NULL,
 	"Timestamp" INTEGER NOT NULL,
 	"Operation" TEXT NOT NULL,
@@ -219,7 +219,7 @@ constructing an error report or when
 debugging
 */
 CREATE TABLE "LogData" (
-	"ID" INTEGER PRIMARY KEY,
+	"ID" INTEGER PRIMARY KEY IDENTITY(1,1),
 	"OperationID" INTEGER NOT NULL,
 	"Timestamp" INTEGER NOT NULL,
 	"Type" TEXT NOT NULL,
@@ -231,7 +231,7 @@ CREATE TABLE "LogData" (
 Internal version tracking
 */
 CREATE TABLE "Version" (
-    "ID" INTEGER PRIMARY KEY,
+    "ID" INTEGER PRIMARY KEY IDENTITY(1,1),
     "Version" INTEGER NOT NULL
 );
 
@@ -240,7 +240,7 @@ Settings, such as hash and blocksize,
 used for verification
 */
 CREATE TABLE "Configuration" (
-	"Key" TEXT PRIMARY KEY NOT NULL,
+	"Key" TEXT PRIMARY KEY NOT NULL IDENTITY(1,1),
 	"Value" TEXT NOT NULL
 );
 
