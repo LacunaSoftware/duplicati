@@ -1,3 +1,8 @@
+2019-01-18 - 1.2.1_stable_2019-01-18
+==========
+- Melhoras na aplicação da linha de comando
+- Corrige pequenas traduções
+
 2019-01-10 - 1.2.0_stable_2019-01-10
 ==========
 - Completo redesign da seção de logs de um backup. Agora se tornou bem mais fácil visualizar resultados e informações sobre a execução de um backup, restauração ou outras operações.
