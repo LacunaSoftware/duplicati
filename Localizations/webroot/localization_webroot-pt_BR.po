@@ -2958,7 +2958,7 @@ msgstr "{{number}} Minutos"
 
 #: templates/home.html:58
 msgid "{{time}} (took {{duration}})"
-msgstr "{{time}} (took {{duration}})"
+msgstr "{{time}} (duração: {{duration}})"
 
 #~ msgid "Copied {0} to clipboard"
 #~ msgstr "{0} foi copiado"
