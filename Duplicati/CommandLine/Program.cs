@@ -209,11 +209,14 @@ namespace Duplicati.CommandLine
 
             if (command != "enroll-enotariado" && cargs.Count > 0 && cargs[0].Contains("enotariado://"))
             {
-                var initialized = LoadEnotariado(outwriter, options);
-
-                if (!initialized)
+                try
                 {
-                    outwriter.WriteLine(Strings.Program.EnotariadoOptionError);
+                    LoadEnotariado(outwriter, options);
+                }
+                catch (Exception ex)
+                {
+                    outwriter.WriteLine();
+                    outwriter.WriteLine(ex.Message);
                     return 200;
                 }
             }
@@ -394,11 +397,16 @@ namespace Duplicati.CommandLine
             }
         }
 
-        private static bool LoadEnotariado(TextWriter outwriter, Dictionary<string, string> options)
+        private static void LoadEnotariado(TextWriter outwriter, Dictionary<string, string> options)
         {
             var path = Library.Enotariado.Main.CONFIG_PATH;
+            var customPath = false;
             if (options.ContainsKey("enotariado-config-path"))
+            {
                 path = options["enotariado-config-path"];
+                customPath = true;
+            }
+
             Library.Enotariado.ConfigInformation enotariadoInfo = new Library.Enotariado.ConfigInformation();
             X509Certificate2 certificate;
 #if DEBUG
@@ -408,26 +416,38 @@ namespace Duplicati.CommandLine
 #endif
 
             if (!File.Exists(path))
-                return false;
+            {
+                throw new Exception(customPath ? Strings.Program.EnotariadoCustomConfigFileNotFound(path) : Strings.Program.EnotariadoConfigFileNotFound(path));
+            }
 
             var jsonContent = Library.Utility.Utility.ReadFileWithDefaultEncoding(path);
             enotariadoInfo = JsonConvert.DeserializeObject<Duplicati.Library.Enotariado.ConfigInformation>(jsonContent);
 
             try
             {
-                certificate = Duplicati.Library.Enotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
-                if (enotariadoInfo.ApplicationId == Guid.Empty || enotariadoInfo.SubscriptionId == Guid.Empty)
+                if (string.IsNullOrWhiteSpace(enotariadoInfo.CertThumbprint) || enotariadoInfo.ApplicationId == Guid.Empty || enotariadoInfo.SubscriptionId == Guid.Empty)
                     throw new Library.Enotariado.FailedEnrollmentException();
+                certificate = Duplicati.Library.Enotariado.CryptoUtils.GetCertificate(keyStoreLocation, enotariadoInfo.CertThumbprint);
             }
             catch (Exception ex) when (ex is Library.Enotariado.FailedEnrollmentException || ex is Library.Enotariado.CertificateNotFoundException)
             {
-                File.Delete(path);
-                return false;
+                if (!customPath)
+                {
+                    File.Delete(path);
+                    if (ex is Library.Enotariado.FailedEnrollmentException)
+                        throw new Exception(Strings.Program.EnotariadoInvalidConfigFile(path));
+                    else
+                        throw new Exception(Strings.Program.EnotariadoCertificateNotFound(enotariadoInfo.CertThumbprint, keyStoreLocation.ToString()));
+                }
+
+                if (ex is Library.Enotariado.FailedEnrollmentException)
+                    throw new Exception(Strings.Program.EnotariadoInvalidCustomConfigFile(path));
+                else
+                    throw new Exception(Strings.Program.EnotariadoCustomCertificateNotFound(enotariadoInfo.CertThumbprint, keyStoreLocation.ToString(), path));
             }
             
             Library.Enotariado.Main.Init(enotariadoInfo.ApplicationId, certificate, true, enotariadoInfo.SubscriptionId);
             outwriter.WriteLine("Arquivo de configuração do e-notariado carregado com sucesso.");
-            return true;
         }
     }
 }

@@ -11,8 +11,6 @@ namespace Duplicati.CommandLine.Strings {
         public static string SupportedBackendsHeader { get { return LC.L(@"Supported backends:"); } }
         public static string SupportedCompressionModulesHeader { get { return LC.L(@"Supported compression modules:"); } }
         public static string SupportedEncryptionModulesHeader { get { return LC.L(@"Supported encryption modules:"); } }
-
-        public static string EnotariadoOptionError { get { return "O arquivo de configurações do e-notariado está faltando ou é inválido. Por favor recadastre a aplicação com o comando \"enroll-enotariado\".";  } }
         public static string SupportedOptionsHeader { get { return LC.L(@"Supported options:"); } }
         public static string ModuleIsLoadedAutomatically { get { return LC.L(@"Module is loaded automatically, use --disable-module to prevent this"); } }
         public static string ModuleIsNotLoadedAutomatically { get { return LC.L(@"Module is not loaded automatically, use --enable-module to load it"); } }
@@ -34,5 +32,11 @@ namespace Duplicati.CommandLine.Strings {
         public static string QuietConsoleOptionShort { get { return LC.L(@"Disable console output"); } }
         public static string SkippingSourceArgumentsOnNonBackupOperation { get { return @"The --source argument was specified in the parameter file, but the current operation is not a backup operation, so the argument is ignored"; } }
         public static string YouMayGetMoreHelpHere(string url) { return LC.L(@"This link may provide additional information: {0}", url); }
+        public static string EnotariadoCustomConfigFileNotFound(string path) { return LC.L($"The custom path ({path}) for the config file provided in the --enotariado-config-path option could not be found. This could mean that either the file exists and the process does not have the correct permissions to read it or the path is invalid. Check the path and try again"); }
+        public static string EnotariadoConfigFileNotFound(string path) { return LC.L($"The config file for e-notariado could not be read in the default path ({path}). The possible reasons are: 1. The application has not been enrolled yet, therefore the file does not exist. If that's the case please enroll the command `enroll-enotariado`; 2. The application is enrolled but the current process is not running under the SYSTEM user. Try running again as an administrator and using the --enotariado-config-path option with the location of the enotariado.json config file"); }
+        public static string EnotariadoInvalidConfigFile(string path) { return LC.L($"The default e-notariado config file in the path {path} has invalid data or an incomplete enrollment, for that reason it was deleted. Enroll again using the `enroll-enotariado` command."); }
+        public static string EnotariadoInvalidCustomConfigFile(string path) { return LC.L($"The provided custom e-notariado config file in the path {path} has invalid data or an incomplete enrollment. Please check the file data and try again."); }
+        public static string EnotariadoCertificateNotFound(string thumbprint, string storeLocation) { return LC.L($"The certificate thumbprint ({thumbprint}) in the default e-notariado config file does not match any available certificates in the StoreLocation \"StoreLocation.{storeLocation}\"."); }
+        public static string EnotariadoCustomCertificateNotFound(string thumbprint, string storeLocation, string path) { return LC.L($"The certificate thumbprint ({thumbprint}) in the custom e-notariado config file ({path}) does not match any available certificates in the StoreLocation \"StoreLocation.{storeLocation}\"."); }
     }
 }
