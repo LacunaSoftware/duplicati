@@ -153,7 +153,7 @@ namespace Duplicati.Server.Database
                 using(var tr = transaction == null ? m_connection.BeginTransaction() : null)
                 {
                     OverwriteAndUpdateDb(
-                        tr,
+                        tr ?? transaction,
                         @"DELETE FROM ""Metadata"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values ?? new Dictionary<string, string>(),
                         @"INSERT INTO ""Metadata"" (""BackupID"", ""Name"", ""Value"") VALUES (@param1, @param2, @param3)",
@@ -184,7 +184,7 @@ namespace Duplicati.Server.Database
                 using(var tr = transaction == null ? m_connection.BeginTransaction() : null)
                 {
                     OverwriteAndUpdateDb(
-                        tr,
+                        tr ?? transaction,
                         @"DELETE FROM ""Filter"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values,
                         @"INSERT INTO ""Filter"" (""BackupID"", ""Order"", ""Include"", ""Expression"") VALUES (@param1, @param2, @param3, @param4)",
@@ -216,7 +216,7 @@ namespace Duplicati.Server.Database
                 using(var tr = transaction == null ? m_connection.BeginTransaction() : null)
                 {
                     OverwriteAndUpdateDb(
-                        tr,
+                        tr ?? transaction,
                         @"DELETE FROM ""Option"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values,
                         @"INSERT INTO ""Option"" (""BackupID"", ""Filter"", ""Name"", ""Value"") VALUES (@param1, @param2, @param3, @param4)",
@@ -244,10 +244,10 @@ namespace Duplicati.Server.Database
         internal void SetSources(IEnumerable<string> values, long id, System.Data.IDbTransaction transaction)
         {
             lock(m_lock)
-                using(var tr = transaction == null ? m_connection.BeginTransaction() : null)
+                using (var tr = transaction == null ? m_connection.BeginTransaction() : null)
                 {
                     OverwriteAndUpdateDb(
-                        tr,
+                        tr ?? transaction,
                         @"DELETE FROM ""Source"" WHERE ""BackupID"" = @param1", new object[] { id },
                         values,
                         @"INSERT INTO ""Source"" (""BackupID"", ""Path"") VALUES (@param1, @param2)",
@@ -270,8 +270,6 @@ namespace Duplicati.Server.Database
             lock(m_lock)
                 using(var cmd = m_connection.CreateCommand())
                 {
-                    Debugger.Launch();
-                    Debugger.Break();
                     var sb = new StringBuilder();
                     
                     foreach(var t in tags)
@@ -348,7 +346,7 @@ namespace Duplicati.Server.Database
             {
                 var usesEncryption = ReadFromDb(
                     (rd) => ConvertToBoolean(rd, 0),
-                    @"SELECT VALUE != """" FROM ""Option"" WHERE BackupID = @param1 AND NAME='encryption-module'", id)
+                    @"SELECT CASE WHEN EXISTS ( SELECT ""Value"" FROM ""Option"" WHERE BackupID = @param1 AND NAME='encryption-module' AND NOT(""Value"" IS NULL OR ""Value"" = '') ) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;", id)
                     .FirstOrDefault();
 
                 if (!usesEncryption)
@@ -358,12 +356,12 @@ namespace Duplicati.Server.Database
 
                 return ReadFromDb(
                     (rd) => ConvertToBoolean(rd, 0),
-                    @"SELECT VALUE != """" FROM ""Option"" WHERE BackupID = @BackupID AND NAME='passphrase'", id)
+                    @"SELECT CASE WHEN EXISTS ( SELECT ""Value"" FROM ""Option"" WHERE BackupID = @param1 AND NAME='passphrase' AND NOT(""Value"" IS NULL OR ""Value"" = '') ) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;", id)
                 .FirstOrDefault();
             }
         }
 
-        internal long[] GetScheduleIDsFromTags(string[] tags)
+        internal long[] GetScheduleIDsFromTags(string[] tags, System.Data.IDbTransaction transaction = null)
         {
             if (tags == null || tags.Length == 0)
                 return new long[0];
@@ -371,18 +369,21 @@ namespace Duplicati.Server.Database
             lock(m_lock)
                 using(var cmd = m_connection.CreateCommand())
                 {
-                    Debugger.Launch();
-                    Debugger.Break();
                     var sb = new StringBuilder();
-                    
+
+                    cmd.Transaction = transaction;
+
+                    var count = 1;
                     foreach(var t in tags)
                     {
                         if (sb.Length != 0)
                             sb.Append(" OR ");
-                        sb.Append(@" ("","" || ""Tags"" || "","" LIKE ""%,"" || ? || "",%"") ");
+                        sb.Append($" (',' + 'Tags' + ',' LIKE '%,' + @param{count} + ',%') ");
                         
                         var p = cmd.CreateParameter();
                         p.Value = t;
+                        p.ParameterName = $"@param{count}";
+                        count++;
                         cmd.Parameters.Add(p);
                     }
 
@@ -571,12 +572,12 @@ namespace Duplicati.Server.Database
                                 update ? (object)item.ID : (object)n.DBPath 
                             };
                         });
-                        
+
                     if (!update)
                         using(var cmd = m_connection.CreateCommand())
                         {
                             cmd.Transaction = tr;
-                            cmd.CommandText = @"SELECT SCOPE_IDENTITY();";
+                            cmd.CommandText = @"SELECT IDENT_CURRENT('Backup');";
                             item.ID = ExecuteScalarInt64(cmd).ToString();
                         }
                         
@@ -585,15 +586,15 @@ namespace Duplicati.Server.Database
                     if (long.Parse(item.ID) <= 0)
                         throw new Exception("Invalid addition, cannot update application settings through update method");
 
-                    SetSources(item.Sources, id, tr);
-                    SetSettings(item.Settings, id, tr);
                     SetFilters(item.Filters, id, tr);
+                    SetSettings(item.Settings, id, tr);
+                    SetSources(item.Sources, id, tr);
                     SetMetadata(item.Metadata, id, tr);
                     
                     if (updateSchedule)
                     {
                         var tags = new string[] { "ID=" + item.ID }; 
-                        var existing = GetScheduleIDsFromTags(tags);
+                        var existing = GetScheduleIDsFromTags(tags, tr);
                         if (schedule == null && existing.Any())
                             DeleteFromDb("Schedule", existing.First(), tr);
                         else if (schedule != null)
@@ -650,20 +651,23 @@ namespace Duplicati.Server.Database
                     update ?
                         @"UPDATE ""Schedule"" SET ""Tags""=@param1, ""Time""=@param2, ""Repeat""=@param3, ""LastRun""=@param4, ""Rule""=@param5 WHERE ""ID""=@param6" :
                         @"INSERT INTO ""Schedule"" (""Tags"", ""Time"", ""Repeat"", ""LastRun"", ""Rule"") VALUES (@param1,@param2,@param3,@param4,@param5)",
-                    (n) => new object[] {
-                        string.Join(",", n.Tags),
-                        NormalizeDateTimeToEpochSeconds(n.Time),
-                        n.Repeat,
-                        NormalizeDateTimeToEpochSeconds(n.LastRun),
-                        n.Rule ?? "",
-                        update ? (object)item.ID : null
+                    (n) => {
+                        var obj = new List<object> {
+                            string.Join(",", n.Tags),
+                            NormalizeDateTimeToEpochSeconds(n.Time),
+                            n.Repeat,
+                            NormalizeDateTimeToEpochSeconds(n.LastRun),
+                            n.Rule ?? "",
+                        };
+                        if (update) obj.Add(item.ID);
+                        return obj.ToArray();
                     });
                     
                 if (!update)
                     using(var cmd = m_connection.CreateCommand())
                     {
                         cmd.Transaction = tr;
-                        cmd.CommandText = @"SELECT SCOPE_IDENTITY();";
+                        cmd.CommandText = @"SELECT IDENT_CURRENT('Schedule');";
                         item.ID = ExecuteScalarInt64(cmd);
                     }
             }
@@ -678,7 +682,7 @@ namespace Duplicati.Server.Database
             {
                 using(var tr = m_connection.BeginTransaction())
                 {
-                    var existing = GetScheduleIDsFromTags(new string[] { "ID=" + ID.ToString() });
+                    var existing = GetScheduleIDsFromTags(new string[] { "ID=" + ID.ToString() }, tr);
                     if (existing.Any())
                         DeleteFromDb("Schedule", existing.First(), tr);
 
@@ -1026,7 +1030,10 @@ namespace Duplicati.Server.Database
             try
             {
                 if (!rd.IsDBNull(index))
-                    return rd.GetInt64(index);
+                {
+                    var x = rd.GetValue(index);
+                    return Convert.ToInt64(x);
+                }
             }
             catch
             {
@@ -1215,7 +1222,7 @@ namespace Duplicati.Server.Database
                 using(var cmd = m_connection.CreateCommand())
                 {
                     cmd.Transaction = transaction;
-                    cmd.CommandText = @"SELECT SCOPE_IDENTITY();";
+                    cmd.CommandText = string.Format(@"SELECT IDENT_CURRENT(""{0}"");", typeof(T).Name);
                     if (idfield.PropertyType == typeof(string))
                         idfield.SetValue(values.First(), ExecuteScalarString(cmd), null);
                     else

@@ -31,7 +31,7 @@ CREATE TABLE "Schedule" (
     "Tags" NVARCHAR(450) NOT NULL,
     "Time" INTEGER NOT NULL,
     "Repeat" TEXT NOT NULL,
-    "LastRun" INTEGER NOT NULL,
+    "LastRun" BIGINT NOT NULL,
     "Rule" TEXT NOT NULL
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE "Option" (
     "BackupID" INTEGER NOT NULL,
     "Filter" TEXT NOT NULL,
     "Name" NVARCHAR(450) NOT NULL,
-    "Value" TEXT NOT NULL
+    "Value" NVARCHAR(450) NOT NULL
 );
 
 /*

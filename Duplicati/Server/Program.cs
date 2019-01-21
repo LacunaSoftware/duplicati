@@ -655,9 +655,6 @@ namespace Duplicati.Server
 
             try
             {
-
-                Debugger.Launch();
-                Debugger.Break();
                 //Attempt to open the database, handling any encryption present
                 DatabaseName = "Duplicati_Main";
                 Duplicati.Library.SQLiteHelper.SQLiteLoader.OpenDatabase(con, DatabaseName);
