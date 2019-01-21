@@ -242,7 +242,7 @@ namespace Duplicati.Library.SQLiteHelper
 
                 if (!exists)
                 {
-                    command.CommandText = string.Format("CREATE DATABASE {0}", databaseName);
+                    command.CommandText = string.Format("CREATE DATABASE [{0}]", databaseName);
                     command.ExecuteNonQuery();
                 }
                 con.ChangeDatabase(databaseName);
