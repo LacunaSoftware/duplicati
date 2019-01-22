@@ -154,49 +154,49 @@ namespace Duplicati.Library.Main.Database
             m_insertBlockCommand = m_connection.CreateCommand();
             m_insertDuplicateBlockCommand = m_connection.CreateCommand();
                             
-            m_insertFileCommand.CommandText = @"INSERT INTO ""File"" (""Path"", ""BlocksetID"", ""MetadataID"") VALUES (?,?,?); SELECT SCOPE_IDENTITY();";
+            m_insertFileCommand.CommandText = @"INSERT INTO ""File"" (""Path"", ""BlocksetID"", ""MetadataID"") VALUES (@param1,@param2,@param3); SELECT IDENT_CURRENT('File');";
             m_insertFileCommand.AddParameters(3);
             
-            m_insertFilesetEntryCommand.CommandText = @"INSERT INTO ""FilesetEntry"" (""FilesetID"", ""FileID"", ""Lastmodified"") VALUES (?,?,?)";
+            m_insertFilesetEntryCommand.CommandText = @"INSERT INTO ""FilesetEntry"" (""FilesetID"", ""FileID"", ""Lastmodified"") VALUES (@param1,@param2,@param3)";
             m_insertFilesetEntryCommand.AddParameters(3);
 
-            m_insertMetadatasetCommand.CommandText = @"INSERT INTO ""Metadataset"" (""BlocksetID"") VALUES (?); SELECT SCOPE_IDENTITY();";
+            m_insertMetadatasetCommand.CommandText = @"INSERT INTO ""Metadataset"" (""BlocksetID"") VALUES (@param1); SELECT IDENT_CURRENT('Metadataset');";
             m_insertMetadatasetCommand.AddParameters(1);
             
-            m_insertBlocksetCommand.CommandText = @"INSERT INTO ""Blockset"" (""Length"", ""FullHash"") VALUES (?,?); SELECT SCOPE_IDENTITY();";
+            m_insertBlocksetCommand.CommandText = @"INSERT INTO ""Blockset"" (""Length"", ""FullHash"") VALUES (@param1,@param2); SELECT IDENT_CURRENT('Blockset');";
             m_insertBlocksetCommand.AddParameters(2);
                             
-            m_insertBlocklistHashCommand.CommandText = @"INSERT INTO ""BlocklistHash"" (""BlocksetID"", ""Index"", ""Hash"") VALUES (?,?,?)";
+            m_insertBlocklistHashCommand.CommandText = @"INSERT INTO ""BlocklistHash"" (""BlocksetID"", ""Index"", ""Hash"") VALUES (@param1,@param2,@param3)";
             m_insertBlocklistHashCommand.AddParameters(3);
             
-            m_updateBlockVolumeCommand.CommandText = @"UPDATE ""Block"" SET ""VolumeID"" = ? WHERE ""Hash"" = ? AND ""Size"" = ?";
+            m_updateBlockVolumeCommand.CommandText = @"UPDATE ""Block"" SET ""VolumeID"" = @param1 WHERE ""Hash"" = @param2 AND ""Size"" = @param3";
             m_updateBlockVolumeCommand.AddParameters(3);
 
-            m_insertBlockset.CommandText = string.Format(@"INSERT INTO ""{0}"" (""BlocklistHash"", ""BlockHash"", ""Index"") VALUES (?,?,?) ", m_tempblocklist);
+            m_insertBlockset.CommandText = string.Format(@"INSERT INTO ""{0}"" (""BlocklistHash"", ""BlockHash"", ""Index"") VALUES (@param1,@param2,@param3) ", m_tempblocklist);
             m_insertBlockset.AddParameters(3);
 
-            m_insertSmallBlockset.CommandText = string.Format(@"INSERT OR IGNORE INTO ""{0}"" (""FileHash"", ""BlockHash"", ""BlockSize"") VALUES (?,?,?) ", m_tempsmalllist);
+            m_insertSmallBlockset.CommandText = string.Format(@"INSERT OR IGNORE INTO ""{0}"" (""FileHash"", ""BlockHash"", ""BlockSize"") VALUES (@param1,@param2,@param3) ", m_tempsmalllist);
             m_insertSmallBlockset.AddParameters(3);
 
-            m_findBlocksetCommand.CommandText = @"SELECT ""ID"" FROM ""Blockset"" WHERE ""Length"" = ? AND ""FullHash"" = ? ";
+            m_findBlocksetCommand.CommandText = @"SELECT ""ID"" FROM ""Blockset"" WHERE ""Length"" = @param1 AND ""FullHash"" = @param2 ";
             m_findBlocksetCommand.AddParameters(2);
             
-            m_findMetadatasetCommand.CommandText = @"SELECT ""Metadataset"".""ID"" FROM ""Metadataset"",""Blockset"" WHERE ""Metadataset"".""BlocksetID"" = ""Blockset"".""ID"" AND ""Blockset"".""FullHash"" = ? AND ""Blockset"".""Length"" = ? ";
+            m_findMetadatasetCommand.CommandText = @"SELECT ""Metadataset"".""ID"" FROM ""Metadataset"",""Blockset"" WHERE ""Metadataset"".""BlocksetID"" = ""Blockset"".""ID"" AND ""Blockset"".""FullHash"" = @param1 AND ""Blockset"".""Length"" = @param2 ";
             m_findMetadatasetCommand.AddParameters(2);
             
-            m_findFilesetCommand.CommandText = @"SELECT ""ID"" FROM ""File"" WHERE ""Path"" = ? AND ""BlocksetID"" = ? AND ""MetadataID"" = ? ";
+            m_findFilesetCommand.CommandText = @"SELECT ""ID"" FROM ""File"" WHERE ""Path"" = @param1 AND ""BlocksetID"" = @param2 AND ""MetadataID"" = @param3 ";
             m_findFilesetCommand.AddParameters(3);
             
-            m_findblocklisthashCommand.CommandText = string.Format(@"SELECT DISTINCT ""BlockListHash"" FROM ""{0}"" WHERE ""BlockListHash"" = ? ", m_tempblocklist);
+            m_findblocklisthashCommand.CommandText = string.Format(@"SELECT DISTINCT ""BlockListHash"" FROM ""{0}"" WHERE ""BlockListHash"" = @param1 ", m_tempblocklist);
             m_findblocklisthashCommand.AddParameters(1);
             
-            m_findHashBlockCommand.CommandText = @"SELECT ""VolumeID"" FROM ""Block"" WHERE ""Hash"" = ? AND ""Size"" = ? ";
+            m_findHashBlockCommand.CommandText = @"SELECT ""VolumeID"" FROM ""Block"" WHERE ""Hash"" = @param1 AND ""Size"" = @param2 ";
             m_findHashBlockCommand.AddParameters(2);
                         
-            m_insertBlockCommand.CommandText = @"INSERT INTO ""Block"" (""Hash"", ""Size"", ""VolumeID"") VALUES (?,?,?)";
+            m_insertBlockCommand.CommandText = @"INSERT INTO ""Block"" (""Hash"", ""Size"", ""VolumeID"") VALUES (@param1,@param2,@param3)";
             m_insertBlockCommand.AddParameters(3);
             
-            m_insertDuplicateBlockCommand.CommandText = @"INSERT INTO ""DuplicateBlock"" (""BlockID"", ""VolumeID"") VALUES ((SELECT ""ID"" FROM ""Block"" WHERE ""Hash"" = ? AND ""Size"" = ?), ?)";
+            m_insertDuplicateBlockCommand.CommandText = @"INSERT INTO ""DuplicateBlock"" (""BlockID"", ""VolumeID"") VALUES ((SELECT ""ID"" FROM ""Block"" WHERE ""Hash"" = @param1 AND ""Size"" = @param2), @param3)";
             m_insertDuplicateBlockCommand.AddParameters(3);
 
             if (options.UseFilepathCache)
@@ -269,7 +269,7 @@ namespace Duplicati.Library.Main.Database
                 var selectFiltered =
                     @"SELECT DISTINCT ""H"".""BlocksetID"", ""H"".""Index"", ""H"".""BlockID"" FROM (" +
                     selectAllBlocksetEntries +
-                    @") H WHERE (""H"".""BlocksetID"" || ':' || ""H"".""Index"") NOT IN (SELECT (""ExistingBlocksetEntries"".""BlocksetID"" || ':' || ""ExistingBlocksetEntries"".""Index"") FROM ""BlocksetEntry"" ""ExistingBlocksetEntries"" )";
+                    @") H WHERE (""H"".""BlocksetID"" + ':' + ""H"".""Index"") NOT IN (SELECT (""ExistingBlocksetEntries"".""BlocksetID"" + ':' + ""ExistingBlocksetEntries"".""Index"") FROM ""BlocksetEntry"" ""ExistingBlocksetEntries"" )";
                 
                 var insertBlocksetEntriesCommand =
                     @"INSERT INTO ""BlocksetEntry"" (""BlocksetID"", ""Index"", ""BlockID"") " + selectFiltered;
@@ -502,7 +502,7 @@ namespace Duplicati.Library.Main.Database
         {
             using(var cmd = m_connection.CreateCommand())
             {
-                cmd.CommandText = @"SELECT DISTINCT ""BlocklistHash"".""Hash"" FROM ""BlocklistHash"", ""Block"" WHERE ""Block"".""Hash"" = ""BlocklistHash"".""Hash"" AND ""Block"".""VolumeID"" = ?";
+                cmd.CommandText = @"SELECT DISTINCT ""BlocklistHash"".""Hash"" FROM ""BlocklistHash"", ""Block"" WHERE ""Block"".""Hash"" = ""BlocklistHash"".""Hash"" AND ""Block"".""VolumeID"" = @param1";
                 cmd.AddParameter(volumeid);
                 
                 using(var rd = cmd.ExecuteReader())
@@ -533,7 +533,7 @@ namespace Duplicati.Library.Main.Database
                 );
                 
                 var countMissingInformation = string.Format(
-                    @"SELECT COUNT(*) FROM (SELECT DISTINCT ""VolumeID"" FROM ({0} UNION {1}))",
+                    @"SELECT COUNT(*) FROM (SELECT DISTINCT ""VolumeID"" FROM ({0} UNION {1})) AS A",
                     missingBlockInfo,
                     missingBlocklistVolumes);
 
@@ -560,14 +560,14 @@ namespace Duplicati.Library.Main.Database
                         var mentionedVolumes =
                             @"SELECT DISTINCT ""VolumeID"" FROM ""Block"" ";
                         
-                        cmd.CommandText = string.Format(selectCommand + @" WHERE ""ID"" NOT IN ({0}) AND ""Type"" = ? ", mentionedVolumes);
+                        cmd.CommandText = string.Format(selectCommand + @" WHERE ""ID"" NOT IN ({0}) AND ""Type"" = @param1 ", mentionedVolumes);
                         cmd.AddParameter(RemoteVolumeType.Blocks.ToString());
                     }
                     else
                     {
                         // On the final pass, we select all volumes
                         // the filter will ensure that we do not download anything twice
-                        cmd.CommandText = selectCommand + @" WHERE ""Type"" = ?";
+                        cmd.CommandText = selectCommand + @" WHERE ""Type"" = @param1";
                         cmd.AddParameter(RemoteVolumeType.Blocks.ToString());
                     }
                 }

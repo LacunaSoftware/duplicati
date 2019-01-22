@@ -535,17 +535,20 @@ namespace Duplicati.Server.Database
                     var folder = Program.DataFolder;
                     if (!System.IO.Directory.Exists(folder))
                         System.IO.Directory.CreateDirectory(folder);
-                    
-                    for(var i = 0; i < 100; i++)
-                    {
-                        var guess = System.IO.Path.Combine(folder, System.IO.Path.ChangeExtension(Duplicati.Library.Main.DatabaseLocator.GenerateRandomName(), ".sqlite"));
-                        if (!System.IO.File.Exists(guess))
-                        {
-                            ((Backup)item).DBPath = guess;
-                            break;
-                        }
-                    }
-                    
+
+                    // for(var i = 0; i < 100; i++)
+                    // {
+                    //     var guess = System.IO.Path.Combine(folder, System.IO.Path.ChangeExtension(Duplicati.Library.Main.DatabaseLocator.GenerateRandomName(), ".sqlite"));
+                    //     if (!System.IO.File.Exists(guess))
+                    //     {
+                    //         ((Backup)item).DBPath = guess;
+                    //         break;
+                    //     }
+                    // }
+
+                    // enotariado://4f0c57a8-4cf3-4009-ad88-f704bb52f451?name=Small%20-%20194%20items
+                    // gets GUID of backup
+                    ((Backup)item).DBPath = ((Backup)item).TargetURL.Substring(13, 36);
                     if (item.DBPath == null)
                         throw new Exception("Unable to generate a unique database file name");
                 }
@@ -1225,7 +1228,7 @@ namespace Duplicati.Server.Database
                 using(var cmd = m_connection.CreateCommand())
                 {
                     cmd.Transaction = transaction;
-                    cmd.CommandText = string.Format(@"SELECT IDENT_CURRENT(""{0}"");", typeof(T).Name);
+                    cmd.CommandText = string.Format(@"SELECT IDENT_CURRENT('{0}');", typeof(T).Name);
                     if (idfield.PropertyType == typeof(string))
                         idfield.SetValue(values.First(), ExecuteScalarString(cmd), null);
                     else

@@ -43,11 +43,7 @@ namespace Duplicati.Library.Main.Database
         public bool ShouldCloseConnection { get; set; }
 
         protected static System.Data.IDbConnection CreateConnection(string path)
-        {
-            path = System.IO.Path.GetFullPath(path);
-            if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(path)))
-                System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
-            
+        {            
             var c = Duplicati.Library.SQLiteHelper.SQLiteLoader.LoadConnection(path);
 
             Library.SQLiteHelper.DatabaseUpgrader.UpgradeDatabase(c, path, typeof(LocalDatabase));
@@ -92,7 +88,9 @@ namespace Duplicati.Library.Main.Database
                 m_connection.Open();
 
             using (var cmd = m_connection.CreateCommand())
-                m_operationid = cmd.ExecuteScalarInt64( @"INSERT INTO ""Operation"" (""Description"", ""Timestamp"") VALUES (?, ?); SELECT SCOPE_IDENTITY();", -1, operation, NormalizeDateTimeToEpochSeconds(OperationTimestamp));
+            {
+                m_operationid = cmd.ExecuteScalarInt64(@"INSERT INTO ""Operation"" (""Description"", ""Timestamp"") VALUES (@param1, @param2); SELECT IDENT_CURRENT('Operation');", -1, operation, NormalizeDateTimeToEpochSeconds(OperationTimestamp));
+            }
         }
         
         private LocalDatabase(System.Data.IDbConnection connection)
@@ -108,31 +106,31 @@ namespace Duplicati.Library.Main.Database
             m_createremotevolumeCommand = connection.CreateCommand();
             m_insertIndexBlockLink = connection.CreateCommand();
 
-            m_insertlogCommand.CommandText = @"INSERT INTO ""LogData"" (""OperationID"", ""Timestamp"", ""Type"", ""Message"", ""Exception"") VALUES (?, ?, ?, ?, ?)";
+            m_insertlogCommand.CommandText = @"INSERT INTO ""LogData"" (""OperationID"", ""Timestamp"", ""Type"", ""Message"", ""Exception"") VALUES (@param1, @param2, @param3, @param4, @param5)";
             m_insertlogCommand.AddParameters(5);
 
-            m_insertremotelogCommand.CommandText = @"INSERT INTO ""RemoteOperation"" (""OperationID"", ""Timestamp"", ""Operation"", ""Path"", ""Data"") VALUES (?, ?, ?, ?, ?)";
+            m_insertremotelogCommand.CommandText = @"INSERT INTO ""RemoteOperation"" (""OperationID"", ""Timestamp"", ""Operation"", ""Path"", ""Data"") VALUES (@param1, @param2, @param3, @param4, @param5)";
             m_insertremotelogCommand.AddParameters(5);
 
-            m_updateremotevolumeCommand.CommandText = @"UPDATE ""Remotevolume"" SET ""OperationID"" = ?, ""State"" = ?, ""Hash"" = ?, ""Size"" = ? WHERE ""Name"" = ?";
+            m_updateremotevolumeCommand.CommandText = @"UPDATE ""Remotevolume"" SET ""OperationID"" = @param1, ""State"" = @param2, ""Hash"" = @param3, ""Size"" = @param4 WHERE ""Name"" = @param5";
             m_updateremotevolumeCommand.AddParameters(5);
 
             m_selectremotevolumesCommand.CommandText = @"SELECT ""ID"", ""Name"", ""Type"", ""Size"", ""Hash"", ""State"", ""DeleteGraceTime"" FROM ""Remotevolume""";
 
-            m_selectremotevolumeCommand.CommandText = m_selectremotevolumesCommand.CommandText + @" WHERE ""Name"" = ?";
-            m_selectduplicateRemoteVolumesCommand.CommandText = string.Format(@"SELECT DISTINCT ""Name"", ""State"" FROM ""Remotevolume"" WHERE ""Name"" IN (SELECT ""Name"" FROM ""Remotevolume"" WHERE ""State"" IN (""{0}"", ""{1}"")) AND NOT ""State"" IN (""{0}"", ""{1}"")", RemoteVolumeState.Deleted.ToString(), RemoteVolumeState.Deleting.ToString());
+            m_selectremotevolumeCommand.CommandText = m_selectremotevolumesCommand.CommandText + @" WHERE ""Name"" = @param1";
+            m_selectduplicateRemoteVolumesCommand.CommandText = string.Format(@"SELECT DISTINCT ""Name"", ""State"" FROM ""Remotevolume"" WHERE ""Name"" IN (SELECT ""Name"" FROM ""Remotevolume"" WHERE ""State"" IN ('{0}', '{1}')) AND NOT ""State"" IN ('{0}', '{1}')", RemoteVolumeState.Deleted.ToString(), RemoteVolumeState.Deleting.ToString());
 
             m_selectremotevolumeCommand.AddParameter();
 
-            m_removeremotevolumeCommand.CommandText = @"DELETE FROM ""Remotevolume"" WHERE ""Name"" = ? AND (""DeleteGraceTime"" < ? OR ""State"" != ?)";
+            m_removeremotevolumeCommand.CommandText = @"DELETE FROM ""Remotevolume"" WHERE ""Name"" = @param1 AND (""DeleteGraceTime"" < @param2 OR ""State"" != @param3)";
             m_removeremotevolumeCommand.AddParameters(3);
 
-            m_selectremotevolumeIdCommand.CommandText = @"SELECT ""ID"" FROM ""Remotevolume"" WHERE ""Name"" = ?";
+            m_selectremotevolumeIdCommand.CommandText = @"SELECT ""ID"" FROM ""Remotevolume"" WHERE ""Name"" = @param1";
 
-            m_createremotevolumeCommand.CommandText = @"INSERT INTO ""Remotevolume"" (""OperationID"", ""Name"", ""Type"", ""State"", ""Size"", ""VerificationCount"", ""DeleteGraceTime"") VALUES (?, ?, ?, ?, ?, ?, ?); SELECT SCOPE_IDENTITY();";
+            m_createremotevolumeCommand.CommandText = @"INSERT INTO ""Remotevolume"" (""OperationID"", ""Name"", ""Type"", ""State"", ""Size"", ""VerificationCount"", ""DeleteGraceTime"") VALUES (@param1, @param2, @param3, @param4, @param5, @param6, @param7); SELECT IDENT_CURRENT('RemoteVolume');";
             m_createremotevolumeCommand.AddParameters(7);
 
-            m_insertIndexBlockLink.CommandText = @"INSERT INTO ""IndexBlockLink"" (""IndexVolumeID"", ""BlockVolumeID"") VALUES (?, ?)";
+            m_insertIndexBlockLink.CommandText = @"INSERT INTO ""IndexBlockLink"" (""IndexVolumeID"", ""BlockVolumeID"") VALUES (@param1, @param2)";
             m_insertIndexBlockLink.AddParameters(2);
         }
 
@@ -190,7 +188,7 @@ namespace Duplicati.Library.Main.Database
 
             if (deleteGraceTime.Ticks > 0)
                 using(var cmd = m_connection.CreateCommand(transaction))
-                    if ((c = cmd.ExecuteNonQuery(@"UPDATE ""RemoteVolume"" SET ""DeleteGraceTime"" = ? WHERE ""Name"" = ? ", (DateTime.UtcNow + deleteGraceTime).Ticks, name)) != 1)
+                    if ((c = cmd.ExecuteNonQuery(@"UPDATE ""RemoteVolume"" SET ""DeleteGraceTime"" = @param1 WHERE ""Name"" = @param2 ", (DateTime.UtcNow + deleteGraceTime).Ticks, name)) != 1)
                         throw new Exception(string.Format("Unexpected number of updates when recording remote volume updates: {0}!", c));
 
 
@@ -222,7 +220,7 @@ namespace Duplicati.Library.Main.Database
                     if (time.Kind == DateTimeKind.Unspecified)
                         throw new Exception("Invalid DateTime given, must be either local or UTC");
 
-                    query.Append(singleTimeMatch ? @" ""Timestamp"" = ?" : @" ""Timestamp"" <= ?");
+                    query.Append(singleTimeMatch ? @" ""Timestamp"" = @param1" : @" ""Timestamp"" <= @param1");
                     // Make sure the resolution is the same (i.e. no milliseconds)
                     args.Add(NormalizeDateTimeToEpochSeconds(time));
                     hasTime = true;
@@ -232,12 +230,13 @@ namespace Duplicati.Library.Main.Database
                 {
                     StringBuilder qs = new StringBuilder();
 
+                    var count = 1;
                     foreach (var v in versions)
                     {
                         if (v >= 0 && v < filesets.Length)
                         {
                             args.Add(filesets[v].Key);
-                            qs.Append("?,");
+                            qs.Append($"@param{count++},");
                         }
                         else
                             Logging.Log.WriteWarningMessage(LOGTAG, "SkipInvalidVersion", null, "Skipping invalid version: {0}", v);
@@ -357,7 +356,7 @@ namespace Duplicati.Library.Main.Database
             using(var cmd = m_connection.CreateCommand())
             {
                 cmd.Transaction = tr.Parent;
-                var c = cmd.ExecuteNonQuery(@"DELETE FROM ""RemoteVolume"" WHERE ""Name"" = ? AND ""State"" = ? ", name, state.ToString());
+                var c = cmd.ExecuteNonQuery(@"DELETE FROM ""RemoteVolume"" WHERE ""Name"" = @param1 AND ""State"" = @param2 ", name, state.ToString());
                 if (c != 1)
                     throw new Exception(string.Format("Unexpected number of remote volumes deleted: {0}, expected {1}", c, 1));
 
@@ -385,7 +384,7 @@ namespace Duplicati.Library.Main.Database
 
                 // Create and fill a temp table with the volids to delete. We avoid using too many parameters that way.
                 deletecmd.ExecuteNonQuery(string.Format(@"CREATE TEMP TABLE ""{0}"" (""ID"" INTEGER PRIMARY KEY)", volidstable));
-                deletecmd.CommandText = string.Format(@"INSERT OR IGNORE INTO ""{0}"" (""ID"") VALUES (?)", volidstable);
+                deletecmd.CommandText = string.Format(@"INSERT OR IGNORE INTO ""{0}"" (""ID"") VALUES (@param1)", volidstable);
                 deletecmd.Parameters.Clear();
                 deletecmd.AddParameters(1);
                 foreach (var name in names)
@@ -656,7 +655,7 @@ namespace Duplicati.Library.Main.Database
         public IEnumerable<ILocalFileEntry> GetFiles(long filesetId)
         {
             using(var cmd = m_connection.CreateCommand())
-            using(var rd = cmd.ExecuteReader(@"SELECT ""A"".""Path"", ""B"".""Length"", ""B"".""FullHash"", ""D"".""FullHash"" FROM ""File"" A, ""Blockset"" B, ""Metadataset"" C, ""Blockset"" D, ""FilesetEntry"" E WHERE ""A"".""BlocksetID"" = ""B"".""ID"" AND ""A"".""MetadataID"" = ""C"".""ID"" AND ""C"".""BlocksetID"" = ""D"".""ID"" AND ""A"".""ID"" = ""E"".""FileID"" AND ""E"".""FilesetID"" = ? ", filesetId))
+            using(var rd = cmd.ExecuteReader(@"SELECT ""A"".""Path"", ""B"".""Length"", ""B"".""FullHash"", ""D"".""FullHash"" FROM ""File"" A, ""Blockset"" B, ""Metadataset"" C, ""Blockset"" D, ""FilesetEntry"" E WHERE ""A"".""BlocksetID"" = ""B"".""ID"" AND ""A"".""MetadataID"" = ""C"".""ID"" AND ""C"".""BlocksetID"" = ""D"".""ID"" AND ""A"".""ID"" = ""E"".""FileID"" AND ""E"".""FilesetID"" = @param1 ", filesetId))
             while(rd.Read())
                 yield return new LocalFileEntry(rd);
         }
@@ -720,7 +719,7 @@ namespace Duplicati.Library.Main.Database
                 cmd.Transaction = tr.Parent;
                 cmd.ExecuteNonQuery(@"DELETE FROM ""Configuration"" ");
                 foreach(var kp in options)
-                    cmd.ExecuteNonQuery(@"INSERT INTO ""Configuration"" (""Key"", ""Value"") VALUES (?, ?) ", kp.Key, kp.Value);
+                    cmd.ExecuteNonQuery(@"INSERT INTO ""Configuration"" (""Key"", ""Value"") VALUES (@param1, @param2) ", kp.Key, kp.Value);
                 
                 tr.Commit();
             }
@@ -729,7 +728,7 @@ namespace Duplicati.Library.Main.Database
         public long GetBlocksLargerThan(long fhblocksize)
         {
             using(var cmd = m_connection.CreateCommand())
-                return cmd.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""Block"" WHERE ""Size"" > ?", -1, fhblocksize);
+                return cmd.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""Block"" WHERE ""Size"" > @param1", -1, fhblocksize);
         }
 
         public void VerifyConsistency(long blocksize, long hashsize, bool verifyfilelists, System.Data.IDbTransaction transaction)
@@ -740,7 +739,7 @@ namespace Duplicati.Library.Main.Database
                 var combinedLengths = @"
 SELECT 
     ""A"".""ID"" AS ""BlocksetID"", 
-    IFNULL(""B"".""CalcLen"", 0) AS ""CalcLen"", 
+    COALESCE(""B"".""CalcLen"", 0) AS ""CalcLen"", 
     ""A"".""Length""
 FROM
     ""Blockset"" A
@@ -786,12 +785,12 @@ ON
                     }
 
                 var real_count = cmd.ExecuteScalarInt64(@"SELECT Count(*) FROM ""BlocklistHash""", 0);
-                var unique_count = cmd.ExecuteScalarInt64(@"SELECT Count(*) FROM (SELECT DISTINCT ""BlocksetID"", ""Index"" FROM ""BlocklistHash"")", 0);
+                var unique_count = cmd.ExecuteScalarInt64(@"SELECT Count(*) FROM (SELECT DISTINCT ""BlocksetID"", ""Index"" FROM ""BlocklistHash"") AS A", 0);
 
                 if (real_count != unique_count)
                     throw new InvalidDataException(string.Format("Found {0} blocklist hashes, but there should be {1}. Run repair to fix it.", real_count, unique_count));
 
-                var itemswithnoblocklisthash = cmd.ExecuteScalarInt64(string.Format(@"SELECT COUNT(*) FROM (SELECT * FROM (SELECT ""N"".""BlocksetID"", ((""N"".""BlockCount"" + {0} - 1) / {0}) AS ""BlocklistHashCountExpected"", CASE WHEN ""G"".""BlocklistHashCount"" IS NULL THEN 0 ELSE ""G"".""BlocklistHashCount"" END AS ""BlocklistHashCountActual"" FROM (SELECT ""BlocksetID"", COUNT(*) AS ""BlockCount"" FROM ""BlocksetEntry"" GROUP BY ""BlocksetID"") ""N"" LEFT OUTER JOIN (SELECT ""BlocksetID"", COUNT(*) AS ""BlocklistHashCount"" FROM ""BlocklistHash"" GROUP BY ""BlocksetID"") ""G"" ON ""N"".""BlocksetID"" = ""G"".""BlocksetID"" WHERE ""N"".""BlockCount"" > 1) WHERE ""BlocklistHashCountExpected"" != ""BlocklistHashCountActual"")", blocksize / hashsize), 0);
+                var itemswithnoblocklisthash = cmd.ExecuteScalarInt64(string.Format(@"SELECT COUNT(*) FROM (SELECT * FROM (SELECT ""N"".""BlocksetID"", ((""N"".""BlockCount"" + {0} - 1) / {0}) AS ""BlocklistHashCountExpected"", CASE WHEN ""G"".""BlocklistHashCount"" IS NULL THEN 0 ELSE ""G"".""BlocklistHashCount"" END AS ""BlocklistHashCountActual"" FROM (SELECT ""BlocksetID"", COUNT(*) AS ""BlockCount"" FROM ""BlocksetEntry"" GROUP BY ""BlocksetID"") ""N"" LEFT OUTER JOIN (SELECT ""BlocksetID"", COUNT(*) AS ""BlocklistHashCount"" FROM ""BlocklistHash"" GROUP BY ""BlocksetID"") ""G"" ON ""N"".""BlocksetID"" = ""G"".""BlocksetID"" WHERE ""N"".""BlockCount"" > 1) AS A WHERE ""A"".""BlocklistHashCountExpected"" != ""A"".""BlocklistHashCountActual"") AS B", blocksize / hashsize), 0);
                 if (itemswithnoblocklisthash != 0)
                     throw new InvalidDataException(string.Format("Found {0} file(s) with missing blocklist hashes", itemswithnoblocklisthash));
 
@@ -800,7 +799,7 @@ ON
                     throw new Exception("Detected non-empty blocksets with no associated blocks!");
                 }
 
-                if (cmd.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""File"" WHERE ""BlocksetID"" != ? AND ""BlocksetID"" != ? AND NOT ""BlocksetID"" IN (SELECT ""ID"" FROM ""Blockset"")", 0, FOLDER_BLOCKSET_ID, SYMLINK_BLOCKSET_ID) != 0)
+                if (cmd.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""File"" WHERE ""BlocksetID"" != @param1 AND ""BlocksetID"" != @param2 AND NOT ""BlocksetID"" IN (SELECT ""ID"" FROM ""Blockset"")", 0, FOLDER_BLOCKSET_ID, SYMLINK_BLOCKSET_ID) != 0)
                     throw new Exception("Detected files associated with non-existing blocksets!");
 
                 if (verifyfilelists)
@@ -808,10 +807,10 @@ ON
                     using(var cmd2 = m_connection.CreateCommand(transaction))
                     foreach(var filesetid in cmd.ExecuteReaderEnumerable(@"SELECT ""ID"" FROM ""Fileset"" ").Select(x => x.ConvertValueToInt64(0, -1)))
                     {
-                        var expandedCmd = string.Format(@"SELECT COUNT(*) FROM (SELECT DISTINCT ""Path"" FROM ({0}) UNION SELECT DISTINCT ""Path"" FROM ({1}))", LocalDatabase.LIST_FILESETS, LocalDatabase.LIST_FOLDERS_AND_SYMLINKS);
+                        var expandedCmd = string.Format(@"SELECT COUNT(*) FROM (SELECT DISTINCT ""Path"" FROM ({0}) UNION SELECT DISTINCT ""Path"" FROM ({1})) AS COUNT_TABLE", LocalDatabase.LIST_FILESETS, LocalDatabase.LIST_FOLDERS_AND_SYMLINKS);
                         var expandedlist = cmd2.ExecuteScalarInt64(expandedCmd, 0, filesetid, FOLDER_BLOCKSET_ID, SYMLINK_BLOCKSET_ID, filesetid);
                         //var storedfilelist = cmd2.ExecuteScalarInt64(string.Format(@"SELECT COUNT(*) FROM ""FilesetEntry"", ""File"" WHERE ""FilesetEntry"".""FilesetID"" = ? AND ""File"".""ID"" = ""FilesetEntry"".""FileID"" AND ""File"".""BlocksetID"" != ? AND ""File"".""BlocksetID"" != ?"), 0, filesetid, FOLDER_BLOCKSET_ID, SYMLINK_BLOCKSET_ID);
-                        var storedlist = cmd2.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""FilesetEntry"" WHERE ""FilesetEntry"".""FilesetID"" = ?", 0, filesetid);
+                        var storedlist = cmd2.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""FilesetEntry"" WHERE ""FilesetEntry"".""FilesetID"" = @param1", 0, filesetid);
 
                         if (expandedlist != storedlist)
                         {
@@ -847,7 +846,7 @@ ON
         public IEnumerable<IBlock> GetBlocks(long volumeid, System.Data.IDbTransaction transaction = null)
 		{
             using(var cmd = m_connection.CreateCommand(transaction))
-			using(var rd = cmd.ExecuteReader(@"SELECT DISTINCT ""Hash"", ""Size"" FROM ""Block"" WHERE ""VolumeID"" = ?", volumeid))
+			using(var rd = cmd.ExecuteReader(@"SELECT DISTINCT ""Hash"", ""Size"" FROM ""Block"" WHERE ""VolumeID"" = @param1", volumeid))
 				while (rd.Read())
                     yield return new Block(rd.GetValue(0).ToString(), rd.GetInt64(1));
         }
@@ -1004,7 +1003,7 @@ FROM
           ON ""I"".""BlockID"" = ""H"".""ID""
         WHERE 
           ""A"".""BlocksetId"" >= 0 AND
-          ""D"".""FilesetID"" = ? AND
+          ""D"".""FilesetID"" = @param1 AND
           (""I"".""Index"" = 0 OR ""I"".""Index"" IS NULL) AND  
           (""G"".""Index"" = 0 OR ""G"".""Index"" IS NULL)
         ) J
@@ -1056,8 +1055,8 @@ FROM
         AND ""E"".""BlocksetID"" = ""C"".""BlocksetID""
         AND ""E"".""BlockID"" = ""F"".""ID""
         AND ""E"".""Index"" = 0
-        AND (""B"".""BlocksetID"" = ? OR ""B"".""BlocksetID"" = ?) 
-        AND ""A"".""FilesetID"" = ?
+        AND (""B"".""BlocksetID"" = @param1 OR ""B"".""BlocksetID"" = @param2) 
+        AND ""A"".""FilesetID"" = @param3
     ) G
 LEFT OUTER JOIN
    ""BlocklistHash"" H
@@ -1171,7 +1170,7 @@ ORDER BY
                         cmd.ExecuteNonQuery(string.Format(@"CREATE TEMPORARY TABLE ""{0}"" (""Path"" TEXT NOT NULL)", Tablename));
                         using(var tr = new TemporaryTransactionWrapper(m_connection, transaction))
                         {
-                            cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (?)", Tablename);
+                            cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (@param1)", Tablename);
                             cmd.AddParameter();
                             cmd.Transaction = tr.Parent;
                             using(var c2 = m_connection.CreateCommand())
@@ -1195,16 +1194,17 @@ ORDER BY
                 {
                     var sb = new StringBuilder();
                     var args = new List<object>();
+                    var count = 1;
                     foreach(var f in ((Library.Utility.FilterExpression)filter).GetSimpleList())
                     {
                         if (f.Contains('*') || f.Contains('?'))
                         {
-                            sb.Append(@"""Path"" LIKE ? OR ");
+                            sb.Append($"\"Path\" LIKE @param{count++} OR ");
                             args.Add(f.Replace('*', '%').Replace('?', '_'));
                         }
                         else
                         {
-                            sb.Append(@"""Path"" = ? OR ");
+                            sb.Append($"\"Path\" = @param{count++} OR ");
                             args.Add(f);
                         }
                     }
@@ -1243,12 +1243,12 @@ ORDER BY
                 cmd.Transaction = tr.Parent;
                 
                 //Rename the old entry, to preserve ID links
-                var c = cmd.ExecuteNonQuery(@"UPDATE ""Remotevolume"" SET ""Name"" = ? WHERE ""Name"" = ?", newname, oldname);
+                var c = cmd.ExecuteNonQuery(@"UPDATE ""Remotevolume"" SET ""Name"" = @param1 WHERE ""Name"" = @param2", newname, oldname);
                 if (c != 1)
                     throw new Exception(string.Format("Unexpected result from renaming \"{0}\" to \"{1}\", expected {2} got {3}", oldname, newname, 1, c));
                 
                 // Grab the type of entry
-                var type = (RemoteVolumeType)Enum.Parse(typeof(RemoteVolumeType), cmd.ExecuteScalar(@"SELECT ""Type"" FROM ""Remotevolume"" WHERE ""Name"" = ?", newname).ToString(), true);
+                var type = (RemoteVolumeType)Enum.Parse(typeof(RemoteVolumeType), cmd.ExecuteScalar(@"SELECT ""Type"" FROM ""Remotevolume"" WHERE ""Name"" = @param1", newname).ToString(), true);
                 
                 //Create a fake new entry with the old name and mark as deleting
                 // as this ensures we will remove it, if it shows up in some later listing
@@ -1270,7 +1270,7 @@ ORDER BY
             using (var tr = new TemporaryTransactionWrapper(m_connection, transaction))
             {
                 cmd.Transaction = tr.Parent;                
-                var id = cmd.ExecuteScalarInt64(@"INSERT INTO ""Fileset"" (""OperationID"", ""Timestamp"", ""VolumeID"") VALUES (?, ?, ?); SELECT SCOPE_IDENTITY();", -1, m_operationid, NormalizeDateTimeToEpochSeconds(timestamp), volumeid);
+                var id = cmd.ExecuteScalarInt64(@"INSERT INTO ""Fileset"" (""OperationID"", ""Timestamp"", ""VolumeID"") VALUES (@param1, @param2, @param3); SELECT IDENT_CURRENT('Fileset');", -1, m_operationid, NormalizeDateTimeToEpochSeconds(timestamp), volumeid);
                 tr.Commit();
                 return id;
             }
@@ -1288,8 +1288,8 @@ ORDER BY
         {
             using(var cmd = m_connection.CreateCommand(transaction))
             {
-                var sql = string.Format(@"SELECT ""A"".""Hash"", ""C"".""Hash"" FROM " + 
-                    @"(SELECT ""BlocklistHash"".""BlocksetID"", ""Block"".""Hash"", * FROM  ""BlocklistHash"",""Block"" WHERE  ""BlocklistHash"".""Hash"" = ""Block"".""Hash"" AND ""Block"".""VolumeID"" = ?) A, " + 
+                var sql = string.Format(@"SELECT ""A"".""Hash"", ""C"".""Hash"" FROM " +
+                    @"(SELECT ""BlocklistHash"".""BlocksetID"", ""Block"".""Hash"", * FROM  ""BlocklistHash"",""Block"" WHERE  ""BlocklistHash"".""Hash"" = ""Block"".""Hash"" AND ""Block"".""VolumeID"" = @param1) A, " + 
                     @" ""BlocksetEntry"" B, ""Block"" C WHERE ""B"".""BlocksetID"" = ""A"".""BlocksetID"" AND " + 
                     @" ""B"".""Index"" >= (""A"".""Index"" * {0}) AND ""B"".""Index"" < ((""A"".""Index"" + 1) * {0}) AND ""C"".""ID"" = ""B"".""BlockID"" " + 
                     @" ORDER BY ""A"".""BlocksetID"", ""B"".""Index""",
@@ -1328,8 +1328,8 @@ ORDER BY
             using(var cmd = m_connection.CreateCommand(tr))
             {
                 var t = NormalizeDateTimeToEpochSeconds(threshold);
-                cmd.ExecuteNonQuery(@"DELETE FROM ""LogData"" WHERE ""Timestamp"" < ?", t);
-                cmd.ExecuteNonQuery(@"DELETE FROM ""RemoteOperation"" WHERE ""Timestamp"" < ?", t);
+                cmd.ExecuteNonQuery(@"DELETE FROM ""LogData"" WHERE ""Timestamp"" < @param1", t);
+                cmd.ExecuteNonQuery(@"DELETE FROM ""RemoteOperation"" WHERE ""Timestamp"" < @param1", t);
 
                 tr.Commit();
             }

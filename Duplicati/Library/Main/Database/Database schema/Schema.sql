@@ -2,10 +2,8 @@
 Syntax notes (Applying to schema.sql and versioning x.*.sql files):
 Be careful with semicolons, it is used as a simple Split-point for statements.
 For conditional schema statements, a preprocesossor exists. Example:
-{#if sqlite_version >= 3.8.2} DO_SOMETHING {#else} DO_SOMETHING_ELSE {#endif}
 Variables available: sqlite_version (type Version) and db_version (type int)
 Nesting is possible when appending a number in the form "_x" to the #if #else #endif.
-{#if sqlite_version >= 3.8.2} DO_SOMETHING_3.8 {#else} {#if_1 sqlite_version >= 3.6.5} DO_SOMETHING_3.6 {#else_1} DO_SOMETHING_ELSE {#endif_1} {#endif}
 */
 
 /* 
@@ -210,7 +208,7 @@ CREATE TABLE "RemoteOperation" (
 	"Timestamp" INTEGER NOT NULL,
 	"Operation" TEXT NOT NULL,
 	"Path" TEXT NOT NULL,
-	"Data" BLOB NULL
+	"Data" TEXT NULL
 );
 
 /*
@@ -240,8 +238,8 @@ Settings, such as hash and blocksize,
 used for verification
 */
 CREATE TABLE "Configuration" (
-	"Key" TEXT PRIMARY KEY NOT NULL IDENTITY(1,1),
-	"Value" TEXT NOT NULL
+	"Key" NVARCHAR(450) PRIMARY KEY NOT NULL,
+	"Value" NVARCHAR(450) NOT NULL
 );
 
 INSERT INTO "Version" ("Version") VALUES (7);

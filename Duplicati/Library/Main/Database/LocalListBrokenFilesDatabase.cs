@@ -58,10 +58,10 @@ WHERE ""BlocksetID"" IS NULL OR ""BlocksetID"" IN
         private const string BROKEN_FILE_NAMES = @"
 SELECT ""A"".""Path"", ""B"".""Length"" FROM ""File"" A, ""Blockset"" B WHERE ""A"".""BlocksetID"" = ""B"".""ID"" AND ""A"".""ID"" IN ("
 + BROKEN_FILE_IDS +
-@") AND ""A"".""ID"" IN (SELECT ""FileID"" FROM ""FilesetEntry"" WHERE ""FilesetID"" = ?)";
+@") AND ""A"".""ID"" IN (SELECT ""FileID"" FROM ""FilesetEntry"" WHERE ""FilesetID"" = @param1)";
 
         private const string INSERT_BROKEN_IDS = @"INSERT INTO ""{3}"" (""{4}"") " + BROKEN_FILE_IDS 
-            + @" AND ""ID"" IN (SELECT ""FileID"" FROM ""FilesetEntry"" WHERE ""FilesetID"" = ?)";
+            + @" AND ""ID"" IN (SELECT ""FileID"" FROM ""FilesetEntry"" WHERE ""FilesetID"" = @param1)";
 
         public LocalListBrokenFilesDatabase(string path)
             : base(path, "ListBrokenFiles", false)
@@ -117,7 +117,7 @@ SELECT ""A"".""Path"", ""B"".""Length"" FROM ""File"" A, ""Blockset"" B WHERE ""
 
                 // Create and fill a temp table with the volids to delete. We avoid using too many parameters that way.
                 deletecmd.ExecuteNonQuery(string.Format(@"CREATE TEMP TABLE ""{0}"" (""ID"" INTEGER PRIMARY KEY)", volidstable));
-                deletecmd.CommandText = string.Format(@"INSERT OR IGNORE INTO ""{0}"" (""ID"") VALUES (?)", volidstable);
+                deletecmd.CommandText = string.Format(@"INSERT OR IGNORE INTO ""{0}"" (""ID"") VALUES (@param1)", volidstable);
                 deletecmd.Parameters.Clear();
                 deletecmd.AddParameters(1);
                 foreach (var name in names)
@@ -148,7 +148,7 @@ SELECT ""A"".""Path"", ""B"".""Length"" FROM ""File"" A, ""Blockset"" B WHERE ""
         public long GetFilesetFileCount(long filesetid, System.Data.IDbTransaction transaction)
         {
             using (var cmd = m_connection.CreateCommand(transaction))
-                return cmd.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""FilesetEntry"" WHERE ""FilesetID"" = ?", 0, filesetid);
+                return cmd.ExecuteScalarInt64(@"SELECT COUNT(*) FROM ""FilesetEntry"" WHERE ""FilesetID"" = @param1", 0, filesetid);
         }
     }
 }

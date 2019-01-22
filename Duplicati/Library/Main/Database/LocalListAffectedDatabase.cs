@@ -61,17 +61,24 @@ namespace Duplicati.Library.Main.Database
             for(var i = 0; i < filesets.Length; i++)
                 dict[filesets[i].Key] = i;
 
+            var nameArray = "";
+            if (items.Count() > 0)
+                nameArray = "@param1";
+            for (int i = 1; i < items.Count(); i++)
+            {
+                nameArray += $",@param{i + 1}";
+            }
+
             var sql = string.Format(
                 @"SELECT DISTINCT ""FilesetID"" FROM (" +
                 @"SELECT ""FilesetID"" FROM ""FilesetEntry"" WHERE ""FileID"" IN ( SELECT ""ID"" FROM ""File"" WHERE ""BlocksetID"" IN ( SELECT ""BlocksetID"" FROM ""BlocksetEntry"" WHERE ""BlockID"" IN ( SELECT ""ID"" From ""Block"" WHERE ""VolumeID"" IN ( SELECT ""ID"" FROM ""RemoteVolume"" WHERE ""Name"" IN ({0})))))" +
                 " UNION " +
                 @"SELECT ""ID"" FROM ""Fileset"" WHERE ""VolumeID"" IN ( SELECT ""ID"" FROM ""RemoteVolume"" WHERE ""Name"" IN ({0}))" +
                 ")",
-                string.Join(",", items.Select(x => "?"))
+                nameArray
             );
 
             var it = new List<string>(items);
-            it.AddRange(items);
 
             using(var cmd = m_connection.CreateCommand())
             using(var rd = cmd.ExecuteReader(sql, it.ToArray()))
@@ -87,6 +94,14 @@ namespace Duplicati.Library.Main.Database
 
         public IEnumerable<Duplicati.Library.Interface.IListResultFile> GetFiles(IEnumerable<string> items)
         {
+            var nameArray = "";
+            if (items.Count() > 0)
+                nameArray = "@param1";
+            for (int i = 1; i < items.Count(); i++)
+            {
+                nameArray += $",@param{i + 1}";
+            }
+
             var sql = string.Format(
                 @"SELECT DISTINCT ""Path"" FROM (" +
                 @"SELECT ""Path"" FROM ""File"" WHERE ""BlocksetID"" IN (SELECT ""BlocksetID"" FROM ""BlocksetEntry"" WHERE ""BlockID"" IN (SELECT ""ID"" FROM ""Block"" WHERE ""VolumeID"" IN (SELECT ""ID"" from ""RemoteVolume"" WHERE ""Name"" IN ({0}))))" +
@@ -95,12 +110,10 @@ namespace Duplicati.Library.Main.Database
                 @" UNION " +
                 @"SELECT ""Path"" FROM ""File"" WHERE ""ID"" IN ( SELECT ""FileID"" FROM ""FilesetEntry"" WHERE ""FilesetID"" IN ( SELECT ""ID"" FROM ""Fileset"" WHERE ""VolumeID"" IN ( SELECT ""ID"" FROM ""RemoteVolume"" WHERE ""Name"" IN ({0}))))" +
                 @") ORDER BY ""Path"" ",
-                string.Join(",", items.Select(x => "?"))
+                nameArray
             );
                 
             var it = new List<string>(items);
-            it.AddRange(items);
-            it.AddRange(items);
 
             using(var cmd = m_connection.CreateCommand())
             using(var rd = cmd.ExecuteReader(sql, it.ToArray()))
@@ -113,12 +126,25 @@ namespace Duplicati.Library.Main.Database
 
         public IEnumerable<Duplicati.Library.Interface.IListResultRemoteLog> GetLogLines(IEnumerable<string> items)
         {
+            var messageArray = "";
+            var pathArray = "";
+            if (items.Count() > 0)
+            {
+                messageArray = "@param1";
+                pathArray = "@param1";
+            }
+            for (int i = 1; i < items.Count(); i++)
+            {
+                messageArray += $" OR \"Message\" LIKE @param{i + 1}";
+                pathArray += $",@param{i + 1}";
+            }
+
             var sql = string.Format(
-                @"SELECT ""TimeStamp"", ""Message"" || "" "" || CASE WHEN ""Exception"" IS NULL THEN """" ELSE ""Exception"" END FROM ""LogData"" WHERE {0}" +
+                @"SELECT ""TimeStamp"", ""Message"" + "" "" + CASE WHEN ""Exception"" IS NULL THEN """" ELSE ""Exception"" END FROM ""LogData"" WHERE {0}" +
                 @" UNION " +
                 @"SELECT ""Timestamp"", ""Data"" FROM ""RemoteOperation"" WHERE ""Path"" IN ({1})",
-                string.Join(" OR ", items.Select(x => @"""Message"" LIKE ?")),
-                string.Join(",", items.Select(x => "?"))
+                messageArray,
+                pathArray
             );
 
             var it = new List<string>(from n in items select "%" + n + "%");
@@ -135,13 +161,21 @@ namespace Duplicati.Library.Main.Database
 
         public IEnumerable<Duplicati.Library.Interface.IListResultRemoteVolume> GetVolumes(IEnumerable<string> items)
         {
+            var nameArray = "";
+            if (items.Count() > 0)
+                nameArray = "@param1";
+            for (int i = 1; i < items.Count(); i++)
+            {
+                nameArray += $",@param{i + 1}";
+            }
+
             var sql = string.Format(
                 @"SELECT DISTINCT ""Name"" FROM ( " +
                 @" SELECT ""Name"" FROM ""Remotevolume"" WHERE ""ID"" IN ( SELECT ""VolumeID"" FROM ""Block"" WHERE ""ID"" IN ( SELECT ""BlockID"" FROM ""BlocksetEntry"" WHERE ""BlocksetID"" IN ( SELECT ""BlocksetID"" FROM ""File"" WHERE ""ID"" IN ( SELECT ""FileID"" FROM ""FilesetEntry"" WHERE ""FilesetID"" IN ( SELECT ""ID"" FROM ""Fileset"" WHERE ""VolumeID"" IN ( SELECT ""ID"" FROM ""RemoteVolume"" WHERE ""Name"" IN ({0}))))))) " +
                 @" UNION " +
                 @" SELECT ""Name"" FROM ""Remotevolume"" WHERE ""ID"" IN ( SELECT ""VolumeID"" FROM ""Block"" WHERE ""ID"" IN ( SELECT ""BlockID"" FROM ""BlocksetEntry"" WHERE ""BlocksetID"" IN ( SELECT ""BlocksetID"" FROM ""Metadataset"" WHERE ""ID"" IN ( SELECT ""MetadataID"" FROM ""File"" WHERE ""ID"" IN ( SELECT ""FileID"" FROM ""FilesetEntry"" WHERE ""FilesetID"" IN ( SELECT ""ID"" FROM ""Fileset"" WHERE ""VolumeID"" IN ( SELECT ""ID"" FROM ""RemoteVolume"" WHERE ""Name"" IN ({0}))))))))" +
                 @")",
-                string.Join(",", items.Select(x => "?"))
+                nameArray
             );
 
             var it = new List<string>(items);

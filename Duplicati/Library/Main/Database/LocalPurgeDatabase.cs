@@ -40,7 +40,7 @@ namespace Duplicati.Library.Main.Database
         public string GetRemoteVolumeNameForFileset(long id, System.Data.IDbTransaction transaction)
         {
             using (var cmd = m_connection.CreateCommand(transaction))
-            using (var rd = cmd.ExecuteReader(@"SELECT ""B"".""Name"" FROM ""Fileset"" A, ""RemoteVolume"" B WHERE ""A"".""VolumeID"" = ""B"".""ID"" AND ""A"".""ID"" = ? ", id))
+            using (var rd = cmd.ExecuteReader(@"SELECT ""B"".""Name"" FROM ""Fileset"" A, ""RemoteVolume"" B WHERE ""A"".""VolumeID"" = ""B"".""ID"" AND ""A"".""ID"" = @param1 ", id))
                 if (!rd.Read())
                     throw new Exception(string.Format("No remote volume found for fileset with id {0}", id));
                 else
@@ -112,7 +112,7 @@ namespace Duplicati.Library.Main.Database
                     using (var cmd = m_connection.CreateCommand(m_transaction))
                     {
                         cmd.ExecuteNonQuery(string.Format(@"CREATE TEMPORARY TABLE ""{0}"" (""Path"" TEXT NOT NULL) ", filenamestable));
-                        cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (?)", filenamestable);
+                        cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (@param1)", filenamestable);
                         cmd.AddParameter();
 
                         foreach (var s in p)
@@ -121,7 +121,7 @@ namespace Duplicati.Library.Main.Database
                             cmd.ExecuteNonQuery();
                         }
 
-                        cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""{0}"" (""FileID"") SELECT DISTINCT ""A"".""FileID"" FROM ""FilesetEntry"" A, ""File"" B WHERE ""A"".""FilesetID"" = ? AND ""A"".""FileID"" = ""B"".""ID"" AND ""B"".""Path"" NOT IN ""{1}""", m_tablename, filenamestable), ParentID);
+                        cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""{0}"" (""FileID"") SELECT DISTINCT ""A"".""FileID"" FROM ""FilesetEntry"" A, ""File"" B WHERE ""A"".""FilesetID"" = @param1 AND ""A"".""FileID"" = ""B"".""ID"" AND ""B"".""Path"" NOT IN ""{1}""", m_tablename, filenamestable), ParentID);
                         cmd.ExecuteNonQuery(string.Format(@"DROP TABLE IF EXISTS ""{0}"" ", filenamestable));
                     }
                 }
@@ -135,7 +135,7 @@ namespace Duplicati.Library.Main.Database
                         cmd2.CommandText = string.Format(@"INSERT INTO ""{0}"" (""FileID"") VALUES (?)", m_tablename);
                         cmd2.AddParameters(1);
 
-                        using (var rd = cmd.ExecuteReader(@"SELECT ""B"".""Path"", ""A"".""FileID"" FROM ""FilesetEntry"" A, ""File"" B WHERE ""A"".""FilesetID"" = ? AND ""A"".""FileID"" = ""B"".""ID"" ", ParentID))
+                        using (var rd = cmd.ExecuteReader(@"SELECT ""B"".""Path"", ""A"".""FileID"" FROM ""FilesetEntry"" A, ""File"" B WHERE ""A"".""FilesetID"" = @param1 AND ""A"".""FileID"" = ""B"".""ID"" ", ParentID))
                             while (rd.Read())
                             {
                                 rd.GetValues(values);
@@ -168,7 +168,7 @@ namespace Duplicati.Library.Main.Database
                 var remotevolid = m_parentdb.RegisterRemoteVolume(name, RemoteVolumeType.Files, RemoteVolumeState.Temporary, m_transaction);
                 var filesetid = m_parentdb.CreateFileset(remotevolid, timestamp, m_transaction);
                 using (var cmd = m_connection.CreateCommand(m_transaction))
-                    cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""FilesetEntry"" (""FilesetID"", ""FileID"", ""Lastmodified"") SELECT ?, ""FileID"", ""LastModified"" FROM ""FilesetEntry"" WHERE ""FilesetID"" = ? AND ""FileID"" NOT IN ""{0}"" ", m_tablename), filesetid, ParentID);
+                    cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""FilesetEntry"" (""FilesetID"", ""FileID"", ""Lastmodified"") SELECT @param1, ""FileID"", ""LastModified"" FROM ""FilesetEntry"" WHERE ""FilesetID"" = @param2 AND ""FileID"" NOT IN ""{0}"" ", m_tablename), filesetid, ParentID);
 
                 return new Tuple<long, long>(remotevolid, filesetid);
             }

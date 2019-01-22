@@ -140,10 +140,10 @@ namespace Duplicati.Library.Main.Database
 
                     //If we have a prefix rule, apply it
                     if (!string.IsNullOrWhiteSpace(prefixrule))
-                        cmd.ExecuteNonQuery(string.Format(@"DELETE FROM ""{0}"" WHERE SUBSTR(""Path"", 1, 1) != ?", tmpnames.Tablename), prefixrule);
+                        cmd.ExecuteNonQuery(string.Format(@"DELETE FROM ""{0}"" WHERE SUBSTR(""Path"", 1, 1) != @param1", tmpnames.Tablename), prefixrule);
 
                     // Then we recursively find the largest prefix
-                    cmd.CommandText = string.Format(@"SELECT ""Path"" FROM ""{0}"" ORDER BY LENGTH(""Path"") DESC LIMIT 1", tmpnames.Tablename);
+                    cmd.CommandText = string.Format(@"SELECT TOP 1 ""Path"" FROM ""{0}"" ORDER BY LEN(""Path"") DESC", tmpnames.Tablename);
                     var v0 = cmd.ExecuteScalar();
                     string maxpath = "";
                     if (v0 != null)
@@ -156,9 +156,8 @@ namespace Duplicati.Library.Main.Database
                     long foundfiles = -1;
     
                     //TODO: Handle FS case-sensitive?
-                    cmd.CommandText = string.Format(@"SELECT COUNT(*) FROM ""{0}"" WHERE SUBSTR(""Path"", 1, ?) = ?", tmpnames.Tablename);
-                    cmd.AddParameter();
-                    cmd.AddParameter();
+                    cmd.CommandText = string.Format(@"SELECT COUNT(*) FROM ""{0}"" WHERE SUBSTR(""Path"", 1, @param1) = @param2", tmpnames.Tablename);
+                    cmd.AddParameters(2);
     
                     while (filecount != foundfiles && maxpath.Length > 0)
                     {
@@ -252,7 +251,7 @@ namespace Duplicati.Library.Main.Database
                         
                         using(var c2 = m_connection.CreateCommand())
                         {
-                            c2.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (?)", tbname);
+                            c2.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (@param1)", tbname);
                             c2.AddParameter();
                         
                             foreach(var n in SelectFolderEntries(cmd, pathprefix, tmpnames.Tablename).Distinct())
@@ -338,7 +337,7 @@ namespace Duplicati.Library.Main.Database
             public void TakeFirst()
             {
                 using(var cmd = m_connection.CreateCommand())
-                    cmd.ExecuteNonQuery(string.Format(@"DELETE FROM ""{0}"" WHERE ""FilesetID"" NOT IN (SELECT ""FilesetID"" FROM ""{0}"" ORDER BY ""Timestamp"" DESC LIMIT 1 )", m_tablename));
+                    cmd.ExecuteNonQuery(string.Format(@"DELETE FROM ""{0}"" WHERE ""FilesetID"" NOT IN (SELECT TOP 1 ""FilesetID"" FROM ""{0}"" ORDER BY ""Timestamp"" DESC )", m_tablename));
             }
 
             public IEnumerable<IFileset> QuickSets

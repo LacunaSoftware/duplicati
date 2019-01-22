@@ -251,7 +251,7 @@ namespace Duplicati.Library.SQLiteHelper
                     {
                         backupfile = System.IO.Path.Combine(
                             SQLiteLoader.dbBackupFolder,
-                            (DateTime.Now + TimeSpan.FromSeconds(i * 1.5)).ToString("yyyyMMddhhmmss", System.Globalization.CultureInfo.InvariantCulture) + "-MainDatabase.bak");
+                            (DateTime.Now + TimeSpan.FromSeconds(i * 1.5)).ToString("yyyyMMddhhmmss", System.Globalization.CultureInfo.InvariantCulture) + $"-{databaseName}.bak");
 
                         if (!System.IO.File.Exists(backupfile))
                             break;
@@ -263,7 +263,7 @@ namespace Duplicati.Library.SQLiteHelper
                             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(backupfile));
 
                         //Keep a backup
-                        cmd.CommandText = $"BACKUP DATABASE {databaseName}" +
+                        cmd.CommandText = $"BACKUP DATABASE [{databaseName}]" +
                                           $"  TO DISK = '{backupfile}'" +
                                           $"     WITH FORMAT;";
                         cmd.ExecuteNonQuery();
@@ -310,11 +310,11 @@ namespace Duplicati.Library.SQLiteHelper
                     catch (Exception ex)
                     {
                         //Restore the database
-                        cmd.CommandText = $"RESTORE DATABASE {databaseName}" +
+                        cmd.CommandText = $"RESTORE DATABASE [{databaseName}]" +
                                           $"  FROM DISK = '{backupfile}'" +
                                           $"  WITH FILE = 6" +
                                           $"    NO RECOVERY;" +
-                                          $"RESTORE DATABASE {databaseName}" +
+                                          $"RESTORE DATABASE [{databaseName}]" +
                                           $"  FROM DISK = '{backupfile}'" +
                                           $"  WITH FILE = 9" +
                                           $"    RECOVERY;";

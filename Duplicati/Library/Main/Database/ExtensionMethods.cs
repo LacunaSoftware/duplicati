@@ -16,12 +16,16 @@ namespace Duplicati.Library.Main.Database
         public static void AddParameters(this System.Data.IDbCommand self, int count)
         {
             for(var i = 0; i < count; i++)
-                self.Parameters.Add(self.CreateParameter());
+            {
+                var param = self.CreateParameter();
+                param.ParameterName = $"param{self.Parameters.Count + 1}";
+                self.Parameters.Add(param);
+            }
         }
 
         public static void AddParameter(this System.Data.IDbCommand self)
         {
-            self.Parameters.Add(self.CreateParameter());
+            self.AddParameters(1);
         }
 
         public static void AddParameter<T>(this System.Data.IDbCommand self, T value, string name = null)
@@ -30,6 +34,8 @@ namespace Duplicati.Library.Main.Database
             p.Value = value;
             if (!string.IsNullOrEmpty(name))
                 p.ParameterName = name;
+            else
+                p.ParameterName = $"param{self.Parameters.Count + 1}";
             self.Parameters.Add(p);
         }
 
@@ -196,7 +202,10 @@ namespace Duplicati.Library.Main.Database
             try
             {
                 if (!reader.IsDBNull(index))
-                    return reader.GetInt64(index);
+                {
+                    var value = reader.GetValue(index);
+                    return Convert.ToInt64(value);
+                }
             }
             catch
             {

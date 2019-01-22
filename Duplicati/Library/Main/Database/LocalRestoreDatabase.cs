@@ -92,9 +92,9 @@ namespace Duplicati.Library.Main.Database
 
                     sql = string.Format(
                           @" INSERT INTO ""{0}"" (""FileId"", ""TotalBlocks"", ""TotalSize"", ""BlocksRestored"", ""SizeRestored"") "
-                        + @" SELECT   ""F"".""ID"", IFNULL(COUNT(""B"".""ID""), 0), IFNULL(SUM(""B"".""Size""), 0)"
-                        + @"        , IFNULL(COUNT(CASE ""B"".""Restored"" WHEN 1 THEN ""B"".""ID"" ELSE NULL END), 0) "
-                        + @"        , IFNULL(SUM(CASE ""B"".""Restored"" WHEN 1 THEN ""B"".""Size"" ELSE 0 END), 0) "
+                        + @" SELECT   ""F"".""ID"", COALESCE(COUNT(""B"".""ID""), 0), COALESCE(SUM(""B"".""Size""), 0)"
+                        + @"        , COALESCE(COUNT(CASE ""B"".""Restored"" WHEN 1 THEN ""B"".""ID"" ELSE NULL END), 0) "
+                        + @"        , COALESCE(SUM(CASE ""B"".""Restored"" WHEN 1 THEN ""B"".""Size"" ELSE 0 END), 0) "
                         + @"   FROM ""{1}"" ""F"" LEFT JOIN ""{2}"" ""B""" // allow for emtpy files (no data Blocks)
                         + @"        ON  ""B"".""FileID"" = ""F"".""ID"" "
                         + @"  WHERE ""B"".""Metadata"" IS NOT 1 " // Use "IS" because of Left Join
@@ -109,10 +109,10 @@ namespace Duplicati.Library.Main.Database
                         + @"  ""TotalFiles"", ""TotalBlocks"", ""TotalSize"" "
                         + @", ""FilesFullyRestored"", ""FilesPartiallyRestored"", ""BlocksRestored"", ""SizeRestored"""
                         + @" ) "
-                        + @" SELECT   IFNULL(COUNT(""P"".""FileId""), 0), IFNULL(SUM(""P"".""TotalBlocks""), 0), IFNULL(SUM(""P"".""TotalSize""), 0) "
-                        + @"        , IFNULL(COUNT(CASE WHEN ""P"".""BlocksRestored"" = ""P"".""TotalBlocks"" THEN 1 ELSE NULL END), 0) "
-                        + @"        , IFNULL(COUNT(CASE WHEN ""P"".""BlocksRestored"" BETWEEN 1 AND ""P"".""TotalBlocks"" - 1 THEN 1 ELSE NULL END), 0) "
-                        + @"        , IFNULL(SUM(""P"".""BlocksRestored""), 0), IFNULL(SUM(""P"".""SizeRestored""), 0) "
+                        + @" SELECT   COALESCE(COUNT(""P"".""FileId""), 0), COALESCE(SUM(""P"".""TotalBlocks""), 0), COALESCE(SUM(""P"".""TotalSize""), 0) "
+                        + @"        , COALESCE(COUNT(CASE WHEN ""P"".""BlocksRestored"" = ""P"".""TotalBlocks"" THEN 1 ELSE NULL END), 0) "
+                        + @"        , COALESCE(COUNT(CASE WHEN ""P"".""BlocksRestored"" BETWEEN 1 AND ""P"".""TotalBlocks"" - 1 THEN 1 ELSE NULL END), 0) "
+                        + @"        , COALESCE(SUM(""P"".""BlocksRestored""), 0), COALESCE(SUM(""P"".""SizeRestored""), 0) "
                         + @"   FROM ""{1}"" ""P"" "
                         , m_totalprogtable, m_fileprogtable);
 
@@ -195,7 +195,7 @@ namespace Duplicati.Library.Main.Database
                     var filesetId = filesetIds[0];
                     filesetIds.RemoveAt(0);
                     
-                    m_restoreTime = ParseFromEpochSeconds(cmd.ExecuteScalarInt64(@"SELECT ""Timestamp"" FROM ""Fileset"" WHERE ""ID"" = ?", 0, filesetId));
+                    m_restoreTime = ParseFromEpochSeconds(cmd.ExecuteScalarInt64(@"SELECT ""Timestamp"" FROM ""Fileset"" WHERE ""ID"" = @param1", 0, filesetId));
                     
                     var ix = this.FilesetTimes.Select((value, index) => new { value.Key, index })
                             .Where(n => n.Key == filesetId)
@@ -218,7 +218,7 @@ namespace Duplicati.Library.Main.Database
                     if (filter == null || filter.Empty)
                     {
                         // Simple case, restore everything
-                        cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""BlocksetID"", ""MetadataID"", ""DataVerified"") SELECT ""File"".""Path"", ""File"".""BlocksetID"", ""File"".""MetadataID"", 0 FROM ""File"", ""FilesetEntry"" WHERE ""File"".""ID"" = ""FilesetEntry"".""FileID"" AND ""FilesetEntry"".""FilesetID"" = ? ", m_tempfiletable);
+                        cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""BlocksetID"", ""MetadataID"", ""DataVerified"") SELECT ""File"".""Path"", ""File"".""BlocksetID"", ""File"".""MetadataID"", 0 FROM ""File"", ""FilesetEntry"" WHERE ""File"".""ID"" = ""FilesetEntry"".""FileID"" AND ""FilesetEntry"".""FilesetID"" = @param1 ", m_tempfiletable);
                         cmd.AddParameter(filesetId);
                         cmd.ExecuteNonQuery();
                     }
@@ -233,7 +233,7 @@ namespace Duplicati.Library.Main.Database
                             var m_filenamestable = "Filenames-" + guid;
                             cmd.Transaction = tr;
                             cmd.ExecuteNonQuery(string.Format(@"CREATE TEMPORARY TABLE ""{0}"" (""Path"" TEXT NOT NULL) ", m_filenamestable));
-                            cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (?)", m_filenamestable);
+                            cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (@param1)", m_filenamestable);
                             cmd.AddParameter();
                             
                             foreach(var s in p)
@@ -242,7 +242,7 @@ namespace Duplicati.Library.Main.Database
                                 cmd.ExecuteNonQuery();
                             }
 
-                            cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""BlocksetID"", ""MetadataID"", ""DataVerified"") SELECT ""File"".""Path"", ""File"".""BlocksetID"", ""File"".""MetadataID"", 0 FROM ""File"", ""FilesetEntry"" WHERE ""File"".""ID"" = ""FilesetEntry"".""FileID"" AND ""FilesetEntry"".""FilesetID"" = ? AND ""Path"" IN (SELECT DISTINCT ""Path"" FROM ""{1}"") ", m_tempfiletable, m_filenamestable);
+                            cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""BlocksetID"", ""MetadataID"", ""DataVerified"") SELECT ""File"".""Path"", ""File"".""BlocksetID"", ""File"".""MetadataID"", 0 FROM ""File"", ""FilesetEntry"" WHERE ""File"".""ID"" = ""FilesetEntry"".""FileID"" AND ""FilesetEntry"".""FilesetID"" = @param1 AND ""Path"" IN (SELECT DISTINCT ""Path"" FROM ""{1}"") ", m_tempfiletable, m_filenamestable);
                             cmd.SetParameterValue(0, filesetId);
                             var c = cmd.ExecuteNonQuery();
                             
@@ -257,7 +257,7 @@ namespace Duplicati.Library.Main.Database
                                     while (rd.Read())
                                         sb.AppendLine(rd.GetValue(0).ToString());
     
-                                var actualrestoretime = ParseFromEpochSeconds(cmd.ExecuteScalarInt64(@"SELECT ""Timestamp"" FROM ""Fileset"" WHERE ""ID"" = ?", 0, filesetId));
+                                var actualrestoretime = ParseFromEpochSeconds(cmd.ExecuteScalarInt64(@"SELECT ""Timestamp"" FROM ""Fileset"" WHERE ""ID"" = @param1", 0, filesetId));
                                 Logging.Log.WriteWarningMessage(LOGTAG, "FilesNotFoundInBackupList", null, "{0} File(s) were not found in list of files for backup at {1}, will not be restored: {2}", p.Length - c, actualrestoretime.ToLocalTime(), sb);
                                 cmd.Parameters.Clear();
                             }
@@ -272,16 +272,14 @@ namespace Duplicati.Library.Main.Database
                     {
                         // Restore but filter elements based on the filter expression
                         // If this is too slow, we could add a special handler for wildcard searches too
-                        cmd.CommandText = @"SELECT ""File"".""Path"", ""File"".""BlocksetID"", ""File"".""MetadataID"" FROM ""File"", ""FilesetEntry"" WHERE ""File"".""ID"" = ""FilesetEntry"".""FileID"" AND ""FilesetID"" = ?";
+                        cmd.CommandText = @"SELECT ""File"".""Path"", ""File"".""BlocksetID"", ""File"".""MetadataID"" FROM ""File"", ""FilesetEntry"" WHERE ""File"".""ID"" = ""FilesetEntry"".""FileID"" AND ""FilesetID"" = @param1";
                         cmd.AddParameter(filesetId);
     
                         object[] values = new object[3];
                         using(var cmd2 = m_connection.CreateCommand())
                         {
-                            cmd2.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""BlocksetID"", ""MetadataID"", ""DataVerified"") VALUES (?,?,?,0)", m_tempfiletable);
-                            cmd2.AddParameter();
-                            cmd2.AddParameter();
-                            cmd2.AddParameter();
+                            cmd2.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""BlocksetID"", ""MetadataID"", ""DataVerified"") VALUES (@param1,@param2,@param3,0)", m_tempfiletable);
+                            cmd2.AddParameters(3);
     
                             using(var rd = cmd.ExecuteReader())
                                 while (rd.Read())
@@ -326,7 +324,7 @@ namespace Duplicati.Library.Main.Database
         {
             using (var cmd = m_connection.CreateCommand())
             {
-                cmd.CommandText = string.Format(@"SELECT ""Path"" FROM ""{0}"" ORDER BY LENGTH(""Path"") DESC LIMIT 1", m_tempfiletable);
+                cmd.CommandText = string.Format(@"SELECT TOP 1 ""Path"" FROM ""{0}"" ORDER BY LEN(""Path"") DESC", m_tempfiletable);
                 var v0 = cmd.ExecuteScalar();
                 if (v0 == null || v0 == DBNull.Value)
                     return null;
@@ -339,7 +337,7 @@ namespace Duplicati.Library.Main.Database
         {
             using (var cmd = m_connection.CreateCommand())
             {
-                cmd.CommandText = string.Format(@"SELECT ""Path"" FROM ""{0}"" ORDER BY LENGTH(""Path"") DESC LIMIT 1", m_tempfiletable);
+                cmd.CommandText = string.Format(@"SELECT TOP 1 ""Path"" FROM ""{0}"" ORDER BY LEN(""Path"") DESC", m_tempfiletable);
                 var v0 = cmd.ExecuteScalar();
                 string maxpath = "";
                 if (v0 != null && v0 != DBNull.Value)
@@ -352,9 +350,8 @@ namespace Duplicati.Library.Main.Database
                 long foundfiles = -1;
 
                 //TODO: Handle FS case-sensitive?
-                cmd.CommandText = string.Format(@"SELECT COUNT(*) FROM ""{0}"" WHERE SUBSTR(""Path"", 1, ?) = ?", m_tempfiletable);
-                cmd.AddParameter();
-                cmd.AddParameter();
+                cmd.CommandText = string.Format(@"SELECT COUNT(*) FROM ""{0}"" WHERE SUBSTR(""Path"", 1, @param1) = @param2", m_tempfiletable);
+                cmd.AddParameters(2);
 
                 while (filecount != foundfiles && maxpath.Length > 0)
                 {
@@ -393,14 +390,14 @@ namespace Duplicati.Library.Main.Database
                     if (Platform.IsClientPosix && dirsep == "\\")
                     {
                         // For Win -> Linux, we remove the colon from the drive letter, and use the drive letter as root folder
-                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""Targetpath"" = CASE WHEN SUBSTR(""Path"", 2, 1) == "":"" THEN ""\\"" || SUBSTR(""Path"", 1, 1) || SUBSTR(""Path"", 3) ELSE ""Path"" END", m_tempfiletable));
-                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""Targetpath"" = CASE WHEN SUBSTR(""Path"", 1, 2) == ""\\"" THEN ""\\"" || SUBSTR(""Path"", 2) ELSE ""Path"" END", m_tempfiletable));
+                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""Targetpath"" = CASE WHEN SUBSTR(""Path"", 2, 1) == "":"" THEN ""\\"" + SUBSTR(""Path"", 1, 1) + SUBSTR(""Path"", 3) ELSE ""Path"" END", m_tempfiletable));
+                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""Targetpath"" = CASE WHEN SUBSTR(""Path"", 1, 2) == ""\\"" THEN ""\\"" + SUBSTR(""Path"", 2) ELSE ""Path"" END", m_tempfiletable));
 
                     }
                     else if (Platform.IsClientWindows && dirsep == "/")
                     {
                         // For Linux -> Win, we use the temporary folder's drive as the root path
-                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""Targetpath"" = CASE WHEN SUBSTR(""Path"", 1, 1) == ""/"" THEN ? || SUBSTR(""Path"", 2) ELSE ""Path"" END", m_tempfiletable), Util.AppendDirSeparator(System.IO.Path.GetPathRoot(Library.Utility.TempFolder.SystemTempPath)).Replace("\\", "/"));
+                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""Targetpath"" = CASE WHEN SUBSTR(""Path"", 1, 1) == ""/"" THEN @param1 + SUBSTR(""Path"", 2) ELSE ""Path"" END", m_tempfiletable), Util.AppendDirSeparator(System.IO.Path.GetPathRoot(Library.Utility.TempFolder.SystemTempPath)).Replace("\\", "/"));
                     }
                     else
                     {
@@ -415,7 +412,7 @@ namespace Duplicati.Library.Main.Database
                         //Special case, restoring to new folder, but files are from different drives (no shared root on Windows)
 
                         // We use the format <restore path> / <drive letter> / <source path>
-                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = CASE WHEN SUBSTR(""Path"", 2, 1) == "":"" THEN SUBSTR(""Path"", 1, 1) || SUBSTR(""Path"", 3) ELSE ""Path"" END", m_tempfiletable));
+                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = CASE WHEN SUBSTR(""Path"", 2, 1) == "":"" THEN SUBSTR(""Path"", 1, 1) + SUBSTR(""Path"", 3) ELSE ""Path"" END", m_tempfiletable));
 
                         // For UNC paths, we use \\server\folder -> <restore path> / <servername> / <source path>
                         cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = CASE WHEN SUBSTR(""Path"", 1, 2) == ""\\"" THEN SUBSTR(""Path"", 2) ELSE ""TargetPath"" END", m_tempfiletable));
@@ -423,7 +420,7 @@ namespace Duplicati.Library.Main.Database
                     else
                     {
                         largest_prefix = Util.AppendDirSeparator(largest_prefix, dirsep);
-                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = SUBSTR(""Path"", ?)", m_tempfiletable), largest_prefix.Length + 1);
+                        cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = SUBSTR(""Path"", @param1)", m_tempfiletable), largest_prefix.Length + 1);
                     }
                 }
 
@@ -440,7 +437,7 @@ namespace Duplicati.Library.Main.Database
                     // Paths are now relative with target-os naming system
                     // so we prefix them with the target path
 
-                    cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = ? || ""TargetPath"" ", m_tempfiletable), Util.AppendDirSeparator(destination));
+                    cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = @param1 + ""TargetPath"" ", m_tempfiletable), Util.AppendDirSeparator(destination));
                 }
 
 
@@ -469,7 +466,7 @@ namespace Duplicati.Library.Main.Database
         public void UpdateTargetPath(long ID, string newname)
         {
             using (var cmd = m_connection.CreateCommand())
-                cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = ? WHERE ""ID"" = ?", m_tempfiletable), newname, ID);
+                cmd.ExecuteNonQuery(string.Format(@"UPDATE ""{0}"" SET ""TargetPath"" = @param1 WHERE ""ID"" = @param2", m_tempfiletable), newname, ID);
         }
 
         public interface IExistingFileBlock
@@ -779,7 +776,7 @@ namespace Duplicati.Library.Main.Database
                     c.ExecuteNonQuery();
 
 
-                    c.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Hash"", ""Size"") VALUES (?,?)", m_tmptable);
+                    c.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Hash"", ""Size"") VALUES (@param1,@param2)", m_tmptable);
                     c.AddParameters(2);
                     foreach (var s in curvolume.Blocks)
                     {
@@ -935,7 +932,7 @@ namespace Duplicati.Library.Main.Database
             using (var cmd = m_connection.CreateCommand())
             {
                 cmd.AddParameter(!onlyNonVerified);
-                using (var rd = cmd.ExecuteReader(string.Format(@"SELECT ""{0}"".""ID"", ""{0}"".""TargetPath"", ""Blockset"".""FullHash"", ""Blockset"".""Length"" FROM ""{0}"",""Blockset"" WHERE ""{0}"".""BlocksetID"" = ""Blockset"".""ID"" AND ""{0}"".""DataVerified"" <= ?", m_tempfiletable)))
+                using (var rd = cmd.ExecuteReader(string.Format(@"SELECT ""{0}"".""ID"", ""{0}"".""TargetPath"", ""Blockset"".""FullHash"", ""Blockset"".""Length"" FROM ""{0}"",""Blockset"" WHERE ""{0}"".""BlocksetID"" = ""Blockset"".""ID"" AND ""{0}"".""DataVerified"" <= @param1", m_tempfiletable)))
                     while (rd.Read())
                         yield return new FileToRestore(rd.ConvertValueToInt64(0), rd.ConvertValueToString(1), rd.ConvertValueToString(2), rd.ConvertValueToInt64(3));
             }
@@ -1043,22 +1040,22 @@ namespace Duplicati.Library.Main.Database
 
                 m_insertblockCommand.CommandText = string.Format(
                       @"UPDATE ""{0}"" SET ""Restored"" = 1 "
-                    + @" WHERE ""FileID"" = ? AND ""Index"" = ? AND ""Hash"" = ? AND ""Size"" = ? AND ""Metadata"" = ? AND ""Restored"" = 0 "
+                    + @" WHERE ""FileID"" = @param1 AND ""Index"" = @param2 AND ""Hash"" = @param3 AND ""Size"" = @param4 AND ""Metadata"" = @param5 AND ""Restored"" = 0 "
                     , m_blocktablename);
                 m_insertblockCommand.AddParameters(5);
 
                 m_resetfileCommand.CommandText = string.Format(
-                      @"UPDATE ""{0}"" SET ""Restored"" = 0 WHERE ""FileID"" = ? "
+                      @"UPDATE ""{0}"" SET ""Restored"" = 0 WHERE ""FileID"" = @param1 "
                     , m_blocktablename);
                 m_resetfileCommand.AddParameters(1);
 
                 m_updateAsRestoredCommand.CommandText = string.Format(
-                      @"UPDATE ""{0}"" SET ""Restored"" = 1 WHERE ""FileID"" = ? AND ""Metadata"" <= ? "
+                      @"UPDATE ""{0}"" SET ""Restored"" = 1 WHERE ""FileID"" = @param1 AND ""Metadata"" <= @param2 "
                     , m_blocktablename);
                 m_updateAsRestoredCommand.AddParameters(2);
 
                 m_updateFileAsDataVerifiedCommand.CommandText = string.Format(
-                      @"UPDATE ""{0}"" SET ""DataVerified"" = 1 WHERE ""ID"" = ?"
+                      @"UPDATE ""{0}"" SET ""DataVerified"" = 1 WHERE ""ID"" = @param1"
                     , m_filetablename);
                 m_updateFileAsDataVerifiedCommand.AddParameters(1); 
 
@@ -1189,7 +1186,7 @@ namespace Duplicati.Library.Main.Database
         public IEnumerable<string> GetTargetFolders()
         {
             using (var cmd = m_connection.CreateCommand())
-            using (var rd = cmd.ExecuteReader(string.Format(@"SELECT ""TargetPath"" FROM ""{0}"" WHERE ""BlocksetID"" == ?", m_tempfiletable), FOLDER_BLOCKSET_ID))
+            using (var rd = cmd.ExecuteReader(string.Format(@"SELECT ""TargetPath"" FROM ""{0}"" WHERE ""BlocksetID"" == @param1", m_tempfiletable), FOLDER_BLOCKSET_ID))
                 while(rd.Read())
                     yield return rd.GetValue(0).ToString();
         }

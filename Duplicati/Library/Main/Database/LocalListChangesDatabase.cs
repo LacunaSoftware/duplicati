@@ -116,12 +116,12 @@ namespace Duplicati.Library.Main.Database
                 
                 m_insertPreviousElementCommand = m_connection.CreateCommand();
                 m_insertPreviousElementCommand.Transaction = m_transaction;
-                m_insertPreviousElementCommand.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") VALUES (?,?,?,?,?)", m_previousTable);
+                m_insertPreviousElementCommand.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") VALUES (@param1,@param2,@param3,@param4,@param5)", m_previousTable);
                 m_insertPreviousElementCommand.AddParameters(5);
                 
                 m_insertCurrentElementCommand = m_connection.CreateCommand();
                 m_insertCurrentElementCommand.Transaction = m_transaction;
-                m_insertCurrentElementCommand.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") VALUES (?,?,?,?,?)", m_currentTable);
+                m_insertCurrentElementCommand.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") VALUES (@param1,@param2,@param3,@param4,@param5)", m_currentTable);
                 m_insertCurrentElementCommand.AddParameters(5);
             }
             
@@ -141,7 +141,7 @@ namespace Duplicati.Library.Main.Database
                     if (filter == null || filter.Empty)
                     {
                         // Simple case, select everything
-                        cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") SELECT ""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"" FROM {1} A WHERE ""A"".""FilesetID"" = ? ", tablename, combined), filesetId);
+                        cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") SELECT ""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"" FROM {1} A WHERE ""A"".""FilesetID"" = @param1 ", tablename, combined), filesetId);
                     }
                     else if (Library.Utility.Utility.IsFSCaseSensitive && filter is Library.Utility.FilterExpression && (filter as Library.Utility.FilterExpression).Type == Duplicati.Library.Utility.FilterType.Simple)
                     {
@@ -151,7 +151,7 @@ namespace Duplicati.Library.Main.Database
                         var p = (filter as Library.Utility.FilterExpression).GetSimpleList();
                         var filenamestable = "Filenames-" + Library.Utility.Utility.ByteArrayAsHexString(Guid.NewGuid().ToByteArray());
                         cmd.ExecuteNonQuery(string.Format(@"CREATE TEMPORARY TABLE ""{0}"" (""Path"" TEXT NOT NULL) ", filenamestable));
-                        cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (?)", filenamestable);
+                        cmd.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"") VALUES (@param1)", filenamestable);
                         cmd.AddParameter();
                     
                         foreach(var s in p)
@@ -160,7 +160,7 @@ namespace Duplicati.Library.Main.Database
                             cmd.ExecuteNonQuery();
                         }
                     
-                        cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") SELECT ""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"" FROM {1} A WHERE ""A"".""FilesetID"" = ? AND ""A"".""Path"" IN (SELECT DISTINCT ""Path"" FROM ""{2}"") ", tablename, combined, filenamestable), filesetId);
+                        cmd.ExecuteNonQuery(string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") SELECT ""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"" FROM {1} A WHERE ""A"".""FilesetID"" = @param1 AND ""A"".""Path"" IN (SELECT DISTINCT ""Path"" FROM ""{2}"") ", tablename, combined, filenamestable), filesetId);
                         cmd.ExecuteNonQuery(string.Format(@"DROP TABLE IF EXISTS ""{0}"" ", filenamestable));
                     }
                     else
@@ -169,11 +169,11 @@ namespace Duplicati.Library.Main.Database
                         object[] values = new object[5];
                         using(var cmd2 = m_connection.CreateCommand())
                         {
-                            cmd2.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") VALUES (?,?,?,?,?)", tablename);
+                            cmd2.CommandText = string.Format(@"INSERT INTO ""{0}"" (""Path"", ""FileHash"", ""MetaHash"", ""Size"", ""Type"") VALUES (@param1,@param2,@param3,@param4,@param5)", tablename);
                             cmd2.AddParameters(5);
                             cmd2.Transaction = m_transaction;
     
-                            using(var rd = cmd.ExecuteReader(string.Format(@"SELECT ""A"".""Path"", ""A"".""FileHash"", ""A"".""MetaHash"", ""A"".""Size"", ""A"".""Type"" FROM {0} A WHERE ""A"".""FilesetID"" = ?", combined), filesetId))
+                            using(var rd = cmd.ExecuteReader(string.Format(@"SELECT ""A"".""Path"", ""A"".""FileHash"", ""A"".""MetaHash"", ""A"".""Size"", ""A"".""Type"" FROM {0} A WHERE ""A"".""FilesetID"" = @param1", combined), filesetId))
                                 while (rd.Read())
                                 {
                                     rd.GetValues(values);
@@ -219,9 +219,9 @@ namespace Duplicati.Library.Main.Database
             private Tuple<string, string, string> GetSqls(bool allTypes)
             {
                 return new Tuple<string, string, string>(
-                    string.Format(@"SELECT ""Path"" FROM ""{0}"" WHERE {2} ""{0}"".""Path"" NOT IN (SELECT ""Path"" FROM ""{1}"")", m_currentTable, m_previousTable, string.Format(allTypes ? "" : @" ""{0}"".""Type"" = ? AND ", m_currentTable)),
-                    string.Format(@"SELECT ""Path"" FROM ""{0}"" WHERE {2} ""{0}"".""Path"" NOT IN (SELECT ""Path"" FROM ""{1}"")", m_previousTable, m_currentTable, string.Format(allTypes ? "" : @" ""{0}"".""Type"" = ? AND ", m_previousTable)),
-                    string.Format(@"SELECT ""{0}"".""Path"" FROM ""{0}"",""{1}"" WHERE {2} ""{0}"".""Path"" = ""{1}"".""Path"" AND (""{0}"".""FileHash"" != ""{1}"".""FileHash"" OR ""{0}"".""MetaHash"" != ""{1}"".""MetaHash"" OR ""{0}"".""Type"" != ""{1}"".""Type"") ", m_currentTable, m_previousTable, string.Format(allTypes ? "" : @" ""{0}"".""Type"" = ? AND ", m_currentTable))
+                    string.Format(@"SELECT ""Path"" FROM ""{0}"" WHERE {2} ""{0}"".""Path"" NOT IN (SELECT ""Path"" FROM ""{1}"")", m_currentTable, m_previousTable, string.Format(allTypes ? "" : @" ""{0}"".""Type"" = @param1 AND ", m_currentTable)),
+                    string.Format(@"SELECT ""Path"" FROM ""{0}"" WHERE {2} ""{0}"".""Path"" NOT IN (SELECT ""Path"" FROM ""{1}"")", m_previousTable, m_currentTable, string.Format(allTypes ? "" : @" ""{0}"".""Type"" = @param1 AND ", m_previousTable)),
+                    string.Format(@"SELECT ""{0}"".""Path"" FROM ""{0}"",""{1}"" WHERE {2} ""{0}"".""Path"" = ""{1}"".""Path"" AND (""{0}"".""FileHash"" != ""{1}"".""FileHash"" OR ""{0}"".""MetaHash"" != ""{1}"".""MetaHash"" OR ""{0}"".""Type"" != ""{1}"".""Type"") ", m_currentTable, m_previousTable, string.Format(allTypes ? "" : @" ""{0}"".""Type"" = @param1 AND ", m_currentTable))
                 );
             }
 
@@ -251,9 +251,9 @@ namespace Duplicati.Library.Main.Database
             public IChangeCountReport CreateChangeCountReport()
             {
                 var sqls = GetSqls(false);
-                var added = @"SELECT COUNT(*) FROM (" + sqls.Item1 + ")";
-                var deleted = @"SELECT COUNT(*) FROM (" + sqls.Item2 + ")";
-                var modified = @"SELECT COUNT(*) FROM (" + sqls.Item3 + ")";
+                var added = @"SELECT COUNT(*) FROM (" + sqls.Item1 + ") AS A";
+                var deleted = @"SELECT COUNT(*) FROM (" + sqls.Item2 + ") AS B";
+                var modified = @"SELECT COUNT(*) FROM (" + sqls.Item3 + ") AS C";
                 
                 using(var cmd = m_connection.CreateCommand())
                 {
