@@ -271,15 +271,18 @@ namespace Duplicati.Server.Database
                 using(var cmd = m_connection.CreateCommand())
                 {
                     var sb = new StringBuilder();
-                    
-                    foreach(var t in tags)
+
+                    var count = 1;
+                    foreach (var t in tags)
                     {
                         if (sb.Length != 0)
                             sb.Append(" OR ");
-                        sb.Append(@" ("","" || ""Tags"" || "","" LIKE ""%,"" || ? || "",%"") ");
-                        
+                        sb.Append($" (',' + 'Tags' + ',' LIKE '%,' + @param{count} + ',%') ");
+
                         var p = cmd.CreateParameter();
                         p.Value = t;
+                        p.ParameterName = $"@param{count}";
+                        count++;
                         cmd.Parameters.Add(p);
                     }
 
