@@ -327,13 +327,13 @@ namespace Duplicati.Library.Main.Operation
                             if (string.Equals(i.Name, protectedfile))
                             {
                                 Logging.Log.WriteInformationMessage(LOGTAG, "KeepIncompleteFile", LC.L(@"keeping protected incomplete remote file listed as {0}: {1}"), i.State, i.Name);
-                                database.UpdateRemoteVolume(i.Name, RemoteVolumeState.Temporary, i.Size, i.Hash, false, new TimeSpan(0), null);
+                                database.UpdateRemoteVolume(i.Name, RemoteVolumeState.Temporary, i.Size, i.Hash, false, new TimeSpan(0));
                             }
                             else
                             {
                                 Logging.Log.WriteInformationMessage(LOGTAG, "SchedulingMissingFileForDelete", LC.L(@"scheduling missing file for deletion, currently listed as {0}: {1}"), i.State, i.Name);
                                 cleanupRemovedRemoteVolumes.Add(i.Name);
-                                database.UpdateRemoteVolume(i.Name, RemoteVolumeState.Deleting, i.Size, i.Hash, false, TimeSpan.FromHours(2), null);
+                                database.UpdateRemoteVolume(i.Name, RemoteVolumeState.Deleting, i.Size, i.Hash, false, TimeSpan.FromHours(2));
                             }
                         }
                         else
@@ -377,7 +377,7 @@ namespace Duplicati.Library.Main.Operation
             }
 
             // cleanup deleted volumes in DB en block
-            database.RemoveRemoteVolumes(cleanupRemovedRemoteVolumes, null);
+            database.RemoveRemoteVolumes(cleanupRemovedRemoteVolumes);
 
             foreach(var i in missingHash)
                 Logging.Log.WriteWarningMessage(LOGTAG, "MissingRemoteHash", null, string.Format(LC.L(@"remote file {1} is listed as {0} with size {2} but should be {3}, please verify the sha256 hash ""{ 4}"""), i.Item2.State, i.Item2.Name, i.Item1, i.Item2.Size, i.Item2.Hash));

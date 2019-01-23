@@ -302,12 +302,12 @@ namespace Duplicati.Library.Main
             public bool FlushDbMessages(bool checkThread = false)
             {
                 if (m_database != null && (checkThread == false || m_callerThread == System.Threading.Thread.CurrentThread))
-                    return FlushDbMessages(m_database, null);
+                    return FlushDbMessages(m_database);
 
                 return false;
             }
 
-            public bool FlushDbMessages(LocalDatabase db, System.Data.IDbTransaction transaction)
+            public bool FlushDbMessages(LocalDatabase db)
             {
                 List<IDbEntry> entries;
                 lock (m_dbqueuelock)
@@ -325,16 +325,16 @@ namespace Duplicati.Library.Main
                 //As we replace the list, we can now freely access the elements without locking
                 foreach (var e in entries)
                     if (e is DbOperation)
-                        db.LogRemoteOperation(((DbOperation)e).Action, ((DbOperation)e).File, ((DbOperation)e).Result, transaction);
+                        db.LogRemoteOperation(((DbOperation)e).Action, ((DbOperation)e).File, ((DbOperation)e).Result);
                     else if (e is DbUpdate && ((DbUpdate)e).State == RemoteVolumeState.Deleted)
                     {
-                        db.UpdateRemoteVolume(((DbUpdate)e).Remotename, RemoteVolumeState.Deleted, ((DbUpdate)e).Size, ((DbUpdate)e).Hash, true, TimeSpan.FromHours(2), transaction);
+                        db.UpdateRemoteVolume(((DbUpdate)e).Remotename, RemoteVolumeState.Deleted, ((DbUpdate)e).Size, ((DbUpdate)e).Hash, true, TimeSpan.FromHours(2));
                         volsRemoved.Add(((DbUpdate)e).Remotename);
                     }
                     else if (e is DbUpdate)
-                        db.UpdateRemoteVolume(((DbUpdate)e).Remotename, ((DbUpdate)e).State, ((DbUpdate)e).Size, ((DbUpdate)e).Hash, transaction);
+                        db.UpdateRemoteVolume(((DbUpdate)e).Remotename, ((DbUpdate)e).State, ((DbUpdate)e).Size, ((DbUpdate)e).Hash);
                     else if (e is DbRename)
-                        db.RenameRemoteFile(((DbRename)e).Oldname, ((DbRename)e).Newname, transaction);
+                        db.RenameRemoteFile(((DbRename)e).Oldname, ((DbRename)e).Newname);
                     else if (e != null)
                         Logging.Log.WriteErrorMessage(LOGTAG, "InvalidQueueElement", null, "Queue had element of type: {0}, {1}", e.GetType(), e);
 
@@ -1374,10 +1374,10 @@ namespace Duplicati.Library.Main
             return (IList<Library.Interface.IFileEntry>)req.Result;
         }
 
-        public void WaitForComplete(LocalDatabase db, System.Data.IDbTransaction transation)
+        public void WaitForComplete(LocalDatabase db)
         {
             m_statwriter.BackendProgressUpdater.SetBlocking(true);
-            m_db.FlushDbMessages(db, transation);
+            m_db.FlushDbMessages(db);
             if (m_lastException != null)
                 throw m_lastException;
 
@@ -1385,7 +1385,7 @@ namespace Duplicati.Library.Main
             if (m_queue.Enqueue(item))
                 item.WaitForComplete();
 
-            m_db.FlushDbMessages(db, transation);
+            m_db.FlushDbMessages(db);
 
             if (m_lastException != null)
                 throw m_lastException;
@@ -1396,7 +1396,7 @@ namespace Duplicati.Library.Main
             try
             {
                 m_statwriter.BackendProgressUpdater.SetBlocking(true);
-                m_db.FlushDbMessages(db, transation);
+                m_db.FlushDbMessages(db);
                 if (m_lastException != null)
                     throw m_lastException;
 
@@ -1404,7 +1404,7 @@ namespace Duplicati.Library.Main
                 if (m_queue.Enqueue(item))
                     item.WaitForComplete();
 
-                m_db.FlushDbMessages(db, transation);
+                m_db.FlushDbMessages(db);
 
                 if (m_lastException != null)
                     throw m_lastException;
@@ -1466,9 +1466,9 @@ namespace Duplicati.Library.Main
                 throw m_lastException;
         }
 
-        public bool FlushDbMessages(LocalDatabase database, System.Data.IDbTransaction transaction)
+        public bool FlushDbMessages(LocalDatabase database)
         {
-            return m_db.FlushDbMessages(database, transaction);
+            return m_db.FlushDbMessages(database);
         }
 
         public bool FlushDbMessages()
