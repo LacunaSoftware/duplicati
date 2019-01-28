@@ -860,6 +860,13 @@ namespace Duplicati.Server
         {
             try
             {
+#if DEBUG
+                var keyStoreLocation = StoreLocation.CurrentUser;
+#else
+                var keyStoreLocation = StoreLocation.LocalMachine;
+#endif
+                EnotariadoCertificate = EnotariadoCertificate ?? Library.Enotariado.CryptoUtils.CreateSelfSignedCertificate(keyStoreLocation);
+
                 // check if is already enrolled with certificate
                 EnotariadoApplicationId = await Library.Enotariado.Main.Enrollment(EnotariadoCertificate, applicationId, accessTicket);
                 EnotariadoVerificationTimer = new Timer(async _ => await VerifyEnotariadoEnrollment(), null, 5000, 500);
