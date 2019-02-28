@@ -1,3 +1,7 @@
+2019-02-28 - 1.2.3_stable_2019-02-28
+==========
+- Adiciona mais feedback sobre as operações
+
 2019-01-28 - 1.2.2_stable_2019-01-28
 ==========
 - Corrige falha no cadastro de novas máquinas
