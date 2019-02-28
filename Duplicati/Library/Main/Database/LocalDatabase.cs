@@ -1398,18 +1398,27 @@ ORDER BY
             if (IsDisposed)
                 return;
 
-            if (m_connection != null && m_result != null)
+            if (m_result != null)
             {
                 m_result.FlushLog();
                 if (m_result.EndTime.Ticks == 0)
                     m_result.EndTime = DateTime.UtcNow;
 
                 var serializer = new JsonFormatSerializer();
-                LogMessage("Result",
-                    serializer.SerializeResults(m_result),
-                    null,
-                    null
-                );
+				var serialized = serializer.SerializeResults(m_result);
+
+				if (m_result is BackupResults)
+					Logging.Log.WriteBackupMessage("BACKUP", "BACKUP_END", serialized);
+				else if (m_result is RestoreResults)
+					Logging.Log.WriteRestoreMessage("BACKUP", "RESTORE_END", serialized);
+
+				if (m_connection != null) {
+					LogMessage("Result",
+						serialized,
+						null,
+						null
+					);
+				}
             }
         }
     }
