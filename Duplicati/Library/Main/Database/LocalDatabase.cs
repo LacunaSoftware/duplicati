@@ -1408,9 +1408,9 @@ ORDER BY
 				var serialized = serializer.SerializeResults(m_result);
 
 				if (m_result is BackupResults)
-					Logging.Log.WriteBackupMessage("BACKUP", "BACKUP_END", serialized);
+					Logging.Log.WriteBackupEndMessage("BACKUPEND", "BACKUP_END", serialized);
 				else if (m_result is RestoreResults)
-					Logging.Log.WriteRestoreMessage("BACKUP", "RESTORE_END", serialized);
+					Logging.Log.WriteRestoreEndMessage("RESTOREEND", "RESTORE_END", serialized);
 
 				if (m_connection != null) {
 					LogMessage("Result",
